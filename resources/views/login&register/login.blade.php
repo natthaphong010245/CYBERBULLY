@@ -6,25 +6,62 @@
             เข้าสู่ระบบ
         </h1>
 
-        <!-- Username Input -->
-        <div class="mb-4">
-            <label for="username" class="block text-left text-[16px] font-medium mb-1">ชื่อผู้ใช้</label>
-            <input type="text" id="username" name="username" placeholder="กรุณากรอกชื่อผู้ใช้"
-                class="w-full px-6 py-3 border border-gray-400 rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
+        <!-- Modal แจ้งเตือน - แสดงเมื่อมี session success -->
+        @if(session('success'))
+        <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white rounded-2xl p-6 max-w-sm mx-4 text-center">
+                <div class="text-green-600 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">ลงทะเบียน สำเร็จ!</h3>
+                <p class="mb-6 text-gray-600">{{ session('success') }}</p>
+                <button id="closeModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2 px-6 rounded-xl text-center transition duration-300 w-full font-bold">
+                    ตกลง
+                </button>
+            </div>
         </div>
+        @endif
 
-        <!-- Password Input -->
-        <div class="mb-4">
-            <label for="password" class="block text-left text-[16px] font-medium mb-1">รหัสผ่าน</label>
-            <input type="password" id="password" name="password" placeholder="กรุณากรอกรหัสผ่าน"
-                class="w-full px-6 py-3 border border-gray-400 rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
-        </div>
+        <form method="POST" action="{{ route('login.authenticate') }}">
+            @csrf
+            <!-- Username Input -->
+            <div class="mb-4">
+                <label for="username" class="block text-left text-[16px] font-medium mb-1">ชื่อผู้ใช้</label>
+                <input type="text" id="username" name="username" placeholder="กรุณากรอกชื่อผู้ใช้" value="{{ old('username') }}"
+                    class="w-full px-6 py-3 border {{ $errors->has('username') ? 'border-red-500' : 'border-gray-400' }} rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
+                @if($errors->has('username'))
+                    <div class="flex items-center mt-1 text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-sm">{{ $errors->first('username') }}</span>
+                    </div>
+                @endif
+            </div>
 
-        <!-- Submit Button -->
-        <a href="{{ route('main') }}"
-            class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2.5 px-6 rounded-2xl text-center transition mt-6 duration-300 w-[100%] mx-auto text-[20px] font-bold">
-            เข้าสู่ระบบ
-        </a>
+            <!-- Password Input -->
+            <div class="mb-4">
+                <label for="password" class="block text-left text-[16px] font-medium mb-1">รหัสผ่าน</label>
+                <input type="password" id="password" name="password" placeholder="กรุณากรอกรหัสผ่าน"
+                    class="w-full px-6 py-3 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-400' }} rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
+                @if($errors->has('password'))
+                    <div class="flex items-center mt-1 text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-sm">{{ $errors->first('password') }}</span>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2.5 px-6 rounded-2xl text-center transition mt-6 duration-300 w-[100%] mx-auto text-[20px] font-bold">
+                เข้าสู่ระบบ
+            </button>
+        </form>
 
         <!-- Cancel Button -->
         <a href="{{ route('home') }}"
@@ -38,4 +75,17 @@
             </p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('successModal');
+            const closeButton = document.getElementById('closeModal');
+            
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            }
+        });
+    </script>
 @endsection
