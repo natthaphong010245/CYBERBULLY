@@ -32,6 +32,10 @@ Route::get('/main_info', function () {
     return view('main_info');
 })->name('main_info');
 
+Route::get('/video_category1_select_language', function () {
+    return view('video_category1_select_language');
+})->name('video_category1_select_language');
+
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
