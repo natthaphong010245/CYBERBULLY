@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            // ทำให้คอลัมน์ school เป็น nullable อย่างง่าย
             $table->string('school')->nullable()->change();
         });
     }

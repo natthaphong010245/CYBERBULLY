@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('role');
-            $table->string('school');
+            $table->boolean('role_user')->default(0);
+            $table->string('school')->nullable(); // กำหนดเป็น nullable ตั้งแต่ต้น
             $table->string('name');
             $table->string('lastname');
             $table->string('username')->unique();
             $table->string('password');
-            $table->boolean('role_user');
             $table->timestamps();
         });
     }
