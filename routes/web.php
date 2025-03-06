@@ -24,6 +24,15 @@ Route::get('/main', function () {
     return view('main');
 })->name('main');
 
+Route::get('/main_video', function () {
+    return view('main_video');
+})->name('main_video');
+
+Route::get('/main_info', function () {
+    return view('main_info');
+})->name('main_info');
+
+
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
