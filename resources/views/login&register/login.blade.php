@@ -6,18 +6,37 @@
             เข้าสู่ระบบ
         </h1>
 
-        <!-- Modal แจ้งเตือน - แสดงเมื่อมี session success -->
+        <!-- Modal แจ้งเตือนข้อผิดพลาด -->
+        @if($errors->has('username') && $errors->first('username') == 'คุณไม่มีสิทธิ์เข้าถึงระบบ')
+        <div id="errorModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white rounded-2xl p-6 max-w-sm mx-4 text-center">
+                <div class="text-red-500 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">ขออภัย</h3>
+                <p class="mb-2 text-gray-600">คุณไม่มีสิทธิ์เข้าถึงระบบ</p>
+                <p class="mb-6 text-gray-600">รอเจ้าหน้าที่ตรวจสอบคำขอ</p>
+                <button id="closeErrorModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2 px-6 rounded-xl text-center transition duration-300 w-full font-bold">
+                    ตกลง
+                </button>
+            </div>
+        </div>
+        @endif
+
+        <!-- Modal แจ้งเตือนสำเร็จ (จากหน้าลงทะเบียน) -->
         @if(session('success'))
         <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div class="bg-white rounded-2xl p-6 max-w-sm mx-4 text-center">
-                <div class="text-green-600 mb-2">
+                <div class="text-green-500 mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-4 text-gray-800">ลงทะเบียน สำเร็จ!</h3>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">ลงทะเบียนสำเร็จ!</h3>
                 <p class="mb-6 text-gray-600">{{ session('success') }}</p>
-                <button id="closeModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2 px-6 rounded-xl text-center transition duration-300 w-full font-bold">
+                <button id="closeSuccessModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2 px-6 rounded-xl text-center transition duration-300 w-full font-bold">
                     ตกลง
                 </button>
             </div>
@@ -26,12 +45,13 @@
 
         <form method="POST" action="{{ route('login.authenticate') }}">
             @csrf
+
             <!-- Username Input -->
             <div class="mb-4">
                 <label for="username" class="block text-left text-[16px] font-medium mb-1">ชื่อผู้ใช้</label>
                 <input type="text" id="username" name="username" placeholder="กรุณากรอกชื่อผู้ใช้" value="{{ old('username') }}"
                     class="w-full px-6 py-3 border {{ $errors->has('username') ? 'border-red-500' : 'border-gray-400' }} rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
-                @if($errors->has('username'))
+                @if($errors->has('username') && $errors->first('username') != 'คุณไม่มีสิทธิ์เข้าถึงระบบ')
                     <div class="flex items-center mt-1 text-red-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -76,14 +96,26 @@
         </div>
     </div>
 
+    <!-- JavaScript for modal control -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('successModal');
-            const closeButton = document.getElementById('closeModal');
+            // สำหรับ modal แจ้งเตือนข้อผิดพลาด
+            const errorModal = document.getElementById('errorModal');
+            const closeErrorButton = document.getElementById('closeErrorModal');
             
-            if (closeButton) {
-                closeButton.addEventListener('click', function() {
-                    modal.classList.add('hidden');
+            if (closeErrorButton) {
+                closeErrorButton.addEventListener('click', function() {
+                    errorModal.classList.add('hidden');
+                });
+            }
+            
+            // สำหรับ modal แจ้งเตือนสำเร็จ
+            const successModal = document.getElementById('successModal');
+            const closeSuccessButton = document.getElementById('closeSuccessModal');
+            
+            if (closeSuccessButton) {
+                closeSuccessButton.addEventListener('click', function() {
+                    successModal.classList.add('hidden');
                 });
             }
         });
