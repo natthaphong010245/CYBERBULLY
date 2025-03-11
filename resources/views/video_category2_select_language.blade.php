@@ -10,43 +10,43 @@
   </div>
   
   <!-- Video Cards - Simple Style -->
-  <a href="video_category1_select_language1" class="block">
+  <a href="#" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(146, 154, 255, 1)">
       ภาษา ไทย
     </div>
   </a>
   
-  <a href="video_category1_select_language2" class="block">
+  <a href="#" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(231, 190, 241, 1)">
       ภาษา อาข่า
     </div>
   </a>
   
-  <a href="video_category1_select_language3" class="block">
+  <a href="#" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(146, 154, 255, 1)">
     ภาษา ลาหู่
     </div>
   </a>
   
-  <a href="video_category1_select_language4" class="block">
+  <a href="#" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(231, 190, 241, 1)">
     ภาษา ม้ง
     </div>
   </a>
   
-  <a href="video_category1_select_language5" class="block">
+  <a href="#" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(146, 154, 255, 1)">
     ภาษา เย้า
     </div>
   </a>
   
-  <a href="video_category1_select_language6" class="block">
+  <a href="#" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(231, 190, 241, 1)">
     ภาษา กระเหรี่ยง
     </div>
   </a>
   
-  <a href="video_category1_select_language7" class="block">
+  <a href="#" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(146, 154, 255, 1)">
     ภาษา ลีซู
     </div>

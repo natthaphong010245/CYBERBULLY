@@ -20,7 +20,7 @@
     </div>
   </a>
   
-  <a href="#" class="block relative">
+  <a href="video_category2_select_language" class="block relative">
     <div class="py-3 pl-24 pr-6 flex items-center h-20 rounded-[10px]" style="background-color: rgba(146, 154, 255, 1)">
       <div class="absolute left-4 -top-6">
         <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-24 h-24 object-contain">
@@ -29,7 +29,7 @@
     </div>
   </a>
   
-  <a href="#" class="block relative">
+  <a href="video_category3_select_language" class="block relative">
     <div class="py-3 pl-24 pr-6 flex items-center h-20 rounded-[10px]" style="background-color: rgba(146, 154, 255, 1)">
       <div class="absolute left-4 -top-6">
         <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-24 h-24 object-contain">
@@ -38,7 +38,7 @@
     </div>
   </a>
   
-  <a href="#" class="block relative">
+  <a href="video_category4_select_language" class="block relative">
     <div class="py-3 pl-24 pr-6 flex items-center h-20 rounded-[10px]" style="background-color: rgba(146, 154, 255, 1)">
       <div class="absolute left-4 -top-6">
         <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-24 h-24 object-contain">
