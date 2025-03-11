@@ -5,7 +5,7 @@
 <div class="card-container space-y-4 px-4 md:px-0">
   <!-- Page Title -->
   <div class="text-center mb-6">
-    <h1 class="text-3xl font-bold" style="color: rgba(62, 54, 174, 1)">VIDEO</h1>
+    <h1 class="text-3xl font-bold" style="color: rgba(62, 54, 174, 1)">VIDEO หมวดหมู่ 1</h1>
     <p class="text-sm" style="color: rgba(62, 54, 174, 0.8)">ภาษา</p>
   </div>
   

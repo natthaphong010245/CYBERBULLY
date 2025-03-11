@@ -13,7 +13,7 @@
   <div class="card-container px-6 sm:px-8 md:px-10">
     <!-- Page Title -->
     <div class="text-center mb-6">
-      <h1 class="text-2xl font-bold" style="color: rgba(62, 54, 174, 1)">VDO ชื่อหมวดหมู่วิดีโอ</h1>
+      <h1 class="text-2xl font-bold" style="color: rgba(62, 54, 174, 1)">VDO ชื่อหมวดหมู่วิดีโอ 1</h1>
       <p class="text-sm" style="color: rgba(62, 54, 174, 0.8)">ภาษา เย้า</p>
     </div>
   

@@ -16,7 +16,7 @@
       <div class="absolute left-4 -top-6">
         <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-24 h-24 object-contain">
       </div>
-      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO</div>
+      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO 1</div>
     </div>
   </a>
   
@@ -25,7 +25,7 @@
       <div class="absolute left-4 -top-6">
         <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-24 h-24 object-contain">
       </div>
-      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO</div>
+      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO 2</div>
     </div>
   </a>
   
@@ -34,7 +34,7 @@
       <div class="absolute left-4 -top-6">
         <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-24 h-24 object-contain">
       </div>
-      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO</div>
+      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO 3</div>
     </div>
   </a>
   
@@ -43,7 +43,7 @@
       <div class="absolute left-4 -top-6">
         <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-24 h-24 object-contain">
       </div>
-      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO</div>
+      <div class="font-medium text-white text-lg ml-12">หมวดหมู่ VDO 4</div>
     </div>
   </a>
 </div>
