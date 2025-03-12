@@ -34,6 +34,10 @@ Route::get('/faq', function () {
     return view('faq/faq');
 })->name('faq');
 
+Route::get('/inforgraphic', function () {
+    return view('inforgraphic/inforgraphic');
+})->name('inforgraphic');
+
 Route::get('/assessment/cyberbulling/person_action', function () {
     return view('assessment/cyberbulling/person_action/person_action');
 })->name('person_action');
