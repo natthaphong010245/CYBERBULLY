@@ -104,7 +104,7 @@
       
       setTimeout(() => {
         window.location.href = 'home';
-      }, 1000); 
+      }, 300); 
     }, 2000); 
   </script>
 </body>
