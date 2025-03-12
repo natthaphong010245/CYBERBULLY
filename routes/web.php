@@ -175,3 +175,138 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::middleware(['auth', CheckRoleUser::class])->group(function () {
     Route::get('/test_login', [MainController::class, 'testLogin'])->name('test_login');
 });
+
+
+
+// video
+
+Route::get('/main_video', function () {
+    return view('main_video');
+})->name('main_video');
+Route::get('/video_category1_select_language', function () {
+    return view('video_category1/video_category1_select_language');
+})->name('video_category1_select_language');
+
+Route::get('/video_category1_select_language1', function () {
+    return view('video_category1/video_category1_select_language1');
+})->name('video_category1_select_language1');
+
+Route::get('/video_category1_select_language2', function () {
+    return view('video_category1/video_category1_select_language2');
+})->name('video_category1_select_language2');
+
+Route::get('/video_category1_select_language3', function () {
+    return view('video_category1/video_category1_select_language3');
+})->name('video_category1_select_language3');
+
+Route::get('/video_category1_select_language4', function () {
+    return view('video_category1/video_category1_select_language4');
+})->name('video_category1_select_language4');
+
+Route::get('/video_category1_select_language5', function () {
+    return view('video_category1/video_category1_select_language5');
+})->name('video_category1_select_language5');
+
+Route::get('/video_category1_select_language6', function () {
+    return view('video_category1/video_category1_select_language6');
+})->name('video_category1_select_language6');
+
+Route::get('/video_category1_select_language7', function () {
+    return view('video_category1/video_category1_select_language7');
+})->name('video_category1_select_language7');
+
+Route::get('/video_category2_select_language', function () {
+    return view('video_category2/video_category2_select_language');
+})->name('video_category2_select_language');
+
+Route::get('/video_category2_select_language1', function () {
+    return view('video_category2/video_category2_select_language1');
+})->name('video_category2_select_language1');
+
+Route::get('/video_category2_select_language2', function () {
+    return view('video_category2/video_category2_select_language2');
+})->name('video_category2_select_language2');
+
+Route::get('/video_category2_select_language3', function () {
+    return view('video_category2/video_category2_select_language3');
+})->name('video_category2_select_language3');
+
+Route::get('/video_category2_select_language4', function () {
+    return view('video_category2/video_category2_select_language4');
+})->name('video_category2_select_language4');
+
+Route::get('/video_category2_select_language5', function () {
+    return view('video_category2/video_category2_select_language5');
+})->name('video_category2_select_language5');
+
+Route::get('/video_category2_select_language6', function () {
+    return view('video_category2/video_category2_select_language6');
+})->name('video_category2_select_language6');
+
+Route::get('/video_category2_select_language7', function () {
+    return view('video_category2/video_category2_select_language7');
+})->name('video_category2_select_language7');
+
+Route::get('/video_category3_select_language', function () {
+    return view('video_category3/video_category3_select_language');
+})->name('video_category3_select_language');
+
+Route::get('/video_category3_select_language1', function () {
+    return view('video_category3/video_category3_select_language1');
+})->name('video_category3_select_language1');
+
+Route::get('/video_category3_select_language2', function () {
+    return view('video_category3/video_category3_select_language2');
+})->name('video_category3_select_language2');
+
+Route::get('/video_category3_select_language3', function () {
+    return view('video_category3/video_category3_select_language3');
+})->name('video_category3_select_language3');
+
+Route::get('/video_category3_select_language4', function () {
+    return view('video_category3/video_category3_select_language4');
+})->name('video_category3_select_language4');
+
+Route::get('/video_category3_select_language5', function () {
+    return view('video_category3/video_category3_select_language5');
+})->name('video_category3_select_language5');
+
+Route::get('/video_category3_select_language6', function () {
+    return view('video_category3/video_category3_select_language6');
+})->name('video_category3_select_language6');
+
+Route::get('/video_category3_select_language7', function () {
+    return view('video_category3/video_category3_select_language7');
+})->name('video_category3_select_language7');
+
+Route::get('/video_category4_select_language', function () {
+    return view('video_category4/video_category4_select_language');
+})->name('video_category4_select_language');
+
+Route::get('/video_category4_select_language1', function () {
+    return view('video_category4/video_category4_select_language1');
+})->name('video_category4_select_language1');
+
+Route::get('/video_category4_select_language2', function () {
+    return view('video_category4/video_category4_select_language2');
+})->name('video_category4_select_language2');
+
+Route::get('/video_category4_select_language3', function () {
+    return view('video_category4/video_category4_select_language3');
+})->name('video_category4_select_language3');
+
+Route::get('/video_category4_select_language4', function () {
+    return view('video_category4/video_category4_select_language4');
+})->name('video_category4_select_language4');
+
+Route::get('/video_category4_select_language5', function () {
+    return view('video_category4/video_category4_select_language5');
+})->name('video_category4_select_language5');
+
+Route::get('/video_category4_select_language6', function () {
+    return view('video_category4/video_category4_select_language6');
+})->name('video_category4_select_language6');
+
+Route::get('/video_category4_select_language7', function () {
+    return view('video_category4/video_category4_select_language7');
+})->name('video_category4_select_language7');
