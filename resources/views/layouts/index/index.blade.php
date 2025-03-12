@@ -84,42 +84,28 @@
   </style>
 </head>
 <body class="flex flex-col items-center justify-center bg-transparent overflow-hidden font-k2d min-h-screen">
-  <div class="text-center px-5 py-8 max-w-[600px] w-full">
-    <div class="mb-16 opacity-0 animate-fade-in flex justify-center items-center">
-      <img src="images/logo.png" alt="Anti-Cyberbullying Logo" class="w-[80%] md:w-[60%] h-auto">
-    </div>
-    
-    <div class="mt-8 text-white opacity-0 animate-fade-in-delay">
-      <div class="text-2xl font-bold mb-2">สำนักวิชาวิทยาศาสตร์สุขภาพ</div>
-      <div class="text-xl">มหาวิทยาลัยแม่ฟ้าหลวง</div>
-    </div>
-  </div>
-
-  <!-- Overlay for transition -->
+  @yield('content')
+  
   <div class="fixed top-0 left-0 w-full h-full bg-transparent z-[9999] page-transition" id="pageTransition"></div>
 
   <script>
-    // Force the content to be centered in the viewport
     function centerContent() {
       const windowHeight = window.innerHeight;
       document.body.style.height = windowHeight + 'px';
     }
     
-    // Run on page load and resize
     window.addEventListener('load', centerContent);
     window.addEventListener('resize', centerContent);
     
     setTimeout(() => {
-      // Create fade-out effect before changing pages
       const transition = document.getElementById('pageTransition');
       transition.style.backgroundColor = 'rgba(229, 200, 246, 1)';
       transition.classList.add('animate-fade-out');
       
-      // Wait for animation to finish before changing page
       setTimeout(() => {
         window.location.href = 'home';
-      }, 1000); // Length of transition
-    }, 2000); // Wait time before starting transition
+      }, 1000); 
+    }, 2000); 
   </script>
 </body>
 </html>
