@@ -15,7 +15,7 @@
         </a>
 
         <!-- Infographic Card -->
-        <a href="main_info" class="card-item gradient-border block mt-6">
+        <a href="inforgraphic" class="card-item gradient-border block mt-6">
             <div class="card-text">
                 <div class="card-title">CYBER<br>BULLYING</div>
                 <div class="card-subtitle">Infographic</div>
