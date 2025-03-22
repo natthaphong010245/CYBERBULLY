@@ -14,7 +14,7 @@
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(146, 154, 255, 1)">
       ภาษา ไทย
     </div>
-  </a>
+  </a> 
   
   <a href="video_category2_select_language2" class="block">
     <div class="py-4 text-center font-medium text-white text-lg rounded-[10px] shadow-md" style="background-color: rgba(231, 190, 241, 1)">

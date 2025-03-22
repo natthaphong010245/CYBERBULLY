@@ -314,3 +314,32 @@ Route::get('/video_category4_select_language6', function () {
 Route::get('/video_category4_select_language7', function () {
     return view('video_category4/video_category4_select_language7');
 })->name('video_category4_select_language7');
+
+use App\Http\Controllers\InfographicControllers; // เปลี่ยนจาก InfographicControllers เป็น InfographicController
+
+// หน้าหลักแสดงหมวดหมู่ทั้งหมด
+Route::get('/inforgraphic', [InfographicControllers::class, 'main'])->name('inforgraphic.main');
+
+// หน้าแสดงรายการในหมวดหมู่
+Route::get('/inforgraphic/category/{categoryId}', [InfographicControllers::class, 'category'])->name('inforgraphic.category');
+
+// หน้าแสดงรายละเอียดของ infographic
+Route::get('/inforgraphic/detail/{id}', [InfographicControllers::class, 'detail'])->name('inforgraphic.detail');
+
+
+
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\InfographicController;
+// ลบ middleware ออกทั้งหมด
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+    
+    // Categories management
+    Route::resource('categories', CategoryController::class);
+    
+    // Infographics management
+    Route::resource('infographics', InfographicController::class);
+});
