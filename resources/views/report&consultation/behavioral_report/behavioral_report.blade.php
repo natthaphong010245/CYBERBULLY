@@ -526,29 +526,58 @@
                     '</div>';
             }
         }
+
+        
     </script>
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // ตรวจสอบว่ามีข้อความแจ้งเตือนความสำเร็จหรือไม่
-            @if (session('success'))
-                // แสดงป๊อปอัพ
-                showCustomAlert("{{ session('success') }}");
-            @endif
+        // เพิ่มโค้ดนี้ในส่วนของ script block ท้ายสุด
+document.addEventListener('DOMContentLoaded', function() {
+    // ตรวจสอบว่ามีข้อความแจ้งเตือนความสำเร็จหรือไม่
+    @if (session('success'))
+        // แสดงป๊อปอัพ
+        showCustomAlert("{{ session('success') }}");
+    @endif
 
-            // เพิ่ม event listener สำหรับปุ่มตกลง
-            document.getElementById('alertButton').addEventListener('click', function() {
-                document.getElementById('customAlert').style.display = 'none';
-
-                window.location.href = "{{ route('result_report') }}";
-            });
-        });
-
-        function showCustomAlert(message) {
-            document.getElementById('alertMessage').textContent = message;
-
-            document.getElementById('customAlert').style.display = 'flex';
+    // เพิ่ม event listener สำหรับปุ่มตกลง
+    document.getElementById('alertButton').addEventListener('click', function() {
+        document.getElementById('customAlert').style.display = 'none';
+        window.location.href = "{{ route('result_report') }}";
+    });
+    
+    // ตรวจสอบพิกัดเมื่อกดส่งฟอร์ม
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // ดึงค่าพิกัด
+        const latitude = document.getElementById('latitude').value;
+        const longitude = document.getElementById('longitude').value;
+        
+        // ตรวจสอบว่าพิกัดเป็น [0,0] หรือไม่
+        if (latitude == 19.9071 && longitude == 99.8308) {
+            // ยกเลิกการส่งฟอร์ม
+            event.preventDefault();
+            
+            // แสดง alert แจ้งเตือน
+            alert('กรุณาระบุตำแหน่งที่ตั้งก่อนส่งแบบฟอร์ม');
+            
+            // เลื่อนไปที่แผนที่
+            document.getElementById('mapContainer').scrollIntoView({ behavior: 'smooth' });
+            
+            // เน้นกรอบแผนที่เป็นสีแดง
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.classList.add('ring', 'ring-red-500', 'ring-2');
+            
+            // ลบกรอบสีแดงหลังจาก 3 วินาที
+            setTimeout(function() {
+                mapContainer.classList.remove('ring', 'ring-red-500', 'ring-2');
+            }, 3000);
         }
+    });
+});
+
+function showCustomAlert(message) {
+    document.getElementById('alertMessage').textContent = message;
+    document.getElementById('customAlert').style.display = 'flex';
+}
     </script>
 @endsection
