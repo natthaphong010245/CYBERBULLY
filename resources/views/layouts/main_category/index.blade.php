@@ -1,5 +1,6 @@
+{{-- นี่คือหน้า main_category/index.blade.php --}}
 <!DOCTYPE html>
-<html lang="th" class="bg-gradient-to-b from-[#E5C8F6] to-[#929AFF] bg-no-repeat bg-fixed min-h-screen">
+<html lang="th" class="bg-gradient-to-b from-[#E5C8F6] to-[#929AFF] bg-no-repeat bg-fixed h-screen">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,11 +26,43 @@
     }
   </script>
   <style>
+    body {
+            background-image: linear-gradient(to bottom, #E5C8F6 0%, #929AFF @yield('gradient-percentage', '40%'));
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'K2D',
+            sans-serif;
+        }
+        
+    html, body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
     /* Custom rounded top white section */
     .rounded-top-section {
       border-top-left-radius: 40px;
       border-top-right-radius: 40px;
-      overflow: hidden;
+    }
+    
+    .page-layout {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    
+    .header-section {
+      flex: 0 0 auto;
+    }
+    
+    .content-section {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
     }
     
     /* Ensure images don't break layout */
@@ -42,7 +75,6 @@
     .card-container {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
     }
     
     /* Card styles */
@@ -153,37 +185,41 @@
     }
   </style>
 </head>
-<body class="font-k2d relative">
-  <div class="desktop-container">
-    <!-- Header with back and home buttons -->
-    <header class="p-4 flex justify-between items-center">
-      <!-- Back button with text -->
-      <a href="javascript:history.back()" class="block p-2 flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 12H5M12 19l-7-7 7-7"/>
-        </svg>
-      </a>
-      
-      <!-- Home icon -->
-      <a href="{{ route('home') }}" class="block p-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-          <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
-      </a>
-    </header>
+<body class="font-k2d">
+  <div class="page-layout">
+    <div class="header-section">
+      <div class="desktop-container">
+        <!-- Header with back and home buttons -->
+        <div class="flex justify-between items-center px-8 py-6">
+          <a href="{{ route('main') }}" class="text-gray-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+          </a>
+          <a href="{{ route('main') }}" class="text-gray-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+          </a>
+      </div>
+        
+        <!-- Logo section -->
+        <div class="text-center mb-6">
+          <a href="{{ route('home') }}" class="inline-block w-full max-w-[200px] mx-auto">
+            <img src="{{ asset('images/logo.png') }}" alt="Anti-Cyberbullying Logo" class="w-full h-auto hover:opacity-80 transition-opacity">
+          </a>
+        </div>
+      </div>
+    </div>
     
-    <!-- Logo section -->
-    <div class="text-center my-6">
-      <a href="{{ route('home') }}" class="inline-block w-full max-w-[250px] mx-auto">
-        <img src="{{ asset('images/logo.png') }}" alt="Anti-Cyberbullying Logo" class="w-full h-auto hover:opacity-80 transition-opacity">
-      </a>
+    <!-- Main content section with white background -->
+    <div class="content-section">
+      <main class="bg-white rounded-top-section pt-8 pb-10 desktop-main flex-grow h-full">
+        @yield('content')
+      </main>
     </div>
   </div>
-  
-  <!-- Main content section with white background -->
-  <main class="bg-white rounded-top-section pt-8 pb-10 px-0 md:px-4 desktop-main">
-    @yield('content')
-  </main>
 </body>
 </html>

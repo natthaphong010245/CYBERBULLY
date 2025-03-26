@@ -37,10 +37,10 @@
         </a>
 
         <!-- สุขภาพจิต Card -->
-        <a href="main_video_teens" class="card-item gradient-border block mt-6">
+        <a href="{{ route('report&consultation') }}" class="card-item gradient-border block mt-6">
             <div class="card-text">
                 <div class="card-title">CYBER<br>BULLYING</div>
-                <div class="card-subtitle">สุขภาพจิต</div>
+                <div class="card-subtitle">รายงาน ขอคำปรึกษา</div>
             </div>
             <div class="card-image">
                 <img src="images/เเบบสอบถาม.jpg" alt="สุขภาพจิต">
@@ -48,7 +48,7 @@
         </a>
 
         <!-- แบบคัดกรอง Card -->
-        <a href="main_video_teens" class="card-item gradient-border block mt-6">
+        <a href="{{ route('assessment') }}" class="card-item gradient-border block mt-6">
             <div class="card-text">
                 <div class="card-title">CYBER<br>BULLYING</div>
                 <div class="card-subtitle">แบบคัดกรอง</div>
@@ -59,7 +59,7 @@
         </a>
 
         <!-- FAQ Card -->
-        <a href="main_video_teens" class="card-item gradient-border card-faq block mt-6 mb-10">
+        <a href="{{ route('faq') }}" class="card-item gradient-border card-faq block mt-6 mb-10">
             <div class="card-image">
                 <img src="images/FAQ.jpg" alt="FAQ">
             </div>

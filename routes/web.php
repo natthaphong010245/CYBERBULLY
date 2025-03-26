@@ -10,7 +10,7 @@ use App\Http\Controllers\PersonActionController;
 use App\Http\Controllers\VictimController;
 use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\MentalHealthController;
-
+use App\Http\Controllers\BehavioralReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,23 +55,23 @@ Route::get('/assessment/mental_health', function () {
 })->name('mental_health');
 
 Route::get('/safe_area', function () {
-    return view('safe_area/safe_area');
+    return view('report&consultation/safe_area/safe_area');
 })->name('safe_area');
 
 Route::get('/safe_area/voice', function () {
-    return view('safe_area/voice/voice');
+    return view('report&consultation/safe_area/voice/voice');
 })->name('safe_area/voice');
 
 Route::get('/safe_area/voice/result', function () {
-    return view('safe_area/voice/result');
+    return view('report&consultation/safe_area/voice/result');
 })->name('safe_area/voice/result');
 
 Route::get('/safe_area/message', function () {
-    return view('safe_area/message/message');
+    return view('report&consultation/safe_area/message/message');
 })->name('safe_area/message');
 
 Route::get('/safe_area/message/result', function () {
-    return view('safe_area/message/result');
+    return view('report&consultation/safe_area/message/result');
 })->name('safe_area/message/result');
 
 // Form routes with controller - Person Action
@@ -187,6 +187,47 @@ Route::middleware(['auth', CheckRoleUser::class])->group(function () {
 Route::get('/main_video', function () {
     return view('main_video');
 })->name('main_video');
+
+Route::get('/assessment', function () {
+    return view('assessment/assessment');
+})->name('assessment');
+
+Route::get('/assessment/cyberbulling', function () {
+    return view('assessment/cyberbulling/cyberbulling');
+})->name('cyberbulling');
+
+Route::get('/report_consultation', function () {
+    return view('report&consultation/report&consultation');
+})->name('report&consultation');
+
+Route::get('/report_consultation/request_consultation', function () {
+    return view('report&consultation/request_consultation/request_consultation');
+})->name('request_consultation');
+
+Route::get('/report_consultation/behavioral_report', function () {
+    return view('report&consultation/behavioral_report/behavioral_report');
+})->name('behavioral_report');
+
+Route::get('/report_consultation/behavioral_report/result', function () {
+    return view('report&consultation/behavioral_report/result');
+})->name('result_report');
+
+Route::get('/report_consultation/request_consultation/teacher', function () {
+    return view('report&consultation/request_consultation/teacher/teacher');
+})->name('teacher_report');
+
+Route::get('/report_consultation/request_consultation/province', function () {
+    return view('report&consultation/request_consultation/province/province');
+})->name('province_report');
+
+Route::get('/report_consultation/request_consultation/country', function () {
+    return view('report&consultation/request_consultation/country/country');
+})->name('country_report');
+
+Route::get('/report_consultation/request_consultation/app_center', function () {
+    return view('report&consultation/request_consultation/app_center/app_center');
+})->name('app_center_report');
+
 Route::get('/video_category1_select_language', function () {
     return view('video_category1/video_category1_select_language');
 })->name('video_category1_select_language');
@@ -314,3 +355,14 @@ Route::get('/video_category4_select_language6', function () {
 Route::get('/video_category4_select_language7', function () {
     return view('video_category4/video_category4_select_language7');
 })->name('video_category4_select_language7');
+
+// Replace the existing behavioral_report route (around line 265)
+Route::get('/report&consultation/behavioral_report', [BehavioralReportController::class, 'index'])
+    ->name('behavioral-report.index');
+
+// เพิ่ม alias route เพื่อให้ใช้กับ route('behavioral_report') ได้
+Route::get('/report&consultation/behavioral_report', [BehavioralReportController::class, 'index'])
+    ->name('behavioral_report');
+
+Route::post('/report&consultation/behavioral_report', [BehavioralReportController::class, 'store'])
+    ->name('behavioral-report.store');
