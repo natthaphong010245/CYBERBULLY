@@ -183,7 +183,6 @@ Route::middleware(['auth', CheckRoleUser::class])->group(function () {
 
 
 // video
-
 Route::get('/main_video', function () {
     return view('main_video');
 })->name('main_video');
@@ -227,6 +226,74 @@ Route::get('/report_consultation/request_consultation/country', function () {
 Route::get('/report_consultation/request_consultation/app_center', function () {
     return view('report&consultation/request_consultation/app_center/app_center');
 })->name('app_center_report');
+
+Route::get('/game/1_1', function () {
+    return view('game/g_1/1_1/index');
+})->name('game_1_1');
+
+Route::get('/game/1_2', function () {
+    return view('game/g_1/1_2/index');
+})->name('game_1_2');
+
+Route::get('/game/1_3', function () {
+    return view('game/g_1/1_3/index');
+})->name('game_1_3');
+
+Route::get('/game/1_4', function () {
+    return view('game/g_1/1_4/index');
+})->name('game_1_4');
+
+Route::get('/game/2', function () {
+    return view('game/g_2/index');
+})->name('game_2');
+
+Route::get('/game/3', function () {
+    return view('game/g_3/index');
+})->name('game_3');
+
+Route::get('/game/5_1', function () {
+    return view('game/g_5/5_1/index');
+})->name('game_5_1');
+
+Route::get('/game/5_2', function () {
+    return view('game/g_5/5_2/index');
+})->name('game_5_2');
+
+Route::get('/game/6', function () {
+    return view('game/g_6/index');
+})->name('game_6');
+
+Route::get('/game/7', function () {
+    return view('game/g_7/index');
+})->name('game_7');
+
+Route::get('/game/8', function () {
+    return view('game/g_8/index');
+})->name('game_8');
+
+Route::get('/game/9', function () {
+    return view('game/g_9/index');
+})->name('game_9');
+
+Route::get('/game/10', function () {
+    return view('game/g_10/index');
+})->name('game_10');
+
+
+
+
+Route::get('/game/12', function () {
+    return view('game/g_12/index');
+})->name('game_12');
+
+
+
+Route::get('/game/14', function () {
+    return view('game/g_14/index');
+})->name('game_14');
+
+
+
 
 Route::get('/video_category1_select_language', function () {
     return view('video_category1/video_category1_select_language');
