@@ -3,8 +3,7 @@
 @section('content')
     <div class="card-container space-y-6 px-6 md:px-0 mb-6">
         <div class="text-center mb-2">
-            <h2 class="text-xl font-bold text-indigo-800">พฤติกรรมแบบนี้เป็นการรังแกรูป</h2>
-            <h2 class="text-xl font-bold text-indigo-800">แบบใหนกันนะ</h2>
+            <h2 class="text-xl font-bold text-indigo-800">พฤติกรรมแบบนี้เป็นการรังแกรูปแบบไหนกัน</h2>
         </div>
         
         <!-- Scenario Image -->
@@ -20,7 +19,7 @@
         <div class="mb-2">
             <div class="flex items-center justify-center mb-4 mt-2">
                 <div class="flex-1 h-px bg-gray-400 max-w-28"></div>
-                <h3 class="text-center text-gray-500 text-sm mx-4">ตัวเลือก</h3>
+                <h3 class="text-center text-gray-500 text-lg mx-4">ตัวเลือก</h3>
                 <div class="flex-1 h-px bg-gray-400 max-w-28"></div>
             </div>
             <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto" id="answer-options">
@@ -53,32 +52,32 @@
     </div>
 
     <!-- Success Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
+    <div id="success-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="Happy Student" class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
-            <h3 class="text-xl font-bold text-indigo-800">เยี่ยมมาก!</h3>
-            <p class="text-indigo-800 mb-2">คุณตอบได้ถูกต้อง</p>
-            <p class="text-indigo-800 text-lg mb-1">เริ่มความท้าทายเกมต่อไปกันเลย</p>
-            <button id="success-btn" class="bg-[#929AFF] text-white font-medium text-lg py-3 px-8 rounded-xl transition-colors hover:bg-indigo-600">
+            <h3 class="text-2xl font-bold text-indigo-800">เยี่ยมมาก!</h3>
+            <p class="text-lg text-indigo-800 mb-4">คุณตอบได้ถูกต้อง</p>
+            <p class="text-indigo-800 text-xl mb-1 font-bold">เริ่มความท้าทายเกมต่อไปกันเลย</p>
+            <button id="success-btn" class="bg-[#929AFF] text-white font-medium text-lg py-2 px-8 rounded-xl transition-colors hover:bg-indigo-600">
                 เริ่ม
             </button>
         </div>
     </div>
 
     <!-- Failure Modal -->
-    <div id="failure-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
-            <h3 class="text-xl font-bold text-indigo-800">ลองอีกครั้ง</h3>
-            <p class="text-indigo-800 mb-4">คำตอบของคุณยังไม่ถูกต้อง</p>
+    <div id="failure-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
+            <h3 class="text-2xl font-bold text-indigo-800">ลองอีกครั้ง</h3>
+            <p class="text-lg text-indigo-800 mb-4">คำตอบของคุณยังไม่ถูกต้อง</p>
             
             <!-- Show correct answer with image -->
             <div class="mb-4">
                 <img src="{{ asset('images/game/1/verbal_bullying.png') }}" alt="Verbal Bullying" class="w-full h-auto object-cover rounded mb-2">
-                <p class="text-indigo-700 font-bold text-xl">การรังแกทางวาจา</p>
+                <p class="text-indigo-800 text-2xl">การรังแกทางวาจา</p>
             </div>
             
-            <p class="text-indigo-800 text-lg mb-1">เริ่มความท้าทายเกมถัดไปกันเลย</p>
-            <button id="failure-btn" class="bg-[#929AFF] text-white font-medium text-lg py-3 px-8 rounded-xl transition-colors hover:bg-indigo-600">
+            <p class="text-indigo-800 text-xl mb-1 font-bold">เริ่มความท้าทายเกมถัดไปกันเลย</p>
+            <button id="failure-btn" class="bg-[#929AFF] text-white font-medium text-lg py-2 px-8 rounded-xl transition-colors hover:bg-indigo-600">
                 ถัดไป
             </button>
         </div>
@@ -128,12 +127,12 @@
             
             function showSuccessModal() {
                 successModal.classList.remove('hidden');
-                successModal.classList.add('animate-fadeIn');
+                successModal.classList.add('animate-modal-show');
             }
             
             function showFailureModal() {
                 failureModal.classList.remove('hidden');
-                failureModal.classList.add('animate-fadeIn');
+                failureModal.classList.add('animate-modal-show');
             }
             
             // Button click handlers
@@ -150,6 +149,7 @@
                 modal.addEventListener('click', function(e) {
                     if (e.target === modal) {
                         modal.classList.add('hidden');
+                        modal.classList.remove('animate-modal-show');
                         resetGame();
                     }
                 });
@@ -167,19 +167,39 @@
     </script>
     
     <style>
-        .animate-fadeIn {
-            animation: fadeIn 0.3s ease-in-out forwards;
+        /* Modal Animation - Background fades in first, then content scales in */
+        .animate-modal-show .modal-backdrop {
+            animation: backdropFadeIn 0.3s ease-out forwards;
         }
         
-        @keyframes fadeIn {
+        .animate-modal-show .modal-content {
+            animation: contentSlideIn 0.4s ease-out 0.15s both;
+        }
+        
+        @keyframes backdropFadeIn {
             0% { 
-                opacity: 0; 
-                transform: scale(0.9); 
+                background-color: rgba(0, 0, 0, 0);
             }
             100% { 
-                opacity: 1; 
-                transform: scale(1); 
+                background-color: rgba(0, 0, 0, 0.5);
             }
+        }
+        
+        @keyframes contentSlideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Initial state for modal content */
+        .modal-content {
+            opacity: 0;
+            transform: scale(0.8);
         }
         
         .answer-option {

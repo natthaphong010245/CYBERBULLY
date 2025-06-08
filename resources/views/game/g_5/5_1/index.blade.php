@@ -1,9 +1,24 @@
 @extends('layouts.game.index')
 
 @section('content')
-    <div class="card-container space-y-6 px-6 md:px-0 mb-6">
+    <!-- Introduction Modal (shows first) -->
+    <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
+            <h3 class="text-2xl font-bold text-indigo-800">ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน</h3>
+            <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
+                class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
+            <h3 class="text-xl font-bold text-indigo-800 mb-2">เกมที่ 5</h3>
+            <p class="text-lg text-indigo-800 mb-2">การกลั่นแกล้งแบบดั้งเดิม และคาดโทษในบอร์</p>
+            <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความก้าวหน้ากันเลย</p>
+            <button id="start-game-btn" class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors ">
+                เริ่ม
+            </button>
+        </div>
+    </div>
+
+    <div class="card-container space-y-6 px-6 md:px-0 mb-6" id="game-content">
         <div class="text-center mb-2">
-            <h2 class="text-2xl font-bold text-indigo-800">การกลั่นแกล้งแบบดั้งเดิม</h2>
+            <h2 class="text-xl font-bold text-indigo-800">การกลั่นแกล้งแบบดั้งเดิม</h2>
             <h2 class="text-lg font-bold text-indigo-800">TRADITIONAL</h2>
         </div>
         
@@ -60,12 +75,12 @@
     </div>
 
     <!-- Success Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
+    <div id="success-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="Happy Student" class="w-32 h-auto mx-auto mb-4">
             <h3 class="text-xl font-bold text-indigo-800 mb-2">เยี่ยมมาก!</h3>
-            <p class="text-gray-700 mb-2">คุณตอบได้ถูกต้อง</p>
-            <p class="text-gray-600 text-sm mb-6">เริ่มความก้าวหน้าในเกมต่อไปกัน</p>
+            <p class="text-indigo-800 mb-2">คุณตอบได้ถูกต้อง</p>
+            <p class="text-indigo-800 text-lg mb-2">เริ่มความก้าวหน้าในเกมต่อไปกัน</p>
             <button id="success-btn" class="bg-[#929AFF] text-white font-medium py-3 px-8 rounded-xl transition-colors hover:bg-indigo-600">
                 เริ่ม
             </button>
@@ -73,12 +88,12 @@
     </div>
 
     <!-- Failure Modal -->
-    <div id="failure-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
+    <div id="failure-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl_false.png') }}" alt="Confused Student" class="w-32 h-auto mx-auto mb-4">
-            <h3 class="text-xl font-bold text-red-600 mb-2">ลองอีกครั้ง</h3>
-            <p class="text-gray-700 mb-6">คำตอบยังไม่ถูกต้อง</p>
-            <div class="flex gap-3 justify-center">
+            <h3 class="text-xl font-bold text-indigo-800 mb-2">ลองอีกครั้ง</h3>
+            <p class="text-indigo-800 mb-6">คำตอบยังไม่ถูกต้อง</p>
+            <div class="flex gap-8 justify-center">
                 <button id="skip-btn" class="bg-gray-400 text-white font-medium py-3 px-6 rounded-xl transition-colors hover:bg-gray-500">
                     ข้าม
                 </button>
@@ -91,6 +106,30 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const introModal = document.getElementById('intro-modal');
+            const gameContent = document.getElementById('game-content');
+            const startGameBtn = document.getElementById('start-game-btn');
+
+            // Show intro modal with animation
+            setTimeout(() => {
+                introModal.classList.add('animate-modal-show');
+                gameContent.classList.add('game-blur'); // Blur the game content
+            }, 100);
+
+            // Handle start game button
+            startGameBtn.addEventListener('click', function() {
+                // Add fade out animation to intro modal
+                introModal.classList.remove('animate-modal-show');
+                introModal.classList.add('animate-modal-fade-out');
+
+                setTimeout(() => {
+                    introModal.style.display = 'none';
+                    gameContent.classList.remove('game-blur'); // Remove blur from game
+                    gameContent.classList.add('animate-unblur'); // Add unblur animation
+                }, 300); // Match the animation duration
+            });
+
+            // Original game logic
             const characterOptions = document.getElementById('character-options');
             const sequenceSlots = document.querySelectorAll('.sequence-slot');
             const characterElements = Array.from(characterOptions.children);
@@ -229,7 +268,7 @@
             function showSuccessModal() {
                 const modal = document.getElementById('success-modal');
                 modal.classList.remove('hidden');
-                modal.classList.add('animate-fadeIn');
+                modal.classList.add('animate-modal-show');
                 
                 document.getElementById('success-btn').onclick = function() {
                     window.location.href = "{{ route('main') }}";
@@ -239,10 +278,11 @@
             function showFailureModal() {
                 const modal = document.getElementById('failure-modal');
                 modal.classList.remove('hidden');
-                modal.classList.add('animate-fadeIn');
+                modal.classList.add('animate-modal-show');
                 
                 document.getElementById('retry-btn').onclick = function() {
                     modal.classList.add('hidden');
+                    modal.classList.remove('animate-modal-show');
                 };
                 
                 document.getElementById('skip-btn').onclick = function() {
@@ -253,13 +293,101 @@
     </script>
     
     <style>
-        .animate-fadeIn {
-            animation: fadeIn 0.3s ease-in-out forwards;
+        /* Modal Animation - Background fades in first, then content slides in */
+        .animate-modal-show .modal-backdrop {
+            animation: backdropFadeIn 0.3s ease-out forwards;
         }
         
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
+        .animate-modal-show .modal-content {
+            animation: contentSlideIn 0.4s ease-out 0.15s both;
+        }
+
+        /* Smooth fade out animation for intro modal */
+        .animate-modal-fade-out {
+            animation: backdropFadeOut 0.3s ease-out forwards;
+        }
+
+        .animate-modal-fade-out .modal-content {
+            animation: contentScaleOut 0.3s ease-out forwards;
+        }
+        
+        @keyframes backdropFadeIn {
+            0% { 
+                background-color: rgba(0, 0, 0, 0);
+            }
+            100% { 
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+        }
+        
+        @keyframes contentSlideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes backdropFadeOut {
+            0% {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            100% {
+                background-color: rgba(0, 0, 0, 0);
+                visibility: hidden;
+            }
+        }
+
+        @keyframes contentScaleOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.3); // Scale down smaller for "วาปเล็กลง" effect
+            }
+        }
+        
+        /* Initial state for modal content */
+        .modal-content {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        /* Game content blur effects */
+        .game-blur {
+            filter: blur(3px);
+            transition: filter 0.3s ease-out;
+            transform: scale(1.02);
+            /* Slightly zoom in when blurred */
+        }
+
+        .animate-unblur {
+            animation: unblurGame 0.4s ease-out forwards;
+        }
+
+        @keyframes unblurGame {
+            0% {
+                filter: blur(3px);
+                transform: scale(1.02);
+            }
+
+            100% {
+                filter: blur(0px);
+                transform: scale(1);
+            }
+        }
+
+        /* Game content with smooth transitions */
+        #game-content {
+            opacity: 1;
+            transition: all 0.3s ease-out;
         }
         
         .aspect-square {

@@ -50,12 +50,12 @@
     </div>
 
     <!-- Success Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
+    <div id="success-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="Happy Student" class="w-32 h-auto mx-auto mb-4">
             <h3 class="text-xl font-bold text-indigo-800 mb-2">เยี่ยมมาก!</h3>
-            <p class="text-gray-700 mb-2">คุณตอบได้ถูกต้อง</p>
-            <p class="text-gray-600 text-sm mb-6">เริ่มความก้าวหน้าในเกมต่อไปกัน</p>
+            <p class="text-indigo-800 mb-4">คุณตอบได้ถูกต้อง</p>
+            <p class="text-indigo-800 text-lg mb-2">เริ่มความก้าวหน้าในเกมต่อไปกัน</p>
             <button id="success-btn" class="bg-[#929AFF] text-white font-medium py-3 px-8 rounded-xl transition-colors hover:bg-indigo-600">
                 เริ่ม
             </button>
@@ -63,12 +63,12 @@
     </div>
 
     <!-- Failure Modal -->
-    <div id="failure-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
+    <div id="failure-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl_false.png') }}" alt="Confused Student" class="w-32 h-auto mx-auto mb-4">
-            <h3 class="text-xl font-bold text-red-600 mb-2">ลองอีกครั้ง</h3>
-            <p class="text-gray-700 mb-6">คำตอบยังไม่ถูกต้อง</p>
-            <div class="flex gap-3 justify-center">
+            <h3 class="text-xl font-bold text-indigo-800 mb-2">ลองอีกครั้ง</h3>
+            <p class="text-indigo-800 mb-6">คำตอบยังไม่ถูกต้อง</p>
+            <div class="flex gap-8 justify-center">
                 <button id="skip-btn" class="bg-gray-400 text-white font-medium py-3 px-6 rounded-xl transition-colors hover:bg-gray-500">
                     ข้าม
                 </button>
@@ -218,7 +218,7 @@
             function showSuccessModal() {
                 const modal = document.getElementById('success-modal');
                 modal.classList.remove('hidden');
-                modal.classList.add('animate-fadeIn');
+                modal.classList.add('animate-modal-show');
                 
                 document.getElementById('success-btn').onclick = function() {
                     window.location.href = "{{ route('main') }}";
@@ -228,10 +228,11 @@
             function showFailureModal() {
                 const modal = document.getElementById('failure-modal');
                 modal.classList.remove('hidden');
-                modal.classList.add('animate-fadeIn');
+                modal.classList.add('animate-modal-show');
                 
                 document.getElementById('retry-btn').onclick = function() {
                     modal.classList.add('hidden');
+                    modal.classList.remove('animate-modal-show');
                 };
                 
                 document.getElementById('skip-btn').onclick = function() {
@@ -242,13 +243,39 @@
     </script>
     
     <style>
-        .animate-fadeIn {
-            animation: fadeIn 0.3s ease-in-out forwards;
+        /* Modal Animation - Background fades in first, then content scales in */
+        .animate-modal-show .modal-backdrop {
+            animation: backdropFadeIn 0.3s ease-out forwards;
         }
         
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
+        .animate-modal-show .modal-content {
+            animation: contentSlideIn 0.4s ease-out 0.15s both;
+        }
+        
+        @keyframes backdropFadeIn {
+            0% { 
+                background-color: rgba(0, 0, 0, 0);
+            }
+            100% { 
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+        }
+        
+        @keyframes contentSlideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Initial state for modal content */
+        .modal-content {
+            opacity: 0;
+            transform: scale(0.8);
         }
         
         .aspect-square {

@@ -1,10 +1,28 @@
 @extends('layouts.game.index')
 
 @section('content')
-    <div class="card-container space-y-6 px-8 md:px-0">
+    <!-- Introduction Modal (shows first) -->
+    <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
+            <h3 class="text-2xl font-bold text-indigo-800 mb-2">ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน</h3>
+            <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
+                class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
+            <h3 class="text-2xl font-bold text-indigo-800 mb-2">เกมที่ 2</h3>
+            <p class="text-lg text-indigo-800 mb-4">"การรังแกกันผ่านโลกไซเบอร์" หรือว่า "ไซเบอร์บูลลี่" เป็นตัวเลือกกันน้า
+            </p>
+            <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความท้าทายกันเลย</p>
+            <button id="start-game-btn"
+                class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors hover:bg-[#7B85FF]">
+                เริ่ม
+            </button>
+        </div>
+    </div>
+
+    <div class="card-container space-y-6 px-8 md:px-0" id="game-content">
         <div class="text-center">
-            <h2 class="text-lg font-bold text-indigo-800">พฤติกรรมแบบนี้เป็นการรังแกรุมแบบไหนกันนะ</h2>
-            <p class="text-sm text-indigo-700 mt-2">ลากตัวเลือกไปใส่ในช่องว่าง</p>
+            <h2 class="text-xl ml-2 mr-2 font-bold text-indigo-800">"การรังแกกันผ่านโลกไซเบอร์" หรือว่า "ไซเบอร์บลูลี่"
+                เป็นตัวเลือกกันน้า</h2>
+            <p class="text-lg text-indigo-700 mt-2">ลากตัวเลือกไปใส่ในช่องว่าง</p>
         </div>
 
         <!-- Sun -->
@@ -92,6 +110,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const introModal = document.getElementById('intro-modal');
+            const gameContent = document.getElementById('game-content');
+            const startGameBtn = document.getElementById('start-game-btn');
             const answerCloudsContainer = document.getElementById('answer-clouds-container');
             const dropZonesContainer = document.getElementById('drop-zones-container');
             const correctOverlay = document.getElementById('correct-overlay');
@@ -119,6 +140,7 @@
                 y: 0
             };
             let isDragging = false;
+            let gameInitialized = false;
 
             // Cloud positions and sizes
             const cloudPositions = [{
@@ -137,6 +159,32 @@
                 position: 'top-52 left-1/2 transform -translate-x-1/2',
                 size: 'w-28 h-auto'
             }];
+
+            // Show intro modal with animation
+            setTimeout(() => {
+                introModal.classList.add('animate-modal-show');
+                gameContent.classList.add('game-blur'); // Blur the game content
+            }, 100);
+
+            // Handle start game button
+            startGameBtn.addEventListener('click', function() {
+                // Add fade out animation to intro modal
+                introModal.classList.remove('animate-modal-show');
+                introModal.classList.add('animate-modal-fade-out');
+
+                setTimeout(() => {
+                    introModal.style.display = 'none';
+                    gameContent.classList.remove('game-blur'); // Remove blur from game
+                    gameContent.classList.add('animate-unblur'); // Add unblur animation
+
+                    // Initialize game after modal is hidden
+                    if (!gameInitialized) {
+                        createAnswerClouds();
+                        setupDropZones();
+                        gameInitialized = true;
+                    }
+                }, 300); // Match the animation duration
+            });
 
             function shuffleArray(array) {
                 const shuffled = [...array];
@@ -231,8 +279,6 @@
 
                 isDragging = true;
                 draggedElement.style.zIndex = '1000';
-                // Remove opacity change to avoid making cloud fade
-                // draggedElement.style.opacity = '0.8';
 
                 // Preserve existing transform and add scale
                 const hasTranslate = draggedElement.classList.contains('transform');
@@ -291,7 +337,6 @@
                 draggedElement.style.left = '';
                 draggedElement.style.top = '';
                 draggedElement.style.zIndex = '';
-                // draggedElement.style.opacity = ''; // Keep original opacity
                 draggedElement.style.transform = '';
                 draggedElement.style.pointerEvents = '';
 
@@ -338,61 +383,63 @@
             }
 
             // Setup drop zones
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                zone.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    e.dataTransfer.dropEffect = 'move';
-                    const cloudImg = this.querySelector('img');
-                    if (cloudImg) {
-                        cloudImg.style.opacity = '0.6';
-                        cloudImg.style.filter = 'brightness(1.2)';
-                    }
-                });
-
-                zone.addEventListener('dragleave', function(e) {
-                    const cloudImg = this.querySelector('img');
-                    if (cloudImg) {
-                        cloudImg.style.opacity = '0.3';
-                        cloudImg.style.filter = '';
-                    }
-                });
-
-                zone.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    const cloudImg = this.querySelector('img');
-                    if (cloudImg) {
-                        cloudImg.style.opacity = '0.3';
-                        cloudImg.style.filter = '';
-                    }
-
-                    if (!draggedElement) return;
-
-                    const answer = draggedElement.dataset.answer;
-                    const zoneIndex = parseInt(this.dataset.zone);
-
-                    // Check if zone is already filled
-                    if (this.querySelector('.placed-cloud')) {
-                        returnToOriginalPosition();
-                        return;
-                    }
-
-                    if (correctAnswers.includes(answer)) {
-                        // Correct answer
-                        placeCloudInZone(draggedElement, this);
-                        completedZones++;
-
-                        if (completedZones < 3) {
-                            showCorrectModal();
-                        } else {
-                            showCompleteModal();
+            function setupDropZones() {
+                document.querySelectorAll('.drop-zone').forEach(zone => {
+                    zone.addEventListener('dragover', function(e) {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                        const cloudImg = this.querySelector('img');
+                        if (cloudImg) {
+                            cloudImg.style.opacity = '0.6';
+                            cloudImg.style.filter = 'brightness(1.2)';
                         }
-                    } else {
-                        // Wrong answer
-                        showWrongModal();
-                        returnToOriginalPosition();
-                    }
+                    });
+
+                    zone.addEventListener('dragleave', function(e) {
+                        const cloudImg = this.querySelector('img');
+                        if (cloudImg) {
+                            cloudImg.style.opacity = '0.3';
+                            cloudImg.style.filter = '';
+                        }
+                    });
+
+                    zone.addEventListener('drop', function(e) {
+                        e.preventDefault();
+                        const cloudImg = this.querySelector('img');
+                        if (cloudImg) {
+                            cloudImg.style.opacity = '0.3';
+                            cloudImg.style.filter = '';
+                        }
+
+                        if (!draggedElement) return;
+
+                        const answer = draggedElement.dataset.answer;
+                        const zoneIndex = parseInt(this.dataset.zone);
+
+                        // Check if zone is already filled
+                        if (this.querySelector('.placed-cloud')) {
+                            returnToOriginalPosition();
+                            return;
+                        }
+
+                        if (correctAnswers.includes(answer)) {
+                            // Correct answer
+                            placeCloudInZone(draggedElement, this);
+                            completedZones++;
+
+                            if (completedZones < 3) {
+                                showCorrectModal();
+                            } else {
+                                showCompleteModal();
+                            }
+                        } else {
+                            // Wrong answer
+                            showWrongModal();
+                            returnToOriginalPosition();
+                        }
+                    });
                 });
-            });
+            }
 
             function placeCloudInZone(cloud, zone) {
                 const answer = cloud.dataset.answer;
@@ -451,13 +498,131 @@
             document.getElementById('finish-game-btn').addEventListener('click', function() {
                 window.location.href = "{{ route('main') }}";
             });
-
-            // Initialize game
-            createAnswerClouds();
         });
     </script>
 
     <style>
+        /* Modal Animation - Background fades in first, then content scales in */
+        .animate-modal-show .modal-backdrop {
+            animation: backdropFadeIn 0.3s ease-out forwards;
+        }
+
+        .animate-modal-show .modal-content {
+            animation: contentSlideIn 0.4s ease-out 0.15s both;
+        }
+
+        /* Modal hide animation */
+        .animate-modal-hide {
+            animation: modalHide 0.3s ease-out forwards;
+        }
+
+        /* Smooth fade out animation for intro modal */
+        .animate-modal-fade-out {
+            animation: backdropFadeOut 0.3s ease-out forwards;
+        }
+
+        .animate-modal-fade-out .modal-content {
+            animation: contentScaleOut 0.3s ease-out forwards;
+        }
+
+        /* Game content fade in - Not used anymore but kept for compatibility */
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes backdropFadeIn {
+            0% {
+                background-color: rgba(0, 0, 0, 0);
+            }
+
+            100% {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        @keyframes contentSlideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes modalHide {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        @keyframes backdropFadeOut {
+            0% {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            100% {
+                background-color: rgba(0, 0, 0, 0);
+                visibility: hidden;
+            }
+        }
+
+        @keyframes contentScaleOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.3); // Scale down smaller for "วาปเล็กลง" effect
+            }
+        }
+
+        /* Game content blur effects */
+        .game-blur {
+            filter: blur(3px);
+            transition: filter 0.3s ease-out;
+            transform: scale(1.02);
+            /* Slightly zoom in when blurred */
+        }
+
+        .animate-unblur {
+            animation: unblurGame 0.4s ease-out forwards;
+        }
+
+        @keyframes unblurGame {
+            0% {
+                filter: blur(3px);
+                transform: scale(1.02);
+            }
+
+            100% {
+                filter: blur(0px);
+                transform: scale(1);
+            }
+        }
+
+        /* Game content with smooth transitions */
+        #game-content {
+            opacity: 1;
+            transition: all 0.3s ease-out;
+        }
+
+        /* Initial state for modal content */
+        .modal-content {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
         /* Modal animations */
         .animate-fadeIn {
             animation: fadeIn 0.5s ease-in-out forwards;
@@ -536,7 +701,7 @@
         .sun-container {
             border: none;
             outline: none;
-            background: transparent;
+
         }
 
         /* Custom cloud sizes */
@@ -633,7 +798,7 @@
 
             /* Better spacing for mobile */
             .card-container {
-                padding: 1rem 0.5rem;
+                padding: 0.5rem 0.5rem;
             }
         }
     </style>
