@@ -210,7 +210,7 @@
                 console.log('Messages to save:', messages);
                 
                 // Navigate to next page directly without alert
-                window.location.href = "{{ route('main') }}";
+                window.location.href = "{{ route('game_7') }}";
             });
             
             // Handle window resize

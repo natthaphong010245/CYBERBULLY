@@ -161,7 +161,7 @@
             continueBtn.addEventListener('click', function() {
                 hideModal();
                 setTimeout(() => {
-                    window.location.href = "{{ route('main') }}";
+                    window.location.href = "{{ route('game_12') }}";
                 }, 500);
             });
             

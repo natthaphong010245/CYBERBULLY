@@ -140,7 +140,7 @@
             finishCorrectBtn.addEventListener('click', function() {
                 hideModal(correctOverlay);
                 setTimeout(() => {
-                    window.location.href = "{{ route('main') }}";
+                    window.location.href = "{{ route('game_9') }}";
                 }, 500);
             });
             

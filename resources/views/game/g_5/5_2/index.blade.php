@@ -221,7 +221,7 @@
                 modal.classList.add('animate-modal-show');
                 
                 document.getElementById('success-btn').onclick = function() {
-                    window.location.href = "{{ route('main') }}";
+                    window.location.href = "{{ route('game_6') }}";
                 };
             }
             
@@ -236,7 +236,7 @@
                 };
                 
                 document.getElementById('skip-btn').onclick = function() {
-                    window.location.href = "{{ route('main') }}";
+                    window.location.href = "{{ route('game_5_2') }}";
                 };
             }
         });

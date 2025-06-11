@@ -185,11 +185,11 @@
 
             // Button click handlers
             successBtn.addEventListener('click', function() {
-                window.location.href = "{{ route('main') }}";
+                window.location.href = "{{ route('game_1_2') }}";
             });
 
             failureBtn.addEventListener('click', function() {
-                window.location.href = "{{ route('main') }}";
+                window.location.href = "{{ route('game_1_2') }}";
             });
 
             // Close modal when clicking outside (except intro modal)

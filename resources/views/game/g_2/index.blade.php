@@ -496,7 +496,7 @@
             });
 
             document.getElementById('finish-game-btn').addEventListener('click', function() {
-                window.location.href = "{{ route('main') }}";
+                window.location.href = "{{ route('game_3') }}";
             });
         });
     </script>

@@ -191,7 +191,7 @@
                         overlay.classList.remove('animate-fadeOut');
                         
                         if (shouldNavigateHome) {
-                            window.location.href = "{{ route('main') }}";
+                            window.location.href = "{{ route('game_4') }}";
                         }
                     }, 500);
                 };

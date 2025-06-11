@@ -251,6 +251,14 @@ Route::get('/game/3', function () {
     return view('game/g_3/index');
 })->name('game_3');
 
+Route::get('/game/4_1', function () {
+    return view('game/g_4/4_1/index');
+})->name('game_4_1');
+
+Route::get('/game/4_2', function () {
+    return view('game/g_4/4_2/index');
+})->name('game_4_2');
+
 Route::get('/game/5_1', function () {
     return view('game/g_5/5_1/index');
 })->name('game_5_1');
@@ -279,8 +287,9 @@ Route::get('/game/10', function () {
     return view('game/g_10/index');
 })->name('game_10');
 
-
-
+Route::get('/game/11', function () {
+    return view('game/g_11/index');
+})->name('game_11');
 
 Route::get('/game/12', function () {
     return view('game/g_12/index');

@@ -204,7 +204,7 @@
                 correctOverlay.classList.add('animate-fadeOut');
                 
                 setTimeout(() => {
-                    window.location.href = "{{ route('main') }}";
+                    window.location.href = "{{ route('game_8') }}";
                 }, 500);
             });
             
