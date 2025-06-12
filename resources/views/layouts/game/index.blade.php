@@ -1,4 +1,3 @@
-{{-- นี่คือหน้า layouts/game/index.blade.php --}}
 <!DOCTYPE html>
 <html lang="th" class="bg-gradient-to-b from-[#E5C8F6] to-[#929AFF] bg-no-repeat bg-fixed h-screen">
 <head>
@@ -79,7 +78,7 @@ img {
     <div class="header-section">
       <div class="desktop-container">
         <!-- Header with back and home buttons -->
-        <div class="flex justify-between items-center px-8 py-6">
+        <div class="flex justify-between items-center px-8 py-4">
           <a href="{{ route('main') }}" class="text-gray-700">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -94,20 +93,16 @@ img {
           </a>
       </div>
         
-        <!-- Title section -->
-        <div class="text-center mb-4 relative">
+        <div class="text-center mb-6 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
-                    <h1 class="text-xl font-bold text-[#ffffff] inline-block" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); letter-spacing: 1px;">ความรู้เกี่ยวกับพฤติกรรม</h1>
-                    <br>
-                    <h1 class="text-xl font-bold text-[#ffffff] inline-block" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); letter-spacing: 1px;">การรังแกกัน</h1>
+                    @yield('game-title')
                 </div>
             </div>
         </div>
       </div>
     </div>
     
-    <!-- Main content section with white background -->
     <div class="content-section">
       <main class="bg-white rounded-top-section pt-8 pb-10 desktop-main flex-grow h-full">
         @yield('content')

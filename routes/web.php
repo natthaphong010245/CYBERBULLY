@@ -11,6 +11,7 @@ use App\Http\Controllers\VictimController;
 use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\MentalHealthController;
 use App\Http\Controllers\BehavioralReportController;
+use App\Http\Controllers\Game\BullyingGameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -227,21 +228,10 @@ Route::get('/report_consultation/request_consultation/app_center', function () {
     return view('report&consultation/request_consultation/app_center/app_center');
 })->name('app_center_report');
 
-Route::get('/game/1_1', function () {
-    return view('game/g_1/1_1/index');
-})->name('game_1_1');
-
-Route::get('/game/1_2', function () {
-    return view('game/g_1/1_2/index');
-})->name('game_1_2');
-
-Route::get('/game/1_3', function () {
-    return view('game/g_1/1_3/index');
-})->name('game_1_3');
-
-Route::get('/game/1_4', function () {
-    return view('game/g_1/1_4/index');
-})->name('game_1_4');
+Route::get('/game/1_1', [BullyingGameController::class, 'game1_1'])->name('game_1_1');
+Route::get('/game/1_2', [BullyingGameController::class, 'game1_2'])->name('game_1_2');
+Route::get('/game/1_3', [BullyingGameController::class, 'game1_3'])->name('game_1_3');
+Route::get('/game/1_4', [BullyingGameController::class, 'game1_4'])->name('game_1_4');
 
 Route::get('/game/2', function () {
     return view('game/g_2/index');
@@ -251,21 +241,12 @@ Route::get('/game/3', function () {
     return view('game/g_3/index');
 })->name('game_3');
 
-Route::get('/game/4_1', function () {
-    return view('game/g_4/4_1/index');
-})->name('game_4_1');
+Route::get('/game/4_1', [BullyingGameController::class, 'game4_1'])->name('game_4_1');
+Route::get('/game/4_2', [BullyingGameController::class, 'game4_2'])->name('game_4_2');
 
-Route::get('/game/4_2', function () {
-    return view('game/g_4/4_2/index');
-})->name('game_4_2');
-
-Route::get('/game/5_1', function () {
-    return view('game/g_5/5_1/index');
-})->name('game_5_1');
-
-Route::get('/game/5_2', function () {
-    return view('game/g_5/5_2/index');
-})->name('game_5_2');
+Route::get('/game/5_1', [BullyingGameController::class, 'game5_1'])->name('game_5_1');
+Route::get('/game/5_2', [BullyingGameController::class, 'game5_2'])->name('game_5_2');
+Route::get('/game/custom', [BullyingGameController::class, 'customSequenceGame'])->name('game_custom');
 
 Route::get('/game/6', function () {
     return view('game/g_6/index');
@@ -295,7 +276,9 @@ Route::get('/game/12', function () {
     return view('game/g_12/index');
 })->name('game_12');
 
-
+Route::get('/game/13', function () {
+    return view('game/g_13/index');
+})->name('game_13');
 
 Route::get('/game/14', function () {
     return view('game/g_14/index');
