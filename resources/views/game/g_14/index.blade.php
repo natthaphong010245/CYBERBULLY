@@ -1,8 +1,6 @@
-{{-- นี่คือหน้า game/g_14/index.blade.php --}}
 @extends('layouts.game.dealing_bullying.index')
 
 @section('content')
-    <!-- Introduction Modal (shows first) -->
     <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <h3 class="text-2xl font-bold text-indigo-800">การรับมือการกลั่นแกล้งบนโลกออนไลน์</h3>
@@ -25,9 +23,7 @@
                 </h2>
             </div>
 
-            <!-- Letters Grid -->
             <div class="grid grid-cols-2 gap-3 max-w-sm mx-auto">
-                <!-- C -->
                 <div class="letter-card" data-letter="c" data-selected="false">
                     <div class="bg-white rounded-2xl p-6 cursor-pointer transition-all border-2 border-transparent hover:border-indigo-200"
                         style="box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1);">
@@ -35,7 +31,6 @@
                     </div>
                 </div>
 
-                <!-- e -->
                 <div class="letter-card" data-letter="o" data-selected="false">
                     <div class="bg-white rounded-2xl p-6 cursor-pointer transition-all border-2 border-transparent hover:border-indigo-200"
                         style="box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1);">
@@ -43,7 +38,6 @@
                     </div>
                 </div>
 
-                <!-- N -->
                 <div class="letter-card" data-letter="n1" data-selected="false">
                     <div class="bg-white rounded-2xl p-6 cursor-pointer transition-all border-2 border-transparent hover:border-indigo-200"
                         style="box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1);">
@@ -51,7 +45,6 @@
                     </div>
                 </div>
 
-                <!-- N -->
                 <div class="letter-card" data-letter="n2" data-selected="false">
                     <div class="bg-white rounded-2xl p-6 cursor-pointer transition-all border-2 border-transparent hover:border-indigo-200"
                         style="box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1);">
@@ -59,7 +52,6 @@
                     </div>
                 </div>
 
-                <!-- E -->
                 <div class="letter-card" data-letter="e" data-selected="false">
                     <div class="bg-white rounded-2xl p-6 cursor-pointer transition-all border-2 border-transparent hover:border-indigo-200"
                         style="box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1);">
@@ -67,7 +59,6 @@
                     </div>
                 </div>
 
-                <!-- C -->
                 <div class="letter-card" data-letter="c2" data-selected="false">
                     <div class="bg-white rounded-2xl p-6 cursor-pointer transition-all border-2 border-transparent hover:border-indigo-200"
                         style="box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1);">
@@ -76,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- T (Bottom Center) -->
             <div class="flex justify-center mt-4 mb-0">
                 <div class="letter-card" data-letter="t" data-selected="false"
                     style="width: calc((100% - 0.75rem) / 2); max-width: calc((320px - 0.75rem) / 2);">
@@ -89,13 +79,11 @@
         </div>
     </div>
 
-    <!-- Letter Detail Modal -->
     <div id="letter-modal"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full mx-4 text-center">
+        <div class="bg-white rounded-xl shadow-xl p-6 max-w-sm w-full mx-4 text-center ">
             <div class="mb-6">
-                <!-- Letter Image -->
-                <div class="mb-4">
+                <div class="mb-4 mt-2">
                     <img id="modal-letter-image" src="" alt="" class="w-32 h-auto mx-auto object-contain">
                 </div>
 
@@ -111,14 +99,12 @@
         </div>
     </div>
 
-    <!-- Summary Modal -->
     <div id="summary-modal"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <div class="mb-2">
                 <h3 class="text-2xl font-bold text-indigo-800 mb-4">การใช้อินเตอร์เน็ตอย่างปลอดภัย</h3>
 
-                <!-- Summary List -->
                 <div class="space-y-4 flex flex-col items-center">
                     <img src="{{ asset('images/game/14/internet_safely.png') }}" alt="C" class="w-11/12 h-auto">
                 </div>
@@ -128,10 +114,10 @@
 
             <button id="finish-btn"
                 class="bg-[#929AFF] text-white font-medium py-2 px-6 rounded-xl transition-colors hover:bg-[#7B85FF]">
-                จบ
+                เสร็จสิ้น
             </button>
         </div>
     </div>
 
-    @include('layouts.game.script.13.index')
+    @include('layouts.game.script.14.index')
 @endsection

@@ -1,30 +1,25 @@
-{{-- นี่คือหน้า layout/game/script/12/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');
             const gameContent = document.getElementById('game-content');
             const startGameBtn = document.getElementById('start-game-btn');
 
-            // Show intro modal with animation
             setTimeout(() => {
                 introModal.classList.add('animate-modal-show');
-                gameContent.classList.add('game-blur'); // Blur the game content
+                gameContent.classList.add('game-blur');
             }, 100);
 
-            // Handle start game button
             startGameBtn.addEventListener('click', function() {
-                // Add fade out animation to intro modal
                 introModal.classList.remove('animate-modal-show');
                 introModal.classList.add('animate-modal-fade-out');
 
                 setTimeout(() => {
                     introModal.style.display = 'none';
-                    gameContent.classList.remove('game-blur'); // Remove blur from game
-                    gameContent.classList.add('animate-unblur'); // Add unblur animation
-                }, 300); // Match the animation duration
+                    gameContent.classList.remove('game-blur');
+                    gameContent.classList.add('animate-unblur');
+                }, 300);
             });
 
-            // Original game logic
             const animalCards = document.querySelectorAll('.animal-card');
             const animalModal = document.getElementById('animal-modal');
             const modalImage = document.getElementById('modal-animal-image');
@@ -32,7 +27,6 @@
             const modalDescription = document.getElementById('modal-animal-description');
             const continueBtn = document.getElementById('continue-btn');
             
-            // Animal data
             const animalData = {
                 tiger: {
                     name: 'เสือ',
@@ -57,7 +51,6 @@
                 }
             };
             
-            // Handle animal card clicks
             animalCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const animalType = this.getAttribute('data-animal');
@@ -65,7 +58,6 @@
                 });
             });
             
-            // Handle continue button
             continueBtn.addEventListener('click', function() {
                 hideModal();
                 setTimeout(() => {
@@ -81,7 +73,6 @@
                 modalName.textContent = animal.name;
                 modalDescription.textContent = animal.description;
                 
-                // Apply light font weight for all animals
                 modalDescription.style.fontWeight = '300';
                 
                 animalModal.classList.remove('hidden');
@@ -100,7 +91,6 @@
     </script>
     
     <style>
-        /* Modal animations */
         .animate-fadeIn {
             animation: fadeIn 0.5s ease-in-out forwards;
         }
@@ -127,7 +117,6 @@
             }
         }
 
-        /* Modal Animation - Background fades in first, then content scales in */
         .animate-modal-show .modal-backdrop {
             animation: backdropFadeIn 0.3s ease-out forwards;
         }
@@ -136,7 +125,6 @@
             animation: contentSlideIn 0.4s ease-out 0.15s both;
         }
 
-        /* Smooth fade out animation for intro modal */
         .animate-modal-fade-out {
             animation: backdropFadeOut 0.3s ease-out forwards;
         }
@@ -190,18 +178,15 @@
             }
         }
 
-        /* Initial state for modal content */
         .modal-content {
             opacity: 0;
             transform: scale(0.8);
         }
 
-        /* Game content blur effects */
         .game-blur {
             filter: blur(3px);
             transition: filter 0.3s ease-out;
             transform: scale(1.02);
-            /* Slightly zoom in when blurred */
         }
 
         .animate-unblur {
@@ -220,13 +205,11 @@
             }
         }
 
-        /* Game content with smooth transitions */
         #game-content {
             opacity: 1;
             transition: all 0.3s ease-out;
         }
         
-        /* Modal content animations */
         #animal-modal .bg-white {
             animation: modalSlideIn 0.5s ease-in-out forwards;
         }
@@ -257,7 +240,6 @@
             }
         }
         
-        /* Animal card hover effects */
         .animal-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 0 25px rgba(0,0,0,0.15) !important;
@@ -268,14 +250,12 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.1) !important;
         }
         
-        /* Remove any borders or outlines */
         img {
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
         }
         
-        /* Modal description with line breaks */
         #modal-animal-description {
             white-space: pre-line;
         }
@@ -291,8 +271,8 @@
             }
             
             .animal-card img {
-                width: 80px;
-                height: 80px;
+                width: 150px;
+                height: 150px;
             }
             
             #animal-modal .bg-white {
@@ -301,10 +281,9 @@
             }
             
             .card-container {
-                padding: 1rem 0.5rem;
+                padding: 0.1rem 0.5rem;
             }
             
-            /* Adjust text size for mobile */
             h2 {
                 font-size: 1rem;
             }

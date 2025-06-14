@@ -1,4 +1,3 @@
- {{-- นี่คือหน้า layout/game/script/3/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');
@@ -78,13 +77,13 @@
                     content.innerHTML = `
                         <img src="{{ asset('images/game/3/anonymous.png') }}" alt="Anonymous" class="w-auto h-48 mx-auto mb-4">
                         <h3 class="text-xl font-bold text-indigo-800 mb-2">ANONYMOUS</h3>
-                        <p class="text-gray-700">ความเป็นนิรนาม การไม่ระบุตัวตน เราไม่รู้จักว่าคือใครขณะเราทำออนไลน์ เป็นใครอำนาจของทุกคนในพื้นที่ออนไลน์เท่าเทียมกัน</p>
+                        <p class=" text-indigo-800">ความเป็นนิรนาม การไม่ระบุตัวตน เราไม่รู้จักว่าคือใครขณะเราทำออนไลน์ เป็นใครอำนาจของทุกคนในพื้นที่ออนไลน์เท่าเทียมกัน</p>
                     `;
                 } else if (cardType === 'anyplace') {
                     content.innerHTML = `
                         <img src="{{ asset('images/game/3/place_time.png') }}" alt="Any place any time" class="w-auto h-48 mx-auto mb-4">
                         <h3 class="text-xl font-bold text-indigo-800 mb-2">ANY PLACE ANY TIME</h3>
-                        <p class="text-gray-700">เกิดได้ทุกที่ ทุกเวลา 24/7 ที่ไหนก็ได้ในโลก เพียงแค่มีอินเตอร์เน็ตเชื่อมต่อมีการแชร์ มีการแคป มีการส่งต่อ แพร่กระจายไปอย่างรวดเร็ว(virality)</p>
+                        <p class=" text-indigo-800">เกิดได้ทุกที่ ทุกเวลา 24/7 ที่ไหนก็ได้ในโลก เพียงแค่มีอินเตอร์เน็ตเชื่อมต่อมีการแชร์ มีการแคป มีการส่งต่อ แพร่กระจายไปอย่างรวดเร็ว(virality)</p>
                     `;
                 }
                 

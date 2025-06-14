@@ -1,30 +1,25 @@
-{{-- นี่คือหน้า layout/game/script/6/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');
             const gameContent = document.getElementById('game-content');
             const startGameBtn = document.getElementById('start-game-btn');
 
-            // Show intro modal with animation
             setTimeout(() => {
                 introModal.classList.add('animate-modal-show');
-                gameContent.classList.add('game-blur'); // Blur the game content
+                gameContent.classList.add('game-blur');
             }, 100);
 
-            // Handle start game button
             startGameBtn.addEventListener('click', function() {
-                // Add fade out animation to intro modal
                 introModal.classList.remove('animate-modal-show');
                 introModal.classList.add('animate-modal-fade-out');
 
                 setTimeout(() => {
                     introModal.style.display = 'none';
-                    gameContent.classList.remove('game-blur'); // Remove blur from game
-                    gameContent.classList.add('animate-unblur'); // Add unblur animation
-                }, 300); // Match the animation duration
+                    gameContent.classList.remove('game-blur');
+                    gameContent.classList.add('animate-unblur');
+                }, 300);
             });
 
-            // Original game logic
             const messageInput = document.getElementById('message-input');
             const addMessageBtn = document.getElementById('add-message-btn');
             const nextBtn = document.getElementById('next-btn');
@@ -33,7 +28,6 @@
             let messages = [];
             const maxMessages = 8;
             
-            // Add message function
             function addMessage() {
                 const messageText = messageInput.value.trim();
                 
@@ -47,7 +41,6 @@
                 updateUI();
             }
             
-            // Update messages display in circular pattern
             function updateMessagesDisplay() {
                 messagesContainer.innerHTML = '';
                 
@@ -60,25 +53,23 @@
                 messages.forEach((message, index) => {
                     let angle;
                     
-                    // First arrange in main positions (top, right, bottom, left), then fill in between
                     if (index === 0) {
-                        angle = -90; // Top (12 o'clock)
+                        angle = -90;
                     } else if (index === 1) {
-                        angle = 0; // Right (3 o'clock)
+                        angle = 0;
                     } else if (index === 2) {
-                        angle = 90; // Bottom (6 o'clock)
+                        angle = 90; 
                     } else if (index === 3) {
-                        angle = 180; // Left (9 o'clock)
+                        angle = 180;
                     } else {
-                        // For additional messages, fill in the gaps
-                        const mainPositions = [-90, 0, 90, 180]; // Main 4 positions
-                        const gaps = [-45, 45, 135, -135]; // Between main positions
-                        const extraPositions = [-67.5, -22.5, 22.5, 67.5, 112.5, 157.5]; // More detailed positions
+                        const mainPositions = [-90, 0, 90, 180];
+                        const gaps = [-45, 45, 135, -135];
+                        const extraPositions = [-67.5, -22.5, 22.5, 67.5, 112.5, 157.5];
                         
                         if (index < 8) {
-                            angle = gaps[index - 4]; // Fill first 4 gaps
+                            angle = gaps[index - 4];
                         } else {
-                            angle = extraPositions[index - 8]; // Fill remaining positions
+                            angle = extraPositions[index - 8];
                         }
                     }
                     
@@ -93,7 +84,6 @@
                     messageElement.style.top = y + 'px';
                     messageElement.textContent = message;
                     
-                    // Add click to remove functionality (without X button)
                     messageElement.onclick = () => {
                         removeMessage(index);
                     };
@@ -102,23 +92,18 @@
                 });
             }
             
-            // Remove message function
             function removeMessage(index) {
                 messages.splice(index, 1);
                 updateMessagesDisplay();
                 updateUI();
             }
             
-            // Update UI elements
             function updateUI() {
-                // Enable/disable add button
                 addMessageBtn.disabled = messages.length >= maxMessages;
                 
-                // Enable next button if at least one message is added
                 nextBtn.disabled = messages.length === 0;
             }
             
-            // Event listeners
             addMessageBtn.addEventListener('click', addMessage);
             
             messageInput.addEventListener('keypress', function(e) {
@@ -128,21 +113,17 @@
             });
             
             nextBtn.addEventListener('click', function() {
-                // Save messages data (you can send to server here)
                 console.log('Messages to save:', messages);
                 
-                // Navigate to next page directly without alert
                 window.location.href = "{{ route('game_7') }}";
             });
             
-            // Handle window resize
             window.addEventListener('resize', function() {
                 if (messages.length > 0) {
                     updateMessagesDisplay();
                 }
             });
             
-            // Initialize
             updateUI();
         });
     </script>
@@ -163,7 +144,6 @@
             }
         }
 
-        /* Modal Animation - Background fades in first, then content scales in */
         .animate-modal-show .modal-backdrop {
             animation: backdropFadeIn 0.3s ease-out forwards;
         }
@@ -172,7 +152,6 @@
             animation: contentSlideIn 0.4s ease-out 0.15s both;
         }
 
-        /* Smooth fade out animation for intro modal */
         .animate-modal-fade-out {
             animation: backdropFadeOut 0.3s ease-out forwards;
         }
@@ -226,18 +205,15 @@
             }
         }
 
-        /* Initial state for modal content */
         .modal-content {
             opacity: 0;
             transform: scale(0.8);
         }
 
-        /* Game content blur effects */
         .game-blur {
             filter: blur(3px);
             transition: filter 0.3s ease-out;
             transform: scale(1.02);
-            /* Slightly zoom in when blurred */
         }
 
         .animate-unblur {
@@ -256,23 +232,21 @@
             }
         }
 
-        /* Game content with smooth transitions */
         #game-content {
             opacity: 1;
             transition: all 0.3s ease-out;
         }
         
-        /* Responsive adjustments */
         @media (max-width: 640px) {
             .card-container {
-                padding: 0.75rem; /* ลดจาก 1rem */
-                padding-bottom: 1rem; /* กำหนด bottom padding เฉพาะ */
+                padding: 0.75rem;
+                padding-bottom: 1rem;
             }
             
             h2 {
                 font-size: 1rem;
                 padding: 0 1rem;
-                margin-bottom: 1rem; /* ลด margin-bottom */
+                margin-bottom: 1rem;
             }
             
             #messages-container {
@@ -291,7 +265,6 @@
             }
         }
         
-        /* Custom message styling */
         #messages-container div {
             max-width: 150px;
             white-space: nowrap;
@@ -309,13 +282,11 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         
-        /* Input focus styling - ลบขอบออก */
         #message-input:focus {
             outline: none;
             box-shadow: none;
         }
         
-        /* Button animations */
         button {
             transition: all 0.2s ease;
         }
@@ -329,12 +300,10 @@
             transform: translateY(0);
         }
         
-        /* ลดพื้นที่ว่างด้านล่างเพิ่มเติม */
         .card-container {
             margin-bottom: 0 !important;
         }
         
-        /* สำหรับ parent container */
         .bg-white {
             padding-bottom: 1rem;
         }

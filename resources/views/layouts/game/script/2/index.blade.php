@@ -1,4 +1,3 @@
-{{-- นี่คือหน้า layout/game/script/2/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');

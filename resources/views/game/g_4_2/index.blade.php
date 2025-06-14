@@ -7,7 +7,7 @@
             <h3 class="text-2xl font-bold text-indigo-800">ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน</h3>
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
                 class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
-            <h3 class="text-2xl font-bold text-indigo-800 mb-2">เกมที่ 4</h3>
+            <h3 class="text-2xl font-bold text-indigo-800 mb-2">เกมที่ 4 ตอน 2</h3>
             <p class="text-lg text-indigo-800 mb-2">จับคู่รูปภาพกับข้อความที่เกี่ยวกับการรังแกทางไซเบอร์</p>
             <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความท้าทายกันเลย</p>
             <button id="start-game-btn" class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors ">
@@ -19,35 +19,35 @@
 
     <div class="card-container space-y-6 px-6 md:px-0 {{ isset($showIntroModal) && $showIntroModal ? 'game-blur' : '' }}" id="game-content">
         <div class="text-center">
-            <h2 class="text-xl font-bold text-indigo-800 ">จับคู่รูปภาพกับข้อความที่เกี่ยวกับการรังแกทางไซเบอร์</h2>
+            <h2 class="text-xl font-bold text-indigo-800 ">จับคู่รูปภาพกับข้อความที่เกี่ยวกับการรังแกทางไซเบอร์ขั้นสูง</h2>
         </div>
 
         <div class="max-w-4xl mx-auto">
             <div class="grid grid-cols-2 gap-10 mb-8">
-                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-6 cursor-pointer transition-all duration-300 relative text-center font-bold text-xl h-28 flex items-center justify-center"
+                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-2 cursor-pointer transition-all duration-300 relative text-center font-bold text-lg h-28 flex items-center justify-center"
                     data-text="1">
-                    การปะทะคารม
+                    เผยแพร่ข้อมูลส่วนตัวของผู้อื่น
                 </div>
                 <div class="image-option border-2 rounded-xl p-2 border-gray-300 bg-white cursor-pointer transition-all duration-300 relative h-28"
                     data-image="1">
                     <div class="flex flex-col items-center justify-center h-full">
                         <div class="flex items-center justify-center">
-                            <img src="{{ asset('images/game/4/disturbance.jpg') }}" alt="การก่อกวน" class="h-24 object-contain">
+                            <img src="{{ asset('images/game/4/monitoring.jpg') }}" alt="เผยแพร่ข้อมูลส่วนตัว" class="h-24 object-contain">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 gap-10 mb-8">
-                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-6 cursor-pointer transition-all duration-300 relative text-center font-bold text-xl h-28 flex items-center justify-center"
+                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-2 cursor-pointer transition-all duration-300 relative text-center font-bold text-lg h-28 flex items-center justify-center"
                     data-text="2">
-                    การก่อกวน
+                    การลบหรือบล็อกผู้อื่นออกจากกลุ่ม
                 </div>
                 <div class="image-option border-2 rounded-xl p-2 border-gray-300 bg-white cursor-pointer transition-all duration-300 relative h-28"
                     data-image="2">
                     <div class="flex flex-col items-center justify-center h-full">
                         <div class="flex items-center justify-center">
-                            <img src="{{ asset('images/game/4/clash.jpg') }}" alt="การปะทะคารม"
+                            <img src="{{ asset('images/game/4/disseminate.jpg') }}" alt="บล็อกจากกลุ่ม"
                                 class="h-24 object-contain">
                         </div>
                     </div>
@@ -55,15 +55,15 @@
             </div>
 
             <div class="grid grid-cols-2 gap-10 mb-8">
-                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-6 cursor-pointer transition-all duration-300 relative text-center font-bold text-xl h-28 flex items-center justify-center"
+                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-2 cursor-pointer transition-all duration-300 relative text-center font-bold text-lg h-28 flex items-center justify-center"
                     data-text="3">
-                    การใส่ร้ายป้ายสี
+                    เฝ้าติดตามทางอินเตอร์เน็ต
                 </div>
                 <div class="image-option border-2 rounded-xl p-2 border-gray-300 bg-white cursor-pointer transition-all duration-300 relative h-28"
                     data-image="3">
                     <div class="flex flex-col items-center justify-center h-full">
                         <div class="flex items-center justify-center">
-                            <img src="{{ asset('images/game/4/Impersonate.png') }}" alt="รวมรอบ เป็นคนซัน"
+                            <img src="{{ asset('images/game/4/sexually.jpg') }}" alt="เฝ้าติดตาม"
                                 class="h-24 object-contain text-center">
                         </div>
                     </div>
@@ -71,41 +71,36 @@
             </div>
 
             <div class="grid grid-cols-2 gap-10 mb-8">
-                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-6 cursor-pointer transition-all duration-300 relative text-center font-bold text-xl h-28 flex items-center justify-center"
+                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-2 cursor-pointer transition-all duration-300 relative text-center font-bold text-lg h-28 flex items-center justify-center"
                     data-text="4">
-                    สวมรอยเป็นคนอื่น
+                    ถ่ายคลิปวีดิโอและเผยแพร่บนอินเตอร์เน็ต
                 </div>
-                <div class="image-option border-2 rounded-xl p-4 border-gray-300 bg-white cursor-pointer transition-all duration-300 relative h-28"
+                <div class="image-option border-2 rounded-xl p-2 border-gray-300 bg-white cursor-pointer transition-all duration-300 relative h-28"
                     data-image="4">
                     <div class="flex flex-col items-center justify-center h-full">
                         <div class="flex items-center justify-center">
-                            <img src="{{ asset('images/game/4/slander.png') }}" alt="สวมรอยเป็นคนอื่น"
+                            <img src="{{ asset('images/game/4/removing_blocking.jpg') }}" alt="ถ่ายและเผยแพร่วีดิโอ"
                                 class="h-24 object-contain">
                         </div>
                     </div>
                 </div>
             </div>
 
-            @if(isset($showFifthPair) && $showFifthPair)
             <div class="grid grid-cols-2 gap-10 mb-6">
-                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-6 cursor-pointer transition-all duration-300 relative text-center font-bold text-xl h-28 flex items-center justify-center"
+                <div class="text-option bg-[#5B21B6] text-white rounded-xl p-2 cursor-pointer transition-all duration-300 relative text-center font-bold text-lg h-28 flex items-center justify-center"
                     data-text="5">
-                    การข่มเหงทางออนไลน์
+                    ส่งต่อภาพหรือวีดิโอที่ล่อแหลมทางเพศ
                 </div>
-                <div class="image-option border-2 rounded-xl p-4 border-gray-300 bg-white cursor-pointer transition-all duration-300 relative h-28"
+                <div class="image-option border-2 rounded-xl p-2 border-gray-300 bg-white cursor-pointer transition-all duration-300 relative h-28"
                     data-image="5">
                     <div class="flex flex-col items-center justify-center h-full">
-                        <div class="flex items-center justify-center mb-2">
-                            <img src="{{ asset('images/game/4/cyberbully.png') }}" alt="การข่มเหงทางออนไลน์"
-                                class="h-16 object-contain">
+                        <div class="flex items-center justify-center">
+                            <img src="{{ asset('images/game/4/video_clips.jpg') }}" alt="เผยแพร่เนื้อหาทางเพศ"
+                                class="h-24 object-contain">
                         </div>
-                        <div class="text-center text-gray-700 font-bold text-sm">การข่มเหงทางออนไลน์</div>
                     </div>
                 </div>
             </div>
-            @else
-            <div class="mb-6"></div>
-            @endif
 
             <div class="progress-container pl-2 pr-2 mt-8 mb-2">
                 <div class="w-full bg-gray-200 rounded-full h-2">
@@ -140,9 +135,9 @@
     @include('layouts.game.script.4.index')
 
     @php
-        $defaultPairs = 4;
-        $defaultMatches = ['1' => '2', '2' => '1', '3' => '4', '4' => '3'];
-        $defaultNextRoute = route('main');
+        $defaultPairs = 5;
+        $defaultMatches = ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'];
+        $defaultNextRoute = route('game_5_1');
         $defaultShowIntroModal = false;
     @endphp
     

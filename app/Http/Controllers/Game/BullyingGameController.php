@@ -64,39 +64,37 @@ class BullyingGameController extends Controller
         ];
     }
 
-    // ★ method สำหรับเกม 4 - แก้ไขแล้ว ★
     private function getGame4Data()
     {
         return [
             '4_1' => [
                 'totalPairs' => 4,
                 'showFifthPair' => false,
-                'showIntroModal' => true,  // ★ เพิ่ม intro modal สำหรับ 4_1 ★
+                'showIntroModal' => true,  
                 'correctMatches' => [
-                    '1' => '2', // การปะทะคารม -> การปกปิดการณม
-                    '2' => '1', // การก่อกวน -> การกล่อมหม  
-                    '3' => '4', // การใส่ร้ายป้ายสี -> การใส่ร้าย ป้ายสี
-                    '4' => '3'  // สวมรอยเป็นคนอื่น -> รวมรอบ เป็นคนซัน
+                    '1' => '2',
+                    '2' => '1', 
+                    '3' => '4',
+                    '4' => '3' 
                 ],
                 'nextRoute' => route('game_4_2')
             ],
             '4_2' => [
                 'totalPairs' => 5,
                 'showFifthPair' => true,
-                'showIntroModal' => false, // ★ ไม่มี intro modal สำหรับ 4_2 ★
+                'showIntroModal' => false,
                 'correctMatches' => [
-                    '1' => '2', // การปะทะคารม -> การปกปิดการณม
-                    '2' => '1', // การก่อกวน -> การกล่อมหม  
-                    '3' => '4', // การใส่ร้ายป้ายสี -> การใส่ร้าย ป้ายสี
-                    '4' => '3', // สวมรอยเป็นคนอื่น -> รวมรอบ เป็นคนซัน
-                    '5' => '5'  // การข่มเหงทางออนไลน์ -> การข่มเหงทางออนไลน์
+                    '1' => '2', 
+                    '2' => '4', 
+                    '3' => '1', 
+                    '4' => '5', 
+                    '5' => '3'  
                 ],
-                'nextRoute' => route('game_5_1') // ★ เปลี่ยนเป็นไปเกม 5_1 ★
+                'nextRoute' => route('game_5_1') 
             ]
         ];
     }
 
-    // ★ เพิ่ม method สำหรับเกม 5 ★
     private function getGame5Data()
     {
         return [
@@ -107,7 +105,6 @@ class BullyingGameController extends Controller
                 'scenarioImage' => 'traditional.png',
                 'altText' => 'Traditional Bullying Scenario',
                 
-                // Layout configuration
                 'totalSlots' => 3,
                 'slotColumns' => 'grid-cols-3',
                 'slotClass' => 'aspect-square',
@@ -117,7 +114,6 @@ class BullyingGameController extends Controller
                 'characterClass' => 'aspect-square',
                 'characterContainerClass' => 'max-w-lg mx-auto',
                 
-                // Game data
                 'characters' => [
                     ['key' => 'bully', 'main' => 'ผู้รังแก', 'sub' => 'BULLY', 'position' => 1],
                     ['key' => 'victim', 'main' => 'ผู้ถูกรังแก', 'sub' => 'VICTIM', 'position' => 2],
@@ -126,9 +122,8 @@ class BullyingGameController extends Controller
                 'availableOptions' => ['bully', 'victim', 'bystander'],
                 'correctSequence' => ['bully', 'victim', 'bystander'],
                 
-                // Navigation
                 'nextRoute' => route('game_5_2'),
-                'skipRoute' => route('game_5_2') // ★ แก้ไข: ข้ามไปเกม 5_2 ★
+                'skipRoute' => route('game_5_2')
             ],
             '5_2' => [
                 'showIntroModal' => false,
@@ -137,7 +132,6 @@ class BullyingGameController extends Controller
                 'scenarioImage' => 'cyberbullying.png',
                 'altText' => 'Cyberbullying Scenario',
                 
-                // Layout configuration
                 'totalSlots' => 2,
                 'slotColumns' => 'grid-cols-2',
                 'slotClass' => 'h-20',
@@ -147,7 +141,6 @@ class BullyingGameController extends Controller
                 'characterClass' => 'h-20',
                 'characterContainerClass' => 'max-w-xs mx-auto',
                 
-                // Game data
                 'characters' => [
                     ['key' => 'bully', 'main' => 'ผู้รังแก', 'sub' => 'BULLY', 'position' => 1],
                     ['key' => 'victim', 'main' => 'ผู้ถูกรังแก', 'sub' => 'VICTIM', 'position' => 2]
@@ -155,9 +148,8 @@ class BullyingGameController extends Controller
                 'availableOptions' => ['bully', 'victim'],
                 'correctSequence' => ['bully', 'victim'],
                 
-                // Navigation
                 'nextRoute' => route('game_6'),
-                'skipRoute' => route('game_6') // ★ แก้ไข: ข้ามไปเกม 6 ★
+                'skipRoute' => route('game_6')
             ]
         ];
     }
@@ -173,7 +165,6 @@ class BullyingGameController extends Controller
         return view('game.g_1.index', $gameData[$stage]);
     }
 
-    // ★ method สำหรับจัดการเกม 4 ★
     public function showGame4($stage)
     {
         $gameData = $this->getGame4Data();
@@ -182,10 +173,13 @@ class BullyingGameController extends Controller
             abort(404);
         }
 
+        if ($stage === '4_2') {
+            return view('game.g_4_2.index', $gameData[$stage]);
+        }
+
         return view('game.g_4.index', $gameData[$stage]);
     }
 
-    // ★ เพิ่ม method สำหรับจัดการเกม 5 ★
     public function showGame5($stage)
     {
         $gameData = $this->getGame5Data();
@@ -197,7 +191,6 @@ class BullyingGameController extends Controller
         return view('game.g_5.index', $gameData[$stage]);
     }
 
-    // เกม 1 methods (เดิม)
     public function game1_1()
     {
         return $this->show('1_1');
@@ -218,7 +211,6 @@ class BullyingGameController extends Controller
         return $this->show('1_4');
     }
 
-    // ★ เกม 4 methods ★
     public function game4_1()
     {
         return $this->showGame4('4_1');
@@ -229,7 +221,6 @@ class BullyingGameController extends Controller
         return $this->showGame4('4_2');
     }
 
-    // ★ เพิ่ม เกม 5 methods ★
     public function game5_1()
     {
         return $this->showGame5('5_1');

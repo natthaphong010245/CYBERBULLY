@@ -1,15 +1,13 @@
-{{-- นี่คือหน้า game/g_10/index.blade.php --}}
 @extends('layouts.game.causes_bullying.index')
 
 @section('content')
-    <!-- Introduction Modal (shows first) -->
     <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <h3 class="text-2xl font-bold text-indigo-800">สาเหตุของการกลั่นแกล้งบนโลกออนไลน์</h3>
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
                 class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
             <h3 class="text-2xl font-bold text-indigo-800 mb-2">เกมที่ 10</h3>
-            <p class="text-lg text-indigo-800 mb-4">น้องๆ คิดว่าการ Cyberbullying ผิดกฎหมายหรือไม่</p>
+            <p class="text-lg text-indigo-800 mb-4">น้องๆ คิดว่าการ CYBERBULLYING ผิดกฎหมายหรือไม่</p>
             <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความก้าวหน้ากันเลย</p>
             <button id="start-game-btn" class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors ">
                 เริ่ม
@@ -19,10 +17,9 @@
 
     <div class="card-container space-y-6 px-6 md:px-0" id="game-content">
         <div class="text-center mb-2">
-            <h2 class="text-xl font-bold text-indigo-800">น้องๆ คิดว่าการ CYBERBULLYING ผิดกฎหมายหรือไม่</h2>
+            <h2 class="text-xl font-bold text-indigo-800 pl-4 pr-4">น้องๆ คิดว่าการ CYBERBULLYING ผิดกฎหมายหรือไม่</h2>
         </div>
 
-        <!-- Choice Buttons -->
         <div class="space-y-4 max-w-md mx-auto">
             <button id="illegal-btn"
                 class="w-full bg-[#929AFF] text-white font-medium py-2 px-3 rounded-xl transition-all hover:bg-[#7B85FF] hover:transform hover:translateY(-1px) text-lg shadow-lg hover:shadow-xl mb-2">
@@ -35,7 +32,6 @@
             </button>
         </div>
 
-        <!-- Illustration -->
         <div class="flex justify-center mt-10">
             <div class="bg-white rounded-xl p-6 max-w-sm w-full ml-6 mr-6" style="box-shadow: 0 0 15px rgba(0,0,0,0.1);">
                 <img src="{{ asset('images/game/10/law.png') }}" alt="Cyberbullying Illustration"
@@ -44,30 +40,32 @@
         </div>
     </div>
 
-    <!-- Correct Answer Modal -->
     <div id="correct-overlay"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <div class="mb-6">
+                <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
+                    class="w-24 h-auto rounded-full mx-auto mb-4 object-cover">
+                <h3 class="text-2xl font-bold text-indigo-800">เยี่ยมมาก!</h3>
+                <p class="text-indigo-800 mb-6 text-lg">คำตอบของคุณถูกต้อง</p>
+
+                <div class="flex items-center mb-2">
+                    <div class="flex-1 border-b-2 border-indigo-700"></div>
+                    <span class="px-4 text-indigo-800 font-bold text-lg">ข้อควรระวัง</span>
+                    <div class="flex-1 border-b-2 border-indigo-700"></div>
+                </div>
+
                 <div class="text-center mb-10 relative">
                     <div class="flex items-center justify-center">
                         <div class="relative">
-                            <h1 class="text-xl font-bold text-indigo-800 inline-block">CYBERBULLYING</h1>
-                            <p class="text-lg text-indigo-800 absolute -bottom-6 right-0">ผิดกฎหมาย</p>
+                            <h1 class="text-2xl font-bold text-indigo-800 inline-block">CYBERBULLYING</h1>
+                            <p class="text-xl text-indigo-800 absolute -bottom-6 right-0">ผิดกฎหมาย</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Illustration -->
-                <div class="mb-4">
-                    <img src="{{ asset('images/game/10/answer.png') }}" alt="Cyberbullying Icons"
-                        class="w-32 h-auto mx-auto object-contain">
-                </div>
 
-                <h4 class="text-left font-bold text-indigo-800 mb-2">ข้อควรระวัง</h4>
-
-                <!-- Details Text -->
-                <div class="text-left text-sm text-gray-700 leading-relaxed space-y-2">
+                <div class="text-left text-lg text-indigo-800 leading-relaxed space-y-2 pr-2 pl-2">
                     <p><span class="font-medium ml-6">พ.ร.บ.</span> คอมพิวเตอร์ <span class="font-medium">มาตรา 14</span>
                         กรณีโพสต์ข้อมูลที่บิดเบือน หรือปลอมแปลง ไม่ว่าจะทั้งหมดหรือบางส่วน หรือข้อมูลที่เป็นเท็จ
                         ซึ่งคนอื่นสามารถเข้าไปดูข้อมูลนั้นได้ ทำให้ผู้อื่นเสียหาย รวมทั้งข้อมูลลามกต่างๆ
@@ -84,33 +82,53 @@
         </div>
     </div>
 
-    <!-- Wrong Answer Modal -->
     <div id="wrong-overlay"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <div class="mb-6">
-                <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
-                    style="background-color: #DD2F2F;">
-                    <img src="{{ asset('images/material/incorrect.png') }}" alt="Wrong" class="w-12 h-12">
+                <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
+                    class="w-24 h-auto rounded-full mx-auto mb-4 object-cover">
+                <h3 class="text-2xl font-bold text-indigo-800">พยายามต่อไป!</h3>
+                <p class="text-indigo-800 mb-6 text-lg">คำตอบของคุณยังไม่ถูกต้อง</p>
+
+                <div class="flex items-center mb-2">
+                    <div class="flex-1 border-b-2 border-indigo-700"></div>
+                    <span class="px-4 text-indigo-800 font-bold text-lg">ข้อควรระวัง</span>
+                    <div class="flex-1 border-b-2 border-indigo-700"></div>
                 </div>
-                <h3 class="text-lg font-bold text-indigo-800 mb-4">ตัวเลือกของคุณยังไม่ถูก</h3>
-                <p class="text-base text-indigo-800">CYBERBULLYING ผิดกฎหมาย และมีบทลงโทษตามกฎหมายที่กำหนด</p>
+
+                <div class="text-center mb-10 relative">
+                    <div class="flex items-center justify-center">
+                        <div class="relative">
+
+                            <h1 class="text-2xl font-bold text-indigo-800 inline-block cyberbullying-with-lines">
+                                CYBERBULLYING</h1>
+                            <p class="text-xl text-indigo-800 absolute -bottom-6 right-0">ผิดกฎหมาย</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-left text-lg text-indigo-800 leading-relaxed space-y-2 pr-2 pl-2">
+                    <p><span class="font-medium ml-6">พ.ร.บ.</span> คอมพิวเตอร์ <span class="font-medium">มาตรา 14</span>
+                        กรณีโพสต์ข้อมูลที่บิดเบือน หรือปลอมแปลง ไม่ว่าจะทั้งหมดหรือบางส่วน หรือข้อมูลที่เป็นเท็จ
+                        ซึ่งคนอื่นสามารถเข้าไปดูข้อมูลนั้นได้ ทำให้ผู้อื่นเสียหาย รวมทั้งข้อมูลลามกต่างๆ
+                        ทั้งผู้โพสต์และผู้เผยแพร่ส่งต่อ จะมีความผิดต้องระวางโทษจำคุกไม่เกิน <span class="font-medium">5
+                            ปี</span>
+                        หรือปรับไม่เกิน <span class="font-medium">100,000 บาท</span> หรือทั้งจำทั้งปรับ</p>
+                </div>
             </div>
 
             <button id="show-answer-btn" class="text-white font-medium py-2 px-6 rounded-lg transition-colors"
-                style="background-color: #DD2F2F;" onmouseover="this.style.backgroundColor='#B82626'"
-                onmouseout="this.style.backgroundColor='#DD2F2F'">
-                ดูคำตอบ
+                style="background-color: #929AFF;" onmouseover="this.style.backgroundColor='#929AFF'"
+                onmouseout="this.style.backgroundColor='#929AFF'">
+                ถัดไป
             </button>
         </div>
     </div>
 
-    {{-- Include shared script --}}
     @include('layouts.game.script.8_9_10.index')
 
-    {{-- กำหนดค่า JavaScript Variables สำหรับเกม 10 --}}
     <script>
-        // กำหนด route สำหรับเกม 10
         window.gameNextRoute = "{{ route('game_11') }}";
     </script>
 @endsection

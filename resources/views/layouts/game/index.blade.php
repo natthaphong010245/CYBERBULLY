@@ -24,7 +24,6 @@ html, body {
   flex-direction: column;
 }
 
-/* Custom rounded top white section */
 .rounded-top-section {
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
@@ -46,19 +45,16 @@ html, body {
   flex-direction: column;
 }
 
-/* Ensure images don't break layout */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* Force single column layout for all devices */
 .card-container {
   display: flex;
   flex-direction: column;
 }
 
-/* Medium and large screen optimizations */
 @media (min-width: 768px) {
   .desktop-container {
     width: 90%;
@@ -76,8 +72,7 @@ img {
 <body class="font-k2d">
   <div class="page-layout">
     <div class="header-section">
-      <div class="desktop-container">
-        <!-- Header with back and home buttons -->
+      <div class="desktop-container pt-1">
         <div class="flex justify-between items-center px-8 py-4">
           <a href="{{ route('main') }}" class="text-gray-700">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

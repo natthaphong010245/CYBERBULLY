@@ -1,4 +1,3 @@
-{{-- นี่คือหน้า game/g_3/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @section('content')
@@ -73,7 +72,7 @@
     </div>
 
     <div id="feedback-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-4 ">
             <div id="info-content" class="text-center">
             </div>
             <div class="mt-6 text-center">

@@ -1,8 +1,6 @@
-{{-- นี่คือหน้า game/g_5/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @section('content')
-    <!-- Introduction Modal (shows first) - แสดงตาม parameter -->
     @if(isset($showIntroModal) && $showIntroModal)
     <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
@@ -10,7 +8,7 @@
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
                 class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
             <h3 class="text-xl font-bold text-indigo-800 mb-2">เกมที่ 5</h3>
-            <p class="text-lg text-indigo-800 mb-2">การกลั่นแกล้งแบบดั้งเดิม และคาดโทษในบอร์</p>
+            <p class="text-lg text-indigo-800 mb-2 pr-2 pl-2">การกลั่นแกล้งแบบดั้งเดิม และคาดโทษในบอร์</p>
             <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความก้าวหน้ากันเลย</p>
             <button id="start-game-btn" class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors ">
                 เริ่ม
@@ -25,7 +23,6 @@
             <h2 class="text-lg font-bold text-indigo-800">{{ $gameSubtitle ?? 'TRADITIONAL' }}</h2>
         </div>
         
-        <!-- Scenario Image -->
         <div class="flex justify-center mb-8">
             <div class="rounded-lg overflow-hidden shadow-lg">
                 <img src="{{ asset('images/game/5/' . ($scenarioImage ?? 'traditional.png')) }}" 
@@ -34,7 +31,6 @@
             </div>
         </div>
         
-        <!-- Sequence Selection Area -->
         <div class="mb-2">
             <h3 class="text-md font-medium text-indigo-700 mb-2">เรียงลำดับเหตุการณ์ให้ถูกต้อง</h3>
             <div class="grid {{ $slotColumns ?? 'grid-cols-3' }} gap-4 mb-6 {{ $slotContainerClass ?? 'max-w-lg mx-auto' }}" id="sequence-slots">
@@ -47,7 +43,6 @@
             </div>
         </div>
         
-        <!-- Character Selection Area -->
         <div class="mb-2">
             <h3 class="text-md font-medium text-indigo-700 mb-2">เลือกเหตุการณ์</h3>
             <div class="grid {{ $characterColumns ?? 'grid-cols-3' }} gap-4 {{ $characterContainerClass ?? 'max-w-lg mx-auto' }}" id="character-options">
@@ -65,25 +60,23 @@
         </div>
     </div>
 
-    <!-- Success Modal -->
     <div id="success-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="modal-content bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="Happy Student" class="w-32 h-auto mx-auto mb-4">
-            <h3 class="text-xl font-bold text-indigo-800 mb-2">เยี่ยมมาก!</h3>
-            <p class="text-indigo-800 mb-2">คุณตอบได้ถูกต้อง</p>
-            <p class="text-indigo-800 text-lg mb-2">เริ่มความก้าวหน้าในเกมต่อไปกัน</p>
+            <h3 class="text-2xl font-bold text-indigo-800">เยี่ยมมาก!</h3>
+            <p class="text-indigo-800 mb-4 text-lg">คุณตอบได้ถูกต้อง</p>
+            <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความก้าวหน้าในเกมต่อไปกัน</p>
             <button id="success-btn" class="bg-[#929AFF] text-white font-medium py-3 px-8 rounded-xl transition-colors hover:bg-indigo-600">
                 เริ่ม
             </button>
         </div>
     </div>
 
-    <!-- Failure Modal -->
     <div id="failure-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="modal-content bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl_false.png') }}" alt="Confused Student" class="w-32 h-auto mx-auto mb-4">
-            <h3 class="text-xl font-bold text-indigo-800 mb-2">ลองอีกครั้ง</h3>
-            <p class="text-indigo-800 mb-6">คำตอบยังไม่ถูกต้อง</p>
+            <h3 class="text-2xl font-bold text-indigo-800">พยายามต่อไป!</h3>
+            <p class="text-indigo-800 mb-6 text-lg">คำตอบของคุณยังไม่ถูกต้อง</p>
             <div class="flex gap-8 justify-center">
                 <button id="skip-btn" class="bg-gray-400 text-white font-medium py-3 px-6 rounded-xl transition-colors hover:bg-gray-500">
                     ข้าม
@@ -97,7 +90,6 @@
 
     @include('layouts.game.script.5.index')
 
-    {{-- กำหนดค่า JavaScript Variables --}}
     @php
         $defaultCharacters = ['bully', 'victim', 'bystander'];
         $defaultCorrectSequence = ['bully', 'victim', 'bystander'];
@@ -106,7 +98,6 @@
     @endphp
     
     <script>
-        // กำหนดค่าจาก Controller
         window.gameCharacters = @json($availableOptions ?? $defaultCharacters);
         window.gameCorrectSequence = @json($correctSequence ?? $defaultCorrectSequence);
         window.gameNextRoute = @json($nextRoute ?? $defaultNextRoute);

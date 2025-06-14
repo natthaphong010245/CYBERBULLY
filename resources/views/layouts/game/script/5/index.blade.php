@@ -1,18 +1,15 @@
-{{-- นี่คือหน้า layout/game/script/5/index.blade.php --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const introModal = document.getElementById('intro-modal');
         const gameContent = document.getElementById('game-content');
         const startGameBtn = document.getElementById('start-game-btn');
 
-        // Show intro modal with animation (only if exists)
         if (introModal && window.gameHasIntroModal) {
             setTimeout(() => {
                 introModal.classList.add('animate-modal-show');
                 gameContent.classList.add('game-blur');
             }, 100);
 
-            // Handle start game button
             startGameBtn.addEventListener('click', function() {
                 introModal.classList.remove('animate-modal-show');
                 introModal.classList.add('animate-modal-fade-out');
@@ -25,7 +22,6 @@
             });
         }
 
-        // Game logic - ใช้ค่าจาก window variables
         const characterOptions = document.getElementById('character-options');
         const sequenceSlots = document.querySelectorAll('.sequence-slot');
         const characterElements = Array.from(characterOptions.children);
@@ -36,7 +32,6 @@
         const nextRoute = window.gameNextRoute;
         const skipRoute = window.gameSkipRoute;
         
-        // Shuffle character options
         function shuffleOptions() {
             for (let i = characterElements.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -44,31 +39,26 @@
             }
         }
         
-        // Initialize game
         shuffleOptions();
         
-        // Handle character option clicks
         document.querySelectorAll('.character-option').forEach(option => {
             option.addEventListener('click', function() {
                 const character = this.getAttribute('data-character');
                 
                 if (!availableOptions.includes(character)) return;
                 
-                // Find next empty slot
                 const nextSlot = Array.from(sequenceSlots).find(slot => 
                     slot.querySelector('.slot-content').classList.contains('hidden')
                 );
                 
                 if (nextSlot) {
                     addToSequence(character, nextSlot);
-                    // Change background color to gray
                     const buttonDiv = this.querySelector('div');
                     buttonDiv.style.backgroundColor = '#939393';
                     buttonDiv.style.color = 'white';
                     this.style.pointerEvents = 'none';
                     availableOptions = availableOptions.filter(opt => opt !== character);
                     
-                    // Check if all slots are filled
                     if (selectedSequence.length === correctSequence.length) {
                         setTimeout(checkAnswer, 500);
                     }
@@ -82,7 +72,6 @@
             
             selectedSequence.push(character);
             
-            // Create character display - text covering the slot
             const characterText = getCharacterText(character);
             slotContent.innerHTML = `
                 <div class="selected-character bg-indigo-500 text-white rounded-lg w-full h-full flex flex-col justify-center items-center text-center font-medium relative transition-all hover:bg-indigo-600">
@@ -97,7 +86,6 @@
             slotContent.classList.remove('hidden');
             slotNumber.classList.add('hidden');
             
-            // Add remove functionality
             slotContent.querySelector('.remove-btn').addEventListener('click', function(e) {
                 e.stopPropagation();
                 removeFromSequence(character, slot);
@@ -108,18 +96,15 @@
             const slotContent = slot.querySelector('.slot-content');
             const slotNumber = slot.querySelector('.slot-number');
             
-            // Remove from sequence array
             selectedSequence = selectedSequence.filter(item => item !== character);
             
-            // Reset slot
             slotContent.innerHTML = '';
             slotContent.classList.add('hidden');
             slotNumber.classList.remove('hidden');
             
-            // Re-enable character option and reset color
             const characterOption = document.querySelector(`[data-character="${character}"]`);
             const buttonDiv = characterOption.querySelector('div');
-            buttonDiv.style.backgroundColor = '#6366f1'; // Original indigo-500 color
+            buttonDiv.style.backgroundColor = '#6366f1';
             buttonDiv.style.color = 'white';
             characterOption.style.pointerEvents = 'auto';
             availableOptions.push(character);
@@ -162,7 +147,6 @@
             document.getElementById('retry-btn').onclick = function() {
                 modal.classList.add('hidden');
                 modal.classList.remove('animate-modal-show');
-                // Reset game state
                 resetGame();
             };
             
@@ -172,7 +156,6 @@
         }
 
         function resetGame() {
-            // Reset all character options
             document.querySelectorAll('.character-option').forEach(option => {
                 const buttonDiv = option.querySelector('div');
                 buttonDiv.style.backgroundColor = '#6366f1';
@@ -180,7 +163,6 @@
                 option.style.pointerEvents = 'auto';
             });
 
-            // Clear all slots
             sequenceSlots.forEach(slot => {
                 const slotContent = slot.querySelector('.slot-content');
                 const slotNumber = slot.querySelector('.slot-number');
@@ -189,7 +171,6 @@
                 slotNumber.classList.remove('hidden');
             });
 
-            // Reset game state
             selectedSequence = [];
             availableOptions = [...window.gameCharacters];
         }
@@ -197,7 +178,6 @@
 </script>
 
 <style>
-    /* Modal Animation - Background fades in first, then content slides in */
     .animate-modal-show .modal-backdrop {
         animation: backdropFadeIn 0.3s ease-out forwards;
     }
@@ -206,7 +186,6 @@
         animation: contentSlideIn 0.4s ease-out 0.15s both;
     }
 
-    /* Smooth fade out animation for intro modal */
     .animate-modal-fade-out {
         animation: backdropFadeOut 0.3s ease-out forwards;
     }
@@ -256,13 +235,11 @@
         }
     }
     
-    /* Initial state for modal content */
     .modal-content {
         opacity: 0;
         transform: scale(0.8);
     }
 
-    /* Game content blur effects */
     .game-blur {
         filter: blur(3px);
         transition: filter 0.3s ease-out;
@@ -284,7 +261,6 @@
         }
     }
 
-    /* Game content with smooth transitions */
     #game-content {
         opacity: 1;
         transition: all 0.3s ease-out;

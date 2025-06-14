@@ -1,4 +1,3 @@
-{{-- นี่คือหน้า layout/game/script/13/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');
@@ -9,32 +8,31 @@
             const nextBtn = document.getElementById('next-btn');
             const startMainBtn = document.getElementById('start-main-btn');
 
-            // Action data
             const actionsData = {
                 'stop': {
-                    title: 'STOP',
-                    description: 'หยุดการกระทำทุกอย่าง: นั่งเฉยไม่ตอบโต้เพื่อป้องกันไม่ให้เกิดการกระทำหรือพิมพ์ความรุนแรงในครั้งต่อไป',
-                    image: "{{ asset('images/cyberbullying/stop.png') }}"
+                    title: 'หยุดการกระทำทุกอย่าง',
+                    description: 'นิ่งเฉยไม่ตอบโต้ เพื่อไม่ให้เกิดการกระทำซ้ำ หรือเพิ่มความรุนแรง ใช้ในในกรณีที่เป็นเหตุการณ์ทะเลาะเบาะแว้งในขั้นเริ่มต้นแล้วค่อยไปปรับความเข้าใจกันภายหลัง เช่น โดนแซวเล็กน้อย',
+                    image: "{{ asset('images/game/13/stop.png') }}"
                 },
                 'remove': {
-                    title: 'REMOVE',
-                    description: 'ลบทุกภาพ ข้อความ วิดีโอ ที่เป็นการกระทำไม่เหมาะสมหรือทำร้ายจิตใจ เช่น การลบโพสต์ใน Facebook IG และ TikTok',
-                    image: "{{ asset('images/cyberbullying/remove.png') }}"
+                    title: 'ลบภาพที่เป็นการระรานออกทันที',
+                    description: 'ลบภาพ ข้อความ วิดีโอ ที่เป็นการระรานออกทันที หรืออาจจะติดต่อเจ้าหน้าที่ที่เป็นเจ้าของพื้นที่นั้น เช่น การกดปุ่มรายงานเนื้อหาบน Facebook IG และ TikTok',
+                    image: "{{ asset('images/game/13/remove.png') }}"
                 },
                 'be-strong': {
-                    title: 'BE STRONG',
-                    description: 'เข้มแข็ง จิตใจ และไม่ให้ผลกระทบต่อตัวเอง ไม่ให้คำพูดหรือการกระทำของผู้อื่นมาทำลายจิตใจของเรา',
-                    image: "{{ asset('images/cyberbullying/be-strong.png') }}"
+                    title: 'เข้มแข็ง',
+                    description: 'เข้มแข็ง อดทน และมั่นใจในคุณค่าของตนเอง ไม่ให้คุณค่ากับคนหรือคำพูดที่ทำร้ายเรา',
+                    image: "{{ asset('images/game/13/be_strong.png') }}"
                 },
                 'block': {
-                    title: 'BLOCK',
-                    description: 'บล็อกผู้ใช้งานที่มีพฤติกรรมการรังแกหรือคุกคาม และรายงานการกระทำไม่เหมาะสมต่อแพลตฟอร์ม',
-                    image: "{{ asset('images/cyberbullying/block.png') }}"
+                    title: 'ปิดกั้นพวกเขาซะ',
+                    description: 'บล็อกผู้กลั่นแกล้ง เพื่อไม่ให้ถูกกระทำซ้ำ',
+                    image: "{{ asset('images/game/13/block.png') }}"
                 },
                 'tell': {
-                    title: 'TELL',
-                    description: 'บอกผู้ปกครอง ครู หรือคนสนิทให้ทราบเหตุการณ์ที่เกิดขึ้น เพื่อขอคำแนะนำและความช่วยเหลือ',
-                    image: "{{ asset('images/cyberbullying/tell.png') }}"
+                    title: 'บอกบุคคลที่ไว้ใจได้',
+                    description: 'บอกผู้ปกครอง ครู หรือบุคคลที่ไว้ใจเพื่อขอความช่วยเหลือ และแคปเก็บบันทึกหลักฐาน',
+                    image: "{{ asset('images/game/13/tell.png') }}"
                 }
             };
 
@@ -42,13 +40,11 @@
             let viewedActions = new Set();
             let currentAction = '';
 
-            // Show intro modal with animation
             setTimeout(() => {
                 introModal.classList.add('animate-modal-show');
                 gameContent.classList.add('game-blur');
             }, 100);
 
-            // Handle start game button
             startGameBtn.addEventListener('click', function() {
                 introModal.classList.remove('animate-modal-show');
                 introModal.classList.add('animate-modal-fade-out');
@@ -60,7 +56,6 @@
                 }, 300);
             });
 
-            // Add click event listeners to all action cards
             document.querySelectorAll('.action-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const action = this.getAttribute('data-action') || this.querySelector(
@@ -71,25 +66,19 @@
                 });
             });
 
-            // Handle next button
             nextBtn.addEventListener('click', function() {
                 hideModal(actionModal);
 
-                // Mark current action as viewed
                 viewedActions.add(currentAction);
                 markActionAsViewed(currentAction);
 
-                // Check if all actions are viewed
                 if (viewedActions.size === actionOrder.length) {
-                    // All actions viewed, show summary after a delay
                     setTimeout(() => {
                         showSummaryModal();
                     }, 500);
                 }
-                // Otherwise, just close modal and return to selection screen
             });
 
-            // Handle start main button
             startMainBtn.addEventListener('click', function() {
                 window.location.href = "{{ route('game_14') }}";
             });
@@ -97,7 +86,6 @@
             function showActionModal(action) {
                 const data = actionsData[action];
 
-                // Store current action for next button
                 currentAction = action;
 
                 document.getElementById('modal-action-image').src = data.image;
@@ -137,7 +125,6 @@
                 });
             }
 
-            // Close modal when clicking outside
             [actionModal, summaryModal].forEach(modal => {
                 modal.addEventListener('click', function(e) {
                     if (e.target === this) {
@@ -149,23 +136,21 @@
     </script>
 
     <style>
-        /* Base styles */
         .container {
             max-width: 400px;
         }
 
-        /* Action Card Styles */
         .action-card {
             cursor: pointer;
         }
 
         .action-card-inner {
             background: white;
-            border: 3px solid #E2E8F0;
+            border: 1.5px solid #E2E8F0;
             border-radius: 16px;
             padding: 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -174,12 +159,12 @@
 
         .action-card-inner:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
             border-color: #CBD5E0;
         }
 
         .action-card-inner.viewed {
-            border-color: #9F7AEA;
+            border-color: #8b5cf6;
             background: #F7FAFC;
         }
 
@@ -189,7 +174,6 @@
             object-fit: contain;
         }
 
-        /* Modal Styles */
         .modal-icon-container {
             width: 100px;
             height: 100px;
@@ -197,7 +181,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #FEB2B2;
             border-radius: 16px;
         }
 
@@ -208,12 +191,11 @@
         }
 
         .summary-icon {
-            width: 24px;
-            height: 24px;
+            width: 100px;
+            height: auto;
             object-fit: contain;
         }
 
-        /* Modal animations */
         .show-modal {
             animation: backdropFadeIn 0.3s ease-in-out forwards;
         }
@@ -274,7 +256,6 @@
             }
         }
 
-        /* Intro Modal Animation */
         .animate-modal-show .modal-content {
             animation: contentSlideIn 0.4s ease-out forwards;
         }
@@ -322,7 +303,6 @@
             }
         }
 
-        /* Game content blur effects */
         .game-blur {
             filter: blur(3px);
             transition: filter 0.3s ease-out;
@@ -345,7 +325,6 @@
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 640px) {
             .container {
                 padding-left: 1rem;
@@ -353,23 +332,23 @@
             }
 
             .action-card-inner {
-                padding: 15px;
-                min-height: 100px;
+                padding: 4px;
+                min-height: 150px;
             }
 
             .action-image {
-                width: 50px;
-                height: 50px;
+                width: 140px;
+                height: 140px;
             }
 
             .modal-icon-container {
-                width: 80px;
-                height: 80px;
+                width: auto;
+                height: 140px;
             }
 
             .modal-action-icon {
-                width: 48px;
-                height: 48px;
+                width: 200px;
+                height: 200px;
             }
         }
     </style>

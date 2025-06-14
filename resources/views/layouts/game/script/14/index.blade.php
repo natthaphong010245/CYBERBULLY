@@ -1,30 +1,24 @@
- {{-- นี่คือหน้า layout/game/script/14/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');
             const gameContent = document.getElementById('game-content');
             const startGameBtn = document.getElementById('start-game-btn');
 
-            // Show intro modal with animation
             setTimeout(() => {
                 introModal.classList.add('animate-modal-show');
-                gameContent.classList.add('game-blur'); // Blur the game content
-            }, 100);
+                gameContent.classList.add('game-blur');
 
-            // Handle start game button
             startGameBtn.addEventListener('click', function() {
-                // Add fade out animation to intro modal
                 introModal.classList.remove('animate-modal-show');
                 introModal.classList.add('animate-modal-fade-out');
 
                 setTimeout(() => {
                     introModal.style.display = 'none';
-                    gameContent.classList.remove('game-blur'); // Remove blur from game
-                    gameContent.classList.add('animate-unblur'); // Add unblur animation
-                }, 300); // Match the animation duration
+                    gameContent.classList.remove('game-blur');
+                    gameContent.classList.add('animate-unblur');
+                }, 300);
             });
 
-            // Original game logic
             const letterCards = document.querySelectorAll('.letter-card');
             const letterModal = document.getElementById('letter-modal');
             const summaryModal = document.getElementById('summary-modal');
@@ -37,7 +31,6 @@
             let selectedLetters = new Set();
             let currentLetter = '';
             
-            // Letter data
             const letterData = {
                 'c': {
                     title: 'Cyber Security',
@@ -76,7 +69,6 @@
                 }
             };
             
-            // Handle letter card clicks
             letterCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const letter = this.getAttribute('data-letter');
@@ -85,15 +77,12 @@
                 });
             });
             
-            // Handle continue button
             continueBtn.addEventListener('click', function() {
                 hideModal(letterModal);
                 
-                // Mark letter as selected
                 selectedLetters.add(currentLetter);
                 updateCardAppearance(currentLetter);
                 
-                // Check if all letters are selected
                 if (selectedLetters.size === 7) {
                     setTimeout(() => {
                         showSummaryModal();
@@ -101,7 +90,6 @@
                 }
             });
             
-            // Handle finish button
             finishBtn.addEventListener('click', function() {
                 hideModal(summaryModal);
                 setTimeout(() => {
@@ -139,18 +127,15 @@
                 const card = document.querySelector(`[data-letter="${letter}"]`);
                 const cardInner = card.querySelector('div');
                 
-                // Change border to purple
                 cardInner.classList.remove('border-transparent', 'hover:border-indigo-200');
                 cardInner.classList.add('border-purple-500');
                 
-                // Mark as selected
                 card.setAttribute('data-selected', 'true');
             }
         });
     </script>
     
     <style>
-        /* Modal animations */
         .animate-fadeIn {
             animation: fadeIn 0.5s ease-in-out forwards;
         }
@@ -177,7 +162,6 @@
             }
         }
 
-        /* Modal Animation - Background fades in first, then content scales in */
         .animate-modal-show .modal-backdrop {
             animation: backdropFadeIn 0.3s ease-out forwards;
         }
@@ -186,7 +170,6 @@
             animation: contentSlideIn 0.4s ease-out 0.15s both;
         }
 
-        /* Smooth fade out animation for intro modal */
         .animate-modal-fade-out {
             animation: backdropFadeOut 0.3s ease-out forwards;
         }
@@ -240,18 +223,15 @@
             }
         }
 
-        /* Initial state for modal content */
         .modal-content {
             opacity: 0;
             transform: scale(0.8);
         }
 
-        /* Game content blur effects */
         .game-blur {
             filter: blur(3px);
             transition: filter 0.3s ease-out;
             transform: scale(1.02);
-            /* Slightly zoom in when blurred */
         }
 
         .animate-unblur {
@@ -270,13 +250,11 @@
             }
         }
 
-        /* Game content with smooth transitions */
         #game-content {
             opacity: 1;
             transition: all 0.3s ease-out;
         }
         
-        /* Modal content animations */
         #letter-modal .bg-white,
         #summary-modal .bg-white {
             animation: modalSlideIn 0.5s ease-in-out forwards;
@@ -309,7 +287,6 @@
             }
         }
         
-        /* Letter card hover effects */
         .letter-card:hover div {
             transform: translateY(-2px);
         }
@@ -318,13 +295,11 @@
             transform: translateY(0);
         }
         
-        /* Selected card styling */
         .letter-card[data-selected="true"] div {
             border-color: #8b5cf6 !important;
             border-width: 2px;
         }
         
-        /* Remove any borders or outlines */
         img {
             border: none !important;
             outline: none !important;
@@ -347,7 +322,7 @@
             
             #letter-modal .bg-white,
             #summary-modal .bg-white {
-                margin: 1rem;
+                margin: 2rem;
                 max-width: calc(100% - 2rem);
             }
             
@@ -355,7 +330,6 @@
                 padding: 1rem 0.5rem;
             }
             
-            /* Adjust text size for mobile */
             h2 {
                 font-size: 1.125rem;
             }
