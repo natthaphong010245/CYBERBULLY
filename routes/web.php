@@ -39,16 +39,16 @@ Route::get('/inforgraphic', function () {
     return view('inforgraphic/inforgraphic');
 })->name('inforgraphic');
 
-Route::get('/assessment/cyberbulling/person_action', function () {
-    return view('assessment/cyberbulling/person_action/person_action');
+Route::get('/assessment/cyberbullying/person_action', function () {
+    return view('assessment/cyberbullying/person_action/person_action');
 })->name('person_action');
 
-Route::get('/assessment/cyberbulling/victim', function () {
-    return view('assessment/cyberbulling/victim/victim');
+Route::get('/assessment/cyberbullying/victim', function () {
+    return view('assessment/cyberbullying/victim/victim');
 })->name('victim');
 
-Route::get('/assessment/cyberbulling/overview', function () {
-    return view('assessment/cyberbulling/overview/overview');
+Route::get('/assessment/cyberbullying/overview', function () {
+    return view('assessment/cyberbullying/overview/overview');
 })->name('overview');
 
 Route::get('/assessment/mental_health', function () {
@@ -76,35 +76,35 @@ Route::get('/safe_area/message/result', function () {
 })->name('safe_area/message/result');
 
 // Form routes with controller - Person Action
-Route::get('/assessment/cyberbulling/person_action/form', [PersonActionController::class, 'showForm'])->name('person_action/form');
-Route::post('/assessment/cyberbulling/person_action/form', [PersonActionController::class, 'submitForm']);
+Route::get('/assessment/cyberbullying/person_action/form', [PersonActionController::class, 'showForm'])->name('person_action/form');
+Route::post('/assessment/cyberbullying/person_action/form', [PersonActionController::class, 'submitForm']);
 
 // Results route - Person Action
-Route::get('/assessment/cyberbulling/person_action/result', function () {
+Route::get('/assessment/cyberbullying/person_action/result', function () {
     $score = session('score', 0);
     $percentage = session('percentage', 0);
     
-    return view('assessment.cyberbulling.person_action.form.result', compact('score', 'percentage'));
+    return view('assessment.cyberbullying.person_action.form.result', compact('score', 'percentage'));
 })->name('person_action/result');
 
 // Form routes with controller - Victim
-Route::get('/assessment/cyberbulling/victim/form', [VictimController::class, 'showForm'])->name('victim/form');
-Route::post('/assessment/cyberbulling/victim/form', [VictimController::class, 'submitForm']);
+Route::get('/assessment/cyberbullying/victim/form', [VictimController::class, 'showForm'])->name('victim/form');
+Route::post('/assessment/cyberbullying/victim/form', [VictimController::class, 'submitForm']);
 
 // Results route - Victim
-Route::get('/assessment/cyberbulling/victim/result', function () {
+Route::get('/assessment/cyberbullying/victim/result', function () {
     $score = session('score', 0);
     $percentage = session('percentage', 0);
     
-    return view('assessment.cyberbulling.victim.form.result', compact('score', 'percentage'));
+    return view('assessment.cyberbullying.victim.form.result', compact('score', 'percentage'));
 })->name('victim/result');
 
 // Form routes with controller - Overview (Combined)
-Route::get('/assessment/cyberbulling/overview/form', [OverviewController::class, 'showForm'])->name('overview/form');
-Route::post('/assessment/cyberbulling/overview/form', [OverviewController::class, 'submitForm']);
+Route::get('/assessment/cyberbullying/overview/form', [OverviewController::class, 'showForm'])->name('overview/form');
+Route::post('/assessment/cyberbullying/overview/form', [OverviewController::class, 'submitForm']);
 
 // Results route - Overview
-Route::get('/assessment/cyberbulling/overview/result', [OverviewController::class, 'showResults'])->name('overview/result');
+Route::get('/assessment/cyberbullying/overview/result', [OverviewController::class, 'showResults'])->name('overview/result');
 
 // Form routes with controller - Mental Health
 Route::get('/assessment/mental_health/form', [MentalHealthController::class, 'showForm'])->name('mental_health/form');
@@ -117,7 +117,7 @@ Route::get('/assessment/mental_health/result', [MentalHealthController::class, '
 Route::get('/check-view-structure', function() {
     $viewPath = resource_path('views');
     
-    $expectedPath = $viewPath . '/assessment/cyberbulling/person_action/form';
+    $expectedPath = $viewPath . '/assessment/cyberbullying/person_action/form';
     
     $results = [
         'base_views_path' => $viewPath,
@@ -192,9 +192,9 @@ Route::get('/assessment', function () {
     return view('assessment/assessment');
 })->name('assessment');
 
-Route::get('/assessment/cyberbulling', function () {
-    return view('assessment/cyberbulling/cyberbulling');
-})->name('cyberbulling');
+Route::get('/assessment/cyberbullying', function () {
+    return view('assessment/cyberbullying/index');
+})->name('cyberbullying');
 
 Route::get('/report_consultation', function () {
     return view('report&consultation/report&consultation');

@@ -12,7 +12,7 @@ class VictimController extends Controller
      */
     public function showForm()
     {
-        return view('assessment.cyberbulling.victim.form.form');
+        return view('assessment.cyberbullying.victim.form.form');
     }
 
     /**
@@ -71,6 +71,6 @@ class VictimController extends Controller
         $score = session('score', 0);
         $percentage = session('percentage', 0);
         
-        return view('assessment.cyberbulling.victim.form.result', compact('score', 'percentage'));
+        return view('assessment.cyberbullying.victim.form.result', compact('score', 'percentage'));
     }
 }

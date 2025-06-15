@@ -13,7 +13,7 @@
         </div>
 
         <!-- Cards -->
-        <a href="{{ route('cyberbulling') }}" class="block relative">
+        <a href="{{ route('cyberbullying') }}" class="block relative">
             <div class="py-3 pl-20 pr-6 flex items-center h-20 rounded-[10px] mb-10"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="absolute left-2 -top-6">
