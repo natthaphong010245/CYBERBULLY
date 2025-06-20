@@ -1,5 +1,6 @@
-{{-- resources/views/assessment/cyberbulling/person_action/form/form.blade.php --}}
+{{-- resources/views/assessment/cyberbullying/person_action/form/form.blade.php --}}
 @extends('layouts.assessment.cyberbullying.person_action.form.form')
+
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8 pb-20">
         <div class="text-center mb-10 relative">

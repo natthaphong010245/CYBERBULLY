@@ -12,27 +12,19 @@
     </div>
     
     <div class="space-y-16 px-2 mt-8">
-        <button onclick="window.location.href='{{ route('safe_area/voice') }}'" class="bg-[#929AFF] w-full py-2 rounded-2xl text-white flex items-center justify-center space-x-8">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24" 
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-            </svg>
+        <button onclick="window.location.href='{{ route('safe_area/voice') }}'" class="bg-[#929AFF] w-full h-24 py-2 rounded-2xl text-white flex items-center justify-center space-x-8">
+            <img src="{{ asset('images/safe_area/microphone.png') }}" alt="Microphone Icon" class="h-20 w-auto object-contain">
             <div class="text-left">
-                <div class="font-semibold text-xl">แชร์ประสบการณ์ด้วย</div>
-                <div class="text-base">เสียง</div>
+                <div class="font-semibold text-lg">แชร์ประสบการณ์ด้วย</div>
+                <div class="text-2xl font-bold ml-4">เสียง</div>
             </div>
         </button>
         
-        <button onclick="window.location.href='{{ route('safe_area/message') }}'" class="bg-[#929AFF] w-full py-2 rounded-2xl text-white flex items-center justify-center space-x-8">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
+        <button onclick="window.location.href='{{ route('safe_area/message') }}'" class="bg-[#929AFF] w-full h-24 py-2 rounded-2xl text-white flex items-center justify-center space-x-8">
+            <img src="{{ asset('images/safe_area/message.png') }}" alt="Message Icon" class="h-20 w-auto object-contain">
             <div class="text-left">
-                <div class="font-semibold text-xl">แชร์ประสบการณ์ด้วย</div>
-                <div class="text-base">ข้อความ</div>
+                <div class="font-semibold text-lg">แชร์ประสบการณ์ด้วย</div>
+                <div class="text-2xl font-bold ml-4">ข้อความ</div>
             </div>
         </button>
     </div>

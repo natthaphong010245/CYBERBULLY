@@ -13,7 +13,7 @@
         </div>
 
         <!-- Cards -->
-        <a href="{{ route('cyberbulling') }}" class="block relative">
+        <a href="{{ route('cyberbullying') }}" class="block relative">
             <div class="py-3 px-6 flex items-center justify-between h-20 rounded-[10px]"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="flex flex-col">
