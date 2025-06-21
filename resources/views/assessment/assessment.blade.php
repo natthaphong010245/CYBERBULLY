@@ -17,8 +17,8 @@
             <div class="flex items-center h-24 rounded-[10px] relative"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <!-- รูปด้านซ้ายที่ล้นออกด้านบน -->
-                <div class="absolute left-5 -top-4 z-10">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-auto h-24 object-contain">
+                <div class="absolute left-2 -top-8 z-10">
+                    <img src="{{ asset('images/assessment/cyberbullying.png') }}" alt="Teen Icon" class="w-auto h-28 object-contain">
                 </div>
                 <!-- ข้อความอยู่กึ่งกลางด้านขวา -->
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">
@@ -36,8 +36,8 @@
             <div class="flex items-center h-24 rounded-[10px] relative"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <!-- รูปด้านซ้ายที่ล้นออกด้านบน -->
-                <div class="absolute left-5 -top-4 z-10">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-auto h-24 object-contain">
+                <div class="absolute left-5 -top-8 z-10">
+                    <img src="{{ asset('images/assessment/mental_health.png') }}" alt="Teen Icon" class="w-auto h-28 object-contain">
                 </div>
                 <!-- ข้อความอยู่กึ่งกลางด้านขวา -->
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">

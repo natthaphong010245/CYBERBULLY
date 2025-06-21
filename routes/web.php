@@ -192,6 +192,14 @@ Route::get('/assessment', function () {
     return view('assessment/assessment');
 })->name('assessment');
 
+Route::get('/main/game', function () {
+    return view('game');
+})->name('main_game');
+
+Route::get('/game', function () {
+    return view('game/index');
+})->name('game');
+
 Route::get('/assessment/cyberbullying', function () {
     return view('assessment/cyberbullying/index');
 })->name('cyberbullying');

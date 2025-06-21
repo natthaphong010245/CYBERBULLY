@@ -26,7 +26,7 @@
         </a>
 
         <!-- Game Card -->
-        <a href="main_video_teens" class="card-item gradient-border block mt-6">
+        <a href="{{ route('main_game') }}" class="card-item gradient-border block mt-6">
             <div class="card-text">
                 <div class="card-title">CYBER<br>BULLYING</div>
                 <div class="card-subtitle">Game</div>

@@ -1,4 +1,4 @@
-{{-- resources/views/assessment/cyberbulling/index.blade.php --}}
+{{-- resources/views/assessment/cyberbullying/index.blade.php --}}
 @extends('layouts.main_category.index')
 
 @section('content')

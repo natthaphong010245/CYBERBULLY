@@ -14,66 +14,66 @@
 
         <!-- Cards -->
         <a href="{{ route('cyberbullying') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-20 rounded-[10px]"
+            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="flex flex-col">
                     <div class="font-median text-white text-lg">คำปรึกษาจาก</div>
-                    <div class="font-median text-white text-xl">นักวิจัย</div>
+                    <div class="font-median text-white text-2xl">นักวิจัย</div>
                 </div>
                 <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-16 h-16 object-contain">
+                    <img src="{{ asset('images/report_consultation/researcher.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
                 </div>
             </div>
         </a>
         
         <a href="{{ route('teacher_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-20 rounded-[10px]"
+            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="flex flex-col">
                     <div class="font-median text-white text-lg">คำปรึกษาจาก</div>
-                    <div class="font-median text-white text-xl">คุณครู</div>
+                    <div class="font-median text-white text-2xl">คุณครู</div>
                 </div>
                 <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-16 h-16 object-contain">
+                    <img src="{{ asset('images/report_consultation/teacher.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
                 </div>
             </div>
         </a>
 
         <a href="{{ route('province_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-20 rounded-[10px]"
+            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="flex flex-col">
                     <div class="font-median text-white text-lg">คำปรึกษาจากหน่วยงาน</div>
-                    <div class="font-median text-white text-xl">จังหวัดเชียงราย</div>
+                    <div class="font-median text-white text-2xl">จังหวัดเชียงราย</div>
                 </div>
                 <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-16 h-16 object-contain">
+                    <img src="{{ asset('images/report_consultation/province.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
                 </div>
             </div>
         </a>
 
         <a href="{{ route('country_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-20 rounded-[10px]"
+            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="flex flex-col">
                     <div class="font-median text-white text-lg">คำปรึกษาจากหน่วยงาน</div>
-                    <div class="font-median text-white text-xl">ประเทศไทย</div>
+                    <div class="font-median text-white text-2xl">ประเทศไทย</div>
                 </div>
                 <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-16 h-16 object-contain">
+                    <img src="{{ asset('images/report_consultation/country.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
                 </div>
             </div>
         </a>
 
         <a href="{{ route('app_center_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-20 rounded-[10px]"
+            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="flex flex-col">
                     <div class="font-median text-white text-lg">APPLICATION</div>
-                    <div class="font-median text-white text-xl">พัฒนาจากศูนย์</div>
+                    <div class="font-median text-white text-2xl">พัฒนาจากศูนย์</div>
                 </div>
                 <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-16 h-16 object-contain">
+                    <img src="{{ asset('images/report_consultation/application.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
                 </div>
             </div>
         </a>

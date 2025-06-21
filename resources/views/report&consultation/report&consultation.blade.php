@@ -14,11 +14,11 @@
 
         <!-- Video Cards -->
         <a href="{{ route('safe_area') }}" class="block relative mt-8">
-            <div class="flex items-center h-20 rounded-[10px] relative"
+            <div class="flex items-center h-24 rounded-[10px] relative"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <!-- รูปด้านซ้ายที่ล้นออกด้านบน -->
-                <div class="absolute left-4 -top-6 z-10">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
+                <div class="absolute left-6 -top-8 z-10">
+                    <img src="{{ asset('images/report_consultation/safe_area.png') }}" alt="Teen Icon" class="w-auto h-28 object-contain">
                 </div>
                 <!-- ข้อความอยู่กึ่งกลางด้านขวา -->
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">
@@ -27,12 +27,13 @@
             </div>
         </a>
 
+        <br>
         <a href="{{ route('behavioral_report') }}" class="block relative mt-8">
-            <div class="flex items-center h-20 rounded-[10px] relative"
+            <div class="flex items-center h-24 rounded-[10px] relative"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <!-- รูปด้านซ้ายที่ล้นออกด้านบน -->
-                <div class="absolute left-4 -top-6 z-10">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
+                <div class="absolute left-6 -top-8 z-10">
+                    <img src="{{ asset('images/report_consultation/behavioral_report.png') }}" alt="Teen Icon" class="w-auto h-28 object-contain">
                 </div>
                 <!-- ข้อความอยู่กึ่งกลางด้านขวา -->
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">
@@ -41,12 +42,13 @@
             </div>
         </a>
         
+        <br>
         <a href="{{ route('request_consultation') }}" class="block relative mt-8">
-            <div class="flex items-center h-20 rounded-[10px] relative"
+            <div class="flex items-center h-24 rounded-[10px] relative"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <!-- รูปด้านซ้ายที่ล้นออกด้านบน -->
-                <div class="absolute left-4 -top-6 z-10">
-                    <img src="{{ asset('images/teen-1.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
+                <div class="absolute left-6 -top-8 z-10">
+                    <img src="{{ asset('images/report_consultation/request_advice.png') }}" alt="Teen Icon" class="w-auto h-28 object-contain">
                 </div>
                 <!-- ข้อความอยู่กึ่งกลางด้านขวา -->
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">

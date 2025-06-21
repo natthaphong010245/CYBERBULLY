@@ -133,7 +133,9 @@
                 card.setAttribute('data-selected', 'true');
             }
         });
-    </script>
+        });
+    
+        </script>
     
     <style>
         .animate-fadeIn {
