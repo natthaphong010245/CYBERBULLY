@@ -29,7 +29,7 @@
         <a href="{{ route('main_game') }}" class="card-item gradient-border block mt-6">
             <div class="card-text">
                 <div class="card-title">CYBER<br>BULLYING</div>
-                <div class="card-subtitle">Game</div>
+                <div class="card-subtitle">Game & Scenario</div>
             </div>
             <div class="card-image">
                 <img src="images/game.jpg" alt="Game">

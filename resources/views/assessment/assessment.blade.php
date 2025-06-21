@@ -57,8 +57,8 @@
         <div id="modal-content"
             class="modal-content bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 text-center transform scale-50">
             <div class="mb-4">
-                <h3 class="text-xl font-medium text-[#3E36AE] mb-1">แบบประเมินพฤติกรรม</h3>
-                <h4 class="text-2xl font-bold text-[#3E36AE]">BEHAVIORAL ASSESSMENT</h4>
+                <h3 class="text-lg font-medium text-[#3E36AE] mb-1">แบบประเมินพฤติกรรม</h3>
+                <h4 class="text-xl font-bold text-[#3E36AE]">BEHAVIORAL ASSESSMENT</h4>
             </div>
 
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
