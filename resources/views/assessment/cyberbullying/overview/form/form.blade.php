@@ -5,7 +5,7 @@
         <div class="text-center mb-10 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
-                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">คัดกรองพฤติกรรมการรังแก</h1>
+                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">แบบคัดกรองพฤติกรรมการรังแก</h1>
                     <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ประสบการณ์การถูกกระทำ</p>
                 </div>
             </div>

@@ -5,7 +5,7 @@
         <div class="text-center mb-2 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
-                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">คัดกรองพฤติกรรมการรังแก</h1>
+                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">แบบคัดกรองพฤติกรรมการรังแก</h1>
                     <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ผลการประเมินภาพรวม</p>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div class="swiper-slide w-full flex-shrink-0 px-2">
                     <div class="bg-white w-full max-w-2xl mx-auto rounded-lg px-4 pt-4 flex flex-col pb-6">
                         <div class="text-center mb-4">
-                            <h3 class="text-lg font-bold text-[#3E36AE] mb-2">ประสบการณ์การกระทำ</h3>
+                            <h3 class="text-xl font-bold text-[#3E36AE] mb-2">ประสบการณ์การกระทำ</h3>
                         </div>
 
                         <div class="flex flex-col items-center">
@@ -84,7 +84,7 @@
                 <div class="swiper-slide w-full flex-shrink-0 px-2">
                     <div class="bg-white w-full max-w-2xl mx-auto rounded-lg px-4 pt-4 flex flex-col pb-6">
                         <div class="text-center mb-4">
-                            <h3 class="text-lg font-bold text-[#3E36AE] mb-2">ประสบการณ์การถูกกระทำ</h3>
+                            <h3 class="text-xl font-bold text-[#3E36AE] mb-2">ประสบการณ์การถูกกระทำ</h3>
                         </div>
 
                         <div class="flex flex-col items-center">

@@ -1,16 +1,17 @@
+{{-- resources/views/assessment/mental_health/form/form.blade.php --}}
 @extends('layouts.assessment.mental_health.form.form')
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8 pb-20">
         <div class="text-center mb-10 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
-                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">แบบประเมินสุขภาพจิต</h1>
-                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ภาวะสุขภาพจิตภาพรวม</p>
+                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">แบบคัดกรองพฤติกรรม</h1>
+                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">สุขภาพจิต</p>
                 </div>
             </div>
         </div>
 
-        <div class="border-b border-gray-200 mb-6"></div>
+        <div class="border-b border-gray-200 mb-4"></div>
 
         <form id="questionnaire-form" method="POST" action="{{ url('/assessment/mental_health/form') }}">
             @csrf
@@ -18,11 +19,9 @@
             <!-- หัวข้อความเครียด -->
             <div class="text-center mb-4 relative">
                 <div class="flex items-center justify-center">
-                   <div class="flex-grow h-px bg-[#3E36AE] mr-4"></div>
                    <div class="relative">
-                        <h1 class="text-lg font-bold text-[#3E36AE] inline-block">ด้านความเครียด</h1>
+                        <h1 class="text-xl font-bold text-[#3E36AE] inline-block">ด้านความเครียด</h1>
                     </div>
-                    <div class="flex-grow h-px bg-[#3E36AE] ml-4"></div>
                 </div>
             </div>
             
@@ -65,13 +64,11 @@
             @endforeach
             
             <!-- หัวข้อภาวะวิตกกังวล -->
-            <div class="text-center mb-4 relative mt-8">
+            <div class="text-center mb-4 relative mt-6">
                 <div class="flex items-center justify-center">
-                   <div class="flex-grow h-px bg-[#3E36AE] mr-4"></div>
                    <div class="relative">
-                        <h1 class="text-lg font-bold text-[#3E36AE] inline-block">ภาวะวิตกกังวล</h1>
+                        <h1 class="text-xl font-bold text-[#3E36AE] inline-block">ภาวะวิตกกังวล</h1>
                     </div>
-                    <div class="flex-grow h-px bg-[#3E36AE] ml-4"></div>
                 </div>
             </div>
             
@@ -107,13 +104,11 @@
             @endforeach
             
             <!-- หัวข้อภาวะซึมเศร้า -->
-            <div class="text-center mb-4 relative mt-8">
+            <div class="text-center mb-4 relative mt-6">
                 <div class="flex items-center justify-center">
-                   <div class="flex-grow h-px bg-[#3E36AE] mr-4"></div>
                    <div class="relative">
-                        <h1 class="text-lg font-bold text-[#3E36AE] inline-block">ภาวะซึมเศร้า</h1>
+                        <h1 class="text-xl font-bold text-[#3E36AE] inline-block">ภาวะซึมเศร้า</h1>
                     </div>
-                    <div class="flex-grow h-px bg-[#3E36AE] ml-4"></div>
                 </div>
             </div>
             

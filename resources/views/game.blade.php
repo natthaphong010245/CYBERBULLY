@@ -18,7 +18,7 @@
                 </div>
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">
                     <div class="flex flex-col text-center">
-                        <div class="font-medium text-white text-3xl">GAME</div>
+                        <div class="font-medium text-white text-2xl">GAME</div>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">
                     <div class="flex flex-col text-center">
-                        <div class="font-medium text-white text-3xl">SCENARIO</div>
+                        <div class="font-medium text-white text-2xl ml-4">SCENARIO</div>
                     </div>
                 </div>
             </div>
