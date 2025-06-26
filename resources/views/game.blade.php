@@ -27,7 +27,7 @@
         <br>
         <br>
 
-        <a href="{{ route('mental_health') }}" class="block relative">
+        <a href="{{ route('scenario.index') }}" class="block relative">
             <div class="flex items-center h-24 rounded-2xl relative"
                 style="background-color: rgba(146, 154, 255, 1)">
                 <div class="absolute left-3 -top-8 z-10">

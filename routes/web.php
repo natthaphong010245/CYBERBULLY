@@ -433,3 +433,44 @@ Route::get('/report&consultation/behavioral_report', [BehavioralReportController
 
 Route::post('/report&consultation/behavioral_report', [BehavioralReportController::class, 'store'])
     ->name('behavioral-report.store');
+
+
+    // เพิ่ม routes เหล่านี้ใน web.php ของคุณ
+
+use App\Http\Controllers\Game\ScenarioController;
+
+// หน้าแสดงรายการ scenarios ทั้งหมด
+Route::get('/scenario', [ScenarioController::class, 'index'])->name('scenario.index');
+
+Route::get('/scenario/completion', [ScenarioController::class, 'completion'])->name('scenario.completion');
+
+
+// Routes สำหรับแต่ละสถานการณ์
+Route::get('/scenario/1', [ScenarioController::class, 'scenario1'])->name('scenario_1');
+Route::get('/scenario/2', [ScenarioController::class, 'scenario2'])->name('scenario_2');
+Route::get('/scenario/3', [ScenarioController::class, 'scenario3'])->name('scenario_3');
+Route::get('/scenario/4', [ScenarioController::class, 'scenario4'])->name('scenario_4');
+Route::get('/scenario/5', [ScenarioController::class, 'scenario5'])->name('scenario_5');
+Route::get('/scenario/6', [ScenarioController::class, 'scenario6'])->name('scenario_6');
+Route::get('/scenario/7', [ScenarioController::class, 'scenario7'])->name('scenario_7');
+Route::get('/scenario/8', [ScenarioController::class, 'scenario8'])->name('scenario_8');
+Route::get('/scenario/9', [ScenarioController::class, 'scenario9'])->name('scenario_9');
+Route::get('/scenario/10', [ScenarioController::class, 'scenario10'])->name('scenario_10');
+Route::get('/scenario/11', [ScenarioController::class, 'scenario11'])->name('scenario_11');
+Route::get('/scenario/12', [ScenarioController::class, 'scenario12'])->name('scenario_12');
+Route::get('/scenario/13', [ScenarioController::class, 'scenario13'])->name('scenario_13');
+
+// Routes สำหรับ submit คำตอบ
+Route::post('/scenario/1/submit', [ScenarioController::class, 'submitScenario1'])->name('scenario_1.submit');
+Route::post('/scenario/2/submit', [ScenarioController::class, 'submitScenario2'])->name('scenario_2.submit');
+Route::post('/scenario/3/submit', [ScenarioController::class, 'submitScenario3'])->name('scenario_3.submit');
+Route::post('/scenario/4/submit', [ScenarioController::class, 'submitScenario4'])->name('scenario_4.submit');
+Route::post('/scenario/5/submit', [ScenarioController::class, 'submitScenario5'])->name('scenario_5.submit');
+Route::post('/scenario/6/submit', [ScenarioController::class, 'submitScenario6'])->name('scenario_6.submit');
+Route::post('/scenario/7/submit', [ScenarioController::class, 'submitScenario7'])->name('scenario_7.submit');
+Route::post('/scenario/8/submit', [ScenarioController::class, 'submitScenario8'])->name('scenario_8.submit');
+Route::post('/scenario/9/submit', [ScenarioController::class, 'submitScenario9'])->name('scenario_9.submit');
+Route::post('/scenario/10/submit', [ScenarioController::class, 'submitScenario10'])->name('scenario_10.submit');
+Route::post('/scenario/11/submit', [ScenarioController::class, 'submitScenario11'])->name('scenario_11.submit');
+Route::post('/scenario/12/submit', [ScenarioController::class, 'submitScenario12'])->name('scenario_12.submit');
+Route::post('/scenario/13/submit', [ScenarioController::class, 'submitScenario13'])->name('scenario_13.submit');
