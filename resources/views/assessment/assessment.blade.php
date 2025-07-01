@@ -1,4 +1,9 @@
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/main';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
 <style>
@@ -10,7 +15,6 @@
 </style>
 
 <div class="card-container space-y-10 px-10 md:px-0">
-    <!-- Page Title -->
     <div class="text-center mb-8 relative">
         <div class="flex items-center justify-center">
             <div class="relative">
@@ -20,7 +24,6 @@
         </div>
     </div>
 
-    <!-- Assessment Cards -->
     @php
     $assessments = [
         [
@@ -49,13 +52,11 @@
         <div id="{{ $assessment['id'] }}" class="assessment-card block relative cursor-pointer">
     @endif
             <div class="flex items-center h-24 rounded-[10px] relative bg-[#929AFF]">
-                <!-- รูปด้านซ้ายที่ล้นออกด้านบน -->
                 <div class="absolute {{ $assessment['image_position'] }} -top-8 z-10">
                     <img src="{{ asset('images/assessment/' . $assessment['image']) }}" 
                          alt="{{ $assessment['title_bottom'] }}" 
                          class="w-auto h-28 object-contain">
                 </div>
-                <!-- ข้อความอยู่กึ่งกลางด้านขวา -->
                 <div class="flex-1 flex items-center justify-center pr-6 pl-24">
                     <div class="flex flex-col text-center">
                         <div class="font-medium text-white text-lg mb-1">{{ $assessment['title_top'] }}</div>
@@ -75,7 +76,6 @@
     @endforeach
 </div>
 
-<!-- Mental Health Assessment Modal -->
 <div id="mental-health-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden opacity-0">
     <div id="modal-content" class="modal-content bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 text-center transform scale-50">
         <div class="mb-4">
@@ -105,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let modalShown = false;
 
-    // Event handlers for closing modal on navigation
     ['pageshow', 'popstate', 'visibilitychange'].forEach(event => {
         window.addEventListener(event, () => {
             if (modalShown || !document.hidden) {
@@ -115,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Show modal
     mentalHealthCard.addEventListener('click', () => {
         modal.classList.remove('hidden');
         modalShown = true;
@@ -127,13 +125,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10);
     });
 
-    // Start assessment
     startAssessmentBtn.addEventListener('click', () => {
         modalShown = true;
         window.location.href = '{{ route("mental_health/form") }}';
     });
 
-    // Close modal on outside click or ESC
     modal.addEventListener('click', (e) => e.target === modal && closeModal());
     document.addEventListener('keydown', (e) => e.key === 'Escape' && !modal.classList.contains('hidden') && closeModal());
 

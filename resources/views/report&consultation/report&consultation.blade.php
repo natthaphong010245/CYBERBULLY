@@ -1,4 +1,9 @@
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/main';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
 <div class="card-container space-y-10 px-10 md:px-0">

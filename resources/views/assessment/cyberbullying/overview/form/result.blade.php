@@ -1,21 +1,18 @@
-{{-- resources/views/assessment/cyberbullying/overview/form/result.blade.php --}}
-@extends('layouts.assessment.cyberbullying.overview.form.result')
+@extends('layouts.assessment.cyberbullying.result')
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8 pb-10">
         <div class="text-center mb-2 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
-                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">แบบคัดกรองพฤติกรรมการรังแก</h1>
-                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ผลการประเมินภาพรวม</p>
+                    <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">แบบคัดกรองพฤติกรรม</h1>
+                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ผลประเมินภาพรวม</p>
                 </div>
             </div>
         </div>
 
-        <!-- Swipeable Container -->
         <div class="relative overflow-hidden rounded-lg mt-8 flex-grow">
             <div class="swiper-container flex transition-transform duration-300 ease-in-out" id="result-carousel">
                 
-                <!-- Page 1: ประสบการณ์การกระทำ -->
                 <div class="swiper-slide w-full flex-shrink-0 px-2">
                     <div class="bg-white w-full max-w-2xl mx-auto rounded-lg px-4 pt-4 flex flex-col pb-6">
                         <div class="text-center mb-4">
@@ -80,7 +77,6 @@
                     </div>
                 </div>
 
-                <!-- Page 2: ประสบการณ์การถูกกระทำ -->
                 <div class="swiper-slide w-full flex-shrink-0 px-2">
                     <div class="bg-white w-full max-w-2xl mx-auto rounded-lg px-4 pt-4 flex flex-col pb-6">
                         <div class="text-center mb-4">
@@ -147,7 +143,6 @@
             </div>
         </div>
 
-        <!-- Dots Indicator -->
         <div class="flex justify-center mb-6">
             <div class="flex space-x-2">
                 <button class="dot w-3 h-3 rounded-full bg-[#3E36AE] transition-all duration-300" data-slide="0"></button>
@@ -157,7 +152,6 @@
 
 
 
-        <!-- Fixed Bottom Button -->
                 <div class="border-b border-gray-300"></div>
 
         <div class="flex justify-center mt-6">
@@ -166,103 +160,8 @@
             </a>
         </div>
     </div>
+    @include('layouts.assessment.cyberbullying.overview.script')
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.getElementById('result-carousel');
-            const dots = document.querySelectorAll('.dot');
-            let currentSlide = 0;
-            let startX = 0;
-            let currentX = 0;
-            let isDragging = false;
-
-            // Update active dot
-            function updateDots() {
-                dots.forEach((dot, index) => {
-                    if (index === currentSlide) {
-                        dot.classList.remove('bg-gray-300');
-                        dot.classList.add('bg-[#3E36AE]');
-                    } else {
-                        dot.classList.remove('bg-[#3E36AE]');
-                        dot.classList.add('bg-gray-300');
-                    }
-                });
-            }
-
-            // Move to specific slide
-            function moveToSlide(slideIndex) {
-                currentSlide = slideIndex;
-                const translateX = -slideIndex * 100;
-                carousel.style.transform = `translateX(${translateX}%)`;
-                updateDots();
-            }
-
-            // Dot click handlers
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    moveToSlide(index);
-                });
-            });
-
-            // Touch/Mouse events for swiping
-            function handleStart(e) {
-                isDragging = true;
-                startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-                carousel.style.transition = 'none';
-            }
-
-            function handleMove(e) {
-                if (!isDragging) return;
-                e.preventDefault();
-                currentX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-                const deltaX = currentX - startX;
-                const currentTranslateX = -currentSlide * 100;
-                const newTranslateX = currentTranslateX + (deltaX / carousel.offsetWidth) * 100;
-                carousel.style.transform = `translateX(${newTranslateX}%)`;
-            }
-
-            function handleEnd() {
-                if (!isDragging) return;
-                isDragging = false;
-                carousel.style.transition = 'transform 0.3s ease-in-out';
-                
-                const deltaX = currentX - startX;
-                const threshold = carousel.offsetWidth * 0.1; // 10% threshold
-
-                if (Math.abs(deltaX) > threshold) {
-                    if (deltaX > 0 && currentSlide > 0) {
-                        // Swipe right - go to previous slide
-                        moveToSlide(currentSlide - 1);
-                    } else if (deltaX < 0 && currentSlide < 1) {
-                        // Swipe left - go to next slide
-                        moveToSlide(currentSlide + 1);
-                    } else {
-                        // Not enough movement, return to current slide
-                        moveToSlide(currentSlide);
-                    }
-                } else {
-                    // Not enough movement, return to current slide
-                    moveToSlide(currentSlide);
-                }
-            }
-
-            // Mouse events
-            carousel.addEventListener('mousedown', handleStart);
-            document.addEventListener('mousemove', handleMove);
-            document.addEventListener('mouseup', handleEnd);
-
-            // Touch events
-            carousel.addEventListener('touchstart', handleStart, { passive: false });
-            carousel.addEventListener('touchmove', handleMove, { passive: false });
-            carousel.addEventListener('touchend', handleEnd);
-
-            // Prevent default drag behavior
-            carousel.addEventListener('dragstart', e => e.preventDefault());
-
-            // Initialize
-            updateDots();
-        });
-    </script>
 
     <style>
         .swiper-container {

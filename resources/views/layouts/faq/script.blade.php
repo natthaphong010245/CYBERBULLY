@@ -11,10 +11,8 @@
                 const isOpen = content.style.maxHeight;
                 
                 if (isOpen) {
-                    // Close accordion
                     closeAccordion(content, button, arrow);
                 } else {
-                    // Open accordion
                     openAccordion(content, button, arrow, contentInner);
                 }
             });

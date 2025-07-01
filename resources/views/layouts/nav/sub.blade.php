@@ -1,11 +1,10 @@
-{{-- resources/views/layouts/assessment/cyberbulling/person_action/nav.blade.php --}}
-<div class="flex justify-between items-center px-8 py-6">
-    <a href="{{ route('overview') }}" class="text-gray-700">
+<div class="flex justify-between items-center px-8 py-5">
+    <a href="{{ $backUrl ?? '#' }}" class="text-gray-700">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
     </a>
-    <a href="{{ route('main') }}" class="text-gray-700">
+    <a href="{{ $mainUrl ?? '#' }}" class="text-gray-700">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

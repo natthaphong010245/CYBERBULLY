@@ -1,11 +1,16 @@
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/report_consultation/request_consultation';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
 <div class="card-container space-y-10 px-10 md:px-0">
     <div class="text-center mb-4 relative">
         <div class="flex items-center justify-center">
             <div class="relative">
-                <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">ขอคำปรึกษาจากคุณครู</h1>
+                <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">ขอคำปรึกษาจากคุณครู</h1>
                 <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">โรงเรียน</p>
             </div>
         </div>

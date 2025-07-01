@@ -1,5 +1,10 @@
 @extends('layouts.game.dealing_bullying.index')
 
+@php
+    $backUrl = '/category/game';
+    $mainUrl = '/main';
+@endphp
+
 @section('content')
     @include('game.intro.index', [
         'title' => 'การรับมือการกลั่นแกล้งบนโลกออนไลน์',

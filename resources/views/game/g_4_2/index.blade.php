@@ -1,6 +1,11 @@
 {{-- game/g_4_2/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
+@php
+    $backUrl = '/category/game';
+    $mainUrl = '/main';
+@endphp
+
 @section('content')
     <div class="card-container space-y-6 px-6 md:px-0" id="game-content">
         <div class="text-center">

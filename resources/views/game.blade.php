@@ -1,8 +1,13 @@
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/main';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
+
 <div class="card-container space-y-10 px-10 md:px-0">
-    <!-- Page Title -->
     <div class="text-center mb-10 mt-2 relative">
         <div class="flex items-center justify-center">
             <div class="relative">
@@ -11,7 +16,6 @@
         </div>
     </div>
 
-    <!-- Game & Scenario Cards -->
     @php
     $gameScenarios = [
         [

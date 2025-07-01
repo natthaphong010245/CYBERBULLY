@@ -1,4 +1,3 @@
-{{-- resources/views/assessment/mental_health/mental_health.blade.php --}}
 @extends('layouts.assessment.mental_health.index')
 
 @section('content')

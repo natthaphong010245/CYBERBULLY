@@ -1,5 +1,10 @@
 @extends('layouts.game.bullying.index')
 
+@php
+    $backUrl = '/category/game';
+    $mainUrl = '/main';
+@endphp
+
 @section('content')
     @if(isset($showIntroModal) && $showIntroModal)
         @include('game.intro.index', [

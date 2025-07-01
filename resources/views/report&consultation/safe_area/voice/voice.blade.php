@@ -1,7 +1,12 @@
-@extends('layouts.safe_area.voice.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/report_consultation/safe_area';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
-    <div class="content-container bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-10">
+    <div class="content-container bg-white w-full flex-grow rounded-t-[50px] px-6 pt-4 flex flex-col">
         <div class="text-center mb-5 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">

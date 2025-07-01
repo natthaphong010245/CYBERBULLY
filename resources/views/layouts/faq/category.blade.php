@@ -1,4 +1,3 @@
-{{-- layouts/faq/category.blade.php --}}
 <div class="text-center mb-4 mt-2 relative">
     <div class="flex items-center justify-center">
         <div class="flex-grow h-px bg-[#3E36AE] mr-4"></div>

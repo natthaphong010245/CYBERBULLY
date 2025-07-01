@@ -1,5 +1,9 @@
-{{-- resources/views/report&consultation/behavioral_report/report&consultation/behavioral_report.blade.php --}}
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/report_consultation';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
 <style>

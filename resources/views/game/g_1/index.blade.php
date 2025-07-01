@@ -1,5 +1,10 @@
 @extends('layouts.game.bullying.index')
 
+@php
+    $backUrl = '/category/game';
+    $mainUrl = '/main';
+@endphp
+
 @section('next-route', $nextRoute)
 
 @section('content')

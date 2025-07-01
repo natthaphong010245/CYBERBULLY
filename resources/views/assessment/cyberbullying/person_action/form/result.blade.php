@@ -1,12 +1,11 @@
-{{-- resources/views/assessment/cyberbullying/person_action/form/result.blade.php --}}
-@extends('layouts.assessment.cyberbullying.person_action.form.result')
+@extends('layouts.assessment.cyberbullying.result')
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8 pb-10">
         <div class="text-center mb-2 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
-                    <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">แบบคัดกรองพฤติกรรมการรังแก</h1>
-                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ประสบการณ์การกระทำ</p>
+                    <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">แบบคัดกรองพฤติกรรม</h1>
+                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ผลประเมินการกระทำ</p>
                 </div>
             </div>
         </div>
@@ -77,4 +76,5 @@
             </a>
         </div>
     </div>
+        @include('layouts.assessment.cyberbullying.person_action.script')
 @endsection

@@ -1,4 +1,9 @@
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/assessment';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
 <style>

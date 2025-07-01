@@ -1,4 +1,3 @@
-{{-- layouts/faq/accordion-item.blade.php --}}
 <div class="accordion-item mb-3">
     <button class="accordion-button w-full py-3 px-6 text-left rounded-xl text-lg font-medium flex justify-between items-center bg-[#929AFF] text-white">
         <span>{{ $item['question'] }}</span>

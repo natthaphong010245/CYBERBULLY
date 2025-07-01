@@ -1,4 +1,3 @@
-{{-- layouts/assessment/cyberbulling/overview/script.blade.php --}}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('questionnaire-form');
@@ -195,4 +194,90 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+
+
+ document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('result-carousel');
+            const dots = document.querySelectorAll('.dot');
+            let currentSlide = 0;
+            let startX = 0;
+            let currentX = 0;
+            let isDragging = false;
+
+            function updateDots() {
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-[#3E36AE]');
+                    } else {
+                        dot.classList.remove('bg-[#3E36AE]');
+                        dot.classList.add('bg-gray-300');
+                    }
+                });
+            }
+
+            function moveToSlide(slideIndex) {
+                currentSlide = slideIndex;
+                const translateX = -slideIndex * 100;
+                carousel.style.transform = `translateX(${translateX}%)`;
+                updateDots();
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    moveToSlide(index);
+                });
+            });
+
+            function handleStart(e) {
+                isDragging = true;
+                startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+                carousel.style.transition = 'none';
+            }
+
+            function handleMove(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                currentX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+                const deltaX = currentX - startX;
+                const currentTranslateX = -currentSlide * 100;
+                const newTranslateX = currentTranslateX + (deltaX / carousel.offsetWidth) * 100;
+                carousel.style.transform = `translateX(${newTranslateX}%)`;
+            }
+
+            function handleEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                carousel.style.transition = 'transform 0.3s ease-in-out';
+                
+                const deltaX = currentX - startX;
+                const threshold = carousel.offsetWidth * 0.1;
+
+                if (Math.abs(deltaX) > threshold) {
+                    if (deltaX > 0 && currentSlide > 0) {
+                        moveToSlide(currentSlide - 1);
+                    } else if (deltaX < 0 && currentSlide < 1) {
+                        moveToSlide(currentSlide + 1);
+                    } else {
+                        moveToSlide(currentSlide);
+                    }
+                } else {
+                    moveToSlide(currentSlide);
+                }
+            }
+
+            carousel.addEventListener('mousedown', handleStart);
+            document.addEventListener('mousemove', handleMove);
+            document.addEventListener('mouseup', handleEnd);
+
+            carousel.addEventListener('touchstart', handleStart, { passive: false });
+            carousel.addEventListener('touchmove', handleMove, { passive: false });
+            carousel.addEventListener('touchend', handleEnd);
+
+            carousel.addEventListener('dragstart', e => e.preventDefault());
+
+            updateDots();
+        });
 </script>

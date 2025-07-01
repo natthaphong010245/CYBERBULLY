@@ -1,5 +1,4 @@
-{{-- resources/views/assessment/mental_health/form/result.blade.php --}}
-@extends('layouts.assessment.mental_health.form.result')
+@extends('layouts.assessment.result')
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8 pb-10">
         <div class="text-center mb-2 relative">
@@ -11,7 +10,6 @@
             </div>
         </div>
 
-        <!-- Swipeable Container -->
         <div class="relative overflow-hidden rounded-lg mt-8 flex-grow">
             <div class="swiper-container flex transition-transform duration-300 ease-in-out" id="result-carousel">
                 
@@ -191,7 +189,6 @@
             </div>
         </div>
 
-        <!-- Dots Indicator -->
         <div class="flex justify-center mb-6">
             <div class="flex space-x-2">
                 <button class="dot w-3 h-3 rounded-full bg-[#3E36AE] transition-all duration-300" data-slide="0"></button>
@@ -202,7 +199,6 @@
 
 
 
-        <!-- Fixed Bottom Button -->
         <div class="border-b border-gray-300"></div>
 
         <div class="flex justify-center mt-6">
@@ -221,7 +217,6 @@
             let currentX = 0;
             let isDragging = false;
 
-            // Update active dot
             function updateDots() {
                 dots.forEach((dot, index) => {
                     if (index === currentSlide) {
@@ -234,7 +229,6 @@
                 });
             }
 
-            // Move to specific slide
             function moveToSlide(slideIndex) {
                 currentSlide = slideIndex;
                 const translateX = -slideIndex * 100;
@@ -242,14 +236,12 @@
                 updateDots();
             }
 
-            // Dot click handlers
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
                     moveToSlide(index);
                 });
             });
 
-            // Touch/Mouse events for swiping
             function handleStart(e) {
                 isDragging = true;
                 startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
@@ -272,39 +264,31 @@
                 carousel.style.transition = 'transform 0.3s ease-in-out';
                 
                 const deltaX = currentX - startX;
-                const threshold = carousel.offsetWidth * 0.1; // 10% threshold
+                const threshold = carousel.offsetWidth * 0.1;
 
                 if (Math.abs(deltaX) > threshold) {
                     if (deltaX > 0 && currentSlide > 0) {
-                        // Swipe right - go to previous slide
                         moveToSlide(currentSlide - 1);
                     } else if (deltaX < 0 && currentSlide < 2) {
-                        // Swipe left - go to next slide
                         moveToSlide(currentSlide + 1);
                     } else {
-                        // Not enough movement, return to current slide
                         moveToSlide(currentSlide);
                     }
                 } else {
-                    // Not enough movement, return to current slide
                     moveToSlide(currentSlide);
                 }
             }
 
-            // Mouse events
             carousel.addEventListener('mousedown', handleStart);
             document.addEventListener('mousemove', handleMove);
             document.addEventListener('mouseup', handleEnd);
 
-            // Touch events
             carousel.addEventListener('touchstart', handleStart, { passive: false });
             carousel.addEventListener('touchmove', handleMove, { passive: false });
             carousel.addEventListener('touchend', handleEnd);
 
-            // Prevent default drag behavior
             carousel.addEventListener('dragstart', e => e.preventDefault());
 
-            // Initialize
             updateDots();
         });
     </script>

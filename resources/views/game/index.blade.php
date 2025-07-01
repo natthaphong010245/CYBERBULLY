@@ -1,4 +1,10 @@
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/main/game';
+    $mainUrl = '/main';
+@endphp
+
 
 @section('content')
 <style>
@@ -62,18 +68,16 @@
     }
 </style>
 
-<div class="container mx-auto px-4 py-8">
-    <!-- Header -->
-    <div class="text-center mb-16">
+<div class="container mx-auto px-4 py-2">
+    <div class="text-center mb-14">
         <div class="flex items-center justify-center">
             <div class="relative">
                 <h1 class="text-4xl font-bold text-[var(--primary-color)] tracking-[0.2em] mb-2">GAME</h1>
-                <p class="text-base text-[var(--primary-color)] absolute -bottom-6 right-0">หมวดหมู่</p>
+                <p class="text-base text-[var(--primary-color)] absolute -bottom-4 right-0">หมวดหมู่</p>
             </div>
         </div>
     </div>
 
-    <!-- Game Grid -->
     <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto px-2">
         @php
         $games = [
@@ -116,7 +120,6 @@
         }, 150);
     }
 
-    // Keyboard navigation
     document.addEventListener('keydown', function(e) {
         const buttons = [...document.querySelectorAll('.game-button')];
         const current = document.activeElement;

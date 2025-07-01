@@ -1,4 +1,3 @@
-{{-- layouts/assessment/cyberbulling/victim/script.blade.php --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('questionnaire-form');

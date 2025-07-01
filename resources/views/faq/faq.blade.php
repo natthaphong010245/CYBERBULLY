@@ -1,5 +1,9 @@
-{{-- views/faq/faq.blade.php --}}
-@extends('layouts.faq.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/main';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8">

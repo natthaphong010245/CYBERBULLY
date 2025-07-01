@@ -1,4 +1,9 @@
-@extends('layouts.main_category.index')
+@extends('layouts.main_category')
+
+@php
+    $backUrl = '/report_consultation/request_consultation';
+    $mainUrl = '/main';
+@endphp
 
 @section('content')
     <div class="card-container space-y-4 px-5 pb-6">
