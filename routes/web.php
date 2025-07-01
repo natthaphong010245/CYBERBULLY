@@ -82,20 +82,34 @@ Route::prefix('assessment/mental_health')->group(function () {
     Route::get('result', [MentalHealthController::class, 'showResults'])->name('mental_health/result');
 });
 
-// Report & Consultation Routes
-$reportRoutes = [
-    '/report_consultation' => ['view' => 'report&consultation/report&consultation', 'name' => 'report&consultation'],
-    '/report_consultation/request_consultation' => ['view' => 'report&consultation/request_consultation/request_consultation', 'name' => 'request_consultation'],
-    '/report_consultation/behavioral_report/result' => ['view' => 'report&consultation/behavioral_report/result', 'name' => 'result_report'],
-    '/report_consultation/request_consultation/teacher' => ['view' => 'report&consultation/request_consultation/teacher/teacher', 'name' => 'teacher_report'],
-    '/report_consultation/request_consultation/province' => ['view' => 'report&consultation/request_consultation/province/province', 'name' => 'province_report'],
-    '/report_consultation/request_consultation/country' => ['view' => 'report&consultation/request_consultation/country/country', 'name' => 'country_report'],
-    '/report_consultation/request_consultation/app_center' => ['view' => 'report&consultation/request_consultation/app_center/app_center', 'name' => 'app_center_report'],
-];
+// Report & Consultation Routes (handle & character in view names)
+Route::get('/report_consultation', function () {
+    return view('report&consultation.report&consultation');
+})->name('report&consultation');
 
-foreach ($reportRoutes as $uri => $config) {
-    Route::get($uri, fn() => view($config['view']))->name($config['name']);
-}
+Route::get('/report_consultation/request_consultation', function () {
+    return view('report&consultation.request_consultation.request_consultation');
+})->name('request_consultation');
+
+Route::get('/report_consultation/behavioral_report/result', function () {
+    return view('report&consultation.behavioral_report.result');
+})->name('result_report');
+
+Route::get('/report_consultation/request_consultation/teacher', function () {
+    return view('report&consultation.request_consultation.teacher.teacher');
+})->name('teacher_report');
+
+Route::get('/report_consultation/request_consultation/province', function () {
+    return view('report&consultation.request_consultation.province.province');
+})->name('province_report');
+
+Route::get('/report_consultation/request_consultation/country', function () {
+    return view('report&consultation.request_consultation.country.country');
+})->name('country_report');
+
+Route::get('/report_consultation/request_consultation/app_center', function () {
+    return view('report&consultation.request_consultation.app_center.app_center');
+})->name('app_center_report');
 
 // Safe Area Routes
 Route::prefix('report_consultation/safe_area')->group(function () {

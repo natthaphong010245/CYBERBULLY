@@ -8,10 +8,11 @@
 @section('content')
 
 <div class="card-container space-y-10 px-10 md:px-0">
-    <div class="text-center mb-10 mt-2 relative">
+    <div class="text-center mb-12 mt-2 relative">
         <div class="flex items-center justify-center">
             <div class="relative">
                 <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">GAME & SCENARIO</h1>
+                <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">หมวดหมู่</p>
             </div>
         </div>
     </div>
