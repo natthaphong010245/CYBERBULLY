@@ -8,7 +8,7 @@
                     <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">เราพร้อมที่จะรับฟังคุณเสมอ</h1>
                 </div>
             </div>
-            <p id="recordText" class="text-base text-[#747474] mt-8">แตะเพื่อบันทึกข้อความเสียง</p>
+            <p id="recordText" class="text-base text-[#747474] mt-10">แตะเพื่อบันทึกข้อความเสียง</p>
         </div>
 
         <div class="flex flex-col items-center">
@@ -57,17 +57,17 @@
 
                 <button id="sendButton"
                     class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-6 hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 " fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 " fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" transform="rotate(90, 12, 12)"/>
+                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" transform="rotate(90, 12, 12)" />
                     </svg>
                 </button>
             </div>
 
-            <div class="text-[#3E36AE] text-base mt-10 w-full text-center">
-                <p>รายละเอียด................................................................</p>
-                <p>........................................................................</p>
+            <div class="text-[#3E36AE] text-base mt-12 w-full text-center pl-2 pr-2">
+                <p>น้องๆ ไม่ได้เดินทางผ่านเรื่องยากมาเพียงคนเดียว</p>
+                <p>บางทีการได้พูดออกมาจะทำให้รู้สึกเบาใจขึ้น</p>
             </div>
         </div>
     </div>

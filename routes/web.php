@@ -55,7 +55,7 @@ Route::get('/assessment/mental_health', function () {
     return view('assessment/mental_health/mental_health');
 })->name('mental_health');
 
-Route::get('/safe_area', function () {
+Route::get('/report_consultation/safe_area', function () {
     return view('report&consultation/safe_area/safe_area');
 })->name('safe_area');
 
@@ -211,10 +211,6 @@ Route::get('/report_consultation', function () {
 Route::get('/report_consultation/request_consultation', function () {
     return view('report&consultation/request_consultation/request_consultation');
 })->name('request_consultation');
-
-Route::get('/report_consultation/behavioral_report', function () {
-    return view('report&consultation/behavioral_report/behavioral_report');
-})->name('behavioral_report');
 
 Route::get('/report_consultation/behavioral_report/result', function () {
     return view('report&consultation/behavioral_report/result');
@@ -423,12 +419,10 @@ Route::get('/video_category4_select_language7', function () {
     return view('video_category4/video_category4_select_language7');
 })->name('video_category4_select_language7');
 
-// Replace the existing behavioral_report route (around line 265)
 Route::get('/report&consultation/behavioral_report', [BehavioralReportController::class, 'index'])
     ->name('behavioral-report.index');
 
-// เพิ่ม alias route เพื่อให้ใช้กับ route('behavioral_report') ได้
-Route::get('/report&consultation/behavioral_report', [BehavioralReportController::class, 'index'])
+Route::get('/report_consultation/behavioral_report', [BehavioralReportController::class, 'index'])
     ->name('behavioral_report');
 
 Route::post('/report&consultation/behavioral_report', [BehavioralReportController::class, 'store'])

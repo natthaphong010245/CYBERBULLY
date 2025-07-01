@@ -1,68 +1,80 @@
 @extends('layouts.main.index')
 
 @section('content')
-    <!-- Card section - Always in a single column -->
-    <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-10">
-        <!-- VDO Card -->
-        <a href="main_video" class="card-item gradient-border block mt-4">
-            <div class="card-text">
-                <div class="card-title">CYBER<br>BULLYING</div>
-                <div class="card-subtitle">VDO</div>
-            </div>
-            <div class="card-image">
-                <img src="images/video.jpg" alt="Video">
-            </div>
-        </a>
+<div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-10">
+    @php
+    $menuItems = [
+        [
+            'route' => 'main_video',
+            'title' => 'CYBERBULLYING',
+            'subtitle' => 'VIDEO',
+            'image' => 'video.jpg',
+            'alt' => 'Video',
+            'type' => 'normal'
+        ],
+        [
+            'route' => 'main_info',
+            'title' => 'CYBERBULLYING',
+            'subtitle' => 'INFOGRAPHIC',
+            'image' => 'info.jpg',
+            'alt' => 'Infographic',
+            'type' => 'normal'
+        ],
+        [
+            'route' => 'main_game',
+            'title' => 'CYBERBULLYING',
+            'subtitle' => 'GAME & SCENARIO',
+            'image' => 'game.jpg',
+            'alt' => 'Game',
+            'type' => 'normal'
+        ],
+        [
+            'route' => 'report&consultation',
+            'title' => 'CYBERBULLYING',
+            'subtitle' => 'รายงาน ขอคำปรึกษา',
+            'image' => 'เเบบสอบถาม.jpg',
+            'alt' => 'สุขภาพจิต',
+            'type' => 'normal'
+        ],
+        [
+            'route' => 'assessment',
+            'title' => 'CYBERBULLYING',
+            'subtitle' => 'แบบคัดกรอง',
+            'image' => 'เเบบคัดกรอง.jpg',
+            'alt' => 'แบบคัดกรอง',
+            'type' => 'normal'
+        ],
+        [
+            'route' => 'faq',
+            'title' => '',
+            'subtitle' => '',
+            'image' => 'FAQ.jpg',
+            'alt' => 'FAQ',
+            'type' => 'faq'
+        ]
+    ];
+    @endphp
 
-        <!-- Infographic Card -->
-        <a href="main_info" class="card-item gradient-border block mt-6">
-            <div class="card-text">
-                <div class="card-title">CYBER<br>BULLYING</div>
-                <div class="card-subtitle">Infographic</div>
+    @foreach($menuItems as $index => $item)
+    <a href="{{ $item['route'] === 'main_video' || $item['route'] === 'main_info' ? $item['route'] : route($item['route']) }}" 
+       class="relative block {{ $index === 0 ? 'mt-4' : 'mt-6' }} {{ $index === count($menuItems) - 1 ? 'mb-10' : '' }} rounded-2xl overflow-hidden shadow-lg border border-[#929AFF]">
+        
+        @if($item['type'] === 'faq')
+            <div class="relative bg-white rounded-2xl overflow-hidden h-32 flex items-center justify-center">
+                <img src="images/{{ $item['image'] }}" alt="{{ $item['alt'] }}" class="w-full h-full object-cover rounded-xl">
             </div>
-            <div class="card-image">
-                <img src="images/info.jpg" alt="Infographic">
+        @else
+            <div class="relative bg-white rounded-2xl overflow-hidden h-32 flex items-center">
+                <div class="absolute inset-0 z-10 flex flex-col justify-center px-6">
+                    <div class="text-2xl font-bold text-[#3E36AE] mb-1">{{ $item['title'] }}</div>
+                    <div class="text-lg text-[#3E36AE] ml-3">{{ $item['subtitle'] }}</div>
+                </div>
+                <div class="absolute right-0 top-0 h-full w-40 flex items-center justify-center">
+                    <img src="images/{{ $item['image'] }}" alt="{{ $item['alt'] }}" class="w-full h-full object-cover {{ $index === 0 ? 'rounded-r-2xl' : 'rounded-r-xl' }}">
+                </div>
             </div>
-        </a>
-
-        <!-- Game Card -->
-        <a href="{{ route('main_game') }}" class="card-item gradient-border block mt-6">
-            <div class="card-text">
-                <div class="card-title">CYBER<br>BULLYING</div>
-                <div class="card-subtitle">Game & Scenario</div>
-            </div>
-            <div class="card-image">
-                <img src="images/game.jpg" alt="Game">
-            </div>
-        </a>
-
-        <!-- สุขภาพจิต Card -->
-        <a href="{{ route('report&consultation') }}" class="card-item gradient-border block mt-6">
-            <div class="card-text">
-                <div class="card-title">CYBER<br>BULLYING</div>
-                <div class="card-subtitle">รายงาน ขอคำปรึกษา</div>
-            </div>
-            <div class="card-image">
-                <img src="images/เเบบสอบถาม.jpg" alt="สุขภาพจิต">
-            </div>
-        </a>
-
-        <!-- แบบคัดกรอง Card -->
-        <a href="{{ route('assessment') }}" class="card-item gradient-border block mt-6">
-            <div class="card-text">
-                <div class="card-title">CYBER<br>BULLYING</div>
-                <div class="card-subtitle">แบบคัดกรอง</div>
-            </div>
-            <div class="card-image">
-                <img src="images/เเบบคัดกรอง.jpg" alt="แบบคัดกรอง">
-            </div>
-        </a>
-
-        <!-- FAQ Card -->
-        <a href="{{ route('faq') }}" class="card-item gradient-border card-faq block mt-6 mb-10">
-            <div class="card-image">
-                <img src="images/FAQ.jpg" alt="FAQ">
-            </div>
-        </a>
-    </div>
+        @endif
+    </a>
+    @endforeach
+</div>
 @endsection

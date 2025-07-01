@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-16">
-        <div class="text-center mb-2 relative">
+        <div class="text-center mb-4 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
                     <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">เราพร้อมที่จะรับฟังคุณเสมอ</h1>

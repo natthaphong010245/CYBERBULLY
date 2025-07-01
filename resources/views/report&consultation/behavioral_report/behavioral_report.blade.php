@@ -1,583 +1,599 @@
 {{-- resources/views/report&consultation/behavioral_report/report&consultation/behavioral_report.blade.php --}}
 @extends('layouts.main_category.index')
+
 @section('content')
-    <div class="card-container space-y-10 px-10 md:px-0">
-        <!-- Page Title -->
-        <div class="text-center mb-4 relative">
-            <div class="flex items-center justify-center">
-                <div class="relative">
-                    <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">รายงานพฤติกรรม</h1>
-                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">การรังแก</p>
-                </div>
+<style>
+    .leaflet-tile-container img { filter: hue-rotate(25deg) saturate(0.8) brightness(1.05); }
+    .leaflet-control-zoom { border: none !important; box-shadow: 0 1px 5px rgba(0,0,0,0.2) !important; }
+    .leaflet-control-zoom a { border-radius: 10px !important; color: #666 !important; background-color: white !important; }
+    .custom-marker { display: flex; align-items: center; justify-content: center; }
+    
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+        .mobile-select {
+            font-size: 16px; /* ป้องกันการ zoom บน iOS */
+            height: 44px; /* ความสูงที่เหมาะสมสำหรับการแตะ */
+        }
+        
+        .dropdown-container {
+            position: relative;
+        }
+        
+        .dropdown-list {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .dropdown-list.show {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .dropdown-item:hover,
+        .dropdown-item.selected {
+            background-color: #f3f4f6;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .select-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background: white;
+            cursor: pointer;
+            min-height: 44px;
+        }
+        
+        .select-display.disabled {
+            background-color: #f3f4f6;
+            cursor: not-allowed;
+        }
+        
+        .arrow-icon {
+            transition: transform 0.2s;
+        }
+        
+        .arrow-icon.rotate {
+            transform: rotate(180deg);
+        }
+    }
+</style>
+
+<div class="card-container space-y-6 px-4 md:px-10 mr-4 ml-4">
+    <!-- Page Title -->
+    <div class="text-center mb-6 relative">
+        <div class="flex items-center justify-center">
+            <div class="relative">
+                <h1 class="text-2xl md:text-3xl font-bold text-[#3E36AE] inline-block">รายงานพฤติกรรม</h1>
+                <p class="text-sm md:text-base text-[#3E36AE] absolute -bottom-6 right-0">การรังแก</p>
             </div>
-        </div>
-
-        <!-- Report Form -->
-        <form method="POST" action="{{ route('behavioral-report.store') }}" enctype="multipart/form-data">
-            @csrf
-            <!-- 1. Report To -->
-            <div class="mb-4">
-                <label for="report_to" class="block text-sm font-medium text-[#3E36AE] mb-1">ต้องการรายงานกับใคร</label>
-                <select id="report_to" name="report_to"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3E36AE]"
-                    required>
-                    <option value="" disabled selected>กรุณาเลือก</option>
-                    <option value="teacher">ครู</option>
-                    <option value="researcher">นักวิจัย</option>
-                </select>
-            </div>
-
-            <!-- 2. School -->
-            <div class="mb-4">
-                <label for="school" class="block text-sm font-medium text-[#3E36AE] mb-1">โรงเรียน</label>
-                <select id="school" name="school"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3E36AE]">
-                    <option value="" disabled selected>กรุณาเลือก</option>
-                    <option value="โรงเรียน1">โรงเรียน1</option>
-                    <option value="โรงเรียน2">โรงเรียน2</option>
-                    <option value="โรงเรียน3">โรงเรียน3</option>
-                    <option value="โรงเรียน4">โรงเรียน4</option>
-                </select>
-            </div>
-
-            <!-- 3. Message -->
-            <div class="mb-4">
-                <label for="message" class="block text-sm font-medium text-[#3E36AE] mb-1">ข้อความ</label>
-                <textarea id="message" name="message" rows="4"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3E36AE]"
-                    required></textarea>
-            </div>
-
-            <!-- 4. Voice Recording -->
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-[#3E36AE] mb-1">บันทึกเสียง</label>
-                <div class="flex items-center space-x-2">
-                    <button type="button" id="recordButton"
-                        class="w-12 h-12 bg-[#7F77E0] rounded-xl flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                        </svg>
-                    </button>
-                    <div id="audioPlayer" class="flex-1">
-                        <audio id="recordedAudio" controls class="w-full">
-                            <source src="" type="audio/mpeg">
-                        </audio>
-                    </div>
-                </div>
-                <input type="hidden" name="audio_recording" id="audio_recording">
-            </div>
-
-            <!-- 5. Photos -->
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-[#3E36AE] mb-1">รูปภาพ</label>
-                <div id="imagePreviewContainer" class="flex flex-wrap mb-2">
-                    <div id="imagePreview" class="flex flex-wrap">
-                        <!-- Preview images will be inserted here -->
-                    </div>
-                    <div id="uploadMoreContainer"
-                        class="flex flex-col items-center justify-center w-20 h-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        <span class="text-xs text-gray-500">อัพรูปเพิ่ม</span>
-                    </div>
-                </div>
-                <input type="file" id="photos" name="photos[]" multiple accept="image/*" class="hidden"
-                    onchange="previewImages(this)">
-            </div>
-
-            <!-- 6. Location -->
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-[#3E36AE] mb-1">ตำแหน่งที่ตั้ง</label>
-                <div id="mapContainer" class="w-full h-40 rounded-lg overflow-hidden relative">
-                    <!-- Map will be rendered here -->
-                    <div id="map" class="w-full h-full"></div>
-                    <!-- Map Loading Indicator -->
-                    <div id="mapLoading" class="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                        <svg class="animate-spin h-8 w-8 text-[#3E36AE]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-                <input type="hidden" name="latitude" id="latitude">
-                <input type="hidden" name="longitude" id="longitude">
-            </div>
-
-            <!-- Buttons -->
-            <div class="flex justify-center gap-8 mt-10 px-12">
-                <button type="button" onclick="window.history.back()"
-                    class="w-36 px-6 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3E36AE]">
-                    ยกเลิก
-                </button>
-                <button type="submit"
-                    class="w-36 px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#7F77E0] hover:bg-[#3E36AE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3E36AE]">
-                    ส่ง
-                </button>
-            </div>
-        </form>
-
-    </div>
-
-    <!-- Image Preview Modal -->
-    <div id="imagePreviewModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
-        <button id="closeImagePreviewModal" class="absolute top-4 right-4 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-        <div class="w-full h-full flex items-center justify-center p-4">
-            <img id="fullSizeImage" src="" alt="Full size image" class="max-w-full max-h-full object-contain">
         </div>
     </div>
 
-    <!-- Location Permission Modal -->
-    <div id="locationPermissionModal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white p-6 rounded-lg w-80 text-center">
-            <div class="flex justify-center mb-4">
-                <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <!-- Report Form -->
+    <form method="POST" action="{{ route('behavioral-report.store') }}" enctype="multipart/form-data">
+        @csrf
+        
+        <!-- Report To Field -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-[#3E36AE] mb-2">ต้องการรายงานกับใคร</label>
+            <div class="dropdown-container">
+                <div id="reportToDisplay" class="select-display">
+                    <span id="reportToText" class="text-gray-500">กรุณาเลือก</span>
+                    <svg class="arrow-icon w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>
                 </div>
-            </div>
-            <h3 class="text-lg font-medium text-gray-900">ตำแหน่งที่ตั้ง</h3>
-            <p class="mt-2 text-sm text-gray-500">โปรดอนุญาตให้เว็บไซต์เข้าถึงตำแหน่งของคุณ เพื่อระบุตำแหน่งที่ตั้งของคุณ
-            </p>
-            <div class="mt-4">
-                <button id="closeLocationPermissionModal"
-                    class="w-full bg-[#7F77E0] py-2 rounded-md text-white font-medium">
-                    ตกลง
-                </button>
+                <div id="reportToList" class="dropdown-list">
+                    <div class="dropdown-item" data-value="teacher">ครู</div>
+                    <div class="dropdown-item" data-value="researcher">นักวิจัย</div>
+                </div>
+                <input type="hidden" name="report_to" id="report_to" required>
             </div>
         </div>
-    </div>
 
-
-    <div id="customAlert" class="custom-alert-overlay"
-        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 9999; display: none;">
-        <div class="custom-alert-box"
-            style="background-color: white; border-radius: 10px; max-width: 300px; width: 85%; padding: 20px 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
-            <div class="custom-alert-icon"
-                style="width: 60px; height: 60px; border-radius: 50%; background-color: #4CAF50; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
-                    fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
+        <!-- School Field -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-[#3E36AE] mb-2">โรงเรียน</label>
+            <div class="dropdown-container">
+                <div id="schoolDisplay" class="select-display">
+                    <span id="schoolText" class="text-gray-500">กรุณาเลือก</span>
+                    <svg class="arrow-icon w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+                <div id="schoolList" class="dropdown-list">
+                    <div class="dropdown-item" data-value="โรงเรียน1">โรงเรียน1</div>
+                    <div class="dropdown-item" data-value="โรงเรียน2">โรงเรียน2</div>
+                    <div class="dropdown-item" data-value="โรงเรียน3">โรงเรียน3</div>
+                    <div class="dropdown-item" data-value="โรงเรียน4">โรงเรียน4</div>
+                </div>
+                <input type="hidden" name="school" id="school">
             </div>
-            <div id="alertMessage" class="custom-alert-message"
-                style="font-size: 16px; color: #333; margin-bottom: 20px;">รายงานพฤติกรรมของคุณถูกส่งเรียบร้อยแล้ว</div>
-            <button id="alertButton" class="custom-alert-button"
-                style="background-color: #7F77E0; color: white; border: none; border-radius: 5px; padding: 10px 0; width: 100%; cursor: pointer; font-weight: 500;">ตกลง</button>
         </div>
-    </div>
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <!-- Message Field -->
+        <div class="mb-6">
+            <label for="message" class="block text-sm font-medium text-[#3E36AE] mb-2">ข้อความ</label>
+            <textarea id="message" name="message" rows="4" required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3E36AE] resize-none text-base"
+                      style="font-size: 16px;"></textarea>
+        </div>
 
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    <script>
-        // Toggle school field based on report_to selection
-        const reportToSelect = document.getElementById('report_to');
-        const schoolSelect = document.getElementById('school');
-
-        reportToSelect.addEventListener('change', function() {
-            if (this.value === 'researcher') {
-                schoolSelect.disabled = true;
-                schoolSelect.value = '';
-                schoolSelect.classList.add('bg-gray-200');
-            } else {
-                schoolSelect.disabled = false;
-                schoolSelect.classList.remove('bg-gray-200');
-            }
-        });
-
-        // Voice recording functionality
-        const recordButton = document.getElementById('recordButton');
-        const audioPlayer = document.getElementById('audioPlayer');
-        const recordedAudio = document.getElementById('recordedAudio');
-
-        let mediaRecorder;
-        let audioChunks = [];
-        let isRecording = false;
-
-        // Toggle recording state
-        function toggleRecording() {
-            if (isRecording) {
-                stopRecording();
-                // Change button back to original state
-                recordButton.innerHTML = `
+        <!-- Voice Recording -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-[#3E36AE] mb-2">บันทึกเสียง</label>
+            <div class="flex items-center space-x-3">
+                <button type="button" id="recordButton" class="w-12 h-12 bg-[#7F77E0] rounded-xl flex items-center justify-center touch-manipulation">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                     </svg>
-                `;
-                recordButton.classList.remove('bg-white', 'border-gray-300');
-                recordButton.classList.add('bg-[#7F77E0]');
-            } else {
-                startRecording();
-                // Change button to white background with red square for stop
-                recordButton.innerHTML = `
-                    <div class="w-4 h-4 bg-red-600 rounded-sm"></div>
-                `;
-                recordButton.classList.remove('bg-[#7F77E0]');
-                recordButton.classList.add('bg-white', 'border', 'border-gray-300');
-            }
-            isRecording = !isRecording;
-        }
+                </button>
+                <div id="audioPlayer" class="flex-1">
+                    <audio id="recordedAudio" controls class="w-full h-10">
+                        <source src="" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+            <input type="hidden" name="audio_recording" id="audio_recording">
+        </div>
 
-        // Start recording
-        function startRecording() {
-            audioChunks = [];
+        <!-- Photos -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-[#3E36AE] mb-2">รูปภาพ</label>
+            <div id="imagePreviewContainer" class="flex flex-wrap gap-2 mb-3">
+                <div id="imagePreview" class="flex flex-wrap gap-2"></div>
+                <div id="uploadMoreContainer" class="flex flex-col items-center justify-center w-20 h-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer touch-manipulation">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span class="text-xs text-gray-500 mt-1">อัพรูปเพิ่ม</span>
+                </div>
+            </div>
+            <input type="file" id="photos" name="photos[]" multiple accept="image/*" class="hidden">
+        </div>
 
-            // Request microphone access
-            navigator.mediaDevices.getUserMedia({
-                    audio: true
-                })
-                .then(stream => {
-                    // Start recording
-                    mediaRecorder = new MediaRecorder(stream);
-                    mediaRecorder.start();
+        <!-- Location -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-[#3E36AE] mb-2">ตำแหน่งที่ตั้ง</label>
+            <div id="mapContainer" class="w-full h-48 rounded-lg overflow-hidden relative">
+                <div id="map" class="w-full h-full"></div>
+                <div id="mapLoading" class="absolute inset-0 bg-gray-100 flex flex-col items-center justify-center">
+                    <svg class="animate-spin h-8 w-8 text-[#3E36AE] mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p class="text-sm text-gray-600 text-center px-4">กำลังโหลดแผนที่...</p>
+                    <p class="text-xs text-gray-500 text-center px-4 mt-1">แตะบนแผนที่เพื่อระบุตำแหน่ง</p>
+                </div>
+                <div id="locationPrompt" class="absolute inset-0 bg-white bg-opacity-95 flex flex-col items-center justify-center hidden">
+                    <svg class="h-12 w-12 text-[#3E36AE] mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <p class="text-sm font-medium text-[#3E36AE] text-center px-4 mb-2">แตะบนแผนที่เพื่อระบุตำแหน่ง</p>
+                    <p class="text-xs text-gray-500 text-center px-4">จำเป็นต้องระบุตำแหน่งก่อนส่งรายงาน</p>
+                </div>
+            </div>
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+        </div>
 
-                    mediaRecorder.addEventListener('dataavailable', event => {
-                        audioChunks.push(event.data);
-                    });
+        <!-- Buttons -->
+        <div class="flex justify-center gap-4 mt-8 px-4">
+            <button type="button" onclick="window.history.back()" class="flex-1 max-w-36 px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3E36AE] touch-manipulation">
+                ยกเลิก
+            </button>
+            <button type="submit" class="flex-1 max-w-36 px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#7F77E0] hover:bg-[#3E36AE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3E36AE] touch-manipulation">
+                ส่ง
+            </button>
+        </div>
+    </form>
+</div>
 
-                    mediaRecorder.addEventListener('stop', () => {
-                        const audioBlob = new Blob(audioChunks, {
-                            type: 'audio/mp3'
-                        });
-                        const audioUrl = URL.createObjectURL(audioBlob);
-                        recordedAudio.src = audioUrl;
+<!-- Modals -->
+<div id="imagePreviewModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
+    <button id="closeImagePreviewModal" class="absolute top-4 right-4 text-white z-10 touch-manipulation">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+    <div class="w-full h-full flex items-center justify-center p-4">
+        <img id="fullSizeImage" src="" alt="Full size image" class="max-w-full max-h-full object-contain">
+    </div>
+</div>
 
-                        // Convert blob to base64 data URL for form submission
-                        const reader = new FileReader();
-                        reader.readAsDataURL(audioBlob);
-                        reader.onloadend = function() {
-                            document.getElementById('audio_recording').value = reader.result;
-                        };
-                    });
-                })
-                .catch(error => {
-                    console.error('Error accessing microphone:', error);
-                    alert('ไม่สามารถเข้าถึงไมโครโฟนได้ กรุณาตรวจสอบการอนุญาตการใช้ไมโครโฟน');
-                    isRecording = false;
-                    recordButton.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                        </svg>
-                    `;
-                    recordButton.classList.remove('bg-white', 'border-gray-300');
-                    recordButton.classList.add('bg-[#7F77E0]');
-                });
-        }
+<div id="customAlert" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+    <div class="bg-white rounded-lg max-w-sm w-4/5 p-5 text-center shadow-lg">
+        <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
+            <img src="/images/material/correct.png" alt="Success" class="w-24 h-24 rounded-full">
+        </div>
+        <div id="alertMessage" class="text-gray-800 mb-4">รายงานพฤติกรรมของคุณ ส่งเรียบร้อยแล้ว</div>
+        <button id="alertButton" class="bg-[#7F77E0] text-white border-0 rounded px-6 py-2 w-full cursor-pointer font-medium touch-manipulation">ตกลง</button>
+    </div>
+</div>
 
-        // Stop recording
-        function stopRecording() {
-            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-                mediaRecorder.stop();
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-                // Stop all audio tracks
-                mediaRecorder.stream.getTracks().forEach(track => track.stop());
-            }
-        }
-
-        // Event listeners
-        recordButton.addEventListener('click', toggleRecording);
-
-        // Image preview functionality
-        const uploadMoreContainer = document.getElementById('uploadMoreContainer');
-        const photosInput = document.getElementById('photos');
-        const imagePreviewModal = document.getElementById('imagePreviewModal');
-        const closeImagePreviewModal = document.getElementById('closeImagePreviewModal');
-        const fullSizeImage = document.getElementById('fullSizeImage');
-
-        uploadMoreContainer.addEventListener('click', function() {
-            photosInput.click();
-        });
-
-        function previewImages(input) {
-            const imagePreview = document.getElementById('imagePreview');
-            const uploadMoreContainer = document.getElementById('uploadMoreContainer');
-            const fileCount = input.files.length;
-
-            // Limit to 3 images
-            if (imagePreview.children.length + fileCount > 3) {
-                alert('คุณสามารถอัปโหลดได้สูงสุด 3 รูป');
-                input.value = '';
-                return;
-            }
-
-            for (let i = 0; i < fileCount; i++) {
-                const file = input.files[i];
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    const imgContainer = document.createElement('div');
-                    imgContainer.className = 'relative mr-2 mb-2';
-
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'w-20 h-20 object-cover rounded-lg cursor-pointer';
-
-                    // Open image in fullscreen modal when clicked
-                    img.onclick = function() {
-                        fullSizeImage.src = e.target.result;
-                        imagePreviewModal.classList.remove('hidden');
-
-                        // Hide everything except the image preview modal
-                        document.getElementById('mapContainer').style.display = 'none';
-                    };
-
-                    const removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.className =
-                        'absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-md z-20';
-                    removeBtn.innerHTML = '×';
-                    removeBtn.style.fontSize = '18px';
-                    removeBtn.style.fontWeight = 'bold';
-                    removeBtn.onclick = function(event) {
-                        event.stopPropagation();
-                        imagePreview.removeChild(imgContainer);
-
-                        // Show upload more button if less than 3 images
-                        if (imagePreview.children.length < 3) {
-                            uploadMoreContainer.classList.remove('hidden');
-                        }
-                    };
-
-                    imgContainer.appendChild(img);
-                    imgContainer.appendChild(removeBtn);
-                    imagePreview.appendChild(imgContainer);
-
-                    // Hide upload more button if 3 images are reached
-                    if (imagePreview.children.length >= 3) {
-                        uploadMoreContainer.classList.add('hidden');
-                    }
-                };
-
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Close image preview modal
-        closeImagePreviewModal.addEventListener('click', function() {
-            imagePreviewModal.classList.add('hidden');
-            // Show map container again
-            document.getElementById('mapContainer').style.display = 'block';
-        });
-
-        // OpenStreetMap Implementation with Leaflet
-        document.addEventListener('DOMContentLoaded', function() {
-            initMap();
-        });
-
-        let map, marker;
-
-        function initMap() {
-            const mapLoading = document.getElementById('mapLoading');
-            const locationPermissionModal = document.getElementById('locationPermissionModal');
-            const closeLocationPermissionModal = document.getElementById('closeLocationPermissionModal');
-
-            // Default location (Thailand)
-            const defaultLocation = [19.9071, 99.8308];  // [latitude, longitude]
-
-            
-            try {
-                // Initialize the map with default location
-                map = L.map('map').setView(defaultLocation, 15);
-
-                // Add OpenStreetMap tiles with green style similar to Google Maps
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                    maxZoom: 19
-                }).addTo(map);
-
-                // Add custom CSS to make the map look more like Google Maps
-                document.head.insertAdjacentHTML('beforeend', `
-            <style>
-                .leaflet-tile-container img {
-                    filter: hue-rotate(25deg) saturate(0.8) brightness(1.05);
-                }
-                .leaflet-control-zoom {
-                    border: none !important;
-                    box-shadow: 0 1px 5px rgba(0,0,0,0.2) !important;
-                }
-                .leaflet-control-zoom a {
-                    border-radius: 10px !important;
-                    color: #666 !important;
-                    background-color: white !important;
-                }
-                .custom-marker {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-            </style>
-        `);
-
-                // Create a custom marker icon (red circle like Google Maps)
-                const redMarkerIcon = L.divIcon({
-                    className: 'custom-marker',
-                    html: '<div style="background-color: #ea4335; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>',
-                    iconSize: [24, 24],
-                    iconAnchor: [12, 12]
-                });
-
-                // Add marker at default location
-                marker = L.marker(defaultLocation, {
-                    icon: redMarkerIcon
-                }).addTo(map);
-
-                // หาตำแหน่งโค้ดนี้ในฟังก์ชัน initMap()
-                if (navigator.geolocation) {
-                    // Show permission modal instead of automatically requesting
-                    locationPermissionModal.classList.remove('hidden');
-
-                    // เพิ่มบรรทัดนี้เพื่อซ่อนแผนที่
-                    document.getElementById('map').style.visibility = 'hidden';
-
-                    // Set default coordinates for now
-                    document.getElementById('latitude').value = defaultLocation[0];
-                    document.getElementById('longitude').value = defaultLocation[1];
-                }
-
-                // Show position when map is clicked
-                map.on('click', function(e) {
-                    const clickedLocation = [e.latlng.lat, e.latlng.lng];
-
-                    // Update marker position
-                    marker.setLatLng(clickedLocation);
-
-                    // Store coordinates in form
-                    document.getElementById('latitude').value = clickedLocation[0];
-                    document.getElementById('longitude').value = clickedLocation[1];
-                });
-
-                // หา event listener ของปุ่มตกลง
-                closeLocationPermissionModal.addEventListener('click', function() {
-                    locationPermissionModal.classList.add('hidden');
-
-                    // เพิ่มบรรทัดนี้เพื่อแสดงแผนที่กลับมา
-                    document.getElementById('map').style.visibility = 'visible';
-
-                    // Show loading again
-                    if (mapLoading) mapLoading.style.display = 'flex';
-
-                    // Request location
-                    navigator.geolocation.getCurrentPosition(
-                        function(position) {
-                            const userLocation = [
-                                position.coords.latitude,
-                                position.coords.longitude
-                            ];
-
-                            // Update map center and marker position
-                            map.setView(userLocation, 15);
-                            marker.setLatLng(userLocation);
-
-                            // Store coordinates in form
-                            document.getElementById('latitude').value = userLocation[0];
-                            document.getElementById('longitude').value = userLocation[1];
-
-                            // Hide loading
-                            if (mapLoading) mapLoading.style.display = 'none';
-                        },
-                        function(error) {
-                            console.error("Geolocation error:", error);
-
-                            // Still show map with default location
-                            document.getElementById('latitude').value = defaultLocation[0];
-                            document.getElementById('longitude').value = defaultLocation[1];
-
-                            // Hide loading
-                            if (mapLoading) mapLoading.style.display = 'none';
-                        }, {
-                            enableHighAccuracy: true,
-                            timeout: 5000,
-                            maximumAge: 0
-                        }
-                    );
-                });
-
-            } catch (error) {
-                console.error("Error initializing map:", error);
-                if (mapLoading) mapLoading.style.display = 'none';
-                document.getElementById('map').innerHTML =
-                    '<div class="w-full h-full flex flex-col items-center justify-center bg-gray-200 rounded-lg">' +
-                    '<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">' +
-                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />' +
-                    '</svg>' +
-                    '<p class="text-sm text-gray-600 text-center px-4">ไม่สามารถโหลดแผนที่ได้ กรุณาลองใหม่อีกครั้งในภายหลัง</p>' +
-                    '</div>';
-            }
-        }
-
-        
-    </script>
-
-
-    <script>
-        // เพิ่มโค้ดนี้ในส่วนของ script block ท้ายสุด
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-    // ตรวจสอบว่ามีข้อความแจ้งเตือนความสำเร็จหรือไม่
-    @if (session('success'))
-        // แสดงป๊อปอัพ
-        showCustomAlert("{{ session('success') }}");
-    @endif
+    // Initialize all components
+    initCustomSelects();
+    initFormValidation();
+    initVoiceRecording();
+    initImagePreview();
+    initMap();
+    initSuccessAlert();
+});
 
-    // เพิ่ม event listener สำหรับปุ่มตกลง
-    document.getElementById('alertButton').addEventListener('click', function() {
-        document.getElementById('customAlert').style.display = 'none';
-        window.location.href = "{{ route('result_report') }}";
-    });
+// Custom mobile-friendly select dropdowns
+function initCustomSelects() {
+    const reportToDisplay = document.getElementById('reportToDisplay');
+    const reportToList = document.getElementById('reportToList');
+    const reportToText = document.getElementById('reportToText');
+    const reportToInput = document.getElementById('report_to');
     
-    // ตรวจสอบพิกัดเมื่อกดส่งฟอร์ม
+    const schoolDisplay = document.getElementById('schoolDisplay');
+    const schoolList = document.getElementById('schoolList');
+    const schoolText = document.getElementById('schoolText');
+    const schoolInput = document.getElementById('school');
+
+    // Report To dropdown
+    reportToDisplay.addEventListener('click', function() {
+        if (!this.classList.contains('disabled')) {
+            toggleDropdown(reportToList, this.querySelector('.arrow-icon'));
+            closeDropdown(schoolList, schoolDisplay.querySelector('.arrow-icon'));
+        }
+    });
+
+    reportToList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('dropdown-item')) {
+            const value = e.target.getAttribute('data-value');
+            const text = e.target.textContent;
+            
+            reportToInput.value = value;
+            reportToText.textContent = text;
+            reportToText.classList.remove('text-gray-500');
+            reportToText.classList.add('text-gray-900');
+            
+            closeDropdown(reportToList, reportToDisplay.querySelector('.arrow-icon'));
+            
+            // Handle school field based on selection
+            if (value === 'researcher') {
+                schoolDisplay.classList.add('disabled');
+                schoolInput.value = '';
+                schoolText.textContent = 'กรุณาเลือก';
+                schoolText.classList.remove('text-gray-900');
+                schoolText.classList.add('text-gray-500');
+            } else {
+                schoolDisplay.classList.remove('disabled');
+            }
+        }
+    });
+
+    // School dropdown
+    schoolDisplay.addEventListener('click', function() {
+        if (!this.classList.contains('disabled')) {
+            toggleDropdown(schoolList, this.querySelector('.arrow-icon'));
+            closeDropdown(reportToList, reportToDisplay.querySelector('.arrow-icon'));
+        }
+    });
+
+    schoolList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('dropdown-item')) {
+            const value = e.target.getAttribute('data-value');
+            const text = e.target.textContent;
+            
+            schoolInput.value = value;
+            schoolText.textContent = text;
+            schoolText.classList.remove('text-gray-500');
+            schoolText.classList.add('text-gray-900');
+            
+            closeDropdown(schoolList, schoolDisplay.querySelector('.arrow-icon'));
+        }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!reportToDisplay.contains(e.target) && !reportToList.contains(e.target)) {
+            closeDropdown(reportToList, reportToDisplay.querySelector('.arrow-icon'));
+        }
+        if (!schoolDisplay.contains(e.target) && !schoolList.contains(e.target)) {
+            closeDropdown(schoolList, schoolDisplay.querySelector('.arrow-icon'));
+        }
+    });
+
+    function toggleDropdown(list, arrow) {
+        list.classList.toggle('show');
+        arrow.classList.toggle('rotate');
+    }
+
+    function closeDropdown(list, arrow) {
+        list.classList.remove('show');
+        arrow.classList.remove('rotate');
+    }
+}
+
+// Form validation and behavior
+function initFormValidation() {
+    // Form submission validation
     document.querySelector('form').addEventListener('submit', function(event) {
-        // ดึงค่าพิกัด
         const latitude = document.getElementById('latitude').value;
         const longitude = document.getElementById('longitude').value;
         
-        // ตรวจสอบว่าพิกัดเป็น [0,0] หรือไม่
-        if (latitude == 19.9071 && longitude == 99.8308) {
-            // ยกเลิกการส่งฟอร์ม
+        if (!latitude || !longitude) {
             event.preventDefault();
             
-            // แสดง alert แจ้งเตือน
-            alert('กรุณาระบุตำแหน่งที่ตั้งก่อนส่งแบบฟอร์ม');
+            // Show location prompt
+            const locationPrompt = document.getElementById('locationPrompt');
+            locationPrompt.classList.remove('hidden');
             
-            // เลื่อนไปที่แผนที่
-            document.getElementById('mapContainer').scrollIntoView({ behavior: 'smooth' });
-            
-            // เน้นกรอบแผนที่เป็นสีแดง
+            // Scroll to map
             const mapContainer = document.getElementById('mapContainer');
+            mapContainer.scrollIntoView({ behavior: 'smooth' });
             mapContainer.classList.add('ring', 'ring-red-500', 'ring-2');
             
-            // ลบกรอบสีแดงหลังจาก 3 วินาที
-            setTimeout(function() {
+            // Hide prompt and remove ring after 3 seconds
+            setTimeout(() => {
+                locationPrompt.classList.add('hidden');
                 mapContainer.classList.remove('ring', 'ring-red-500', 'ring-2');
             }, 3000);
         }
     });
-});
-
-function showCustomAlert(message) {
-    document.getElementById('alertMessage').textContent = message;
-    document.getElementById('customAlert').style.display = 'flex';
 }
-    </script>
+
+// Voice recording functionality
+function initVoiceRecording() {
+    const recordButton = document.getElementById('recordButton');
+    const recordedAudio = document.getElementById('recordedAudio');
+    let mediaRecorder, audioChunks = [], isRecording = false;
+
+    const micIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+    </svg>`;
+    const stopIcon = `<div class="w-4 h-4 bg-red-600 rounded-sm"></div>`;
+
+    recordButton.addEventListener('click', function() {
+        if (isRecording) {
+            stopRecording();
+            updateRecordButton(micIcon, 'bg-[#7F77E0]', ['bg-white', 'border-gray-300']);
+        } else {
+            startRecording();
+            updateRecordButton(stopIcon, 'bg-white border border-gray-300', ['bg-[#7F77E0]']);
+        }
+        isRecording = !isRecording;
+    });
+
+    function updateRecordButton(html, addClasses, removeClasses) {
+        recordButton.innerHTML = html;
+        recordButton.classList.remove(...removeClasses);
+        recordButton.classList.add(...addClasses.split(' '));
+    }
+
+    function startRecording() {
+        audioChunks = [];
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.start();
+
+                mediaRecorder.addEventListener('dataavailable', event => audioChunks.push(event.data));
+                mediaRecorder.addEventListener('stop', () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+                    recordedAudio.src = URL.createObjectURL(audioBlob);
+
+                    const reader = new FileReader();
+                    reader.onloadend = () => document.getElementById('audio_recording').value = reader.result;
+                    reader.readAsDataURL(audioBlob);
+                });
+            })
+            .catch(error => {
+                console.error('Error accessing microphone:', error);
+                alert('ไม่สามารถเข้าถึงไมโครโฟนได้ กรุณาตรวจสอบการอนุญาตการใช้ไมโครโฟน');
+                isRecording = false;
+                updateRecordButton(micIcon, 'bg-[#7F77E0]', ['bg-white', 'border-gray-300']);
+            });
+    }
+
+    function stopRecording() {
+        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+            mediaRecorder.stop();
+            mediaRecorder.stream.getTracks().forEach(track => track.stop());
+        }
+    }
+}
+
+// Image preview functionality
+function initImagePreview() {
+    const uploadMoreContainer = document.getElementById('uploadMoreContainer');
+    const photosInput = document.getElementById('photos');
+    const imagePreview = document.getElementById('imagePreview');
+    const imagePreviewModal = document.getElementById('imagePreviewModal');
+    const fullSizeImage = document.getElementById('fullSizeImage');
+
+    uploadMoreContainer.addEventListener('click', () => photosInput.click());
+    document.getElementById('closeImagePreviewModal').addEventListener('click', () => {
+        imagePreviewModal.classList.add('hidden');
+        document.getElementById('mapContainer').style.display = 'block';
+    });
+
+    photosInput.addEventListener('change', function() {
+        const fileCount = this.files.length;
+        if (imagePreview.children.length + fileCount > 3) {
+            alert('คุณสามารถอัปโหลดได้สูงสุด 3 รูป');
+            this.value = '';
+            return;
+        }
+
+        Array.from(this.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'relative';
+                
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'w-20 h-20 object-cover rounded-lg cursor-pointer touch-manipulation';
+                img.onclick = () => {
+                    fullSizeImage.src = e.target.result;
+                    imagePreviewModal.classList.remove('hidden');
+                    document.getElementById('mapContainer').style.display = 'none';
+                };
+
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.className = 'absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-md z-20 touch-manipulation';
+                removeBtn.innerHTML = '×';
+                removeBtn.style.fontSize = '16px';
+                removeBtn.style.fontWeight = 'bold';
+                removeBtn.onclick = (event) => {
+                    event.stopPropagation();
+                    imagePreview.removeChild(imgContainer);
+                    if (imagePreview.children.length < 3) {
+                        uploadMoreContainer.classList.remove('hidden');
+                    }
+                };
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(removeBtn);
+                imagePreview.appendChild(imgContainer);
+
+                if (imagePreview.children.length >= 3) {
+                    uploadMoreContainer.classList.add('hidden');
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+}
+
+// Map functionality
+function initMap() {
+    const mapLoading = document.getElementById('mapLoading');
+    const locationPrompt = document.getElementById('locationPrompt');
+    let map, marker;
+    let locationSelected = false;
+
+    try {
+        // Initialize map without default location
+        map = L.map('map', {
+            zoomControl: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: true,
+            touchZoom: true,
+            dragging: true
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        const redMarkerIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background-color: #ea4335; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        // Try to get user's current location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const userLocation = [position.coords.latitude, position.coords.longitude];
+                    map.setView(userLocation, 15);
+                    
+                    // Add marker at current location
+                    marker = L.marker(userLocation, { icon: redMarkerIcon }).addTo(map);
+                    document.getElementById('latitude').value = userLocation[0];
+                    document.getElementById('longitude').value = userLocation[1];
+                    locationSelected = true;
+                    
+                    mapLoading.style.display = 'none';
+                },
+                function(error) {
+                    console.error("Geolocation error:", error);
+                    // Fall back to default location if geolocation fails
+                    const defaultLocation = [13.7563, 100.5018]; // Bangkok
+                    map.setView(defaultLocation, 10);
+                    mapLoading.style.display = 'none';
+                    locationPrompt.classList.remove('hidden');
+                },
+                { 
+                    enableHighAccuracy: true, 
+                    timeout: 10000, 
+                    maximumAge: 300000 
+                }
+            );
+        } else {
+            // Geolocation not supported
+            const defaultLocation = [13.7563, 100.5018]; // Bangkok
+            map.setView(defaultLocation, 10);
+            mapLoading.style.display = 'none';
+            locationPrompt.classList.remove('hidden');
+        }
+
+        // Handle map clicks
+        map.on('click', function(e) {
+            const clickedLocation = [e.latlng.lat, e.latlng.lng];
+            
+            // Remove existing marker
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            
+            // Add new marker
+            marker = L.marker(clickedLocation, { icon: redMarkerIcon }).addTo(map);
+            document.getElementById('latitude').value = clickedLocation[0];
+            document.getElementById('longitude').value = clickedLocation[1];
+            locationSelected = true;
+            
+            // Hide location prompt
+            locationPrompt.classList.add('hidden');
+        });
+
+    } catch (error) {
+        console.error("Error initializing map:", error);
+        if (mapLoading) mapLoading.style.display = 'none';
+        document.getElementById('map').innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-gray-200 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg><p class="text-sm text-gray-600 text-center px-4">ไม่สามารถโหลดแผนที่ได้ กรุณาลองใหม่อีกครั้งในภายหลัง</p></div>';
+    }
+}
+
+// Success alert functionality
+function initSuccessAlert() {
+    @if (session('success'))
+        document.getElementById('alertMessage').textContent = "{{ session('success') }}";
+        document.getElementById('customAlert').classList.remove('hidden');
+    @endif
+
+    document.getElementById('alertButton').addEventListener('click', function() {
+        document.getElementById('customAlert').classList.add('hidden');
+        window.location.href = "{{ route('result_report') }}";
+    });
+}
+</script>
 @endsection

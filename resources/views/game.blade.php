@@ -1,44 +1,53 @@
 @extends('layouts.main_category.index')
 
 @section('content')
-    <div class="card-container space-y-10 px-10 md:px-0">
-        <div class="text-center mb-10 mt-2 relative">
-            <div class="flex items-center justify-center">
-                <div class="relative">
-                    <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">GAME & SCENARIO</h1>
+<div class="card-container space-y-10 px-10 md:px-0">
+    <!-- Page Title -->
+    <div class="text-center mb-10 mt-2 relative">
+        <div class="flex items-center justify-center">
+            <div class="relative">
+                <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">GAME & SCENARIO</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game & Scenario Cards -->
+    @php
+    $gameScenarios = [
+        [
+            'route' => 'game',
+            'title' => 'GAME',
+            'image' => 'game.png',
+            'image_position' => 'left-10',
+            'text_position' => 'pr-6 pl-24',
+            'text_extra_class' => ''
+        ],
+        [
+            'route' => 'scenario.index',
+            'title' => 'SCENARIO',
+            'image' => 'scenario.png',
+            'image_position' => 'left-3',
+            'text_position' => 'pr-6 pl-24',
+            'text_extra_class' => 'ml-4'
+        ]
+    ];
+    @endphp
+
+    @foreach($gameScenarios as $index => $item)
+    <a href="{{ route($item['route']) }}" class="block relative {{ $index > 0 ? 'mt-16' : '' }}">
+        <div class="flex items-center h-24 rounded-2xl relative bg-[#929AFF] mb-12">
+            <div class="absolute {{ $item['image_position'] }} -top-8 z-10">
+                <img src="{{ asset('images/game/' . $item['image']) }}" 
+                     alt="{{ $item['title'] }} Icon" 
+                     class="w-auto h-28 object-contain">
+            </div>
+            <div class="flex-1 flex items-center justify-center {{ $item['text_position'] }}">
+                <div class="flex flex-col text-center">
+                    <div class="font-medium text-white text-2xl {{ $item['text_extra_class'] }}">{{ $item['title'] }}</div>
                 </div>
             </div>
         </div>
-
-        <a href="{{ route('game') }}" class="block relative">
-            <div class="flex items-center h-24 rounded-2xl relative"
-                style="background-color: rgba(146, 154, 255, 1)">
-                <div class="absolute left-10 -top-8 z-10">
-                    <img src="{{ asset('images/game/game.png') }}" alt="Teen Icon" class="w-auto h-28 object-contain">
-                </div>
-                <div class="flex-1 flex items-center justify-center pr-6 pl-24">
-                    <div class="flex flex-col text-center">
-                        <div class="font-medium text-white text-2xl">GAME</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <br>
-        <br>
-
-        <a href="{{ route('scenario.index') }}" class="block relative">
-            <div class="flex items-center h-24 rounded-2xl relative"
-                style="background-color: rgba(146, 154, 255, 1)">
-                <div class="absolute left-3 -top-8 z-10">
-                    <img src="{{ asset('images/game/scenario.png') }}" alt="Teen Icon" class="w-auto h-28 object-contain">
-                </div>
-                <div class="flex-1 flex items-center justify-center pr-6 pl-24">
-                    <div class="flex flex-col text-center">
-                        <div class="font-medium text-white text-2xl ml-4">SCENARIO</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
+    </a>
+    @endforeach
+</div>
 @endsection

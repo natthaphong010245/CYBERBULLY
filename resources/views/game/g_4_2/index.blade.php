@@ -1,23 +1,8 @@
+{{-- game/g_4_2/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @section('content')
-    @if(isset($showIntroModal) && $showIntroModal)
-    <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
-            <h3 class="text-2xl font-bold text-indigo-800">ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน</h3>
-            <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
-                class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
-            <h3 class="text-2xl font-bold text-indigo-800 mb-2">เกมที่ 4 ตอน 2</h3>
-            <p class="text-lg text-indigo-800 mb-2">จับคู่รูปภาพกับข้อความที่เกี่ยวกับการรังแกทางไซเบอร์</p>
-            <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความท้าทายกันเลย</p>
-            <button id="start-game-btn" class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors ">
-                เริ่ม
-            </button>
-        </div>
-    </div>
-    @endif
-
-    <div class="card-container space-y-6 px-6 md:px-0 {{ isset($showIntroModal) && $showIntroModal ? 'game-blur' : '' }}" id="game-content">
+    <div class="card-container space-y-6 px-6 md:px-0" id="game-content">
         <div class="text-center">
             <h2 class="text-xl font-bold text-indigo-800 ">จับคู่รูปภาพกับข้อความที่เกี่ยวกับการรังแกทางไซเบอร์ขั้นสูง</h2>
         </div>
@@ -138,13 +123,11 @@
         $defaultPairs = 5;
         $defaultMatches = ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'];
         $defaultNextRoute = route('game_5_1');
-        $defaultShowIntroModal = false;
     @endphp
     
     <script>
         window.gamePairs = @json($totalPairs ?? $defaultPairs);
         window.gameMatches = @json($correctMatches ?? $defaultMatches);
         window.gameNextRoute = @json($nextRoute ?? $defaultNextRoute);
-        window.gameHasIntroModal = @json($showIntroModal ?? $defaultShowIntroModal);
     </script>
 @endsection

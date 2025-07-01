@@ -1,81 +1,65 @@
 @extends('layouts.main_category.index')
 
 @section('content')
-    <div class="card-container space-y-10 px-10 md:px-0">
-        <!-- Page Title -->
-        <div class="text-center mb-4 relative">
-            <div class="flex items-center justify-center">
-                <div class="relative">
-                    <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">ขอรับการปรึกษา</h1>
-                    <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ประเภท</p>
-                </div>
+<div class="card-container space-y-10 px-10 md:px-0">
+    <div class="text-center mb-4 relative">
+        <div class="flex items-center justify-center">
+            <div class="relative">
+                <h1 class="text-3xl font-bold text-[#3E36AE] inline-block">ขอรับการปรึกษา</h1>
+                <p class="text-base text-[#3E36AE] absolute -bottom-6 right-0">ประเภท</p>
             </div>
         </div>
-
-        <!-- Cards -->
-        <a href="{{ route('cyberbullying') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
-                style="background-color: rgba(146, 154, 255, 1)">
-                <div class="flex flex-col">
-                    <div class="font-median text-white text-lg">คำปรึกษาจาก</div>
-                    <div class="font-median text-white text-2xl">นักวิจัย</div>
-                </div>
-                <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/report_consultation/researcher.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
-                </div>
-            </div>
-        </a>
-        
-        <a href="{{ route('teacher_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
-                style="background-color: rgba(146, 154, 255, 1)">
-                <div class="flex flex-col">
-                    <div class="font-median text-white text-lg">คำปรึกษาจาก</div>
-                    <div class="font-median text-white text-2xl">คุณครู</div>
-                </div>
-                <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/report_consultation/teacher.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
-                </div>
-            </div>
-        </a>
-
-        <a href="{{ route('province_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
-                style="background-color: rgba(146, 154, 255, 1)">
-                <div class="flex flex-col">
-                    <div class="font-median text-white text-lg">คำปรึกษาจากหน่วยงาน</div>
-                    <div class="font-median text-white text-2xl">จังหวัดเชียงราย</div>
-                </div>
-                <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/report_consultation/province.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
-                </div>
-            </div>
-        </a>
-
-        <a href="{{ route('country_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
-                style="background-color: rgba(146, 154, 255, 1)">
-                <div class="flex flex-col">
-                    <div class="font-median text-white text-lg">คำปรึกษาจากหน่วยงาน</div>
-                    <div class="font-median text-white text-2xl">ประเทศไทย</div>
-                </div>
-                <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/report_consultation/country.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
-                </div>
-            </div>
-        </a>
-
-        <a href="{{ route('app_center_report') }}" class="block relative">
-            <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px]"
-                style="background-color: rgba(146, 154, 255, 1)">
-                <div class="flex flex-col">
-                    <div class="font-median text-white text-lg">APPLICATION</div>
-                    <div class="font-median text-white text-2xl">พัฒนาจากศูนย์</div>
-                </div>
-                <div class="flex items-center justify-center">
-                    <img src="{{ asset('images/report_consultation/application.png') }}" alt="Teen Icon" class="w-20 h-20 object-contain">
-                </div>
-            </div>
-        </a>
     </div>
+
+    @php
+    $consultationTypes = [
+        [
+            'route' => 'cyberbullying',
+            'title_top' => 'คำปรึกษาจาก',
+            'title_bottom' => 'นักวิจัย',
+            'image' => 'researcher.png'
+        ],
+        [
+            'route' => 'teacher_report',
+            'title_top' => 'คำปรึกษาจาก',
+            'title_bottom' => 'คุณครู',
+            'image' => 'teacher.png'
+        ],
+        [
+            'route' => 'province_report',
+            'title_top' => 'คำปรึกษาจากหน่วยงาน',
+            'title_bottom' => 'จังหวัดเชียงราย',
+            'image' => 'province.png'
+        ],
+        [
+            'route' => 'country_report',
+            'title_top' => 'คำปรึกษาจากหน่วยงาน',
+            'title_bottom' => 'ประเทศไทย',
+            'image' => 'country.png'
+        ],
+        [
+            'route' => 'app_center_report',
+            'title_top' => 'APPLICATION',
+            'title_bottom' => 'พัฒนาจากศูนย์',
+            'image' => 'application.png'
+        ]
+    ];
+    @endphp
+
+    @foreach($consultationTypes as $type)
+    <a href="{{ route($type['route']) }}" class="block relative">
+        <div class="py-3 px-6 flex items-center justify-between h-24 rounded-[10px] bg-[#929AFF]">
+            <div class="flex flex-col">
+                <div class="font-median text-white text-lg">{{ $type['title_top'] }}</div>
+                <div class="font-median text-white text-2xl">{{ $type['title_bottom'] }}</div>
+            </div>
+            <div class="flex items-center justify-center">
+                <img src="{{ asset('images/report_consultation/' . $type['image']) }}" 
+                     alt="{{ $type['title_bottom'] }}" 
+                     class="w-20 h-20 object-contain">
+            </div>
+        </div>
+    </a>
+    @endforeach
+</div>
 @endsection

@@ -1,19 +1,12 @@
 @extends('layouts.game.dealing_bullying.index')
 
 @section('content')
-    <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
-            <h3 class="text-2xl font-bold text-indigo-800">การรับมือการกลั่นแกล้งบนโลกออนไลน์</h3>
-            <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
-                class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
-            <h3 class="text-2xl font-bold text-indigo-800 mb-2">เกมที่ 14</h3>
-            <p class="text-lg text-indigo-800 mb-4">การใช้อินเตอร์เน็ตอย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T</p>
-            <p class="text-indigo-800 text-xl mb-2 font-bold">เริ่มความก้าวหน้ากันเลย</p>
-            <button id="start-game-btn" class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors ">
-                เริ่ม
-            </button>
-        </div>
-    </div>
+    @include('game.intro.index', [
+        'title' => 'การรับมือการกลั่นแกล้งบนโลกออนไลน์',
+        'gameNumber' => '14',
+        'description' => 'การใช้อินเตอร์เน็ตอย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T',
+        'actionText' => 'เริ่มความก้าวหน้ากันเลย'
+    ])
 
     <div class="bg-white" id="game-content">
         <div class="card-container space-y-6 px-2 pb-0">
