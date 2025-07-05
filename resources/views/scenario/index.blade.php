@@ -16,4 +16,6 @@
         </div>
     </div>
     @include('layouts.scenario.selection')
+    @include('layouts.scenario.script.index')
 @endsection
+

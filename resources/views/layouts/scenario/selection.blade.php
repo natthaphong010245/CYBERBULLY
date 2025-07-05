@@ -87,8 +87,7 @@
         <img src="{{ asset('images/scenarios/scenario_' . $scenario['id'] . '_thumb.png') }}" 
              alt="สถานการณ์ที่ {{ $scenario['id'] }}" 
              class="w-full h-full object-cover">
-        
-
+    
       </div>
       
       <!-- Content Section -->
