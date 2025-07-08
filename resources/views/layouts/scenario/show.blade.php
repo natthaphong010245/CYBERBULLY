@@ -33,16 +33,22 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      display: none;
-      z-index: 9999;
+      display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .result-modal.show {
-      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
     }
 
     .result-content {
@@ -52,8 +58,21 @@
       max-width: 400px;
       width: 100%;
       text-align: center;
-      animation: modalSlideIn 0.4s ease-out;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      animation: modalFadeSlide 0.5s ease-out;
     }
+    @keyframes modalFadeSlide {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+}
+
+
 
     /* Completion Modal - เพิ่มจาก artifact แรก */
     .completion-modal {
@@ -135,6 +154,13 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
     }
+    button {
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
 
     .completion-button {
       background: linear-gradient(135deg, #8B7FE8 0%, #9B8BF5 100%);
@@ -181,19 +207,15 @@
 
     #intro-modal {
       opacity: 0;
-      transform: scale(0.95);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transform: translateY(20px) scale(0.96);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      will-change: opacity, transform;
     }
-
     #intro-modal.show {
       opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
+      transform: translateY(0) scale(1);
     }
+
 
     @keyframes modalSlideIn {
       from {
@@ -236,11 +258,14 @@
       animation: modalSlideIn 0.4s ease-out;
     }
   </style>
+
+
+
 <div class="content-section">
       <main class="bg-white rounded-top-section pt-8 pb-10 desktop-main flex-grow h-full">
         
         <!-- Intro Modal - แบบเรียบง่าย -->
-        <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div id="intro-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
             <div class="modal-content bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 text-center">
                 <!-- ชื่อสถานการณ์ -->
                 <h3 class="text-2xl font-bold text-indigo-800 mb-6">{{ $scenario['title'] }}</h3>
@@ -322,7 +347,7 @@
               </form>
 
             <!-- Result Modal Popup -->
-            <div id="resultModal" class="result-modal">
+            <div id="resultModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
               <div class="result-content">
                 <div id="resultImage" class="w-32 h-32 mx-auto mb-6">
                   <!-- รูปจะถูกใส่ที่นี่ -->
@@ -344,7 +369,7 @@
             </div>
 
             <!-- Completion Modal -->
-            <div id="completionModal" class="completion-modal">
+            <div id="completionModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
               <div class="completion-content">
                 <!-- Header -->
                 <div class="text-center p-8 pb-4">

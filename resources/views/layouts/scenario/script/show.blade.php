@@ -4,9 +4,12 @@
     const currentScenarioId = {{ $scenarioId }};
     
     // แสดง intro modal ทันทีที่โหลดหน้า
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(() => {
         showIntroModal();
+      }, 100); // หรือ 200ms ก็ได้
     });
+
 
    function showIntroModal() {
       const modal = document.getElementById('intro-modal');
