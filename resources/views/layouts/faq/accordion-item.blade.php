@@ -1,6 +1,6 @@
 <div class="faq-item overflow-hidden">
     <button
-        class="faq-question w-full py-4 px-6 text-left flex justify-between items-center bg-[#E1DEFF] transition-colors duration-200 focus:outline-none border-t-2 border-b-2 border-custom"
+        class="faq-question w-full py-3 px-6 text-left flex justify-between items-center bg-[#E1DEFF] transition-colors duration-200 focus:outline-none border-t-2 border-b-2 border-custom"
         onclick="toggleFaqItem(this)">
         <span class="text-indigo-800 font-medium text-lg pr-4">{{ $item['question'] }}</span>
         <div
@@ -20,7 +20,7 @@
     </button>
 
     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white">
-        <div class="p-6 text-indigo-800 leading-relaxed border-b-2 border-custom">
+        <div class="p-4 text-indigo-800 leading-relaxed border-b-2 border-custom">
             {!! $item['answer'] !!}
         </div>
     </div>

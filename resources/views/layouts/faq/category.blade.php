@@ -1,5 +1,5 @@
-<div class="category-section mb-8">
-    <div class="text-center mb-6 mt-2 relative">
+<div class="category-section mb-2">
+    <div class="text-center mb-4 mt-4 relative">
         <div class="flex items-center justify-center">
             <div class="flex-grow h-px bg-indigo-800 mr-4"></div>
             <div class="relative">
