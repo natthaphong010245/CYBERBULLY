@@ -1,7 +1,7 @@
 @extends('layouts.home.index')
 
 @section('content')
-<div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-16">
+<div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-12">
     <div class="text-center mb-6">
         <h1 class="text-[#3F359E] text-[24px] font-bold">
             สำนักวิชาวิทยาศาสตร์สุขภาพ

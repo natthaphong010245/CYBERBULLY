@@ -6,7 +6,7 @@
 @endphp
 
 @section('content')
-    <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8">
+    <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 flex flex-col">
         <div class="text-center mb-4">
             <h2 class="text-4xl font-bold text-indigo-800 pr-4 pl-4">FAQs</h2>
         </div>

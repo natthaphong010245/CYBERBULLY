@@ -137,7 +137,7 @@
     }
 
     .celebration-icon {
-      background: linear-gradient(135deg, #8B7FE8 0%, #9B8BF5 100%);
+      background: linear-gradient(135deg, #000000 0%, #9B8BF5 100%);
       color: white;
       width: 80px;
       height: 80px;

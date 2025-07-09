@@ -116,13 +116,13 @@
 
   .scenario-button:hover {
     transform: translateY(-2px);
-    border-color: #8B5CF6;
+    border-color: #929AFF;
     box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
   }
 
   .scenario-button:focus {
     outline: none;
-    border-color: #8B5CF6;
+    border-color: #929AFF;
     box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
   }
 
