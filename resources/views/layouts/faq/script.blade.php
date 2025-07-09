@@ -1,61 +1,34 @@
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const accordionButtons = document.querySelectorAll('.accordion-button');
-        
-        accordionButtons.forEach(button => {
-            const content = button.nextElementSibling;
-            const arrow = button.querySelector('svg');
-            const contentInner = content.querySelector('div');
+        function toggleFaqItem(button) {
+            const faqItem = button.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const iconPlus = button.querySelector('.icon-plus');
+            const iconMinus = button.querySelector('.icon-minus');
             
-            button.addEventListener('click', function() {
-                const isOpen = content.style.maxHeight;
-                
-                if (isOpen) {
-                    closeAccordion(content, button, arrow);
-                } else {
-                    openAccordion(content, button, arrow, contentInner);
-                }
-            });
-        });
-        
-        function closeAccordion(content, button, arrow) {
-            content.style.maxHeight = null;
-            content.style.borderLeft = '';
-            content.style.borderRight = '';
-            content.style.borderBottom = '';
+            const isCurrentlyOpen = answer.classList.contains('active');
             
-            resetButtonStyles(button);
-            updateArrow(arrow, 'down');
-        }
-        
-        function openAccordion(content, button, arrow, contentInner) {
-            content.style.maxHeight = contentInner.offsetHeight + "px";
-            
-            setActiveButtonStyles(button);
-            updateArrow(arrow, 'up');
-        }
-        
-        function resetButtonStyles(button) {
-            button.style.backgroundColor = '';
-            button.style.color = '';
-            button.style.border = '';
-            button.style.borderRadius = '';
-        }
-        
-        function setActiveButtonStyles(button) {
-            button.style.backgroundColor = 'white';
-            button.style.color = '#3E36AE';
-            button.style.border = '1px solid #3E36AE';
-            button.style.borderBottomLeftRadius = '0';
-            button.style.borderBottomRightRadius = '0';
-        }
-        
-        function updateArrow(arrow, direction) {
-            if (direction === 'down') {
-                arrow.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />';
+            if (isCurrentlyOpen) {
+                answer.classList.remove('active');
+                button.classList.remove('active');
+                iconPlus.classList.remove('hidden');
+                iconMinus.classList.add('hidden');
             } else {
-                arrow.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />';
+                answer.classList.add('active');
+                button.classList.add('active');
+                iconPlus.classList.add('hidden');
+                iconMinus.classList.remove('hidden');
             }
         }
-    });
-</script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const allAnswers = document.querySelectorAll('.faq-answer');
+            const allQuestions = document.querySelectorAll('.faq-question');
+            const allIconsPlus = document.querySelectorAll('.icon-plus');
+            const allIconsMinus = document.querySelectorAll('.icon-minus');
+            
+            allAnswers.forEach(answer => answer.classList.remove('active'));
+            allQuestions.forEach(question => question.classList.remove('active'));
+            allIconsPlus.forEach(icon => icon.classList.remove('hidden'));
+            allIconsMinus.forEach(icon => icon.classList.add('hidden'));
+        });
+    </script>

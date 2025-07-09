@@ -1,11 +1,27 @@
-<div class="accordion-item mb-3">
-    <button class="accordion-button w-full py-3 px-6 text-left rounded-xl text-lg font-medium flex justify-between items-center bg-[#929AFF] text-white">
-        <span>{{ $item['question'] }}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
+<div class="faq-item overflow-hidden">
+    <button
+        class="faq-question w-full py-4 px-6 text-left flex justify-between items-center bg-[#E1DEFF] transition-colors duration-200 focus:outline-none border-t-2 border-b-2 border-custom"
+        onclick="toggleFaqItem(this)">
+        <span class="text-indigo-800 font-medium text-lg pr-4">{{ $item['question'] }}</span>
+        <div
+            class="faq-icon w-8 h-8 bg-indigo-800 rounded-full flex items-center justify-center text-white flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon-plus">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" d="M5 12h14m-7-7v14" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                class="icon-minus hidden">
+                <path fill="none" stroke="currentColor" stroke-dasharray="16" stroke-dashoffset="16"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14">
+                    <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0" />
+                </path>
+            </svg>
+        </div>
     </button>
-    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-[#929AFF] rounded-b-xl border-0 border-blue-300 text-white">
-        <div class="p-4 break-words text-sm">{!! $item['answer'] !!}</div>
+
+    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white">
+        <div class="p-6 text-indigo-800 leading-relaxed border-b-2 border-custom">
+            {!! $item['answer'] !!}
+        </div>
     </div>
 </div>

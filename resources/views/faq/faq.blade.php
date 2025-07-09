@@ -6,7 +6,7 @@
 @endphp
 
 @section('content')
-    <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 flex flex-col">
+    <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-4 flex flex-col">
         <div class="text-center mb-4">
             <h2 class="text-4xl font-bold text-indigo-800 pr-4 pl-4">FAQs</h2>
         </div>
@@ -76,13 +76,13 @@
                                 '-เด็กที่ถูกรังแกจะเสี่ยงต่อที่จะเผชิญกับภาวะวิตกกังวล หวาดระแวง รู้สึกไม่ปลอดภัย รวมถึงสูญเสียความมั่นใจในตัวเอง <br>-นำไปสู่ภาวะซึมเศร้าและบางรายอาจจะทำร้ายตัวเอง/ฆ่าตัวตายจนจบชีวิตเลยก็มีครับเพราะทนความกดดันจากการถูกรังแกไม่ไหว',
                         ],
                         [
-                            'question' => '12. การ Cyberbullying ผิดกฎหมายหรือไม่?',
-                            'answer' => '......',
+                            'question' => 'การ Cyberbullying ผิดกฎหมายหรือไม่?',
+                            'answer' => 'การ Cyberbullying สามารถผิดกฎหมายได้ขึ้นอยู่กับลักษณะการกระทำ เช่น การข่มขู่คุกคาม การแพร่ภาพโดยไม่ได้รับอนุญาต การสร้างความเสียหายต่อชื่อเสียง ซึ่งอาจเข้าข่ายความผิดตามพระราชบัญญัติคอมพิวเตอร์ พ.ศ. 2560 หรือประมวลกฎหมายอาญา',
                         ],
                         [
                             'question' => 'บทบาทผู้ที่เกี่ยวข้องกับการรังแกกันทางไซเบอร์?',
                             'answer' =>
-                                '<div class="text-center font-bold text-lg">การรันแกทางไซเบอร์</div> <div class="ml-2 mr-2">1.ผู้รักแก (bully) <br>2.ผู้ถูกรังแก/เหยื่อ (Victim)</div> <div class="text-center font-bold text-lg mt-2">การรังแกแบบทั่วไป</div> <div class="ml-2 mr-2">3.ผู้เห็นเหตุการณ์ (Bystander)</div>',
+                                '<div class="text-center font-bold text-lg">การรังแกทางไซเบอร์</div> <div class="ml-2 mr-2">1.ผู้รังแก (bully) <br>2.ผู้ถูกรังแก/เหยื่อ (Victim)</div> <div class="text-center font-bold text-lg mt-2">การรังแกแบบทั่วไป</div> <div class="ml-2 mr-2">3.ผู้เห็นเหตุการณ์ (Bystander)</div>',
                         ],
                         [
                             'question' => 'สัญญานเตือนภัยของผู้ถูกกระทำ',
@@ -102,22 +102,22 @@
                         [
                             'question' => 'วิธีการใช้อินเตอร์เน็ตอย่างปลอดภัย',
                             'answer' =>
-                                '-ไม่ไม่บอกพาสเวิร์ดให้เพื่อนในกลุ่มเดียวกันได้รู้ <br>-ไม่ต่อ Wi-Fi สาธารณะเมื่อใช้งาน internet banking <br>-ไม่คลิกดาวโหลด link จาก SMS ที่บอกว่ามาจากธนาคาร <br>-เลือกไม่จำรหัสผ่านเมื่อใช้งานคอมพิวเตอร์ในโรงเรียน <br>-Log out ออกจากบัญชีออนไลน์ต่างๆ <br>-ปิดการแชร์ตำแหน่ง (check in) ว่านักเรียนทำอะไรอยู่ที่ไหน',
+                                '-ไม่บอกพาสเวิร์ดให้เพื่อนในกลุ่มเดียวกันได้รู้ <br>-ไม่ต่อ Wi-Fi สาธารณะเมื่อใช้งาน internet banking <br>-ไม่คลิกดาวโหลด link จาก SMS ที่บอกว่ามาจากธนาคาร <br>-เลือกไม่จำรหัสผ่านเมื่อใช้งานคอมพิวเตอร์ในโรงเรียน <br>-Log out ออกจากบัญชีออนไลน์ต่างๆ <br>-ปิดการแชร์ตำแหน่ง (check in) ว่านักเรียนทำอะไรอยู่ที่ไหน',
                         ],
                         [
                             'question' => 'เทคนิคการตั้งชื่อ password ที่ปลอดภัย',
                             'answer' =>
-                                '-AwesomeWonderland985!  (ใส่เครื่องหมายถูก) <br>-Thapa2532 (ใส่เครื่องหมายผิด)ชื่อและปีพ.ศ.เกิด <br>-05012532 (ใส่เครื่องหมายผิด)วันเดือนปีเกิด',
+                                '-AwesomeWonderland985!  <span class="text-green-600 font-bold">(✓ ปลอดภัย)</span> <br>-Thapa2532 <span class="text-red-600 font-bold">(✗ ไม่ปลอดภัย)</span> ชื่อและปีพ.ศ.เกิด <br>-05012532 <span class="text-red-600 font-bold">(✗ ไม่ปลอดภัย)</span> วันเดือนปีเกิด',
                         ],
                         [
                             'question' => 'วิธีการรับมือกับ Cyberbullying',
                             'answer' =>
-                                '1.Stop หยุดการกระทำทุกอย่าง: นิ่งเฉยไม่ตอบโต้ เพื่อไม่ให้เกิดการกระทำซ้ำ หรือเพิ่มความรุนแรง ใช้ในในกรณีที่เป็นเหตุการณ์ทะเลาะเบาะแว้งในขั้นเริ่มต้นแล้วค่อยไปปรับความเข้าใจกันภายหลัง เช่น โดนแซวเล็กน้อย <br>2.Block ปิดกั้นพวกเขา: บล็อกผู้กลั่นแกล้ง เพื่อไม่ให้ถูกกระทำซ้ำ <br>3.Tell บอกบุคคลที่ไว้ใจได้: บอกผู้ปกครอง ครู หรือบุคคลที่ไว้ใจเพื่อขอความช่วยเหลือ และแคปเก็บบันทึกหลักฐาน <br>4.Remove ลบภาพที่เป็นการระรานออกทันที: ลบภาพ ข้อความ วิดีโอ ที่เป็นการระรานออกทันที หรืออาจจะติดต่อเจ้าหน้าที่ที่เป็นเจ้าของพื้นที่นั้น เช่น การกดปุ่มรายงานเนื้อหาบน Facebook IG และ TikTok <br>5.Be strong: เข้มแข็ง อดทน และมั่นใจในคุณค่าของตนเอง ไม่ให้คุณค่ากับคนหรือคำพูดที่ทำร้ายเรา',
+                                '1.<strong>Stop</strong> หยุดการกระทำทุกอย่าง: นิ่งเฉยไม่ตอบโต้ เพื่อไม่ให้เกิดการกระทำซ้ำ หรือเพิ่มความรุนแรง ใช้ในกรณีที่เป็นเหตุการณ์ทะเลาะเบาะแว้งในขั้นเริ่มต้นแล้วค่อยไปปรับความเข้าใจกันภายหลัง เช่น โดนแซวเล็กน้อย <br>2.<strong>Block</strong> ปิดกั้นพวกเขา: บล็อกผู้กลั่นแกล้ง เพื่อไม่ให้ถูกกระทำซ้ำ <br>3.<strong>Tell</strong> บอกบุคคลที่ไว้ใจได้: บอกผู้ปกครอง ครู หรือบุคคลที่ไว้ใจเพื่อขอความช่วยเหลือ และแคปเก็บบันทึกหลักฐาน <br>4.<strong>Remove</strong> ลบภาพที่เป็นการระรานออกทันที: ลบภาพ ข้อความ วิดีโอ ที่เป็นการระรานออกทันที หรืออาจจะติดต่อเจ้าหน้าที่ที่เป็นเจ้าของพื้นที่นั้น เช่น การกดปุ่มรายงานเนื้อหาบน Facebook IG และ TikTok <br>5.<strong>Be strong</strong>: เข้มแข็ง อดทน และมั่นใจในคุณค่าของตนเอง ไม่ให้คุณค่ากับคนหรือคำพูดที่ทำร้ายเรา',
                         ],
                         [
-                            'question' => 'ช่องการทางการขอความช่วยเหลือ',
+                            'question' => 'ช่องทางการขอความช่วยเหลือ',
                             'answer' =>
-                                '1.ต้องการปรึกษาคุณครูที่โรงเรียน <a href="https://line.me/R/ti/p/@teacher_school" target="_blank" class="text-blue-600 underline">คลิกที่นี่</a> <br>2.ต้องการปรึกษาพี่ๆนักวิจัย <a href="{{ route(\'researcher.consultation\') }}" class="text-blue-600 underline">คลิกที่นี่</a> <br>3.ขอคำปรึกษาจากหน่วยงานในจังหวัดเชียงราย <a href="{{ route(\'local.help\') }}" class="text-blue-600 underline">คลิกที่นี่</a> <br>4.ขอคำปรึกษาจากหน่วยงานในประเทศไทย (ส่วนกลาง) <a href="{{ route(\'national.help\') }}" class="text-blue-600 underline">คลิกที่นี่</a>',
+                                '1.ต้องการปรึกษาคุณครูที่โรงเรียน <a href="https://line.me/R/ti/p/@teacher_school" target="_blank" class="text-blue-600 underline hover:text-blue-800">คลิกที่นี่</a> <br>2.ต้องการปรึกษาพี่ๆนักวิจัย <a href="{{ route(\'researcher.consultation\') }}" class="text-blue-600 underline hover:text-blue-800">คลิกที่นี่</a> <br>3.ขอคำปรึกษาจากหน่วยงานในจังหวัดเชียงราย <a href="{{ route(\'local.help\') }}" class="text-blue-600 underline hover:text-blue-800">คลิกที่นี่</a> <br>4.ขอคำปรึกษาจากหน่วยงานในประเทศไทย (ส่วนกลาง) <a href="{{ route(\'national.help\') }}" class="text-blue-600 underline hover:text-blue-800">คลิกที่นี่</a>',
                         ],
                         [
                             'question' => 'สิ่งที่อยากบอกให้น้องๆ เข้าใจ',
@@ -133,7 +133,40 @@
             @include('layouts.faq.category', ['category' => $category])
         @endforeach
     </div>
-@endsection
+
+    <style>
+        .border-custom {
+            border-color: #524AC4;
+        }
+        
+        .faq-item {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question.active .faq-icon {
+            background-color: #4A4A4A !important;
+        }
+        
+        .faq-answer.active {
+            max-height: 1000px;
+        }
+
+        .faq-answer a {
+            color: rgb(37 99 235);
+            text-decoration: underline;
+        }
+
+        .faq-answer a:hover {
+            color: rgb(29 78 216);
+        }
+
+        .icon-plus,
+        .icon-minus {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+
+    @endsection
 
 @section('scripts')
     @include('layouts.faq.script')
