@@ -7,7 +7,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       setTimeout(() => {
         showIntroModal();
-      }, 100); // หรือ 200ms ก็ได้
+      }, 0); // หรือ 200ms ก็ได้
     });
 
 
@@ -24,7 +24,7 @@
       // รอ transition fade-out เสร็จก่อนแสดงเนื้อหา
       setTimeout(() => {
         document.getElementById('game-content').classList.add('show');
-      }, 400); // ตรงกับเวลา transition
+      }, 0); // ตรงกับเวลา transition
     }
 
     

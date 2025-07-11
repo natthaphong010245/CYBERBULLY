@@ -59,7 +59,7 @@
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-      animation: modalFadeSlide 0.5s ease-out;
+      animation: modalScaleIn 0.5s ease-out;
     }
     @keyframes modalFadeSlide {
     from {
@@ -105,7 +105,7 @@
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      animation: modalSlideIn 0.6s ease-out;
+      animation: modalScaleIn 0.5s ease-out;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     }
 
@@ -137,7 +137,7 @@
     }
 
     .celebration-icon {
-      background: linear-gradient(135deg, #000000 0%, #9B8BF5 100%);
+
       color: white;
       width: 80px;
       height: 80px;
@@ -207,8 +207,7 @@
 
     #intro-modal {
       opacity: 0;
-      transform: translateY(20px) scale(0.96);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    
       will-change: opacity, transform;
     }
     #intro-modal.show {
@@ -255,7 +254,18 @@
     }
 
     .modal-content {
-      animation: modalSlideIn 0.4s ease-out;
+      animation: modalScaleIn 0.5s ease-out;
+    }
+
+    @keyframes modalScaleIn {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
   </style>
 
@@ -368,123 +378,8 @@
               </div>
             </div>
 
-            <!-- Completion Modal -->
-            <div id="completionModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
-              <div class="completion-content">
-                <!-- Header -->
-                <div class="text-center p-8 pb-4">
-                  <div class="celebration-icon">
-                    🎉
-                  </div>
-                  <h1 class="text-3xl font-bold text-[#3E36AE] mb-4">
-                    ยินดีด้วย! 
-                  </h1>
-                  <h2 class="text-xl font-semibold text-[#5A63D7] mb-2">
-                    นี้คือบทสรุปของไซเบอร์บูลลี่
-                  </h2>
-                  <p class="text-[#6B7280] text-base">
-                    ตอนนี้คุณรู้จักรูปแบบของไซเบอร์บูลลี่และวิธีรับมือแล้ว
-                  </p>
-                </div>
-
-                <!-- Content -->
-                <div class="px-8 pb-8">
-                  <h3 class="text-xl font-bold text-[#3E36AE] mb-6 text-center">
-                    รูปแบบของไซเบอร์บูลลี่ที่พบบ่อย
-                  </h3>
-
-                  <div class="scroll-container">
-                    <div class="bullying-type">
-                      <div class="bullying-title">1. การคุกคาม (Harassment)</div>
-                      <div class="bullying-description">
-                        การส่งข้อความที่หยาบคาย น่ารังเกียจ หรือดูหมิ่นซ้ำๆ
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">2. การใส่ร้าย (Denigration/Dissing)</div>
-                      <div class="bullying-description">
-                        การเผยแพร่ข้อมูลเท็จหรือข่าวลือเกี่ยวกับผู้อื่นเพื่อทำลายชื่อเสียง
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">3. การแอบอ้างตัวตน (Impersonation)</div>
-                      <div class="bullying-description">
-                        การแฮกบัญชีออนไลน์ของผู้อื่นและใช้ในทางที่เสียหาย
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">4. การกีดกัน (Exclusion)</div>
-                      <div class="bullying-description">
-                        การตั้งใจไม่รวมใครบางคนออกจากกลุ่มเพื่อนหรือกิจกรรมออนไลน์
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">5. การเผยแพร่ความลับ (Outing)</div>
-                      <div class="bullying-description">
-                        การเปิดเผยข้อมูลส่วนตัวหรือความลับของผู้อื่นโดยไม่ได้รับอนุญาต
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">6. การหลอกลวง (Trickery)</div>
-                      <div class="bullying-description">
-                        การใช้อุบายเพื่อให้เหยื่อเปิดเผยข้อมูลส่วนตัวแล้วนำไปเผยแพร่
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">7. การข่มขู่คุกคาม (Threatening/Intimidation)</div>
-                      <div class="bullying-description">
-                        การส่งข้อความที่ขู่ทำร้ายหรือคุกคาม
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">8. การสร้างกลุ่มเพื่อโจมตี (Flaming)</div>
-                      <div class="bullying-description">
-                        การสร้างกลุ่มหรือเพจเพื่อโจมตีหรือประจานบุคคล
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">9. การตัดต่อภาพหรือวิดีโอ (Photo/Video Manipulation)</div>
-                      <div class="bullying-description">
-                        การตัดต่อภาพหรือวิดีโอของผู้อื่นให้เกิดความเสียหาย
-                      </div>
-                    </div>
-
-                    <div class="bullying-type">
-                      <div class="bullying-title">10. การเผยแพร่คลิปวิดีโอหรือรูปภาพที่ส่อไปในทางเสียหาย</div>
-                      <div class="bullying-description">
-                        การนำคลิปหรือรูปภาพที่ทำให้ผู้อื่นอับอายหรือเสียหายไปเผยแพร่
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- จำไว้เสมอ -->
-                  <div class="mt-8 p-6 bg-gradient-to-r from-[#E5C8F6] to-[#D1D5FF] rounded-2xl">
-                    <h4 class="font-bold text-[#3E36AE] text-lg mb-3 text-center">💡 จำไว้เสมอ</h4>
-                    <div class="text-[#5A63D7] text-center space-y-2">
-                      <p><strong>STOP</strong> - หยุดและไม่ตอบโต้</p>
-                      <p><strong>BLOCK</strong> - ปิดกั้นผู้กระทำผิด</p>
-                      <p><strong>TELL</strong> - บอกผู้ใหญ่ที่ไว้ใจ</p>
-                      <p><strong>BE STRONG</strong> - เข้มแข็งและมั่นใจในตัวเอง</p>
-                    </div>
-                  </div>
-
-                  <!-- ปุ่มกลับหน้าหลัก -->
-                  <div class="text-center mt-8">
-                    <button onclick="goToHome()" class="completion-button">
-                      กลับสู่หน้าหลัก
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- Completion Modal -->
+            @include('layouts.scenario.bullying-types')
           </div>
         </div>
       </main>
