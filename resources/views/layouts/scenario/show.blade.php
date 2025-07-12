@@ -26,31 +26,6 @@
       font-weight: 500;
     }
 
-    /* Result Modal Popup */
-    .result-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 9999;
-      backdrop-filter: blur(4px);
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.95);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .result-modal.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: scale(1);
-    }
-
     .result-content {
       background: white;
       border-radius: 24px;
@@ -59,20 +34,8 @@
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-      animation: modalScaleIn 0.5s ease-out;
-    }
-    @keyframes modalFadeSlide {
-    from {
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-}
 
-
+    }
 
     /* Completion Modal - เพิ่มจาก artifact แรก */
     .completion-modal {
@@ -91,7 +54,18 @@
       transform: scale(0.95);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
+    #completionModal {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
 
+#completionModal.show {
+  display: flex !important;
+  opacity: 1;
+  pointer-events: auto;
+}
     .completion-modal.show {
       display: flex;
       opacity: 1;
@@ -205,27 +179,7 @@
       background: #7C6FE0;
     }
 
-    #intro-modal {
-      opacity: 0;
-    
-      will-change: opacity, transform;
-    }
-    #intro-modal.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
 
-
-    @keyframes modalSlideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-50px) scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
 
     @media (min-width: 768px) {
       .desktop-container {
@@ -242,8 +196,6 @@
 
     .modal-backdrop {
       opacity: 0;
-      transform: scale(0.95);
-      transition: opacity 0.4s ease, transform 0.4s ease;
       pointer-events: none;
     }
 
@@ -267,6 +219,20 @@
         opacity: 1;
       }
     }
+    #resultModal {
+      display: none; /* เริ่มต้นซ่อนไว้ */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #resultModal.show {
+      display: flex !important;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    
   </style>
 
 
@@ -358,7 +324,7 @@
 
             <!-- Result Modal Popup -->
             <div id="resultModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
-              <div class="result-content">
+              <div class="result-content modal-content">
                 <div id="resultImage" class="w-32 h-32 mx-auto mb-6">
                   <!-- รูปจะถูกใส่ที่นี่ -->
                 </div>

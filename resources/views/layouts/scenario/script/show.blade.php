@@ -10,8 +10,7 @@
       }, 0); // หรือ 200ms ก็ได้
     });
 
-
-   function showIntroModal() {
+    function showIntroModal() {
       const modal = document.getElementById('intro-modal');
       modal.classList.add('show');
       document.getElementById('game-content').classList.remove('show');
@@ -27,7 +26,6 @@
       }, 0); // ตรงกับเวลา transition
     }
 
-    
     function selectOption(optionId) {
       // Remove selected class from all cards
       document.querySelectorAll('.option-card').forEach(card => {
@@ -85,10 +83,14 @@
       imageDiv.innerHTML = `<img src="{{ asset('images/') }}/${result.image}" alt="Result" class="w-full h-full object-contain">`;
       
       // ใส่ข้อความ
-    title.textContent = result.title;
-    message.innerHTML = result.message.replace(/\n/g, '<br>');
-      // แสดง modal
-      modal.classList.add('show');
+      title.textContent = result.title;
+      message.innerHTML = result.message.replace(/\n/g, '<br>');
+      
+      // แสดง modal พร้อม animation
+      modal.style.display = 'flex';  // แสดง modal ก่อน
+      setTimeout(() => {
+        modal.classList.add('show');  // เพิ่ม animation
+      }, 10); // หน่วงเวลานิดหน่อยเพื่อให้ display: flex มีผล
     }
 
     // ฟังก์ชันใหม่: ไปสถานการณ์ถัดไปพร้อม modal
@@ -96,20 +98,23 @@
       const modal = document.getElementById('resultModal');
       modal.classList.remove('show');
       
-      // ตรวจสอบว่าเป็นสถานการณ์สุดท้ายหรือไม่
-      if (currentScenarioId == 13) {
-        // แสดง completion modal
-        setTimeout(() => {
+      // รอ animation fade-out เสร็จก่อนซ่อน modal
+      setTimeout(() => {
+        modal.style.display = 'none';
+        
+        // ตรวจสอบว่าเป็นสถานการณ์สุดท้ายหรือไม่
+        if (currentScenarioId == 13) {
+          // แสดง completion modal
           showCompletionModal();
-        }, 500);
-      } else {
-        // ไปยังสถานการณ์ถัดไป
-        @if(isset($scenario['nextRoute']) && $scenario['nextRoute'])
-          window.location.href = "{{ route($scenario['nextRoute']) }}";
-        @else
-          window.location.href = "{{ route('scenario.index') }}";
-        @endif
-      }
+        } else {
+          // ไปยังสถานการณ์ถัดไป
+          @if(isset($scenario['nextRoute']) && $scenario['nextRoute'])
+            window.location.href = "{{ route($scenario['nextRoute']) }}";
+          @else
+            window.location.href = "{{ route('scenario.index') }}";
+          @endif
+        }
+      }, 300); // ตรงกับเวลา animation
     }
 
     function skipScenario() {
@@ -146,5 +151,17 @@
     function closeModal() {
       goToNextScenario();
     }
+
+    // เพิ่มฟังก์ชันซ่อน modal เมื่อคลิกที่ backdrop
+    document.addEventListener('DOMContentLoaded', function() {
+      const resultModal = document.getElementById('resultModal');
+      if (resultModal) {
+        resultModal.addEventListener('click', function(e) {
+          if (e.target === this) {
+            goToNextScenario();
+          }
+        });
+      }
+    });
   </script>
 @endpush
