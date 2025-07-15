@@ -1,5 +1,6 @@
+
 <div id="completionModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="completion-content">
+    <div class="completion-content modal-content">
         <!-- Header -->
         <div class="text-center p-8 pb-4">
             <div class="celebration-icon">🎉</div>
