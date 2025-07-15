@@ -5,10 +5,10 @@
         </svg>
     </a>
     <div class="flex space-x-2">
-        <a href="https://www.facebook.com/profile.php?id=61558869870617" target="_blank" class="block">
+        <a href="https://www.facebook.com/profile.php?id=61577920375564" target="_blank" class="block">
           <img src="{{ asset('images/facebook.png') }}" alt="Facebook" class="w-8 h-8 object-contain">
         </a>
-        <a href="https://lin.ee/qMSjkiJ" target="_blank" class="block">
+        <a href="https://lin.ee/ZLnJCpu" target="_blank" class="block">
           <img src="{{ asset('images/line.png') }}" alt="Line" class="w-8 h-8 object-contain">
         </a>
     </div>

@@ -61,4 +61,4 @@
         </div>
     </div>
     @include('layouts.assessment.script')
-@endsec
+@endsection

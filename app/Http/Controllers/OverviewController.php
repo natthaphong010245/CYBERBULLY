@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PersonActionAssessment;
-use App\Models\VictimAssessment;
+use App\Models\CyberbullyingAssessment;
 use Illuminate\Http\Request;
 
 class OverviewController extends Controller
@@ -43,13 +42,15 @@ class OverviewController extends Controller
             $victimQuestionsArray[] = (int)$request->{'question' . $i};
         }
 
-        // Create new assessment records
-        $personActionAssessment = PersonActionAssessment::create([
-            'questions' => $personActionQuestionsArray
-        ]);
+        // ✅ Create assessment data structure: [person_action, victim]
+        $assessmentData = [
+            $personActionQuestionsArray, // index 0: person_action
+            $victimQuestionsArray        // index 1: victim
+        ];
 
-        $victimAssessment = VictimAssessment::create([
-            'questions' => $victimQuestionsArray
+        // Create new assessment record in single table
+        $assessment = CyberbullyingAssessment::create([
+            'assessment_data' => $assessmentData
         ]);
 
         // Calculate scores for both assessments
@@ -66,7 +67,8 @@ class OverviewController extends Controller
             'person_action_score' => $personActionTotalScore,
             'person_action_percentage' => $personActionPercentage,
             'victim_score' => $victimTotalScore,
-            'victim_percentage' => $victimPercentage
+            'victim_percentage' => $victimPercentage,
+            'assessment_id' => $assessment->id
         ]);
 
         // Redirect to the results page

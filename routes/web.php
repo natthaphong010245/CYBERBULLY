@@ -5,13 +5,12 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MainController;
 use App\Http\Middleware\CheckRoleUser;
-use App\Http\Controllers\PersonActionController;
-use App\Http\Controllers\VictimController;
 use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\MentalHealthController;
 use App\Http\Controllers\BehavioralReportController;
 use App\Http\Controllers\Game\BullyingGameController;
 use App\Http\Controllers\Game\ScenarioController;
+use App\Http\Controllers\AssessmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,27 +48,17 @@ foreach ($assessmentRoutes as $uri => $config) {
 
 // Assessment Form Routes with Controllers
 Route::prefix('assessment/cyberbullying')->group(function () {
-    // Person Action
-    Route::get('person_action/form', [PersonActionController::class, 'showForm'])->name('person_action/form');
-    Route::post('person_action/form', [PersonActionController::class, 'submitForm']);
-    Route::get('person_action/result', function () {
-        return view('assessment.cyberbullying.person_action.form.result', [
-            'score' => session('score', 0),
-            'percentage' => session('percentage', 0)
-        ]);
-    })->name('person_action/result');
+    // ✅ Person Action - ใช้ AssessmentController
+    Route::get('person_action/form', [AssessmentController::class, 'showPersonActionForm'])->name('person_action/form');
+    Route::post('person_action/form', [AssessmentController::class, 'submitPersonActionForm']);
+    Route::get('person_action/result', [AssessmentController::class, 'showPersonActionResults'])->name('person_action/result');
 
-    // Victim
-    Route::get('victim/form', [VictimController::class, 'showForm'])->name('victim/form');
-    Route::post('victim/form', [VictimController::class, 'submitForm']);
-    Route::get('victim/result', function () {
-        return view('assessment.cyberbullying.victim.form.result', [
-            'score' => session('score', 0),
-            'percentage' => session('percentage', 0)
-        ]);
-    })->name('victim/result');
+    // ✅ Victim - ใช้ AssessmentController
+    Route::get('victim/form', [AssessmentController::class, 'showVictimForm'])->name('victim/form');
+    Route::post('victim/form', [AssessmentController::class, 'submitVictimForm']);
+    Route::get('victim/result', [AssessmentController::class, 'showVictimResults'])->name('victim/result');
 
-    // Overview
+    // Overview - ใช้ OverviewController เดิม
     Route::get('overview/form', [OverviewController::class, 'showForm'])->name('overview/form');
     Route::post('overview/form', [OverviewController::class, 'submitForm']);
     Route::get('overview/result', [OverviewController::class, 'showResults'])->name('overview/result');
