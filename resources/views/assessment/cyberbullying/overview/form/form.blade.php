@@ -1,10 +1,8 @@
 @extends('layouts.assessment.form')
 
 @php
-    $backUrl = '/assessment/cyberbullying';
     $mainUrl = '/main';
 @endphp
-
 
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8 pb-20">
@@ -66,16 +64,20 @@
                         {{ $question }}</p>
                     <div class="flex justify-between">
                         @foreach ($options as $option)
-                            <div class="flex flex-col items-center w-16 option-container"
+                            <label class="flex flex-col items-center w-16 option-container cursor-pointer"
                                 data-question="{{ $questionNumber }}" data-value="{{ $option['value'] }}">
                                 <div class="flex items-center justify-center h-8">
                                     <input type="radio" name="question{{ $questionNumber }}"
-                                        value="{{ $option['value'] }}" class="{{ $option['size'] }} border-2 radio-option"
-                                        data-question="{{ $questionNumber }}">
+                                        value="{{ $option['value'] }}" 
+                                        class="{{ $option['size'] }} border-2 border-gray-300 rounded-full bg-white cursor-pointer transition-all duration-200 radio-option"
+                                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none;"
+                                        data-question="{{ $questionNumber }}"
+                                        onchange="this.style.backgroundColor='#3E36AE'; this.style.borderColor='#3E36AE'; this.style.boxShadow='inset 0 0 0 2px white';"
+                                        onmouseover="if(!this.checked) this.style.borderColor='#3E36AE';"
+                                        onmouseout="if(!this.checked) this.style.borderColor='#d1d5db';">
                                 </div>
-                                <span
-                                    class="text-xs text-gray-400 mt-1 option-text text-center">{{ $option['text'] }}</span>
-                            </div>
+                                <span class="text-xs text-gray-400 mt-1 option-text text-center">{{ $option['text'] }}</span>
+                            </label>
                         @endforeach
                     </div>
                     <div class="border-b border-gray-200 mt-6"></div>
@@ -91,5 +93,5 @@
         </form>
     </div>
     @include('layouts.assessment.percent')
-    @include('layouts.assessment.cyberbullying.overview.script')
+    @include('layouts.assessment.script')
 @endsection

@@ -1,6 +1,10 @@
 @push('scripts')
     <script>
         window.addEventListener('load', function() {
+            if (sessionStorage.getItem('notification_shown')) {
+                sessionStorage.removeItem('notification_shown');
+            }
+            
             if (sessionStorage.getItem('message_submitted')) {
                 sessionStorage.removeItem('message_submitted');
                 window.location.reload();
@@ -81,8 +85,12 @@
                     })
                     .then(response => {
                         if (response.ok) {
-                            sessionStorage.setItem('message_submitted', 'true');
-                            window.location.href = "{{ route('home') }}";
+                            hideConfirmation();
+                            
+                            textarea.value = '';
+                            resizeTextarea();
+                            
+                            showSuccessNotification();
                         } else {
                             throw new Error('เกิดข้อผิดพลาดในการส่งข้อความ');
                         }

@@ -1,7 +1,6 @@
 @extends('layouts.main_category')
 
 @php
-    $backUrl = '/report_consultation/safe_area';
     $mainUrl = '/main';
 @endphp
 
@@ -46,7 +45,6 @@
                     <div id="recordButton"
                         class="w-32 h-32 rounded-full bg-[#3E36AE] border-4 border-gray-200 flex items-center justify-center cursor-pointer relative z-10">
 
-
                         <div id="recordState" class="w-6 h-6 rounded-full bg-red-500"></div>
 
                         <div id="stopState" class="w-8 h-8 rounded-lg bg-white hidden"></div>
@@ -78,20 +76,14 @@
     </div>
 
     <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white rounded-lg w-80 overflow-hidden">
+        <div class="bg-white rounded-xl w-80 overflow-hidden">
             <div id="modalContent">
                 <div class="p-5 flex items-center justify-center">
-                    <div class="bg-[#929AFF] rounded-full p-2 mb-2 mt-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#ffffff]" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                        </svg>
-                    </div>
-
+                        <img src="{{ asset('images/safe_area/microphone.png') }}" alt="Chat Icon" class="h-20 w-auto">
                 </div>
-                <div class="px-5 pb-4 text-center">
-                    <h3 class="text-lg font-semibold text-gray-900">ส่งข้อความเสียง</h3>
+                <div class="px-4 text-center">
+                    <div class="text-xl font-median text-[#3E36AE]">ข้อความเสียง</div>
+                    <div class="text-lg font-median text-[#3E36AE]">คุณต้องการส่งข้อความเสียง?</div>
                 </div>
                 <div class="flex flex-col p-4 space-y-2 mb-2">
                     <button id="confirmSend"
@@ -116,7 +108,9 @@
         </div>
     </div>
 
+    @include('report&consultation.safe_area.result')
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
-@include('layouts.safe_area.voice.script')
+@include('layouts.report&consultation.safe_area.voice.script')

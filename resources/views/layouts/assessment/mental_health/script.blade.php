@@ -1,3 +1,4 @@
+{{-- resources/views/layouts/assessment/mental_health/script.blade.php --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('questionnaire-form');
@@ -66,8 +67,20 @@
             
             const questionContainer = document.getElementById(`question-container-${questionNumber}`);
             if (questionContainer) {
-                questionContainer.classList.add('question-answered');
-                questionContainer.classList.remove('question-error');
+                // รีเซ็ต radio buttons ทั้งหมดในคำถามนี้ก่อน
+                const allRadios = questionContainer.querySelectorAll('.radio-option');
+                allRadios.forEach(radio => {
+                    radio.style.backgroundColor = 'white';
+                    radio.style.borderColor = '#d1d5db';
+                    radio.style.boxShadow = 'none';
+                    radio.checked = false;
+                });
+                
+                // เลือกตัวที่คลิก
+                radioElement.checked = true;
+                radioElement.style.backgroundColor = '#3E36AE';
+                radioElement.style.borderColor = '#3E36AE';
+                radioElement.style.boxShadow = 'inset 0 0 0 2px white';
                 
                 const allOptions = questionContainer.querySelectorAll('.option-container');
                 allOptions.forEach(option => {
@@ -79,11 +92,26 @@
                 });
             }
             
+            // แก้ไขสีของหัวข้อคำถาม และลบดอกจัน
             const questionTitle = document.getElementById(`question-title-${questionNumber}`);
             if (questionTitle) {
-                questionTitle.classList.remove('text-red-500');
-                questionTitle.classList.add('text-gray-400');
+                questionTitle.style.color = '#4b5563'; // สีเทาเข้ม
+                questionTitle.style.fontWeight = '600';
+                
+                // ลบดอกจันถ้ามี
+                const asterisk = questionTitle.querySelector('.required-asterisk');
+                if (asterisk) {
+                    asterisk.remove();
+                }
             }
+            
+            // แก้ไขสีของข้อความตัวเลือก
+            const allOptionTexts = questionContainer.querySelectorAll('.option-text');
+            allOptionTexts.forEach(optionText => {
+                if (optionText) {
+                    optionText.style.color = '#4b5563'; // สีเทาเข้ม
+                }
+            });
             
             if (questionNumber < totalQuestions) {
                 const nextQuestionNumber = questionNumber + 1;
@@ -115,10 +143,12 @@
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            const allQuestionContainers = document.querySelectorAll('.question-container');
-            allQuestionContainers.forEach(container => {
-                if (container) {
-                    container.classList.remove('question-error');
+            // Clear previous error states
+            const allQuestionTitles = document.querySelectorAll('.question-title');
+            allQuestionTitles.forEach(title => {
+                const asterisk = title.querySelector('.required-asterisk');
+                if (asterisk) {
+                    asterisk.remove();
                 }
             });
             
@@ -144,19 +174,24 @@
                 if (radioButtons.length === 0) {
                     allAnswered = false;
                     
+                    const questionTitle = document.getElementById(`question-title-${i}`);
+                    if (questionTitle) {
+                        questionTitle.style.color = '#ef4444'; // สีแดง
+                        
+                        if (!questionTitle.querySelector('.required-asterisk')) {
+                            const asterisk = document.createElement('span');
+                            asterisk.className = 'required-asterisk';
+                            asterisk.style.color = '#ef4444';
+                            asterisk.style.fontWeight = 'bold';
+                            asterisk.style.marginLeft = '4px';
+                            asterisk.textContent = ' *';
+                            questionTitle.appendChild(asterisk);
+                        }
+                    }
+                    
+                    // จำข้อแรกที่ไม่ได้ตอบเพื่อ scroll ไป
                     if (firstUnanswered === null) {
                         firstUnanswered = i;
-                        
-                        const questionContainer = document.getElementById(`question-container-${i}`);
-                        if (questionContainer) {
-                            questionContainer.classList.add('question-error');
-                        }
-                        
-                        const questionTitle = document.getElementById(`question-title-${i}`);
-                        if (questionTitle) {
-                            questionTitle.classList.add('text-red-500');
-                            questionTitle.classList.remove('text-gray-400');
-                        }
                     }
                 }
             }
@@ -194,5 +229,4 @@
             }
         });
     });
-    </script>
-    
+</script>

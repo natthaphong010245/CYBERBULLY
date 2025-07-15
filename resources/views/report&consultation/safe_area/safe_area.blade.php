@@ -1,7 +1,6 @@
 @extends('layouts.main_category')
 
 @php
-    $backUrl = '/report_consultation';
     $mainUrl = '/main';
 @endphp
 

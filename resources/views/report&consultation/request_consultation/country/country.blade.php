@@ -1,22 +1,8 @@
 @extends('layouts.main_category')
 
 @php
-    $backUrl = '/report_consultation/request_consultation';
     $mainUrl = '/main';
-@endphp
-
-@section('content')
-<div class="card-container space-y-4 px-5 pb-6">
-    <div class="text-center mb-10 relative">
-        <div class="flex items-center justify-center">
-            <div class="relative">
-                <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">ขอคำปรึกษาจากหน่วยงาน</h1>
-                <p class="text-sm text-[#3E36AE] absolute -bottom-5 right-0">ประเทศไทย</p>
-            </div>
-        </div>
-    </div>
-
-    @php
+    
     $consultations = [
         [
             'name' => 'Childline Thailand Foundation',
@@ -47,35 +33,23 @@
             'image_size' => 'w-20 h-20'
         ]
     ];
-    @endphp
+@endphp
 
-    @foreach($consultations as $consultation)
-    <div class="bg-[#929AFF] rounded-xl p-3 relative flex items-center">
-        <div class="min-w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center overflow-hidden mr-4">
-            <img src="{{ asset('images/report_consultation/country/' . $consultation['image']) }}" 
-                 alt="{{ $consultation['name'] }}" 
-                 class="{{ $consultation['image_size'] }} object-contain">
-        </div>
-        
-        <div class="flex-grow">
-            <div class="text-white font-medium text-lg leading-tight">{{ $consultation['name'] }}</div>
-            
-            @if($consultation['phone'])
-            <a href="tel:{{ $consultation['phone'] }}" class="flex items-center text-white text-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                {{ $consultation['phone'] }}
-            </a>
-            @endif
-        </div>
-        
-        <div class="absolute bottom-3 right-3">
-            <a href="{{ $consultation['link'] }}" target="_blank" class="text-[#3E36AE] text-sm inline-flex items-center">
-                เพิ่มเติม
-            </a>
+@section('content')
+<div class="card-container px-5 pb-6">
+    <div class="text-center mb-12 relative">
+        <div class="flex items-center justify-center">
+            <div class="relative">
+                <h1 class="text-2xl font-bold text-[#3E36AE] inline-block">ขอคำปรึกษาจากหน่วยงาน</h1>
+                <p class="text-sm text-[#3E36AE] absolute -bottom-5 right-0">ประเทศไทย</p>
+            </div>
         </div>
     </div>
-    @endforeach
+
+    <div class="space-y-6">
+        @foreach($consultations as $consultation)
+            @include('report&consultation.request_consultation.country.card', $consultation)
+        @endforeach
+    </div>
 </div>
 @endsection

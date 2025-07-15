@@ -1,3 +1,4 @@
+{{-- resources/views/layouts/assessment/percent.blade.php --}}
 <div class="fixed bottom-0 left-0 right-0 bg-[#576071] px-8 py-4 shadow-md">
     <div class="relative">
         <div class="flex items-center">

@@ -1,8 +1,11 @@
-
 @push('scripts')
     <script>
         window.addEventListener('load', function() {
             console.log("Voice recorder script loaded");
+            
+            if (sessionStorage.getItem('notification_shown')) {
+                sessionStorage.removeItem('notification_shown');
+            }
 
             const STATE_INITIAL = 'initial';
             const STATE_RECORDING = 'recording';
@@ -428,7 +431,11 @@
                         console.log("Server response status:", response.status);
 
                         if (response.status >= 200 && response.status < 300) {
-                            window.location.href = '/home';
+                            hideConfirmation();
+                            
+                            deleteRecordingFunc();
+                            
+                            showSuccessNotification();
                         } else {
                             return response.text().then(text => {
                                 try {

@@ -11,7 +11,6 @@
         'gameNumber' => '2',
         'description' => '"การรังแกกันผ่านโลกไซเบอร์" หรือว่า "ไซเบอร์บูลลี่" เป็นตัวเลือกกันน้า',
         'descriptionClass' => 'pr-4 pl-4',
-        'buttonClass' => 'hover:bg-[#7B85FF]'
     ])
 
     <div class="card-container space-y-6 px-8 md:px-0" id="game-content">

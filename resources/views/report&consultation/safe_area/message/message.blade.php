@@ -1,7 +1,7 @@
+{{-- resources/views/report%26consultation/safe_area/message/message.blade.php --}}
 @extends('layouts.main_category')
 
 @php
-    $backUrl = '/report_consultation/safe_area';
     $mainUrl = '/main';
 @endphp
 
@@ -16,37 +16,32 @@
         </div>
 
         <form id="messageForm" action="{{ route('safe-area.message.store') }}" method="POST"
-            class="flex flex-col items-center p-4">
+            class="flex flex-col items-center p-2">
             @csrf
             <div class="w-full mb-2">
                 <textarea name="message" id="message"
-                    class="w-full border border-[#929AFF] rounded-lg px-2 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#929AFF] resize-y min-h-[150px] leading-tight"
-                    placeholder="แชร์ประสบการณ์..." rows="2" required></textarea>
+                    class="w-full border border-[#929AFF] rounded-xl px-3 py-3 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#929AFF] resize-y min-h-[160px] leading-tight"
+                    placeholder="YOUTH CYBERSAFE" rows="2" required></textarea>
             </div>
 
             <div class="flex justify-between w-full p-6">
-                <a href="{{ route('safe_area') }}"
-                    class="w-[45%] py-2 border border-gray-300 text-gray-500 rounded-lg font-medium text-center text-lg">ยกเลิก</a>
+                <button type="button" onclick="history.back()"
+    class="w-[40%] py-2 border border-gray-300 text-gray-500 rounded-lg font-medium text-center text-lg focus:outline-none">ยกเลิก</button>
                 <button type="button" id="submitBtn"
-                    class="w-[45%] py-2 bg-[#929AFF] text-white rounded-lg font-medium text-lg">ส่ง</button>
+                    class="w-[40%] py-2 bg-[#929AFF] text-white rounded-lg font-medium text-lg">ส่ง</button>
             </div>
         </form>
     </div>
 
     <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white rounded-lg w-80 overflow-hidden">
+        <div class="bg-white rounded-xl w-80 overflow-hidden">
             <div id="modalContent">
                 <div class="p-5 flex items-center justify-center">
-                    <div class="bg-[#929AFF] rounded-full p-2 mb-2 mt-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#ffffff]" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                        </svg>
-                    </div>
+                        <img src="{{ asset('images/safe_area/message.png') }}" alt="Chat Icon" class="h-20 w-auto">
                 </div>
-                <div class="px-5 pb-4 text-center">
-                    <h3 class="text-lg font-semibold text-gray-900">ส่งข้อความ</h3>
+                <div class="px-4 text-center">
+                    <div class="text-xl font-median text-[#3E36AE]">ข้อความ</div>
+                    <div class="text-lg font-median text-[#3E36AE]">คุณต้องการส่งข้อความ?</div>
                 </div>
                 <div class="flex flex-col p-4 space-y-2 mb-2">
                     <button id="confirmSend"
@@ -71,6 +66,9 @@
         </div>
     </div>
 
+    @include('report&consultation.safe_area.result')
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
-@include('layouts.safe_area.message.script')
+
+@include('layouts.report&consultation.safe_area.message.script')

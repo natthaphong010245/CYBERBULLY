@@ -1,4 +1,4 @@
-@extends('layouts.assessment.cyberbullying.result')
+@extends('layouts.assessment.result')
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-6 pt-8 flex flex-col mt-8 pb-10">
         <div class="text-center mb-2 relative">
@@ -14,16 +14,10 @@
 
             <div class="flex flex-col items-center">
                 <div class="flex justify-center mb-4">
-                    @if ($percentage == 0)
+                    @if ($score == 0)
                         <div class="text-8xl">😊</div>
-                    @elseif ($percentage < 25)
-                        <div class="text-8xl">🙂</div>
-                    @elseif($percentage < 50)
-                        <div class="text-8xl">😐</div>
-                    @elseif($percentage < 75)
-                        <div class="text-8xl">😟</div>
                     @else
-                        <div class="text-8xl">😥</div>
+                        <div class="text-8xl">😟</div>
                     @endif
                 </div>
                 
@@ -41,28 +35,19 @@
                 </p>
 
                 <div class="border-t border-gray-300 w-full pt-4 mt-2">
-                    <h2 class="text-xl font-medium text-[#3E36AE] mb-2">ผลการประเมิน</h2>
-                    @if ($percentage == 0)
-                        <p class="text-green-600 font-medium mb-2 text-center">ไม่มีประสบการณ์การถูกกลั่นแกล้ง</p>
-                        <p class="text-gray-600">คำแนะนำ: คุณไม่มีประสบการณ์การถูกกลั่นแกล้งทางอินเทอร์เน็ต</p>
-                    @elseif ($percentage < 25)
-                        <p class="text-green-600 font-medium mb-2 text-center">มีประสบการณ์การถูกกลั่นแกล้ง ระดับต่ำ</p>
-                        <p class="text-gray-600">คำแนะนำ: คุณมีประสบการณ์การถูกกลั่นแกล้งในระดับต่ำ ให้ระวังการใช้งานออนไลน์</p>
-                    @elseif($percentage < 50)
-                        <p class="text-yellow-600 font-medium mb-2 text-center">มีประสบการณ์การถูกกลั่นแกล้ง ระดับปานกลาง</p>
-                        <p class="text-gray-600">คำแนะนำ: คุณมีประสบการณ์การถูกกลั่นแกล้งในระดับปานกลาง ควรพิจารณาปรับการใช้สื่อออนไลน์</p>
-                    @elseif($percentage < 75)
-                        <p class="text-orange-600 font-medium mb-2 text-center">มีประสบการณ์การถูกกลั่นแกล้ง ระดับสูง</p>
-                        <p class="text-gray-600">คำแนะนำ: คุณมีประสบการณ์การถูกกลั่นแกล้งในระดับสูง ควรปรึกษาผู้ใหญ่ที่คุณไว้ใจ</p>
+                    <h2 class="text-sm font-bold text-[#3E36AE] mb-2">ผลการประเมิน</h2>
+                    @if ($score == 0)
+                        <p class="text-green-600 font-medium mb-2 text-center text-xl">ไม่เคยถูกกลั่นแกล้ง</p>
+                        <p class="text-gray-600 text-lg">คำแนะนำ: ไม่เคยถูกกลั่นแกล้ง</p>
                     @else
-                        <p class="text-red-600 font-medium mb-2 text-center">มีประสบการณ์การถูกกลั่นแกล้ง ระดับสูงมาก</p>
-                        <p class="text-gray-600">คำแนะนำ: คุณมีประสบการณ์การถูกกลั่นแกล้งในระดับสูงมาก ควรรีบหาความช่วยเหลือจากผู้เชี่ยวชาญทันที</p>
+                        <p class="text-red-600 font-medium mb-2 text-center text-xl">เคยถูกกลั่นแกล้ง</p>
+                        <p class="text-gray-600 text-lg">คำแนะนำ: เคยถูกกลั่นแกล้ง</p>
                     @endif
                 </div>
 
                 <div class="flex justify-center mt-4">
                     <a href="/assessment/cyberbullying/victim/form"
-                        class="text-base px-6 py-2 rounded-xl text-white font-medium shadow-md bg-[#929AFF]">
+                        class="text-base px-6 py-2 rounded-xl text-white font-medium shadow-md bg-[#929AFF] transition-all duration-300 hover:bg-[#7B84FC]">
                         ดูรายละเอียดเพิ่มเติม
                     </a>
                 </div>
@@ -70,11 +55,10 @@
         </div>
         <div class="border-b border-gray-300"></div>
         <div class="flex justify-center mt-6">
-            <a href="{{ route('main') }}" class="text-lg px-6 py-2 rounded-xl text-white font-medium shadow-md bg-[#c0c0c0]">
+            <a href="{{ route('main') }}" class="text-lg px-6 py-2 rounded-xl text-white font-medium shadow-md bg-[#c0c0c0] transition-all duration-300 hover:bg-gray-400">
                 หน้าหลัก
             </a>
         </div>
     </div>
-        @include('layouts.assessment.cyberbullying.victim.script')
-
-@endsection
+    @include('layouts.assessment.script')
+@endsec
