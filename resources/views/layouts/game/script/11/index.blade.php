@@ -1,24 +1,26 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const introModal = document.getElementById('intro-modal');
-        const mainScreen = document.getElementById('main-screen');
+        const gameContent = document.getElementById('game-content');
         const startGameBtn = document.getElementById('start-game-btn');
 
-        setTimeout(() => {
-            introModal.classList.add('modal-show');
-            mainScreen.classList.add('game-blur');
-        }, 100);
-
-        startGameBtn.addEventListener('click', function() {
-            introModal.classList.remove('modal-show');
-            introModal.classList.add('modal-fade-out');
-
+        if (introModal && gameContent && startGameBtn) {
             setTimeout(() => {
-                introModal.style.display = 'none';
-                mainScreen.classList.remove('game-blur');
-                mainScreen.classList.add('animate-unblur');
-            }, 300);
-        });
+                introModal.classList.add('animate-modal-show');
+                gameContent.classList.add('game-blur');
+            }, 100);
+
+            startGameBtn.addEventListener('click', function() {
+                introModal.classList.remove('animate-modal-show');
+                introModal.classList.add('animate-modal-fade-out');
+
+                setTimeout(() => {
+                    introModal.style.display = 'none';
+                    gameContent.classList.remove('game-blur');
+                    gameContent.classList.add('animate-unblur');
+                }, 300);
+            });
+        }
     });
 
     const signalData = {
@@ -44,18 +46,19 @@
         modal.classList.add('flex');
 
         setTimeout(() => {
-            modal.classList.add('modal-show');
+            modal.classList.add('animate-fadeIn');
         }, 10);
     }
 
     function closeSignalModal() {
         const modal = document.getElementById('signal-modal');
-        modal.classList.remove('modal-show');
+        modal.classList.remove('animate-fadeIn');
+        modal.classList.add('animate-fadeOut');
 
         setTimeout(() => {
             modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }, 300);
+            modal.classList.remove('flex', 'animate-fadeOut');
+        }, 500);
     }
 
     function selectAnswer(choice) {
@@ -67,7 +70,7 @@
             } else {
                 showRetryModal();
             }
-        }, 500);
+        }, 600);
     }
 
     function showSuccessModal() {
@@ -76,7 +79,7 @@
         modal.classList.add('flex');
 
         setTimeout(() => {
-            modal.classList.add('modal-show');
+            modal.classList.add('animate-fadeIn');
         }, 10);
     }
 
@@ -86,14 +89,42 @@
         modal.classList.add('flex');
 
         setTimeout(() => {
-            modal.classList.add('modal-show');
+            modal.classList.add('animate-fadeIn');
         }, 10);
     }
 
-    function goToMain() {
-        window.location.href = "{{ route('game_12') }}";
+    function hideModal(modal, callback) {
+        modal.classList.remove('animate-fadeIn');
+        modal.classList.add('animate-fadeOut');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex', 'animate-fadeOut');
+            if (callback) callback();
+        }, 500);
     }
 
+    function goToNextGame() {
+        const modal = document.getElementById('success-modal');
+        hideModal(modal, function() {
+            window.location.href = "{{ route('game_12') }}";
+        });
+    }
+
+    function tryAgain() {
+        const modal = document.getElementById('retry-modal');
+        hideModal(modal);
+        // Game resets automatically, buttons become clickable again
+    }
+
+    function skipGame() {
+        const modal = document.getElementById('retry-modal');
+        hideModal(modal, function() {
+            window.location.href = "{{ route('game_12') }}";
+        });
+    }
+
+    // Close modal when clicking backdrop
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal-backdrop')) {
             if (e.target.id === 'signal-modal') {
@@ -102,6 +133,7 @@
         }
     });
 
+    // Prevent modal content clicks from closing the modal
     document.querySelectorAll('.modal-content').forEach(modal => {
         modal.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -110,35 +142,72 @@
 </script>
 
 <style>
-    .modal-backdrop {
-        backdrop-filter: blur(8px);
-        transition: all 0.3s ease;
+    .animate-fadeIn {
+        animation: fadeIn 0.5s ease-in-out forwards;
+    }
+    
+    .animate-fadeOut {
+        animation: fadeOut 0.5s ease-in-out forwards;
+    }
+    
+    @keyframes fadeIn {
+        0% { 
+            opacity: 0; 
+        }
+        100% { 
+            opacity: 1; 
+        }
+    }
+    
+    @keyframes fadeOut {
+        0% { 
+            opacity: 1; 
+        }
+        100% { 
+            opacity: 0; 
+        }
     }
 
-    .modal-content {
-        transform: scale(0.9);
-        opacity: 0;
-        transition: all 0.3s ease;
+    .animate-modal-show .modal-backdrop {
+        animation: backdropFadeIn 0.3s ease-out forwards;
     }
 
-    .modal-show .modal-content {
-        transform: scale(1);
-        opacity: 1;
+    .animate-modal-show .modal-content {
+        animation: contentSlideIn 0.4s ease-out 0.15s both;
     }
 
-    .modal-fade-out {
-        animation: modalFadeOut 0.3s ease-out forwards;
+    .animate-modal-fade-out {
+        animation: backdropFadeOut 0.3s ease-out forwards;
     }
 
-    .modal-fade-out .modal-content {
+    .animate-modal-fade-out .modal-content {
         animation: contentScaleOut 0.3s ease-out forwards;
     }
 
-    @keyframes modalFadeOut {
+    @keyframes backdropFadeIn {
+        0% {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        100% {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+
+    @keyframes contentSlideIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes backdropFadeOut {
         0% {
             background-color: rgba(0, 0, 0, 0.4);
         }
-
         100% {
             background-color: rgba(0, 0, 0, 0);
             visibility: hidden;
@@ -150,11 +219,76 @@
             opacity: 1;
             transform: scale(1);
         }
-
         100% {
             opacity: 0;
             transform: scale(0.3);
         }
+    }
+
+    .animate-modal-show .modal-backdrop {
+        animation: backdropFadeIn 0.3s ease-out forwards;
+    }
+
+    .animate-modal-show .modal-content {
+        animation: contentSlideIn 0.4s ease-out 0.15s both;
+    }
+
+    .animate-modal-fade-out {
+        animation: backdropFadeOut 0.3s ease-out forwards;
+    }
+
+    .animate-modal-fade-out .modal-content {
+        animation: contentScaleOut 0.3s ease-out forwards;
+    }
+
+    @keyframes backdropFadeIn {
+        0% {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        100% {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+
+    @keyframes contentSlideIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes backdropFadeOut {
+        0% {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        100% {
+            background-color: rgba(0, 0, 0, 0);
+            visibility: hidden;
+        }
+    }
+
+    @keyframes contentScaleOut {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+    }
+
+    .modal-content {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    .modal-backdrop {
+        transition: all 0.3s ease;
     }
 
     .game-blur {
@@ -172,7 +306,6 @@
             filter: blur(3px);
             transform: scale(1.02);
         }
-
         100% {
             filter: blur(0px);
             transform: scale(1);
@@ -194,13 +327,10 @@
     }
 
     @keyframes pulse {
-
-        0%,
-        100% {
+        0%, 100% {
             transform: scale(1);
             opacity: 1;
         }
-
         50% {
             transform: scale(1.05);
             opacity: 0.8;
@@ -220,13 +350,47 @@
         transform: translateY(0);
     }
 
+    /* Modal slide animations */
+    .animate-fadeIn .modal-content {
+        animation: modalSlideIn 0.5s ease-in-out forwards;
+    }
+    
+    .animate-fadeOut .modal-content {
+        animation: modalSlideOut 0.5s ease-in-out forwards;
+    }
+    
+    @keyframes modalSlideIn {
+        0% { 
+            opacity: 0; 
+            transform: scale(0.9) translateY(-20px); 
+        }
+        100% { 
+            opacity: 1; 
+            transform: scale(1) translateY(0); 
+        }
+    }
+    
+    @keyframes modalSlideOut {
+        0% { 
+            opacity: 1; 
+            transform: scale(1) translateY(0); 
+        }
+        100% { 
+            opacity: 0; 
+            transform: scale(0.9) translateY(-20px); 
+        }
+    }
+
     @media (max-width: 640px) {
         .p-8 {
             padding: 1.5rem;
         }
-
         .gap-4 {
             gap: 0.75rem;
+        }
+        .modal-content {
+            margin: 1rem;
+            max-width: calc(100% - 2rem);
         }
     }
 </style>

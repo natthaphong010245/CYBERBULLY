@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_3/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -6,7 +7,7 @@
 @endphp
 
 @section('content')
-    @include('game.intro.index', [
+    @include('game.intro', [
         'title' => 'ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน',
         'gameNumber' => '3',
         'description' => 'แบบไหนที่เรียกว่าเป็นการรังแกทางไซเบอร์'
@@ -68,8 +69,9 @@
         </div>
     </div>
 
+    <!-- Card Information Modal -->
     <div id="feedback-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-4 ">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-4">
             <div id="info-content" class="text-center">
             </div>
             <div class="mt-6 text-center">
@@ -80,5 +82,20 @@
         </div>
     </div>
 
-       @include('layouts.game.script.3.index')
+    <!-- Game Complete Modal -->
+    <div id="game-complete-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-40">
+        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
+            <img src="{{ asset('images/material/school_girl.png') }}" alt="Happy Student"
+                class="w-32 h-auto mx-auto mb-4 object-cover">
+            <h3 class="text-2xl font-bold text-indigo-800">เยี่ยมมาก!</h3>
+            <p class="text-lg text-indigo-800 mb-4">คุณตอบได้ถูกต้อง</p>
+            <p class="text-indigo-800 text-xl font-bold mb-4">เริ่มความท้าทายในเกมถัดไปกันเลย</p>
+            <button id="start-next-game-btn"
+                class="bg-[#929AFF] text-white font-medium text-lg py-2 px-8 rounded-xl transition-colors hover:bg-indigo-600">
+                เริ่ม
+            </button>
+        </div>
+    </div>
+
+    @include('layouts.game.script.3.index')
 @endsection

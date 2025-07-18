@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_1/index.blade.php --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const introModal = document.getElementById('intro-modal');
@@ -6,8 +7,11 @@
         const answerOptions = document.querySelectorAll('.answer-option');
         const successModal = document.getElementById('success-modal');
         const failureModal = document.getElementById('failure-modal');
+        const answerRevealModal = document.getElementById('answer-reveal-modal');
         const successBtn = document.getElementById('success-btn');
-        const failureBtn = document.getElementById('failure-btn');
+        const tryAgainBtn = document.getElementById('try-again-btn');
+        const skipBtn = document.getElementById('skip-btn');
+        const continueBtn = document.getElementById('continue-btn');
 
         if (introModal) {
             setTimeout(() => {
@@ -32,12 +36,14 @@
                 const isCorrect = this.getAttribute('data-correct') === 'true';
                 const answer = this.getAttribute('data-answer');
 
+                // Disable all options
                 answerOptions.forEach(opt => {
                     opt.style.pointerEvents = 'none';
                     const optDiv = opt.querySelector('div');
                     optDiv.classList.add('opacity-50');
                 });
 
+                // Highlight selected option
                 const selectedDiv = this.querySelector('div');
                 if (isCorrect) {
                     selectedDiv.style.backgroundColor = '#10b981';
@@ -67,32 +73,69 @@
             failureModal.classList.add('animate-modal-show');
         }
 
-        successBtn.addEventListener('click', function() {
-            window.location.href = "@yield('next-route')";
-        });
+        function showAnswerRevealModal() {
+            answerRevealModal.classList.remove('hidden');
+            answerRevealModal.classList.add('animate-modal-show');
+        }
 
-        failureBtn.addEventListener('click', function() {
-            window.location.href = "@yield('next-route')";
-        });
-
-        [successModal, failureModal].forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('animate-modal-show');
-                    resetGame();
-                }
-            });
-        });
+        function hideModal(modal) {
+            modal.classList.remove('animate-modal-show');
+            modal.classList.add('animate-modal-fade-out');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('animate-modal-fade-out');
+            }, 300);
+        }
 
         function resetGame() {
             answerOptions.forEach(opt => {
                 opt.style.pointerEvents = 'auto';
                 const optDiv = opt.querySelector('div');
                 optDiv.classList.remove('opacity-50');
-                optDiv.style.backgroundColor = '#6366f1';
+                optDiv.style.backgroundColor = '#6366f1'; // Reset to original indigo color
             });
         }
+
+        // Success button - go to next game
+        successBtn.addEventListener('click', function() {
+            window.location.href = "@yield('next-route')";
+        });
+
+        // Try again button - reset game and close modal
+        tryAgainBtn.addEventListener('click', function() {
+            hideModal(failureModal);
+            setTimeout(() => {
+                resetGame();
+            }, 300);
+        });
+
+        // Skip button - show answer reveal modal
+        skipBtn.addEventListener('click', function() {
+            hideModal(failureModal);
+            setTimeout(() => {
+                showAnswerRevealModal();
+            }, 300);
+        });
+
+        // Continue button - go to next game
+        continueBtn.addEventListener('click', function() {
+            window.location.href = "@yield('next-route')";
+        });
+
+        // Close modal on backdrop click
+        [successModal, failureModal, answerRevealModal].forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    hideModal(modal);
+                    if (modal === failureModal) {
+                        setTimeout(() => {
+                            resetGame();
+                        }, 300);
+                    }
+                }
+            });
+        });
     });
 </script>
 
@@ -185,7 +228,7 @@
         }
         100% {
             opacity: 0;
-            transform: scale(0.3); // Scale down smaller for "วาปเล็กลง" effect
+            transform: scale(0.3);
         }
     }
 
@@ -231,6 +274,7 @@
         box-shadow: none !important;
     }
 
+    /* เบลอเฉพาะส่วนเกม เหมือนเกม 2 */
     .game-blur {
         filter: blur(3px);
         transition: filter 0.3s ease-out;
@@ -255,5 +299,21 @@
     #game-content {
         opacity: 1;
         transition: all 0.3s ease-out;
+    }
+
+    /* Additional animations for smooth transitions */
+    .answer-option div {
+        will-change: transform, background-color;
+    }
+
+    /* Enhanced button hover effects */
+    button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 </style>

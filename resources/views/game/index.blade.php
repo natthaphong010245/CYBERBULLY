@@ -1,3 +1,4 @@
+{{-- resouces/views/game/index.blade.php --}}
 @extends('layouts.main_category')
 
 @php

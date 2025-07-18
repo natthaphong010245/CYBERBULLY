@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_1/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -9,7 +10,7 @@
 
 @section('content')
     @if ($showIntroModal)
-        @include('game.intro.index', [
+        @include('game.intro', [
             'title' => 'ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน',
             'gameNumber' => '1',
             'description' => 'พฤติกรรมแบบนี้เป็นการรังแกรูปแบบไหนกัน',
@@ -53,6 +54,7 @@
         </div>
     </div>
 
+    <!-- Success Modal -->
     <div id="success-modal"
         class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
@@ -68,24 +70,45 @@
         </div>
     </div>
 
+    <!-- Failure Modal - Try Again or Skip -->
     <div id="failure-modal"
         class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
-            <img src="{{ asset('images/material/school_girl_false.png') }}" alt="School Girl Character"
+            <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
                 class="w-32 h-auto mx-auto mb-4 object-cover">
             <h3 class="text-2xl font-bold text-indigo-800">พยายามต่อไป!</h3>
-            <p class="text-lg text-indigo-800 mb-4">คำตอบของคุณยังไม่ถูกต้อง</p>
+            <p class="text-lg text-indigo-800 mb-4">ตัวเลือกของคุณยังไม่ถูกต้อง</p>
 
+            <div class="flex space-x-4 justify-center">
+                <button id="skip-btn"
+                    class="bg-gray-400 text-white font-medium text-lg py-2 px-6 rounded-xl transition-colors hover:bg-gray-500">
+                    ข้าม
+                </button>
+                <button id="try-again-btn"
+                    class="bg-[#929AFF] text-white font-medium text-lg py-2 px-6 rounded-xl transition-colors hover:bg-[#7B85FF]">
+                    อีกครั้ง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Answer Reveal Modal -->
+    <div id="answer-reveal-modal"
+        class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
+            <h3 class="text-2xl font-bold text-indigo-800 mb-4">ตัวเลือกที่ถูก</h3>
+            
             <div class="mb-4">
                 <img src="{{ asset('images/game/1/' . $scenarioImage) }}" alt="{{ $altText }}"
-                    class="w-full h-auto object-cover rounded mb-2">
-                <p class="text-indigo-800 text-2xl">{{ $correctAnswerText }}</p>
+                    class="w-full h-auto object-cover rounded-lg mb-2">
             </div>
 
-            <p class="text-indigo-800 font-bold text-xl mb-1">เริ่มความท้าทายในเกมถัดไปกันเลย</p>
-            <button id="failure-btn"
+            <p class="text-indigo-800 text-2xl font-median mb-4">{{ $correctAnswerText }}</p>
+            <p class="text-indigo-800 text-xl font-bold mb-2">เริ่มความท้าทายเกมถัดไปกันเลย</p>
+            
+            <button id="continue-btn"
                 class="bg-[#929AFF] text-white font-medium text-lg py-2 px-8 rounded-xl transition-colors hover:bg-indigo-600">
-                ถัดไป
+                เริ่ม
             </button>
         </div>
     </div>

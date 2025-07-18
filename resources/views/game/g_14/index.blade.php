@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_14/index.blade.php --}}
 @extends('layouts.game.dealing_bullying.index')
 
 @php
@@ -6,7 +7,7 @@
 @endphp
 
 @section('content')
-    @include('game.intro.index', [
+    @include('game.intro', [
         'title' => 'การรับมือการกลั่นแกล้งบนโลกออนไลน์',
         'gameNumber' => '14',
         'description' => 'การใช้อินเตอร์เน็ตอย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T',
@@ -98,24 +99,31 @@
     </div>
 
     <div id="summary-modal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
-            <div class="mb-2">
-                <h3 class="text-2xl font-bold text-indigo-800 mb-4">การใช้อินเตอร์เน็ตอย่างปลอดภัย</h3>
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
+    <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
+        <div class="mb-2">
+            <h3 class="text-2xl font-bold text-indigo-800 mb-4">การใช้อินเตอร์เน็ตอย่างปลอดภัย</h3>
 
-                <div class="space-y-4 flex flex-col items-center">
-                    <img src="{{ asset('images/game/14/internet_safely.png') }}" alt="C" class="w-11/12 h-auto">
-                </div>
-
-                <p class="text-indigo-800 font-semibold text-lg mt-6">สิ้นสุดความท้าทาย</p>
+            <div class="space-y-4 flex flex-col items-center">
+                <img src="{{ asset('images/game/14/internet_safely.png') }}" alt="Internet Safety" class="w-11/12 h-auto">
             </div>
 
-            <button id="finish-btn"
+            <p class="text-indigo-800 font-semibold text-lg mt-6">สิ้นสุดความท้าทาย</p>
+        </div>
+
+        {{-- แก้ไขให้มี 2 ปุ่ม --}}
+        <div class="flex gap-6 justify-center mt-6">
+            <button id="exit-btn"
+                class="bg-gray-400 text-white font-medium py-2 px-6 rounded-xl transition-colors hover:bg-gray-600">
+                ออก
+            </button>
+            <button id="start-btn"
                 class="bg-[#929AFF] text-white font-medium py-2 px-6 rounded-xl transition-colors hover:bg-[#7B85FF]">
-                เสร็จสิ้น
+                เริ่มต้น
             </button>
         </div>
     </div>
+</div>
 
     @include('layouts.game.script.14.index')
 @endsection

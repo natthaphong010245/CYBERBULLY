@@ -1,0 +1,1 @@
+{{-- resouces/views/game/center.blade.php --}}

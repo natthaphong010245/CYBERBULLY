@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_2/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -6,7 +7,7 @@
 @endphp
 
 @section('content')
-    @include('game.intro.index', [
+    @include('game.intro', [
         'title' => 'ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน',
         'gameNumber' => '2',
         'description' => '"การรังแกกันผ่านโลกไซเบอร์" หรือว่า "ไซเบอร์บูลลี่" เป็นตัวเลือกกันน้า',
@@ -65,8 +66,8 @@
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <div class="mb-6">
                 <img src="{{ asset('images/material/school_girl.png') }}" alt="Character" class="w-32 h-auto mx-auto mb-4">
-                <h3 class="text-2xl font-bold text-indigo-800">ลองอีกครั้ง</h3>
-                <p class="text-lg text-indigo-800">คำตอบยังไม่ถูกต้อง</p>
+                <h3 class="text-2xl font-bold text-indigo-800">พยายามต่อไป!</h3>
+                <p class="text-lg text-indigo-800">ตัวเลือกของคุณยังไม่ถูกต้อง</p>
             </div>
             <div class="flex space-x-6 justify-center">
                 <button id="skip-btn"

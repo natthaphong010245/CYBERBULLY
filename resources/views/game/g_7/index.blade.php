@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_7/index.blade.php --}}
 @extends('layouts.game.causes_bullying.index')
 
 @php
@@ -6,7 +7,7 @@
 @endphp
 
 @section('content')
-    @include('game.intro.index', [
+    @include('game.intro', [
         'title' => 'สาเหตุของการกลั่นแกล้งบนโลกออนไลน์',
         'gameNumber' => '7',
         'description' => 'อยากรู้ไหมว่า สาเหตุของการกลั่นแกล้งบนโลกออนไลน์ เกิดจากอะไร.....'
@@ -21,13 +22,14 @@
         </div>
     </div>
 
+    <!-- Wrong Answer Modal -->
     <div id="wrong-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
                 class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
             
-            <h3 class="text-2xl font-bold text-indigo-800">ลองอีกครั้ง</h3>
-            <p class="text-indigo-800 mb-6 text-lg">คุณตอบไม่ถูกต้อง</p>
+            <h3 class="text-2xl font-bold text-indigo-800">พยายามต่อไป!</h3>
+            <p class="text-indigo-800 mb-6 text-lg">ตัวเลือกของคุณยังไม่ถูกต้อง</p>
             
             <div class="flex gap-6 justify-center">
                 <button id="skip-btn" class="bg-gray-400 text-white font-medium py-2 px-6 rounded-xl transition-colors">
@@ -40,21 +42,40 @@
         </div>
     </div>
 
-    <div id="correct-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
+    <!-- Step 1: Information Modal (รูปที่ 1) -->
+    <div id="info-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full mx-4 text-center">
+            <div class="mb-4">
+                <img src="{{ asset('images/game/7/mystery_box.png') }}" alt="Mystery Box Open" 
+                     class="w-32 h-32 mx-auto mb-4 object-contain">
+            </div>
+            
+            <h3 class="text-xl font-bold text-indigo-800 mb-4">การกลั่นแกล้งบนโลกออนไลน์ เกิดจากอะไร...</h3>
+            
+            <div class="text-indigo-800 text-base leading-relaxed mb-6 text-left">
+                <p class="mb-2 indent-6">
+                    สาเหตุของการกลั่นแกล้งบนโลกออนไลน์ ไม่สามารถเกิดได้หลากหลาย แต่ส่วนมากเกิดขึ้นจากความเกลียดชังและจงใจที่จะล้อเลียน 
+                    เพื่อทำให้เป้าหมายเกิดความอับอายบนโลกไซเบอร์ มีทั้งทำครั้งเดียวเพื่อความสะใจแล้วหายไปและการจงใจตามคุกคาม
+                    เป็นระยะเวลานานๆ แบบล็อคเป้าหมายจนกว่าจะพอใจ
+                </p>
+            </div>
+            
+            <button id="next-btn" class="bg-[#929AFF] text-white font-medium py-2 px-8 rounded-xl transition-colors">
+                ถัดไป
+            </button>
+        </div>
+    </div>
+
+    <!-- Step 2: Success Modal (รูปที่ 2) -->
+    <div id="success-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
-                class="w-32 h-auto rounded-full mx-auto mb-4 object-cover">
+                class="w-32 h-auto mx-auto mb-4 object-cover">
             
             <h3 class="text-2xl font-bold text-indigo-800">เยี่ยมมาก!</h3>
-            <p class="text-indigo-800 mb-6 text-lg">คุณตอบได้ถูกต้อง</p>
+            <p class="text-indigo-800 mb-4 text-lg">คุณตอบได้ถูกต้อง</p>
             
-            <div class="text-indigo-800 p-2">
-                <p class="font-bold text-xl mb-2">การกลั่นแกล้งบนโลกออนไลน์ เกิดจากอะไร...</p>
-                <p class="text-lg leading-relaxed text-lef mb-4" >
-                    สาเหตุของการกลั่นแกล้งบนโลกออนไลน์ สามารถเกิดได้หลากหลาย แต่ส่วนมากเกิดขึ้นจากความเกลียดชังและจงใจที่จะล้อเลียน เพื่อทำให้เป้าหมายเกิดความอับอายบนโลกไซเบอร์ มีทั้งทำครั้งเดียวเพื่อความสะใจแล้วหายไปและการจงใจตามคุกคามเป็นระยะเวลานานๆ แบบล็อคเป้าหมายจนกว่าจะพอใจ
-                </p>
-            
-            <p class="text-indigo-800 text-xl font-bold mb-2">เริ่มความคิดกายในเกมต่อไปกัน</p>
+            <p class="text-indigo-800 text-xl font-bold mb-4">เริ่มความท้าทายในเกมต่อไปกัน</p>
             
             <button id="finish-btn" class="bg-[#929AFF] text-white font-medium py-2 px-8 rounded-xl transition-colors">
                 เริ่ม

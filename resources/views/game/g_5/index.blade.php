@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_5/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -7,7 +8,7 @@
 
 @section('content')
     @if(isset($showIntroModal) && $showIntroModal)
-        @include('game.intro.index', [
+        @include('game.intro', [
             'title' => 'ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน',
             'gameNumber' => '5',
             'description' => 'การกลั่นแกล้งแบบดั้งเดิม และคาดโทษในบอร์',
@@ -75,7 +76,7 @@
         <div class="modal-content bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl_false.png') }}" alt="Confused Student" class="w-32 h-auto mx-auto mb-4">
             <h3 class="text-2xl font-bold text-indigo-800">พยายามต่อไป!</h3>
-            <p class="text-indigo-800 mb-6 text-lg">คำตอบของคุณยังไม่ถูกต้อง</p>
+            <p class="text-indigo-800 mb-6 text-lg">ตัวเลือกของคุณยังไม่ถูกต้อง</p>
             <div class="flex gap-8 justify-center">
                 <button id="skip-btn" class="bg-gray-400 text-white font-medium py-3 px-6 rounded-xl transition-colors hover:bg-gray-500">
                     ข้าม

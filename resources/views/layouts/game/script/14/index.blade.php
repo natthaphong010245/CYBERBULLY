@@ -1,139 +1,152 @@
+{{-- resouces/views/game/g_14/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const introModal = document.getElementById('intro-modal');
-            const gameContent = document.getElementById('game-content');
-            const startGameBtn = document.getElementById('start-game-btn');
+    const introModal = document.getElementById('intro-modal');
+    const gameContent = document.getElementById('game-content');
+    const startGameBtn = document.getElementById('start-game-btn');
 
+    setTimeout(() => {
+        introModal.classList.add('animate-modal-show');
+        gameContent.classList.add('game-blur');
+    }, 100);
+
+    startGameBtn.addEventListener('click', function() {
+        introModal.classList.remove('animate-modal-show');
+        introModal.classList.add('animate-modal-fade-out');
+
+        setTimeout(() => {
+            introModal.style.display = 'none';
+            gameContent.classList.remove('game-blur');
+            gameContent.classList.add('animate-unblur');
+        }, 300);
+    });
+
+    const letterCards = document.querySelectorAll('.letter-card');
+    const letterModal = document.getElementById('letter-modal');
+    const summaryModal = document.getElementById('summary-modal');
+    const modalImage = document.getElementById('modal-letter-image');
+    const modalTitle = document.getElementById('modal-letter-title');
+    const modalDescription = document.getElementById('modal-letter-description');
+    const continueBtn = document.getElementById('continue-btn');
+    
+    // แก้ไข: เปลี่ยนจาก finishBtn เป็น exitBtn และ startBtn
+    const exitBtn = document.getElementById('exit-btn');
+    const startBtn = document.getElementById('start-btn');
+    
+    let selectedLetters = new Set();
+    let currentLetter = '';
+    
+    const letterData = {
+        'c': {
+            title: 'Cyber Security',
+            description: 'ใช้อย่างปลอดภัย',
+            image: '{{ asset("images/game/14/c.png") }}'
+        },
+        'o': {
+            title: 'Online Empath',
+            description: 'ใส่ใจผู้อื่น',
+            image: '{{ asset("images/game/14/o.png") }}'
+        },
+        'n1': {
+            title: 'Netiquette',
+            description: 'ใช้อย่างมีสุภาพ',
+            image: '{{ asset("images/game/14/n.png") }}'
+        },
+        'n2': {
+            title: 'Notification',
+            description: 'ปิดการแจ้งเตือน',
+            image: '{{ asset("images/game/14/n.png") }}'
+        },
+        'e': {
+            title: 'Exploration',
+            description: 'สำรวจเพื่อแนะนำ',
+            image: '{{ asset("images/game/14/e.png") }}'
+        },
+        'c2': {
+            title: 'Collect & Connect',
+            description: 'แกน-แกร์ ผ่อมบกร้',
+            image: '{{ asset("images/game/14/c.png") }}'
+        },
+        't': {
+            title: 'Two-Step Verification',
+            description: 'เปิดโครี่ทำกิดให้ช่วย',
+            image: '{{ asset("images/game/14/t.png") }}'
+        }
+    };
+    
+    letterCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const letter = this.getAttribute('data-letter');
+            currentLetter = letter;
+            showLetterModal(letter);
+        });
+    });
+    
+    continueBtn.addEventListener('click', function() {
+        hideModal(letterModal);
+        
+        selectedLetters.add(currentLetter);
+        updateCardAppearance(currentLetter);
+        
+        if (selectedLetters.size === 7) {
             setTimeout(() => {
-                introModal.classList.add('animate-modal-show');
-                gameContent.classList.add('game-blur');
-
-            startGameBtn.addEventListener('click', function() {
-                introModal.classList.remove('animate-modal-show');
-                introModal.classList.add('animate-modal-fade-out');
-
-                setTimeout(() => {
-                    introModal.style.display = 'none';
-                    gameContent.classList.remove('game-blur');
-                    gameContent.classList.add('animate-unblur');
-                }, 300);
-            });
-
-            const letterCards = document.querySelectorAll('.letter-card');
-            const letterModal = document.getElementById('letter-modal');
-            const summaryModal = document.getElementById('summary-modal');
-            const modalImage = document.getElementById('modal-letter-image');
-            const modalTitle = document.getElementById('modal-letter-title');
-            const modalDescription = document.getElementById('modal-letter-description');
-            const continueBtn = document.getElementById('continue-btn');
-            const finishBtn = document.getElementById('finish-btn');
-            
-            let selectedLetters = new Set();
-            let currentLetter = '';
-            
-            const letterData = {
-                'c': {
-                    title: 'Cyber Security',
-                    description: 'ใช้อย่างปลอดภัย',
-                    image: '{{ asset("images/game/14/c.png") }}'
-                },
-                'o': {
-                    title: 'Online Empath',
-                    description: 'ใส่ใจผู้อื่น',
-                    image: '{{ asset("images/game/14/o.png") }}'
-                },
-                'n1': {
-                    title: 'Netiquette',
-                    description: 'ใช้อย่างมีสุดส่วน',
-                    image: '{{ asset("images/game/14/n.png") }}'
-                },
-                'n2': {
-                    title: 'Notification',
-                    description: 'ปิดการแจ้งเตือน',
-                    image: '{{ asset("images/game/14/n.png") }}'
-                },
-                'e': {
-                    title: 'Exploration',
-                    description: 'สำรวจเพื่อแนะนำ',
-                    image: '{{ asset("images/game/14/e.png") }}'
-                },
-                'c2': {
-                    title: 'Collect & Connect',
-                    description: 'แกน-แกร์ ผ่อมบกร้',
-                    image: '{{ asset("images/game/14/c.png") }}'
-                },
-                't': {
-                    title: 'Two-Step Verification',
-                    description: 'เปิดโครี่ทำกิดให้ช่วย',
-                    image: '{{ asset("images/game/14/t.png") }}'
-                }
-            };
-            
-            letterCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const letter = this.getAttribute('data-letter');
-                    currentLetter = letter;
-                    showLetterModal(letter);
-                });
-            });
-            
-            continueBtn.addEventListener('click', function() {
-                hideModal(letterModal);
-                
-                selectedLetters.add(currentLetter);
-                updateCardAppearance(currentLetter);
-                
-                if (selectedLetters.size === 7) {
-                    setTimeout(() => {
-                        showSummaryModal();
-                    }, 500);
-                }
-            });
-            
-            finishBtn.addEventListener('click', function() {
-                hideModal(summaryModal);
-                setTimeout(() => {
-                    window.location.href = "{{ route('main') }}";
-                }, 500);
-            });
-            
-            function showLetterModal(letter) {
-                const data = letterData[letter];
-                
-                modalImage.src = data.image;
-                modalImage.alt = data.title;
-                modalTitle.textContent = data.title;
-                modalDescription.textContent = data.description;
-                
-                letterModal.classList.remove('hidden');
-                letterModal.classList.add('animate-fadeIn');
-            }
-            
-            function showSummaryModal() {
-                summaryModal.classList.remove('hidden');
-                summaryModal.classList.add('animate-fadeIn');
-            }
-            
-            function hideModal(modal) {
-                modal.classList.remove('animate-fadeIn');
-                modal.classList.add('animate-fadeOut');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('animate-fadeOut');
-                }, 500);
-            }
-            
-            function updateCardAppearance(letter) {
-                const card = document.querySelector(`[data-letter="${letter}"]`);
-                const cardInner = card.querySelector('div');
-                
-                cardInner.classList.remove('border-transparent', 'hover:border-indigo-200');
-                cardInner.classList.add('border-purple-500');
-                
-                card.setAttribute('data-selected', 'true');
-            }
-        });
-        });
+                showSummaryModal();
+            }, 500);
+        }
+    });
+    
+    // แก้ไข: เพิ่ม event listener สำหรับปุ่ม "ออก"
+    exitBtn.addEventListener('click', function() {
+        hideModal(summaryModal);
+        setTimeout(() => {
+            window.location.href = "{{ route('game') }}";
+        }, 500);
+    });
+    
+    // แก้ไข: เพิ่ม event listener สำหรับปุ่ม "เริ่มต้น"
+    startBtn.addEventListener('click', function() {
+        hideModal(summaryModal);
+        setTimeout(() => {
+            window.location.href = "{{ route('game_1_1') }}";
+        }, 500);
+    });
+    
+    function showLetterModal(letter) {
+        const data = letterData[letter];
+        
+        modalImage.src = data.image;
+        modalImage.alt = data.title;
+        modalTitle.textContent = data.title;
+        modalDescription.textContent = data.description;
+        
+        letterModal.classList.remove('hidden');
+        letterModal.classList.add('animate-fadeIn');
+    }
+    
+    function showSummaryModal() {
+        summaryModal.classList.remove('hidden');
+        summaryModal.classList.add('animate-fadeIn');
+    }
+    
+    function hideModal(modal) {
+        modal.classList.remove('animate-fadeIn');
+        modal.classList.add('animate-fadeOut');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('animate-fadeOut');
+        }, 500);
+    }
+    
+    function updateCardAppearance(letter) {
+        const card = document.querySelector(`[data-letter="${letter}"]`);
+        const cardInner = card.querySelector('div');
+        
+        cardInner.classList.remove('border-transparent', 'hover:border-indigo-200');
+        cardInner.classList.add('border-purple-500');
+        
+        card.setAttribute('data-selected', 'true');
+    }
+});
     
         </script>
     

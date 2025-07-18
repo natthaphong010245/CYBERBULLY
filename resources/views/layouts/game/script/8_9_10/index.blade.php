@@ -20,80 +20,116 @@
             }, 300);
         });
 
-        const correctOverlay = document.getElementById('correct-overlay');
+        // Modal elements
+        const infoOverlay = document.getElementById('info-overlay');
+        const successOverlay = document.getElementById('success-overlay');
         const wrongOverlay = document.getElementById('wrong-overlay');
-        const showAnswerBtn = document.getElementById('show-answer-btn');
+        
+        // Button elements
+        const nextBtn = document.getElementById('next-btn');
+        const finishBtn = document.getElementById('finish-btn');
+        const tryAgainBtn = document.getElementById('try-again-btn');
+        const skipBtn = document.getElementById('skip-btn');
         
         const nextRoute = window.gameNextRoute || "{{ route('main') }}";
         
+        // For games 8 & 9 (choice cards)
         const correctChoice = document.querySelector('.correct-choice');
         const wrongChoice = document.querySelector('.wrong-choice');
         
         if (correctChoice && wrongChoice) {
-            const finishCorrectBtn = document.getElementById('finish-correct-btn');
-            
             correctChoice.addEventListener('click', function() {
-                showCorrectModal();
+                showInfoModal(); // Step 1: Show information
             });
             
             wrongChoice.addEventListener('click', function() {
                 showWrongModal();
             });
-            
-            finishCorrectBtn.addEventListener('click', function() {
-                hideModal(correctOverlay);
-                setTimeout(() => {
-                    window.location.href = nextRoute;
-                }, 500);
-            });
         }
         
+        // For game 10 (buttons)
         const illegalBtn = document.getElementById('illegal-btn');
         const legalBtn = document.getElementById('legal-btn');
         
         if (illegalBtn && legalBtn) {
-            const correctContinueBtn = document.getElementById('correct-continue-btn');
-            
             illegalBtn.addEventListener('click', function() {
-                showCorrectModal();
+                showInfoModal(); // Step 1: Show information
             });
 
             legalBtn.addEventListener('click', function() {
                 showWrongModal();
             });
-            
-            correctContinueBtn.addEventListener('click', function() {
-                hideModal(correctOverlay);
-                setTimeout(() => {
-                    window.location.href = nextRoute;
-                }, 500);
+        }
+
+        // Event listeners for modal buttons
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                hideModal(infoOverlay, function() {
+                    setTimeout(() => {
+                        showSuccessModal(); // Step 2: Show success modal
+                    }, 300);
+                });
+            });
+        }
+
+        if (finishBtn) {
+            finishBtn.addEventListener('click', function() {
+                hideModal(successOverlay, function() {
+                    setTimeout(() => {
+                        window.location.href = nextRoute;
+                    }, 300);
+                });
+            });
+        }
+
+        if (tryAgainBtn) {
+            tryAgainBtn.addEventListener('click', function() {
+                hideModal(wrongOverlay);
+                // Game resets automatically, buttons become clickable again
+            });
+        }
+
+        if (skipBtn) {
+            skipBtn.addEventListener('click', function() {
+                hideModal(wrongOverlay, function() {
+                    setTimeout(() => {
+                        window.location.href = nextRoute;
+                    }, 300);
+                });
             });
         }
         
-        showAnswerBtn.addEventListener('click', function() {
-            hideModal(wrongOverlay);
-            setTimeout(() => {
-                window.location.href = nextRoute;
-            }, 500);
-        });
-        
-        function showCorrectModal() {
-            correctOverlay.classList.remove('hidden');
-            correctOverlay.classList.add('animate-fadeIn');
+        function showInfoModal() {
+            if (infoOverlay) {
+                infoOverlay.classList.remove('hidden');
+                infoOverlay.classList.add('animate-fadeIn');
+            }
+        }
+
+        function showSuccessModal() {
+            if (successOverlay) {
+                successOverlay.classList.remove('hidden');
+                successOverlay.classList.add('animate-fadeIn');
+            }
         }
         
         function showWrongModal() {
-            wrongOverlay.classList.remove('hidden');
-            wrongOverlay.classList.add('animate-fadeIn');
+            if (wrongOverlay) {
+                wrongOverlay.classList.remove('hidden');
+                wrongOverlay.classList.add('animate-fadeIn');
+            }
         }
         
-        function hideModal(modal) {
-            modal.classList.remove('animate-fadeIn');
-            modal.classList.add('animate-fadeOut');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('animate-fadeOut');
-            }, 500);
+        function hideModal(modal, callback) {
+            if (modal) {
+                modal.classList.remove('animate-fadeIn');
+                modal.classList.add('animate-fadeOut');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('animate-fadeOut');
+                    if (callback) callback();
+                }, 500);
+            }
         }
     });
 </script>
@@ -182,7 +218,7 @@
 
         100% {
             opacity: 0;
-            transform: scale(0.3); // Scale down smaller for "วาปเล็กลง" effect
+            transform: scale(0.3);
         }
     }
 
@@ -218,12 +254,14 @@
         transition: all 0.3s ease-out;
     }
     
-    #correct-overlay .bg-white,
+    #info-overlay .bg-white,
+    #success-overlay .bg-white,
     #wrong-overlay .bg-white {
         animation: modalSlideIn 0.5s ease-in-out forwards;
     }
     
-    #correct-overlay.animate-fadeOut .bg-white,
+    #info-overlay.animate-fadeOut .bg-white,
+    #success-overlay.animate-fadeOut .bg-white,
     #wrong-overlay.animate-fadeOut .bg-white {
         animation: modalSlideOut 0.5s ease-in-out forwards;
     }
@@ -280,7 +318,8 @@
             height: 160px;
         }
         
-        #correct-overlay .bg-white,
+        #info-overlay .bg-white,
+        #success-overlay .bg-white,
         #wrong-overlay .bg-white {
             margin: 1rem;
             max-width: calc(100% - 2rem);

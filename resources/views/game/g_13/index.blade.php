@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_13/index.blade.php --}}
 @extends('layouts.game.dealing_bullying.index')
 
 @php
@@ -6,7 +7,7 @@
 @endphp
 
 @section('content')
-    @include('game.intro.index', [
+    @include('game.intro', [
         'title' => 'การรับมือการกลั่นแกล้งบนโลกออนไลน์',
         'gameNumber' => '13',
         'description' => 'วิธีรับมือ CYBERBULLYING'

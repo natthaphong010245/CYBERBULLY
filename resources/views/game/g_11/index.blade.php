@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_11/index.blade.php --}}
 @extends('layouts.game.dealing_bullying.index')
 
 @php
@@ -6,7 +7,7 @@
 @endphp
 
 @section('content')
-    @include('game.intro.index', [
+    @include('game.intro', [
         'title' => 'การรับมือการกลั่นแกล้งบนโลกออนไลน์',
         'gameNumber' => '11',
         'description' => 'สัญญาณเตือนภัยกับการรังแกทางไซเบอร์'
@@ -63,6 +64,7 @@
         </div>
     </div>
 
+    <!-- Signal Details Modal -->
     <div id="signal-modal"
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
         <div class="modal-content bg-white rounded-3xl shadow-2xl p-8 max-w-sm mx-4 text-center">
@@ -93,63 +95,45 @@
         </div>
     </div>
 
+    <!-- Success Modal (รูปที่ 1) -->
     <div id="success-modal"
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
-        <div class="modal-content bg-white rounded-3xl shadow-2xl p-8 max-w-sm mx-4 text-center">
-            <h2 class="text-xl font-bold text-indigo-800 mb-4">
-                สัญญาณเตือนภัยกับงบนอกถังผู้ถูกกลั่นแกล้งทางไซเบอร์
-            </h2>
-
-            <div class="flex justify-center mb-4">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 text-center">
+            <div class="flex justify-center mb-6">
                 <img src="{{ asset('images/material/school_girl.png') }}" alt="Character"
-                    class="w-24 h-24 object-contain rounded-full">
+                    class="w-40 h-auto object-contain">
             </div>
 
-            <div class="text-2xl font-bold text-indigo-800">เยี่ยมมาก!</div>
-            <div class="text-indigo-800 mb-4">คำตอบของคุณถูกต้อง</div>
-            <div class="text-indigo-800 text-lg font-bold mb-2">เริ่มความท้าทายในเกมถัดไปกันเลย</div>
+            <div class="text-3xl font-bold text-indigo-800 mb-2">เยี่ยมมาก!</div>
+            <div class="text-xl text-indigo-800 mb-4">คุณตอบได้ถูกต้อง</div>
+            <div class="text-indigo-800 text-xl font-bold mb-6">เริ่มความท้าทายเกมต่อไปเลย</div>
 
-            <button onclick="goToMain()" class="bg-[#929AFF] text-white px-8 py-2 rounded-xl font-medium transition-colors">
+            <button onclick="goToNextGame()" class="bg-[#929AFF] text-white font-medium py-3 px-12 rounded-xl text-lg transition-colors hover:bg-[#7B85FF]">
                 เริ่ม
             </button>
         </div>
     </div>
 
+    <!-- Wrong Answer Modal (รูปที่ 2) -->
     <div id="retry-modal"
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
-        <div class="modal-content bg-white rounded-3xl shadow-2xl p-8 max-w-sm mx-4 text-center">
-            <div class="flex justify-center mb-4">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 text-center">
+            <div class="flex justify-center mb-6">
                 <img src="{{ asset('images/material/school_girl.png') }}" alt="Character"
-                    class="w-24 h-24 object-contain rounded-full">
+                    class="w-40 h-auto object-contain">
             </div>
 
-            <div class="text-2xl font-bold text-indigo-800 mb-2">พยายามต่อไป!</div>
-            <div class="text-indigo-800 mb-2">คำตอบของคุณยังไม่ถูกต้อง</div>
+            <div class="text-3xl font-bold text-indigo-800 mb-2">พยายามต่อไป!</div>
+            <div class="text-xl text-indigo-800 mb-8">ตัวเลือกของคุณยังไม่ถูกต้อง</div>
 
-            <div class="rounded-xl p-4 mb-6 text-left">
-                <div class="text-indigo-800 font-bold mb-4 text-center text-lg">
-                    สัญญาณเตือนภัยกับงบนอกถังผู้ถูกกลั่นแกล้งทางไซเบอร์
-                </div>
-                <div class="text-indigo-800 text-lg font-bold mb-2 text-center">
-                    <div class="flex items-center mb-2">
-                        <div class="flex-1 border-b-2 border-indigo-700"></div>
-                        <span class="px-4 text-sm">สัญญาณเตือน</span>
-                        <div class="flex-1 border-b-2 border-indigo-700"></div>
-                    </div>
-                    <div class="text-3xl">1</div>
-                </div>
-                <div class="text-indigo-800 text-lg leading-relaxed">
-                    หลีกหนีสถานการณ์ทางสังคมไม่อยากไปโรงเรียนเก็บตัวไม่อยากสุงสิงกับใครมีมุมมองต่อตัว เองใน แง่ลบ เช่น
-                    ฉันอ่อนแอ ไม่มีทางสู้
-                </div>
+            <div class="flex gap-8 justify-center">
+                <button onclick="skipGame()" class="bg-gray-400 text-white font-medium py-3 px-8 rounded-xl text-lg transition-colors hover:bg-gray-500">
+                    ข้าม
+                </button>
+                <button onclick="tryAgain()" class="bg-[#929AFF] text-white font-medium py-3 px-8 rounded-xl text-lg transition-colors hover:bg-[#7B85FF]">
+                    อีกครั้ง
+                </button>
             </div>
-
-            <div class="text-indigo-800 text-xl font-bold mb-2">เริ่มความท้าทายในเกมถัดไปกันเลย</div>
-
-            <button onclick="goToMain()"
-                class="bg-[#929AFF] text-white px-8 py-2 rounded-xl font-medium transition-colors">
-                เริ่ม
-            </button>
         </div>
     </div>
 

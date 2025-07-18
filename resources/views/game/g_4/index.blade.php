@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_4/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -7,7 +8,7 @@
 
 @section('content')
     @if(isset($showIntroModal) && $showIntroModal)
-        @include('game.intro.index', [
+        @include('game.intro', [
             'title' => 'ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน',
             'gameNumber' => '4',
             'description' => 'จับคู่รูปภาพกับข้อความที่เกี่ยวกับการรังแกทางไซเบอร์'

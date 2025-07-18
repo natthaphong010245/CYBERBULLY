@@ -1,3 +1,4 @@
+{{-- resouces/views/layouts/game/script/2/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');

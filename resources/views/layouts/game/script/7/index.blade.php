@@ -22,9 +22,11 @@
 
         const container = document.getElementById('mystery-container');
         const wrongOverlay = document.getElementById('wrong-overlay');
-        const correctOverlay = document.getElementById('correct-overlay');
+        const infoOverlay = document.getElementById('info-overlay');
+        const successOverlay = document.getElementById('success-overlay');
         const tryAgainBtn = document.getElementById('try-again-btn');
         const skipBtn = document.getElementById('skip-btn');
+        const nextBtn = document.getElementById('next-btn');
         const finishBtn = document.getElementById('finish-btn');
         
         let gameBoxes = [];
@@ -80,7 +82,7 @@
             if (boxIndex === correctBoxIndex) {
                 gameCompleted = true;
                 setTimeout(() => {
-                    showCorrectModal();
+                    showInfoModal(); // Step 1: Show information first
                 }, 300);
             } else {
                 setTimeout(() => {
@@ -94,9 +96,25 @@
             wrongOverlay.classList.add('animate-fadeIn');
         }
         
-        function showCorrectModal() {
-            correctOverlay.classList.remove('hidden');
-            correctOverlay.classList.add('animate-fadeIn');
+        function showInfoModal() {
+            infoOverlay.classList.remove('hidden');
+            infoOverlay.classList.add('animate-fadeIn');
+        }
+        
+        function showSuccessModal() {
+            successOverlay.classList.remove('hidden');
+            successOverlay.classList.add('animate-fadeIn');
+        }
+        
+        function hideModal(modal, callback) {
+            modal.classList.remove('animate-fadeIn');
+            modal.classList.add('animate-fadeOut');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('animate-fadeOut');
+                if (callback) callback();
+            }, 500);
         }
         
         function resetGame() {
@@ -105,33 +123,34 @@
             });
         }
         
+        // Try Again Button - Reset game
         tryAgainBtn.addEventListener('click', function() {
-            wrongOverlay.classList.remove('animate-fadeIn');
-            wrongOverlay.classList.add('animate-fadeOut');
-            
-            setTimeout(() => {
-                wrongOverlay.classList.add('hidden');
-                wrongOverlay.classList.remove('animate-fadeOut');
+            hideModal(wrongOverlay, function() {
                 resetGame();
-            }, 500);
+            });
         });
         
+        // Skip Button - Go to next game
         skipBtn.addEventListener('click', function() {
-            wrongOverlay.classList.remove('animate-fadeIn');
-            wrongOverlay.classList.add('animate-fadeOut');
-            
-            setTimeout(() => {
+            hideModal(wrongOverlay, function() {
                 window.location.href = "{{ route('game_8') }}";
-            }, 500);
+            });
         });
         
+        // Next Button - From info modal to success modal
+        nextBtn.addEventListener('click', function() {
+            hideModal(infoOverlay, function() {
+                setTimeout(() => {
+                    showSuccessModal(); // Step 2: Show success modal
+                }, 300);
+            });
+        });
+        
+        // Finish Button - Go to next game
         finishBtn.addEventListener('click', function() {
-            correctOverlay.classList.remove('animate-fadeIn');
-            correctOverlay.classList.add('animate-fadeOut');
-            
-            setTimeout(() => {
+            hideModal(successOverlay, function() {
                 window.location.href = "{{ route('game_8') }}";
-            }, 500);
+            });
         });
         
         createMysteryBoxes();
@@ -258,13 +277,16 @@
         transition: all 0.3s ease-out;
     }
     
+    /* Modal content animations */
     #wrong-overlay .bg-white,
-    #correct-overlay .bg-white {
+    #info-overlay .bg-white,
+    #success-overlay .bg-white {
         animation: modalSlideIn 0.5s ease-in-out forwards;
     }
     
     #wrong-overlay.animate-fadeOut .bg-white,
-    #correct-overlay.animate-fadeOut .bg-white {
+    #info-overlay.animate-fadeOut .bg-white,
+    #success-overlay.animate-fadeOut .bg-white {
         animation: modalSlideOut 0.5s ease-in-out forwards;
     }
     
@@ -295,5 +317,21 @@
         width: 100%;
         height: 200px;
     }
-    
+
+    /* Enhanced button hover effects */
+    button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mystery box hover effects */
+    .cursor-pointer:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
 </style>

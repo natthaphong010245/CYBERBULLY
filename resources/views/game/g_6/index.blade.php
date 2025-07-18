@@ -1,3 +1,4 @@
+{{-- resouces/views/game/g_6/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -6,7 +7,7 @@
 @endphp
 
 @section('content')
-    @include('game.intro.index', [
+    @include('game.intro', [
         'title' => 'ความรู้เกี่ยวกับพฤติกรรมการรังแกกัน',
         'gameNumber' => '6',
         'description' => 'พบปัญหา สิ่งที่เขาได้ยินได้ทุกข์ทรมาน หรือกลั่นแกล้งบนโลกออนไลน์ที่ผ่านมาได้เลย',
