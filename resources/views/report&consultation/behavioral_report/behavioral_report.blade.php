@@ -1,4 +1,4 @@
-@extends('layouts.main_category')
+@extends('layouts.category_game')
 
 @php
     $mainUrl = '/main';
@@ -28,7 +28,7 @@
             <label class="block text-lg font-medium text-[#3E36AE] mb-2">การรายงาน</label>
             <div class="dropdown-container">
                 <div id="reportToDisplay" class="select-display">
-                    <span id="reportToText" class="text-gray-500">กรุณาเลือก</span>
+                    <span id="reportToText" class="select-text text-gray-500">กรุณาเลือก</span>
                     <svg class="arrow-icon w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>
@@ -45,7 +45,7 @@
             <label class="block text-lg font-medium text-[#3E36AE] mb-2">โรงเรียน</label>
             <div class="dropdown-container">
                 <div id="schoolDisplay" class="select-display">
-                    <span id="schoolText" class="text-gray-500">กรุณาเลือก</span>
+                    <span id="schoolText" class="select-text text-gray-500">กรุณาเลือก</span>
                     <svg class="arrow-icon w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>
@@ -63,8 +63,8 @@
         <div class="mb-6">
             <label for="message" class="block text-lg font-medium text-[#3E36AE] mb-2">ข้อความ</label>
             <textarea id="message" name="message" rows="4" required
-                      class="w-full h-44 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3E36AE] resize-none text-base"
-                      style="font-size: 16px;"></textarea>
+                      class="w-full h-44 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3E36AE] resize-none text-base"
+                      style="font-size: 16px;" placeholder="กรุณาใส่ข้อความของคุณ..."></textarea>
         </div>
 
         @include('report&consultation.behavioral_report.record')
@@ -74,7 +74,7 @@
         @include('report&consultation.behavioral_report.position')
 
         <div class="flex justify-center gap-4 mt-8 px-4">
-            <button button type="button" onclick="history.back()" class="flex-1 max-w-36 px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3E36AE] touch-manipulation">
+            <button type="button" onclick="history.back()" class="flex-1 max-w-36 px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3E36AE] touch-manipulation">
                 ยกเลิก
             </button>
             <button type="submit" class="flex-1 max-w-36 px-6 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#7F77E0] hover:bg-[#3E36AE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3E36AE] touch-manipulation">

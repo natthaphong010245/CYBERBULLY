@@ -1,5 +1,4 @@
-{{-- resouces/views/game/g_13/index.blade.php --}}
-<script>
+ <script>
         document.addEventListener('DOMContentLoaded', function() {
             const introModal = document.getElementById('intro-modal');
             const gameContent = document.getElementById('game-content');
@@ -170,14 +169,22 @@
         }
 
         .action-image {
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
         }
 
+        .modal-container {
+            max-width: 400px;
+        }
+
+        .summary-container {
+            max-width: 450px;
+        }
+
         .modal-icon-container {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -186,22 +193,164 @@
         }
 
         .modal-action-icon {
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
         }
 
-        .summary-icon {
-            width: 100px;
-            height: auto;
-            object-fit: contain;
+        .modal-title {
+            font-size: 1.5rem; 
+        }
+
+        .modal-subtitle {
+            font-size: 1rem; 
+        }
+
+        .modal-action-title {
+            font-size: 1.25rem; 
+        }
+
+        .modal-description {
+            font-size: 1rem; 
+        }
+
+        .summary-title {
+            font-size: 1.375rem; 
+        }
+
+        .summary-subtitle {
+            font-size: 0.875rem; 
+        }
+
+        .summary-method-title {
+            font-size: 1.125rem; 
+        }
+
+        .summary-method-subtitle {
+            font-size: 1rem; 
+        }
+
+        .summary-text {
+            font-size: 0.875rem;
+        }
+
+        .summary-challenge-text {
+            font-size: 1rem; 
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .action-card-inner {
+                padding: 16px;
+                min-height: 140px;
+            }
+
+            .action-image {
+                width: 110px;
+                height: 110px;
+            }
+
+            .modal-container {
+                max-width: 350px;
+            }
+
+            .summary-container {
+                max-width: 380px;
+            }
+
+            .modal-icon-container {
+                width: 140px;
+                height: 140px;
+            }
+
+            .modal-action-icon {
+                width: 120px;
+                height: 120px;
+            }
+
+            .modal-title {
+                font-size: 1.25rem; 
+            }
+
+            .modal-subtitle {
+                font-size: 0.875rem; 
+            }
+
+            .modal-action-title {
+                font-size: 1.125rem; 
+            }
+
+            .modal-description {
+                font-size: 0.9375rem; 
+            }
+
+            .summary-title {
+                font-size: 1.25rem; 
+            }
+
+            .summary-method-title {
+                font-size: 1rem; 
+            }
+
+            .summary-method-subtitle {
+                font-size: 0.9375rem;
+            }
+
+            .summary-text {
+                font-size: 0.8125rem; 
+            }
+        }
+
+        @media (min-width: 768px) {
+            .desktop-container .action-image {
+                width: 110px;
+                height: 110px;
+            }
+
+            .desktop-container .action-card-inner {
+                min-height: 150px;
+                padding: 24px;
+            }
+
+            .desktop-container .modal-container {
+                max-width: 380px;
+            }
+
+            .desktop-container .summary-container {
+                max-width: 400px;
+            }
+
+            .desktop-container .modal-action-icon {
+                width: 110px;
+                height: 110px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .desktop-container .action-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .desktop-container .action-card-inner {
+                min-height: 160px;
+            }
+
+            .desktop-container .modal-action-icon {
+                width: 120px;
+                height: 120px;
+            }
         }
 
         .show-modal {
             animation: backdropFadeIn 0.3s ease-in-out forwards;
         }
 
-        .show-modal>div {
+        .show-modal > div {
             animation: contentScaleIn 0.4s ease-out 0.1s both;
         }
 
@@ -209,7 +358,7 @@
             animation: backdropFadeOut 0.3s ease-in-out forwards;
         }
 
-        .hide-modal>div {
+        .hide-modal > div {
             animation: contentScaleOut 0.3s ease-in forwards;
         }
 
@@ -217,7 +366,6 @@
             0% {
                 opacity: 0;
             }
-
             100% {
                 opacity: 1;
             }
@@ -227,7 +375,6 @@
             0% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0;
             }
@@ -238,7 +385,6 @@
                 opacity: 0;
                 transform: scale(0.7);
             }
-
             100% {
                 opacity: 1;
                 transform: scale(1);
@@ -250,7 +396,6 @@
                 opacity: 1;
                 transform: scale(1);
             }
-
             100% {
                 opacity: 0;
                 transform: scale(0.7);
@@ -274,33 +419,9 @@
                 opacity: 0;
                 transform: scale(0.8);
             }
-
             100% {
                 opacity: 1;
                 transform: scale(1);
-            }
-        }
-
-        @keyframes backdropFadeOut {
-            0% {
-                background-color: rgba(0, 0, 0, 0.4);
-            }
-
-            100% {
-                background-color: rgba(0, 0, 0, 0);
-                visibility: hidden;
-            }
-        }
-
-        @keyframes contentScaleOut {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(0.3);
             }
         }
 
@@ -319,37 +440,45 @@
                 filter: blur(3px);
                 transform: scale(1.02);
             }
-
             100% {
                 filter: blur(0px);
                 transform: scale(1);
             }
         }
 
-        @media (max-width: 640px) {
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
+        .action-card-inner {
+            will-change: transform, box-shadow;
+        }
 
-            .action-card-inner {
-                padding: 4px;
-                min-height: 150px;
-            }
+        .modal-action-icon,
+        .action-image {
+            will-change: auto;
+        }
 
-            .action-image {
-                width: 140px;
-                height: 140px;
-            }
+        .action-card:focus {
+            outline: 2px solid #3E36AE;
+            outline-offset: 2px;
+        }
 
-            .modal-icon-container {
-                width: auto;
-                height: 140px;
-            }
+        .summary-container {
+            scroll-behavior: smooth;
+        }
 
-            .modal-action-icon {
-                width: 200px;
-                height: 200px;
-            }
+        .summary-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .summary-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .summary-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .summary-container::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
         }
     </style>

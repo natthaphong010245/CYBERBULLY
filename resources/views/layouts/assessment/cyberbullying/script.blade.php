@@ -1,4 +1,3 @@
-{{-- resources/views/layouts/assessment/cyberbullying/script.blade.php --}}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('questionnaire-form');
@@ -22,15 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressBar = document.getElementById('progress-bar');
     const progressPercentage = document.getElementById('progress-percentage');
     
-    // ตรวจสอบจำนวนคำถามจาก URL หรือนับจากหน้าจริง
-    let totalQuestions = 18; // default สำหรับ overview
+    let totalQuestions = 18; 
     
     const currentPath = window.location.pathname;
     if (currentPath.includes('person_action') || currentPath.includes('victim')) {
         totalQuestions = 9;
     }
     
-    // หรือนับจากจำนวนคำถามจริงในหน้า
     const questionContainers = document.querySelectorAll('.question-container');
     if (questionContainers.length > 0) {
         totalQuestions = questionContainers.length;
@@ -80,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const questionContainer = document.getElementById(`question-container-${questionNumber}`);
         if (questionContainer) {
-            // รีเซ็ต radio buttons ทั้งหมดในคำถามนี้ก่อน
             const allRadios = questionContainer.querySelectorAll('.radio-option');
             allRadios.forEach(radio => {
                 radio.style.backgroundColor = 'white';
@@ -89,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 radio.checked = false;
             });
             
-            // เลือกตัวที่คลิก
             radioElement.checked = true;
             radioElement.style.backgroundColor = '#3E36AE';
             radioElement.style.borderColor = '#3E36AE';
@@ -105,24 +100,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // แก้ไขสีของหัวข้อคำถาม และลบดอกจัน
         const questionTitle = document.getElementById(`question-title-${questionNumber}`);
         if (questionTitle) {
-            questionTitle.style.color = '#4b5563'; // สีเทาเข้ม
+            questionTitle.style.color = '#4b5563';
             questionTitle.style.fontWeight = '600';
             
-            // ลบดอกจันถ้ามี
             const asterisk = questionTitle.querySelector('.required-asterisk');
             if (asterisk) {
                 asterisk.remove();
             }
         }
         
-        // แก้ไขสีของข้อความตัวเลือก
         const allOptionTexts = questionContainer.querySelectorAll('.option-text');
         allOptionTexts.forEach(optionText => {
             if (optionText) {
-                optionText.style.color = '#4b5563'; // สีเทาเข้ม
+                optionText.style.color = '#4b5563';
             }
         });
         
@@ -156,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         
-        // Clear previous error states
         const allQuestionTitles = document.querySelectorAll('.question-title');
         allQuestionTitles.forEach(title => {
             const asterisk = title.querySelector('.required-asterisk');
@@ -187,12 +178,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (radioButtons.length === 0) {
                 allAnswered = false;
                 
-                // เพิ่ม error state สำหรับทุกข้อที่ยังไม่ตอบ
                 const questionTitle = document.getElementById(`question-title-${i}`);
                 if (questionTitle) {
-                    questionTitle.style.color = '#ef4444'; // สีแดง
+                    questionTitle.style.color = '#ef4444';
                     
-                    // เพิ่มดอกจันถ้ายังไม่มี
                     if (!questionTitle.querySelector('.required-asterisk')) {
                         const asterisk = document.createElement('span');
                         asterisk.className = 'required-asterisk';
@@ -204,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // จำข้อแรกที่ไม่ได้ตอบเพื่อ scroll ไป
                 if (firstUnanswered === null) {
                     firstUnanswered = i;
                 }
@@ -245,12 +233,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Carousel functionality for result pages
 document.addEventListener('DOMContentLoaded', function() {
     const carousel = document.getElementById('result-carousel');
     const dots = document.querySelectorAll('.dot');
     
-    // ถ้าไม่มี carousel ในหน้านี้ ให้ข้ามไป
     if (!carousel || dots.length === 0) {
         return;
     }
@@ -281,14 +267,12 @@ document.addEventListener('DOMContentLoaded', function() {
         updateDots();
     }
 
-    // Dot click handlers
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             moveToSlide(index);
         });
     });
 
-    // Touch/Mouse handlers
     function handleStart(e) {
         isDragging = true;
         startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
@@ -312,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
         carousel.style.transition = 'transform 0.3s ease-in-out';
         
         const deltaX = currentX - startX;
-        const threshold = carousel.offsetWidth * 0.2; // ลดความไวลงเล็กน้อย
+        const threshold = carousel.offsetWidth * 0.2; 
 
         if (Math.abs(deltaX) > threshold) {
             if (deltaX > 0 && currentSlide > 0) {
@@ -326,25 +310,20 @@ document.addEventListener('DOMContentLoaded', function() {
             moveToSlide(currentSlide);
         }
         
-        // Reset values
         startX = 0;
         currentX = 0;
     }
 
-    // Mouse events
     carousel.addEventListener('mousedown', handleStart);
     document.addEventListener('mousemove', handleMove);
     document.addEventListener('mouseup', handleEnd);
 
-    // Touch events
     carousel.addEventListener('touchstart', handleStart, { passive: false });
     carousel.addEventListener('touchmove', handleMove, { passive: false });
     carousel.addEventListener('touchend', handleEnd);
 
-    // Prevent default drag behavior
     carousel.addEventListener('dragstart', e => e.preventDefault());
 
-    // Keyboard support
     document.addEventListener('keydown', function(e) {
         if (!carousel || document.activeElement === carousel) return;
         
@@ -355,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize
     updateDots();
     moveToSlide(0);
 });

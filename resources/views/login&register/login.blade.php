@@ -2,59 +2,56 @@
 
 @section('content')
     <div class="bg-white w-full flex-grow rounded-t-[50px] px-10 pt-8 flex flex-col mt-16">
-        <h1 class="text-center mb-6 text-[#3F359E] text-[24px] font-bold">
+        <h1 class="text-center mb-6 text-[#3F359E] text-3xl font-bold">
             เข้าสู่ระบบ
         </h1>
 
-        <!-- Modal แจ้งเตือนข้อผิดพลาด: คุณไม่มีสิทธิ์เข้าถึงระบบ -->
         @if($errors->has('username') && $errors->first('username') == 'คุณไม่มีสิทธิ์เข้าถึงระบบ')
-        <div id="accessDeniedModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div class="bg-white rounded-2xl p-6 max-w-sm mx-4 text-center">
-                <div class="text-red-500 mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div id="accessDeniedModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md mx-auto text-center">
+                <div class="text-red-500 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-4 text-gray-800">ขออภัย</h3>
-                <p class="mb-2 text-gray-600">คุณไม่มีสิทธิ์เข้าถึงระบบ</p>
-                <p class="mb-6 text-gray-600">รอเจ้าหน้าที่ตรวจสอบคำขอ</p>
-                <button id="closeAccessDeniedModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2 px-6 rounded-xl text-center transition duration-300 w-full font-bold">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">ขออภัย</h3>
+                <p class="mb-3 text-gray-600 text-lg">คุณไม่มีสิทธิ์เข้าถึงระบบ</p>
+                <p class="mb-8 text-gray-600 text-lg">เจ้าหน้าที่กำลังตรวจสอบคำขอคุณ</p>
+                <button id="closeAccessDeniedModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-3 px-8 rounded-2xl text-center transition duration-300 w-full font-bold text-lg">
                     ตกลง
                 </button>
             </div>
         </div>
         @endif
 
-        <!-- Modal แจ้งเตือนข้อผิดพลาด: ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง -->
         @if($errors->has('username') && $errors->first('username') == 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
-        <div id="invalidCredentialsModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div class="bg-white rounded-2xl p-6 max-w-sm mx-4 text-center">
-                <div class="text-red-500 mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div id="invalidCredentialsModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md mx-auto text-center">
+                <div class="text-red-500 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-4 text-gray-800">เข้าสู่ระบบไม่สำเร็จ</h3>
-                <p class="mb-6 text-gray-600">ชื่อผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง</p>
-                <button id="closeInvalidCredentialsModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2 px-6 rounded-xl text-center transition duration-300 w-full font-bold">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">เข้าสู่ระบบไม่สำเร็จ</h3>
+                <p class="mb-8 text-gray-600 text-lg">ชื่อผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง</p>
+                <button id="closeInvalidCredentialsModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-3 px-8 rounded-2xl text-center transition duration-300 w-full font-bold text-lg">
                     ตกลง
                 </button>
             </div>
         </div>
         @endif
 
-        <!-- Modal แจ้งเตือนสำเร็จ (จากหน้าลงทะเบียน) -->
         @if(session('success'))
-        <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div class="bg-white rounded-2xl p-6 max-w-sm mx-4 text-center">
-                <div class="text-green-500 mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
+            <div class="bg-white rounded-3xl p-8 w-full max-w-md mx-auto text-center">
+                <div class="text-green-500 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-4 text-gray-800">ลงทะเบียนสำเร็จ!</h3>
-                <p class="mb-6 text-gray-600">{{ session('success') }}</p>
-                <button id="closeSuccessModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2 px-6 rounded-xl text-center transition duration-300 w-full font-bold">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">ลงทะเบียนสำเร็จ!</h3>
+                <p class="mb-8 text-gray-600 text-lg">{{ session('success') }}</p>
+                <button id="closeSuccessModal" class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-3 px-8 rounded-2xl text-center transition duration-300 w-full font-bold text-lg">
                     ตกลง
                 </button>
             </div>
@@ -64,11 +61,10 @@
         <form method="POST" action="{{ route('login.authenticate') }}">
             @csrf
 
-            <!-- Username Input -->
             <div class="mb-4">
                 <label for="username" class="block text-left text-[16px] font-medium mb-1">ชื่อผู้ใช้</label>
                 <input type="text" id="username" name="username" placeholder="กรุณากรอกชื่อผู้ใช้" value="{{ old('username') }}"
-                    class="w-full px-6 py-3 border {{ $errors->has('username') ? 'border-red-500' : 'border-gray-400' }} rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
+                    class="w-full px-6 py-3 border {{ $errors->has('username') ? 'border-red-500' : 'border-gray-400' }} rounded-xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
                 @if($errors->has('username') && $errors->first('username') != 'คุณไม่มีสิทธิ์เข้าถึงระบบ' && $errors->first('username') != 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
                     <div class="flex items-center mt-1 text-red-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -79,11 +75,10 @@
                 @endif
             </div>
 
-            <!-- Password Input -->
             <div class="mb-4">
                 <label for="password" class="block text-left text-[16px] font-medium mb-1">รหัสผ่าน</label>
                 <input type="password" id="password" name="password" placeholder="กรุณากรอกรหัสผ่าน"
-                    class="w-full px-6 py-3 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-400' }} rounded-2xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
+                    class="w-full px-6 py-3 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-400' }} rounded-xl text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#929AFF]">
                 @if($errors->has('password'))
                     <div class="flex items-center mt-1 text-red-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -94,16 +89,14 @@
                 @endif
             </div>
 
-            <!-- Submit Button -->
             <button type="submit"
-                class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2.5 px-6 rounded-2xl text-center transition mt-6 duration-300 w-[100%] mx-auto text-[20px] font-bold">
+                class="bg-[#929AFF] hover:bg-[#7B84EA] text-white py-2.5 px-6 rounded-xl text-center transition mt-6 duration-300 w-[100%] mx-auto text-[20px] font-median">
                 เข้าสู่ระบบ
             </button>
         </form>
 
-        <!-- Cancel Button -->
         <a href="{{ route('home') }}"
-            class="bg-[#ffffff] py-2.5 px-6 rounded-2xl text-center transition duration-300 w-[100%] mx-auto text-[20px] mt-8 mb-8 text-gray-400 border border-gray-400 font-bold active:border-white">
+            class="bg-[#ffffff] py-2.5 px-6 rounded-xl text-center transition duration-300 w-[100%] mx-auto text-[20px] mt-8 mb-8 text-gray-400 border border-gray-400 font-median active:border-white">
             ยกเลิก
         </a>
 
@@ -114,10 +107,8 @@
         </div>
     </div>
 
-    <!-- JavaScript for modal control -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // สำหรับ modal แจ้งเตือน "คุณไม่มีสิทธิ์เข้าถึงระบบ"
             const accessDeniedModal = document.getElementById('accessDeniedModal');
             const closeAccessDeniedButton = document.getElementById('closeAccessDeniedModal');
             
@@ -127,7 +118,6 @@
                 });
             }
             
-            // สำหรับ modal แจ้งเตือน "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"
             const invalidCredentialsModal = document.getElementById('invalidCredentialsModal');
             const closeInvalidCredentialsButton = document.getElementById('closeInvalidCredentialsModal');
             
@@ -137,7 +127,6 @@
                 });
             }
             
-            // สำหรับ modal แจ้งเตือนสำเร็จ
             const successModal = document.getElementById('successModal');
             const closeSuccessButton = document.getElementById('closeSuccessModal');
             

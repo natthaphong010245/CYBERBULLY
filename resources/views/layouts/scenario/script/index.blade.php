@@ -1,4 +1,3 @@
-<!-- Scenario Scripts -->
  @push('scripts')
 <script>
   function goToScenario(scenarioId) {
@@ -9,7 +8,6 @@
     }
   }
 
-  // Keyboard navigation
   document.addEventListener('keydown', function(e) {
     const buttons = [...document.querySelectorAll('.scenario-button')];
     const current = document.activeElement;
@@ -45,7 +43,6 @@
     }
   });
 
-  // Add click animation
   document.querySelectorAll('.scenario-button').forEach(button => {
     button.addEventListener('click', function() {
       this.style.transform = 'scale(0.95)';

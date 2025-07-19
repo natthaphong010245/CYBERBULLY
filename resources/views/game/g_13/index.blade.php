@@ -1,4 +1,3 @@
-{{-- resouces/views/game/g_13/index.blade.php --}}
 @extends('layouts.game.dealing_bullying.index')
 
 @php
@@ -13,7 +12,7 @@
         'description' => 'วิธีรับมือ CYBERBULLYING'
     ])
 
-    <div class="bg-white min-h-screen" id="game-content">
+    <div id="game-content">
         <div class="container mx-auto px-4 ">
             <div class="text-center mb-12 relative">
                 <div class="flex items-center justify-center">

@@ -1,7 +1,6 @@
 
 <div id="completionModal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
     <div class="completion-content modal-content">
-        <!-- Header -->
         <div class="text-center p-8 pb-4">
             <div class="celebration-icon">🎉</div>
             <h1 class="text-3xl font-bold text-[#3E36AE] mb-4">ยินดีด้วย!</h1>
@@ -9,7 +8,6 @@
             <p class="text-[#6B7280] text-base">ตอนนี้คุณรู้จักรูปแบบของไซเบอร์บูลลี่และวิธีรับมือแล้ว</p>
         </div>
 
-        <!-- Bullying Types -->
         <div class="px-8 pb-8">
             <h3 class="text-xl font-bold text-[#3E36AE] mb-6 text-center">รูปแบบของไซเบอร์บูลลี่ที่พบบ่อย</h3>
             <div class="scroll-container">
@@ -36,7 +34,6 @@
                 @endforeach
             </div>
 
-            <!-- Remember Section -->
             <div class="mt-8 p-6 bg-gradient-to-r from-[#E5C8F6] to-[#D1D5FF] rounded-2xl">
                 <h4 class="font-bold text-[#3E36AE] text-lg mb-3 text-center">💡 จำไว้เสมอ</h4>
                 <div class="text-[#5A63D7] text-center space-y-2">
@@ -47,7 +44,6 @@
                 </div>
             </div>
 
-            <!-- Home Button -->
             <div class="text-center mt-8">
                 <button onclick="goToHome()" class="completion-button">กลับสู่หน้าหลัก</button>
             </div>

@@ -1,4 +1,3 @@
-{{-- resouces/views/game/g_9/index.blade.php --}}
 @extends('layouts.game.causes_bullying.index')
 
 @php
@@ -35,7 +34,6 @@
         </div>
     </div>
 
-    <!-- Step 1: Information Modal (รูปที่ 4) -->
     <div id="info-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <h3 class="text-xl font-bold text-indigo-800 mb-4">ผลกระทบของผู้ถูกรังแกทางไซเบอร์</h3>
@@ -56,7 +54,6 @@
         </div>
     </div>
 
-    <!-- Step 2: Success Modal (รูปที่ 5) -->
     <div id="success-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
@@ -73,7 +70,6 @@
         </div>
     </div>
 
-    <!-- Wrong Answer Modal (รูปที่ 6) -->
     <div id="wrong-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"

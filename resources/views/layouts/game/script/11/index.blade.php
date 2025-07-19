@@ -393,4 +393,10 @@
             max-width: calc(100% - 2rem);
         }
     }
+        @media (min-width: 768px) {
+            .main {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
 </style>

@@ -23,7 +23,6 @@
         const cardGrid = document.getElementById('card-grid');
         const cards = Array.from(cardGrid.children);
         
-        // Shuffle cards
         for (let i = cards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             cardGrid.appendChild(cards[j]);
@@ -95,7 +94,6 @@
             
             continueBtn.onclick = function() {
                 hideModal(overlay, function() {
-                    // Check if this is the second correct selection
                     if (correctSelections >= requiredSelections) {
                         setTimeout(() => {
                             showGameCompleteModal();
@@ -273,7 +271,6 @@
         transition: all 0.3s ease-out;
     }
 
-    /* Enhanced button hover effects */
     button:hover {
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -284,7 +281,6 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* Card hover effects */
     .card-option:hover .card-image {
         transform: scale(1.02);
         transition: transform 0.2s ease;

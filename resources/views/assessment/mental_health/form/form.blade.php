@@ -20,7 +20,6 @@
         <form id="questionnaire-form" method="POST" action="{{ url('/assessment/mental_health/form') }}">
             @csrf
 
-            <!-- หัวข้อความเครียด -->
             <div class="text-center mb-4 relative">
                 <div class="flex items-center justify-center">
                     <div class="relative">
@@ -75,7 +74,6 @@
                 </div>
             @endforeach
 
-            <!-- หัวข้อภาวะวิตกกังวล -->
             <div class="text-center mb-4 relative mt-6">
                 <div class="flex items-center justify-center">
                     <div class="relative">
@@ -123,7 +121,6 @@
                 </div>
             @endforeach
 
-            <!-- หัวข้อภาวะซึมเศร้า -->
             <div class="text-center mb-4 relative mt-6">
                 <div class="flex items-center justify-center">
                     <div class="relative">

@@ -1,4 +1,3 @@
-{{-- resouces/views/game/g_10/index.blade.php --}}
 @extends('layouts.game.causes_bullying.index')
 
 @php
@@ -39,7 +38,6 @@
         </div>
     </div>
 
-    <!-- Step 1: Information Modal (รูปที่ 7) -->
     <div id="info-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full mx-4 text-center">
             <div class="flex items-center mb-2">
@@ -72,7 +70,6 @@
         </div>
     </div>
 
-    <!-- Step 2: Success Modal (รูปที่ 8) -->
     <div id="success-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"
@@ -89,7 +86,6 @@
         </div>
     </div>
 
-    <!-- Wrong Answer Modal (รูปที่ 9) -->
     <div id="wrong-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30 opacity-0">
         <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character"

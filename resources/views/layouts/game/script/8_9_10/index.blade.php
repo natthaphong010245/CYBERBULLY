@@ -20,12 +20,10 @@
             }, 300);
         });
 
-        // Modal elements
         const infoOverlay = document.getElementById('info-overlay');
         const successOverlay = document.getElementById('success-overlay');
         const wrongOverlay = document.getElementById('wrong-overlay');
         
-        // Button elements
         const nextBtn = document.getElementById('next-btn');
         const finishBtn = document.getElementById('finish-btn');
         const tryAgainBtn = document.getElementById('try-again-btn');
@@ -33,13 +31,12 @@
         
         const nextRoute = window.gameNextRoute || "{{ route('main') }}";
         
-        // For games 8 & 9 (choice cards)
         const correctChoice = document.querySelector('.correct-choice');
         const wrongChoice = document.querySelector('.wrong-choice');
         
         if (correctChoice && wrongChoice) {
             correctChoice.addEventListener('click', function() {
-                showInfoModal(); // Step 1: Show information
+                showInfoModal();
             });
             
             wrongChoice.addEventListener('click', function() {
@@ -47,13 +44,12 @@
             });
         }
         
-        // For game 10 (buttons)
         const illegalBtn = document.getElementById('illegal-btn');
         const legalBtn = document.getElementById('legal-btn');
         
         if (illegalBtn && legalBtn) {
             illegalBtn.addEventListener('click', function() {
-                showInfoModal(); // Step 1: Show information
+                showInfoModal(); 
             });
 
             legalBtn.addEventListener('click', function() {
@@ -61,12 +57,11 @@
             });
         }
 
-        // Event listeners for modal buttons
         if (nextBtn) {
             nextBtn.addEventListener('click', function() {
                 hideModal(infoOverlay, function() {
                     setTimeout(() => {
-                        showSuccessModal(); // Step 2: Show success modal
+                        showSuccessModal();
                     }, 300);
                 });
             });
@@ -85,7 +80,6 @@
         if (tryAgainBtn) {
             tryAgainBtn.addEventListener('click', function() {
                 hideModal(wrongOverlay);
-                // Game resets automatically, buttons become clickable again
             });
         }
 

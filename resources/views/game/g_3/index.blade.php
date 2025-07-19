@@ -1,4 +1,3 @@
-{{-- resouces/views/game/g_3/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -69,7 +68,6 @@
         </div>
     </div>
 
-    <!-- Card Information Modal -->
     <div id="feedback-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-4">
             <div id="info-content" class="text-center">
@@ -82,7 +80,6 @@
         </div>
     </div>
 
-    <!-- Game Complete Modal -->
     <div id="game-complete-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-40">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
             <img src="{{ asset('images/material/school_girl.png') }}" alt="Happy Student"

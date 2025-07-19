@@ -17,17 +17,10 @@
         </div>
     </div>
     @stack('scripts')
-
+    
     @yield('scripts')
-    @include('layouts.responsive')
-    <style>
-        @media (min-width: 768px) {
-            .main {
-                padding-left: 2rem;
-                padding-right: 2rem;
-            }
-        }
-    </style>
-</body>
 
+@include('layouts.responsive')
+    
+</body>
 </html>

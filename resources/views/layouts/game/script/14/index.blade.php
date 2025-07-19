@@ -1,4 +1,3 @@
-{{-- resouces/views/game/g_14/index.blade.php --}}
 <script>
         document.addEventListener('DOMContentLoaded', function() {
     const introModal = document.getElementById('intro-modal');

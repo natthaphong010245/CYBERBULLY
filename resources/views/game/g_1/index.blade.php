@@ -1,4 +1,3 @@
-{{-- resouces/views/game/g_1/index.blade.php --}}
 @extends('layouts.game.bullying.index')
 
 @php
@@ -54,7 +53,6 @@
         </div>
     </div>
 
-    <!-- Success Modal -->
     <div id="success-modal"
         class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
@@ -70,7 +68,6 @@
         </div>
     </div>
 
-    <!-- Failure Modal - Try Again or Skip -->
     <div id="failure-modal"
         class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">
@@ -92,7 +89,6 @@
         </div>
     </div>
 
-    <!-- Answer Reveal Modal -->
     <div id="answer-reveal-modal"
         class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-4 text-center">

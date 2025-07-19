@@ -1,5 +1,4 @@
-{{-- resouces/views/game/index.blade.php --}}
-@extends('layouts.main_category')
+@extends('layouts.category_game')
 
 @php
     $backUrl = '/main/game';

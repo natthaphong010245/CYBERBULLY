@@ -1,17 +1,11 @@
-{{-- resources/views/layouts/assessment/script.blade.php --}}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // ===========================================
-    // FORM QUESTIONNAIRE FUNCTIONALITY
-    // ===========================================
     const form = document.getElementById('questionnaire-form');
     if (form) {
         initializeQuestionnaireForm(form);
     }
     
-    // ===========================================
-    // CAROUSEL FUNCTIONALITY FOR RESULT PAGES
-    // ===========================================
+
     const carousel = document.getElementById('result-carousel');
     const dots = document.querySelectorAll('.dot');
     if (carousel && dots.length > 0) {
@@ -19,9 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ===========================================
-// QUESTIONNAIRE FORM FUNCTIONS
-// ===========================================
+
 function initializeQuestionnaireForm(form) {
     const submitButton = document.querySelector('.submit-btn');
     if (!submitButton) {
@@ -29,7 +21,6 @@ function initializeQuestionnaireForm(form) {
         return; 
     }
     
-    // Reset submit button state
     submitButton.disabled = false;
     submitButton.classList.remove('opacity-75', 'cursor-not-allowed');
     if (submitButton.querySelector('.animate-spin')) {
@@ -39,27 +30,21 @@ function initializeQuestionnaireForm(form) {
     const progressBar = document.getElementById('progress-bar');
     const progressPercentage = document.getElementById('progress-percentage');
     
-    // Auto-detect total questions
     let totalQuestions = detectTotalQuestions();
     let answeredQuestions = 0;
 
-    // Initialize progress
     if (progressBar && progressPercentage) {
         updateProgress();
     }
 
-    // Add event listeners
     setupRadioButtonListeners();
     setupFormSubmitListener(form, submitButton, totalQuestions);
     setupPageShowListener(submitButton);
 
-    // ===========================================
-    // HELPER FUNCTIONS
-    // ===========================================
+
     function detectTotalQuestions() {
         const currentPath = window.location.pathname;
         
-        // Detect by URL pattern
         if (currentPath.includes('mental_health')) {
             return 21;
         } else if (currentPath.includes('cyberbullying/overview')) {
@@ -68,13 +53,11 @@ function initializeQuestionnaireForm(form) {
             return 9;
         }
         
-        // Fallback: Count from DOM
         const questionContainers = document.querySelectorAll('.question-container');
         if (questionContainers.length > 0) {
             return questionContainers.length;
         }
         
-        // Default fallback
         return 21;
     }
 
@@ -120,7 +103,6 @@ function initializeQuestionnaireForm(form) {
         
         const questionContainer = document.getElementById(`question-container-${questionNumber}`);
         if (questionContainer) {
-            // รีเซ็ต radio buttons ทั้งหมดในคำถามนี้ก่อน
             const allRadios = questionContainer.querySelectorAll('.radio-option');
             allRadios.forEach(radio => {
                 radio.style.backgroundColor = 'white';
@@ -129,7 +111,6 @@ function initializeQuestionnaireForm(form) {
                 radio.checked = false;
             });
             
-            // เลือกตัวที่คลิก
             radioElement.checked = true;
             radioElement.style.backgroundColor = '#3E36AE';
             radioElement.style.borderColor = '#3E36AE';
@@ -145,28 +126,24 @@ function initializeQuestionnaireForm(form) {
             });
         }
         
-        // แก้ไขสีของหัวข้อคำถาม และลบดอกจัน
         const questionTitle = document.getElementById(`question-title-${questionNumber}`);
         if (questionTitle) {
-            questionTitle.style.color = '#4b5563'; // สีเทาเข้ม
+            questionTitle.style.color = '#4b5563';
             questionTitle.style.fontWeight = '600';
             
-            // ลบดอกจันถ้ามี
             const asterisk = questionTitle.querySelector('.required-asterisk');
             if (asterisk) {
                 asterisk.remove();
             }
         }
         
-        // แก้ไขสีของข้อความตัวเลือก
         const allOptionTexts = questionContainer.querySelectorAll('.option-text');
         allOptionTexts.forEach(optionText => {
             if (optionText) {
-                optionText.style.color = '#4b5563'; // สีเทาเข้ม
+                optionText.style.color = '#4b5563'; 
             }
         });
         
-        // Auto scroll to next question
         if (questionNumber < totalQuestions) {
             const nextQuestionNumber = questionNumber + 1;
             const nextQuestionContainer = document.getElementById(`question-container-${nextQuestionNumber}`);
@@ -177,7 +154,6 @@ function initializeQuestionnaireForm(form) {
             }
         }
         
-        // Update progress
         if (progressBar && progressPercentage) {
             updateProgress();
         }
@@ -198,7 +174,6 @@ function initializeQuestionnaireForm(form) {
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Clear previous error states
             const allQuestionTitles = document.querySelectorAll('.question-title');
             allQuestionTitles.forEach(title => {
                 const asterisk = title.querySelector('.required-asterisk');
@@ -207,7 +182,6 @@ function initializeQuestionnaireForm(form) {
                 }
             });
             
-            // Show loading state
             const originalButtonText = submitButton.innerHTML;
             submitButton.innerHTML = `
                 <div class="flex items-center justify-center">
@@ -221,7 +195,6 @@ function initializeQuestionnaireForm(form) {
             submitButton.disabled = true;
             submitButton.classList.add('opacity-75', 'cursor-not-allowed');
             
-            // Validate all questions
             let allAnswered = true;
             let firstUnanswered = null;
 
@@ -231,12 +204,10 @@ function initializeQuestionnaireForm(form) {
                 if (radioButtons.length === 0) {
                     allAnswered = false;
                     
-                    // Add error state for all unanswered questions
                     const questionTitle = document.getElementById(`question-title-${i}`);
                     if (questionTitle) {
-                        questionTitle.style.color = '#ef4444'; // สีแดง
+                        questionTitle.style.color = '#ef4444';
                         
-                        // Add asterisk if not exists
                         if (!questionTitle.querySelector('.required-asterisk')) {
                             const asterisk = document.createElement('span');
                             asterisk.className = 'required-asterisk';
@@ -248,7 +219,6 @@ function initializeQuestionnaireForm(form) {
                         }
                     }
                     
-                    // Remember first unanswered for scrolling
                     if (firstUnanswered === null) {
                         firstUnanswered = i;
                     }
@@ -260,12 +230,10 @@ function initializeQuestionnaireForm(form) {
                     form.submit();
                 }, 500);
             } else {
-                // Restore button state
                 submitButton.innerHTML = originalButtonText;
                 submitButton.disabled = false;
                 submitButton.classList.remove('opacity-75', 'cursor-not-allowed');
                 
-                // Scroll to first unanswered question
                 if (firstUnanswered !== null) {
                     const unansweredContainer = document.getElementById(`question-container-${firstUnanswered}`);
                     if (unansweredContainer) {
@@ -289,9 +257,6 @@ function initializeQuestionnaireForm(form) {
     }
 }
 
-// ===========================================
-// CAROUSEL FUNCTIONALITY
-// ===========================================
 function initializeCarousel(carousel, dots) {
     let currentSlide = 0;
     let startX = 0;
@@ -319,14 +284,12 @@ function initializeCarousel(carousel, dots) {
         updateDots();
     }
 
-    // Dot click handlers
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             moveToSlide(index);
         });
     });
 
-    // Touch/Mouse handlers
     function handleStart(e) {
         isDragging = true;
         startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
@@ -368,20 +331,16 @@ function initializeCarousel(carousel, dots) {
         currentX = 0;
     }
 
-    // Mouse events
     carousel.addEventListener('mousedown', handleStart);
     document.addEventListener('mousemove', handleMove);
     document.addEventListener('mouseup', handleEnd);
 
-    // Touch events
     carousel.addEventListener('touchstart', handleStart, { passive: false });
     carousel.addEventListener('touchmove', handleMove, { passive: false });
     carousel.addEventListener('touchend', handleEnd);
 
-    // Prevent default drag behavior
     carousel.addEventListener('dragstart', e => e.preventDefault());
 
-    // Keyboard support
     document.addEventListener('keydown', function(e) {
         if (!carousel || document.activeElement === carousel) return;
         
@@ -392,7 +351,6 @@ function initializeCarousel(carousel, dots) {
         }
     });
 
-    // Initialize
     updateDots();
     moveToSlide(0);
 }

@@ -1,4 +1,3 @@
-{{-- resources/views/report%26consultation/safe_area/message/message.blade.php --}}
 @extends('layouts.main_category')
 
 @php

@@ -1,4 +1,3 @@
-{{-- resources/views/layouts/safe_area/result.blade.php --}}
 <script>
 function showSuccessNotification() {
     const notification = document.getElementById('success-notification');

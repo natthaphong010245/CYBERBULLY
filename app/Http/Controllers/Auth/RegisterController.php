@@ -64,6 +64,6 @@ class RegisterController extends Controller
             'role_user' => 0, 
         ]);
         
-        return redirect()->route('login')->with('success', 'รอการอนุมัติจากเจ้าหน้าที่');
+        return redirect()->route('login')->with('success', 'เจ้าหน้าที่กำลงัตรวจสอบข้อมูลของคุณ กรุณารอการอนุมัติจากผู้ดูแลระบบ');
     }
 }

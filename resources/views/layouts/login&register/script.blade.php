@@ -4,16 +4,15 @@
         const schoolContainer = document.getElementById('school-container');
         const schoolSelect = document.getElementById('school');
         
-        // ตรวจสอบค่าเริ่มต้น (กรณีที่มีการกลับมาที่หน้านี้หลังจาก validation error)
         if(roleSelect.value === 'researcher') {
-            schoolSelect.value = ''; // ตั้งค่าเป็นค่าว่าง
+            schoolSelect.value = '';
             schoolSelect.disabled = true;
             schoolContainer.classList.add('opacity-50');
         }
         
         roleSelect.addEventListener('change', function() {
             if(this.value === 'researcher') {
-                schoolSelect.value = ''; // ตั้งค่าเป็นค่าว่าง
+                schoolSelect.value = '';
                 schoolSelect.disabled = true;
                 schoolContainer.classList.add('opacity-50');
             } else {

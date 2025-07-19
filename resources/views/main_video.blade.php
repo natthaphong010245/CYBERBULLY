@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="card-container space-y-10 px-10 md:px-0">
-        <!-- Page Title -->
         <div class="text-center mb-4 relative">
             <div class="flex items-center justify-center">
                 <div class="relative">
@@ -12,9 +11,6 @@
             </div>
         </div>
 
-
-
-        <!-- Video Cards -->
         <a href="video_category1_select_language" class="block relative">
             <div class="py-3 pl-24 pr-6 flex items-center h-20 rounded-[10px]"
                 style="background-color: rgba(146, 154, 255, 1)">

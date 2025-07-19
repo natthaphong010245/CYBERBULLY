@@ -82,7 +82,7 @@
             if (boxIndex === correctBoxIndex) {
                 gameCompleted = true;
                 setTimeout(() => {
-                    showInfoModal(); // Step 1: Show information first
+                    showInfoModal(); 
                 }, 300);
             } else {
                 setTimeout(() => {
@@ -123,30 +123,26 @@
             });
         }
         
-        // Try Again Button - Reset game
         tryAgainBtn.addEventListener('click', function() {
             hideModal(wrongOverlay, function() {
                 resetGame();
             });
         });
         
-        // Skip Button - Go to next game
         skipBtn.addEventListener('click', function() {
             hideModal(wrongOverlay, function() {
                 window.location.href = "{{ route('game_8') }}";
             });
         });
         
-        // Next Button - From info modal to success modal
         nextBtn.addEventListener('click', function() {
             hideModal(infoOverlay, function() {
                 setTimeout(() => {
-                    showSuccessModal(); // Step 2: Show success modal
+                    showSuccessModal();
                 }, 300);
             });
         });
         
-        // Finish Button - Go to next game
         finishBtn.addEventListener('click', function() {
             hideModal(successOverlay, function() {
                 window.location.href = "{{ route('game_8') }}";
@@ -277,7 +273,6 @@
         transition: all 0.3s ease-out;
     }
     
-    /* Modal content animations */
     #wrong-overlay .bg-white,
     #info-overlay .bg-white,
     #success-overlay .bg-white {
@@ -318,7 +313,6 @@
         height: 200px;
     }
 
-    /* Enhanced button hover effects */
     button:hover {
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -329,7 +323,6 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* Mystery box hover effects */
     .cursor-pointer:hover {
         filter: brightness(1.1);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);

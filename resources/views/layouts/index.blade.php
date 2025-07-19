@@ -4,8 +4,10 @@
 @include('layouts.head')
 
 <body class="font-k2d relative">
+    <div class="desktop-container">
         @yield('content')
-        
+    </div>
 </body>
+@include('layouts.responsive')
 
 </html>

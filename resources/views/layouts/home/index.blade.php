@@ -47,9 +47,13 @@
 </head>
 
 <body class="relative">
-    @include('layouts.home.about')
-    @include('layouts.home.logo')
-    @include('layouts.home.scripts')
+    <div class="desktop-container">
+        @include('layouts.home.about')
+        @include('layouts.home.logo')
+        @include('layouts.home.scripts')
+    </div>
 </body>
+</div>
+@include('layouts.responsive')
 
 </html>

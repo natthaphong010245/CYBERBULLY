@@ -1,4 +1,3 @@
-{{-- resouces/views/game/g_11/index.blade.php --}}
 @extends('layouts.game.dealing_bullying.index')
 
 @php
@@ -64,7 +63,6 @@
         </div>
     </div>
 
-    <!-- Signal Details Modal -->
     <div id="signal-modal"
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
         <div class="modal-content bg-white rounded-3xl shadow-2xl p-8 max-w-sm mx-4 text-center">
@@ -95,7 +93,6 @@
         </div>
     </div>
 
-    <!-- Success Modal (รูปที่ 1) -->
     <div id="success-modal"
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
         <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 text-center">
@@ -114,7 +111,6 @@
         </div>
     </div>
 
-    <!-- Wrong Answer Modal (รูปที่ 2) -->
     <div id="retry-modal"
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
         <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 text-center">

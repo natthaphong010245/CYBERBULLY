@@ -1,6 +1,4 @@
-{{-- resources/views/layouts/scenario/selection.blade.php --}}
 <div class="px-6">
-  <!-- Scenario Grid -->
   <div class="grid grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto pl-2 pr-2">
     @php
     $scenarios = [
@@ -82,7 +80,6 @@
          tabindex="0"
          data-route="{{ route($scenario['route']) }}">
       
-      <!-- Image Container -->
       <div class="scenario-image-container">
         <img src="{{ asset('images/scenarios/scenario_' . $scenario['id'] . '_thumb.png') }}" 
              alt="สถานการณ์ที่ {{ $scenario['id'] }}" 
@@ -90,7 +87,6 @@
     
       </div>
       
-      <!-- Content Section -->
       <div class="scenario-title-section flex flex-col items-center justify-center text-center">
         <h3 class="text-white font-semibold text-lg mb-1 leading-tight">
           สถานการณ์ที่ {{ $scenario['id'] }}
@@ -105,7 +101,6 @@
   </div>
 </div>
 
-<!-- Scenario Styles -->
 <style>
   .scenario-button {
     transition: all 0.3s ease;

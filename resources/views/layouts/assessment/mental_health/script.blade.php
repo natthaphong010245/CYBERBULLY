@@ -1,4 +1,3 @@
-{{-- resources/views/layouts/assessment/mental_health/script.blade.php --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('questionnaire-form');
@@ -67,7 +66,6 @@
             
             const questionContainer = document.getElementById(`question-container-${questionNumber}`);
             if (questionContainer) {
-                // รีเซ็ต radio buttons ทั้งหมดในคำถามนี้ก่อน
                 const allRadios = questionContainer.querySelectorAll('.radio-option');
                 allRadios.forEach(radio => {
                     radio.style.backgroundColor = 'white';
@@ -76,7 +74,6 @@
                     radio.checked = false;
                 });
                 
-                // เลือกตัวที่คลิก
                 radioElement.checked = true;
                 radioElement.style.backgroundColor = '#3E36AE';
                 radioElement.style.borderColor = '#3E36AE';
@@ -92,24 +89,21 @@
                 });
             }
             
-            // แก้ไขสีของหัวข้อคำถาม และลบดอกจัน
             const questionTitle = document.getElementById(`question-title-${questionNumber}`);
             if (questionTitle) {
-                questionTitle.style.color = '#4b5563'; // สีเทาเข้ม
+                questionTitle.style.color = '#4b5563';
                 questionTitle.style.fontWeight = '600';
                 
-                // ลบดอกจันถ้ามี
                 const asterisk = questionTitle.querySelector('.required-asterisk');
                 if (asterisk) {
                     asterisk.remove();
                 }
             }
             
-            // แก้ไขสีของข้อความตัวเลือก
             const allOptionTexts = questionContainer.querySelectorAll('.option-text');
             allOptionTexts.forEach(optionText => {
                 if (optionText) {
-                    optionText.style.color = '#4b5563'; // สีเทาเข้ม
+                    optionText.style.color = '#4b5563';
                 }
             });
             
@@ -143,7 +137,6 @@
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Clear previous error states
             const allQuestionTitles = document.querySelectorAll('.question-title');
             allQuestionTitles.forEach(title => {
                 const asterisk = title.querySelector('.required-asterisk');
@@ -176,7 +169,7 @@
                     
                     const questionTitle = document.getElementById(`question-title-${i}`);
                     if (questionTitle) {
-                        questionTitle.style.color = '#ef4444'; // สีแดง
+                        questionTitle.style.color = '#ef4444'; 
                         
                         if (!questionTitle.querySelector('.required-asterisk')) {
                             const asterisk = document.createElement('span');
@@ -189,7 +182,6 @@
                         }
                     }
                     
-                    // จำข้อแรกที่ไม่ได้ตอบเพื่อ scroll ไป
                     if (firstUnanswered === null) {
                         firstUnanswered = i;
                     }
