@@ -11,7 +11,7 @@ use App\Http\Controllers\BehavioralReportController;
 use App\Http\Controllers\Game\BullyingGameController;
 use App\Http\Controllers\Game\ScenarioController;
 use App\Http\Controllers\AssessmentController;
-
+use App\Http\Controllers\VideoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +24,6 @@ $basicRoutes = [
     '/home' => ['view' => 'home', 'name' => 'home'],
     '/main' => ['view' => 'main', 'name' => 'main'],
     '/faq' => ['view' => 'faq/faq', 'name' => 'faq'],
-    '/main_video' => ['view' => 'main_video', 'name' => 'main_video'],
     '/inforgraphic' => ['view' => 'inforgraphic/inforgraphic', 'name' => 'inforgraphic'],
 ];
 
@@ -137,30 +136,17 @@ Route::prefix('game')->group(function () {
     Route::get('custom', [BullyingGameController::class, 'customSequenceGame'])->name('game_custom');
 });
 
-// Simple Game Routes (View Only)
-$simpleGames = [2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-foreach ($simpleGames as $gameId) {
-    Route::get("/game/{$gameId}", fn() => view("game/g_{$gameId}/index"))->name("game_{$gameId}");
+
+// Video Routes - ไปหน้าเลือกภาษาเลย (ไม่มีการเลือกหมวด)
+Route::get('/main_video', [VideoController::class, 'mainVideo'])->name('main_video');
+
+// หน้าแสดงวิดีโอตามภาษา (รวมทุกหมวด)
+foreach ([1, 2, 3, 4, 5, 6, 7] as $lang) {
+    Route::get("/main_video_language{$lang}",
+        [VideoController::class, 'showVideos'])
+        ->defaults('language', $lang)
+        ->name("main_video_language{$lang}");
 }
-
-// Video Category Routes
-$videoCategories = [1, 2, 3, 4];
-$languages = [1, 2, 3, 4, 5, 6, 7];
-
-foreach ($videoCategories as $category) {
-    // Main category route
-    Route::get("/video_category{$category}_select_language", 
-        fn() => view("video_category{$category}/video_category{$category}_select_language"))
-        ->name("video_category{$category}_select_language");
-    
-    // Language specific routes
-    foreach ($languages as $lang) {
-        Route::get("/video_category{$category}_select_language{$lang}",
-            fn() => view("video_category{$category}/video_category{$category}_select_language{$lang}"))
-            ->name("video_category{$category}_select_language{$lang}");
-    }
-}
-
 // Scenario Routes
 Route::prefix('scenario')->group(function () {
     Route::get('/', [ScenarioController::class, 'index'])->name('scenario.index');
@@ -220,3 +206,6 @@ if (app()->environment('local')) {
         ]);
     });
 }
+
+
+
