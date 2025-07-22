@@ -16,15 +16,15 @@
             [
                 'route' => 'main_video',
                 'title' => 'CYBERBULLYING',
-                'subtitle' => 'VIDEO',
+                'subtitle' => 'สื่อการเรียนรู้',
                 'image' => 'video.jpg',
                 'alt' => 'Video',
                 'type' => 'normal'
             ],
             [
-                'route' => 'main_info',
+                'route' => 'main_info', 
                 'title' => 'CYBERBULLYING',
-                'subtitle' => 'INFOGRAPHIC',
+                'subtitle' => 'สาระน่ารู้',
                 'image' => 'info.jpg',
                 'alt' => 'Infographic',
                 'type' => 'normal'
@@ -65,7 +65,7 @@
         @endphp
 
         @foreach($menuItems as $index => $item)
-        <a href="{{ $item['route'] === 'main_video' || $item['route'] === 'main_info' ? $item['route'] : route($item['route']) }}" 
+        <a href="{{ $item['route'] === 'main_video' || $item['route'] === 'main_info' ? route($item['route']) : route($item['route']) }}" 
            class="relative block {{ $index === 0 ? 'mt-4' : 'mt-6' }} {{ $index === count($menuItems) - 1 ? 'mb-10' : '' }} rounded-2xl overflow-hidden shadow-lg border border-[#929AFF]">
             
             @if($item['type'] === 'faq')

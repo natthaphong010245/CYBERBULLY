@@ -32,3 +32,35 @@
             allIconsMinus.forEach(icon => icon.classList.add('hidden'));
         });
     </script>
+
+    <style>
+        .border-custom {
+            border-color: #524AC4;
+        }
+        
+        .faq-item {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question.active .faq-icon {
+            background-color: #4A4A4A !important;
+        }
+        
+        .faq-answer.active {
+            max-height: 1000px;
+        }
+
+        .faq-answer a {
+            color: rgb(37 99 235);
+            text-decoration: underline;
+        }
+
+        .faq-answer a:hover {
+            color: rgb(29 78 216);
+        }
+
+        .icon-plus,
+        .icon-minus {
+            transition: opacity 0.3s ease;
+        }
+    </style>

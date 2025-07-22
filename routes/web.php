@@ -12,6 +12,9 @@ use App\Http\Controllers\Game\BullyingGameController;
 use App\Http\Controllers\Game\ScenarioController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\InfographicController; // Added for infographic
+use Illuminate\Support\Facades\File; // Added for test route
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,25 +48,20 @@ foreach ($assessmentRoutes as $uri => $config) {
     Route::get($uri, fn() => view($config['view']))->name($config['name']);
 }
 
-// Assessment Form Routes with Controllers
 Route::prefix('assessment/cyberbullying')->group(function () {
-    // ✅ Person Action - ใช้ AssessmentController
     Route::get('person_action/form', [AssessmentController::class, 'showPersonActionForm'])->name('person_action/form');
     Route::post('person_action/form', [AssessmentController::class, 'submitPersonActionForm']);
     Route::get('person_action/result', [AssessmentController::class, 'showPersonActionResults'])->name('person_action/result');
 
-    // ✅ Victim - ใช้ AssessmentController
     Route::get('victim/form', [AssessmentController::class, 'showVictimForm'])->name('victim/form');
     Route::post('victim/form', [AssessmentController::class, 'submitVictimForm']);
     Route::get('victim/result', [AssessmentController::class, 'showVictimResults'])->name('victim/result');
 
-    // Overview - ใช้ OverviewController เดิม
     Route::get('overview/form', [OverviewController::class, 'showForm'])->name('overview/form');
     Route::post('overview/form', [OverviewController::class, 'submitForm']);
     Route::get('overview/result', [OverviewController::class, 'showResults'])->name('overview/result');
 });
 
-// Mental Health Routes
 Route::prefix('assessment/mental_health')->group(function () {
     Route::get('form', [MentalHealthController::class, 'showForm'])->name('mental_health/form');
     Route::post('form', [MentalHealthController::class, 'submitForm']);
@@ -136,17 +134,32 @@ Route::prefix('game')->group(function () {
     Route::get('custom', [BullyingGameController::class, 'customSequenceGame'])->name('game_custom');
 });
 
+$simpleGames = [2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+foreach ($simpleGames as $gameId) {
+    Route::get("/game/{$gameId}", fn() => view("game/g_{$gameId}/index"))->name("game_{$gameId}");
+}
 
-// Video Routes - ไปหน้าเลือกภาษาเลย (ไม่มีการเลือกหมวด)
+// Video Routes
 Route::get('/main_video', [VideoController::class, 'mainVideo'])->name('main_video');
 
-// หน้าแสดงวิดีโอตามภาษา (รวมทุกหมวด)
 foreach ([1, 2, 3, 4, 5, 6, 7] as $lang) {
     Route::get("/main_video_language{$lang}",
         [VideoController::class, 'showVideos'])
         ->defaults('language', $lang)
         ->name("main_video_language{$lang}");
 }
+
+// Infographic Routes (NEW)
+Route::prefix('infographic')->name('infographic.')->group(function () {
+    Route::get('/', [InfographicController::class, 'index'])->name('index');
+    Route::get('/{topicId}', [InfographicController::class, 'show'])->name('show');
+    Route::get('/api/images/{topicId}', [InfographicController::class, 'getImages'])->name('api.images');
+    Route::get('/api/check/{topicId}', [InfographicController::class, 'checkAvailability'])->name('api.check');
+});
+
+// Update the main route to point to infographic (NEW)
+Route::get('/main_info', [InfographicController::class, 'index'])->name('main_info');
+
 // Scenario Routes
 Route::prefix('scenario')->group(function () {
     Route::get('/', [ScenarioController::class, 'index'])->name('scenario.index');
@@ -205,7 +218,41 @@ if (app()->environment('local')) {
             'all_blade_files' => $allFiles
         ]);
     });
+
+    // Test route for infographic structure (NEW - for debugging)
+    Route::get('/test-infographic-structure', function() {
+        $basePath = public_path('images/infographic');
+        $result = [];
+        
+        for ($topicId = 1; $topicId <= 6; $topicId++) {
+            $topicPath = $basePath . '/' . $topicId;
+            $images = [];
+            
+            if (File::exists($topicPath)) {
+                $files = File::files($topicPath);
+                
+                foreach ($files as $file) {
+                    if (in_array($file->getExtension(), ['png', 'jpg', 'jpeg', 'gif'])) {
+                        $images[] = $file->getFilename();
+                    }
+                }
+                
+                // Sort numerically
+                usort($images, function($a, $b) {
+                    $aNum = (int) pathinfo($a, PATHINFO_FILENAME);
+                    $bNum = (int) pathinfo($b, PATHINFO_FILENAME);
+                    return $aNum <=> $bNum;
+                });
+            }
+            
+            $result[$topicId] = [
+                'path_exists' => File::exists($topicPath),
+                'path' => $topicPath,
+                'images' => $images,
+                'count' => count($images)
+            ];
+        }
+        
+        return response()->json($result, 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    })->name('test.infographic.structure');
 }
-
-
-

@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
-    // ภาษาที่รองรับ (ตรงกับ routes เดิม: 1=ไทย, 2=อาข่า, ฯลฯ)
     private $languages = [
-        1 => 'ภาษาไทย',
+        1 => 'ไทย',
         2 => 'อาข่า', 
         3 => 'ลาหู่',
         4 => 'ม้ง',
@@ -17,7 +16,6 @@ class VideoController extends Controller
         7 => 'ลีซู'
     ];
 
-    // หน้าเลือกภาษา (ไม่ต้องเลือกหมวด)
     public function selectLanguage()
     {
         return view('video.select_language', [
@@ -25,15 +23,12 @@ class VideoController extends Controller
         ]);
     }
 
-    // หน้าแสดงวิดีโอตามภาษา
     public function showVideos($language)
     {
-        // ตรวจสอบว่าภาษาที่เลือกมีอยู่จริง
         if (!array_key_exists($language, $this->languages)) {
             abort(404);
         }
 
-        // ดึงข้อมูลวิดีโอตามภาษา (รวมทุกหมวด)
         $videos = $this->getVideosByLanguage($language);
         
         return view('video.show_videos', [
@@ -43,10 +38,8 @@ class VideoController extends Controller
         ]);
     }
 
-    // ฟังก์ชันจำลองการดึงข้อมูลวิดีโอตามภาษา (รวมทุกหมวด)
     private function getVideosByLanguage($language)
     {
-        // ข้อมูลจำลอง YouTube URLs - รวมทุกหมวดในภาษาเดียว
         $allVideos = [
             1 => [ // ภาษาไทย
                 [
@@ -96,7 +89,6 @@ class VideoController extends Controller
             ]
         ];
 
-        // ส่งคืนวิดีโอตามภาษา หรือ array ว่างถ้าไม่มี
         return $allVideos[$language] ?? [
             [
                 'id' => 0,
@@ -109,10 +101,8 @@ class VideoController extends Controller
         ];
     }
 
-    // ฟังก์ศันดึง thumbnail จาก YouTube - ปรับปรุงให้ fallback
     public function getYouTubeThumbnail($youtubeId, $quality = 'mqdefault')
     {
-        // ลำดับการลอง thumbnail จากคุณภาพสูงไปต่ำ
         $qualities = [
             'maxresdefault', // 1280x720 (HD)
             'sddefault',     // 640x480 (SD)
@@ -121,17 +111,14 @@ class VideoController extends Controller
             'default'        // 120x90 (thumbnail)
         ];
         
-        // ใช้ mqdefault เป็นค่าเริ่มต้นเพราะมีอยู่แน่นอน
         return "https://img.youtube.com/vi/{$youtubeId}/mqdefault.jpg";
     }
 
-    // ฟังก์ชันแปลง YouTube URL เป็น embed URL
     public static function getYouTubeEmbedUrl($youtubeId)
     {
         return "https://www.youtube.com/embed/{$youtubeId}";
     }
 
-    // หน้า main video - ไปหน้าเลือกภาษาเลย
     public function mainVideo()
     {
         return $this->selectLanguage();

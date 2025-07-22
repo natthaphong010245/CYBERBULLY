@@ -86,7 +86,7 @@
                         [
                             'question' => 'สัญญานเตือนภัยของผู้ถูกกระทำ',
                             'answer' =>
-                                '<div class="text-center font-bold text-lg">เพื่อน คุณครู ผู้ปกครอง สามารถสังเกตอาการได้</div> -หลีกหนีสถานการณ์ทางสังคม <br>-ไม่อยากไปโรงเรียน <br>-เก็บตัว ไม่อยากสุงสิงกับใคร <br>-มีมุมมองต่อตัวเองในแง่ลบ เช่น ฉันอ่อนแอ ไม่มีทางสู้',
+                                '<div class="text-center font-bold text-lg">เพื่อน คุณครู ผู้ปกครอง สามารถสังเกตได้</div> -หลีกหนีสถานการณ์ทางสังคม <br>-ไม่อยากไปโรงเรียน <br>-เก็บตัว ไม่อยากสุงสิงกับใคร <br>-มีมุมมองต่อตัวเองในแง่ลบ เช่น ฉันอ่อนแอ ไม่มีทางสู้',
                         ],
                         [
                             'question' => 'สัญญานเตือนภัยของผู้กระทำ',
@@ -132,38 +132,6 @@
             @include('layouts.faq.category', ['category' => $category])
         @endforeach
     </div>
-
-    <style>
-        .border-custom {
-            border-color: #524AC4;
-        }
-        
-        .faq-item {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .faq-question.active .faq-icon {
-            background-color: #4A4A4A !important;
-        }
-        
-        .faq-answer.active {
-            max-height: 1000px;
-        }
-
-        .faq-answer a {
-            color: rgb(37 99 235);
-            text-decoration: underline;
-        }
-
-        .faq-answer a:hover {
-            color: rgb(29 78 216);
-        }
-
-        .icon-plus,
-        .icon-minus {
-            transition: opacity 0.3s ease;
-        }
-    </style>
 
     @endsection
 
