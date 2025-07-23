@@ -44,28 +44,21 @@ class VideoController extends Controller
             1 => [ // ภาษาไทย
                 [
                     'id' => 1,
-                    'title' => 'วิดีโอตัวอย่างภาษาไทย ตอนที่ 1',
-                    'youtube_id' => 'S9lSM99___w',
-                    'thumbnail' => $this->getYouTubeThumbnail('S9lSM99___w'),
-                    'duration' => '03:11',
-                    'category' => 'การป้องกัน'
+                    'title' => 'รู้จัก Bullying การรังแก 4 ประเภท หลัก 3 จ. ที่เด็กต้องรู้',
+                    'youtube_id' => 'fJwfh6GR03w',
+                    'thumbnail' => $this->getYouTubeThumbnail('fJwfh6GR03w'),
+                    'duration' => '02:18',
+                    'category' => 'การรังแก'
                 ],
                 [
                     'id' => 2,
-                    'title' => 'การป้องกันไซเบอร์บูลลี่ภาษาไทย ตอนที่ 2',
-                    'youtube_id' => 'jNQXAC9IVRw',
-                    'thumbnail' => $this->getYouTubeThumbnail('jNQXAC9IVRw'),
-                    'duration' => '08:15',
-                    'category' => 'การป้องกัน'
+                    'title' => 'รู้จัก Cyber Bullying การรังแกทางไซเบอร์ 9 รูปแบบที่เด็กควรรู้ และหลัก 2A✨',
+                    'youtube_id' => 'qNyWgnQul_s',
+                    'thumbnail' => $this->getYouTubeThumbnail('qNyWgnQul_s'),
+                    'duration' => '02:58',
+                    'category' => 'การรังแกทางไซเบอร์'
                 ],
-                [
-                    'id' => 3,
-                    'title' => 'จิตวิทยาเด็กและเยาวชนภาษาไทย ตอนที่ 1',
-                    'youtube_id' => 'y6120QOlsfU',
-                    'thumbnail' => $this->getYouTubeThumbnail('y6120QOlsfU'),
-                    'duration' => '10:20',
-                    'category' => 'จิตวิทยา'
-                ]
+
             ],
             2 => [ // อาข่า
                 [
