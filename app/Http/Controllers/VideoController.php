@@ -86,8 +86,8 @@ class VideoController extends Controller
             [
                 'id' => 0,
                 'title' => "วิดีโอ{$this->languages[$language]} (กำลังอัพเดท)",
-                'youtube_id' => 'dQw4w9WgXcQ',
-                'thumbnail' => $this->getYouTubeThumbnail('dQw4w9WgXcQ'),
+                'youtube_id' => 'fJwfh6GR03w',
+                'thumbnail' => $this->getYouTubeThumbnail('fJwfh6GR03w'),
                 'duration' => '00:00',
                 'category' => 'ทั่วไป'
             ]
