@@ -31,7 +31,7 @@
             'title_top' => 'ประสบการณ์',
             'title_bottom' => 'ผู้กระทำ',
             'modal_title' => 'ประสบการณ์การรังแกผู้กระทำ',
-            'modal_subtitle' => 'เริ่มความท้าทายกันเลย',
+            'modal_subtitle' => 'เริ่มทำแบบสอบถามกันเลย',
             'route' => route('person_action/form')
         ],
         [
@@ -40,7 +40,7 @@
             'title_top' => 'ประสบการณ์',
             'title_bottom' => 'ผู้ถูกกระทำ',
             'modal_title' => 'ประสบการณ์การรังแกผู้ถูกกระทำ',
-            'modal_subtitle' => 'เริ่มความท้าทายกันเลย',
+            'modal_subtitle' => 'เริ่มทำแบบสอบถามกันเลย',
             'route' => route('victim/form')
         ],
         [
@@ -49,7 +49,7 @@
             'title_top' => 'ประสบการณ์',
             'title_bottom' => 'ภาพรวม',
             'modal_title' => 'ประสบการณ์การรังแกภาพรวม',
-            'modal_subtitle' => 'เริ่มความท้าทายกันเลย',
+            'modal_subtitle' => 'เริ่มทำแบบสอบถามกันเลย',
             'route' => route('overview/form')
         ]
     ];
@@ -78,17 +78,17 @@
     <div id="modal-content" class="modal-content bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 text-center transform scale-50">
         <div class="mb-4">
             <h3 class="text-lg font-medium text-[#3E36AE] mb-1">แบบประเมินพฤติกรรม</h3>
-            <h4 class="text-xl font-bold text-[#3E36AE]">BEHAVIORAL ASSESSMENT</h4>
+            <h3 class="text-xl font-bold text-[#3E36AE] mb-4" id="modal-title">ประสบการณ์การรังแกกันเลย</h3>
         </div>
 
         <img src="{{ asset('images/material/school_girl.png') }}" alt="School Girl Character" class="w-32 h-auto rounded-full mx-auto mb-6 object-cover">
 
         <div class="mb-2">
-            <h3 class="text-xl font-medium text-[#3E36AE] mb-4" id="modal-title">ประสบการณ์การรังแกกันเลย</h3>
-            <p class="text-xl font-bold text-[#3E36AE]" id="modal-subtitle">เริ่มทำแบบสอบถามกันเลย</p>
+            
+            <p class="text-xl font-medium text-[#3E36AE]" id="modal-subtitle">เริ่มทำแบบสอบถามกันเลย</p>
         </div>
 
-        <button id="start-assessment-btn" class="bg-[#929AFF] text-white text-lg py-2 px-8 rounded-xl transition-colors hover:bg-[#7B85FF]">
+        <button id="start-assessment-btn" class="bg-[#929AFF] text-white text-lg py-1 px-6 rounded-xl transition-colors hover:bg-[#7B85FF]">
             เริ่ม
         </button>
     </div>
