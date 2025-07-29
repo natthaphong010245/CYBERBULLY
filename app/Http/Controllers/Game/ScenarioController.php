@@ -114,7 +114,7 @@ class ScenarioController extends Controller
                         'isCorrect' => false,
                         'feedback' => [
                             'title' => 'คุณแน่ใจหรอที่จะทำแบบนี้',
-                            'message' => 'วิธีนี้อาจเพิ่มความรุนแรงและการกระทำซำขึ้นก็ได้',
+                            'message' => 'วิธีนี้อาจเพิ่มความรุนแรงและการกระทำซ้ำขึ้นอีกก็ได้',
                             'type' => 'warning'
                         ]
                     ],
@@ -380,7 +380,7 @@ class ScenarioController extends Controller
                 'options' => [
                     [
                         'id' => 'talk',
-                        'text' => 'เพื่อยอด Like และ หัวใจ',
+                        'text' => 'ส่งให้อีกเพื่อเพื่อยอด Like และ หัวใจ',
                         'isCorrect' => false,
                         'feedback' => [
                             'title' => 'คุณแน่ใจหรอที่จะทำแบบนี้',

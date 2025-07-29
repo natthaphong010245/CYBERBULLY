@@ -58,28 +58,71 @@ class VideoController extends Controller
                     'duration' => '02:58',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
+                [
+                    'id' => 3,
+                    'title' => 'ผลกระทบของการรังแกทางออนไลน์ที่คุณต้องรู้ | คุณนายตำรวจเตือนภัย',
+                    'youtube_id' => '2oUuSjwzgfQ',
+                    'thumbnail' => $this->getYouTubeThumbnail('2oUuSjwzgfQ'),
+                    'duration' => '01:09',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
+                    'youtube_id' => '9k_V7hp5lRA',
+                    'thumbnail' => $this->getYouTubeThumbnail('9k_V7hp5lRA'),
+                    'duration' => '00:55',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 5,
+                    'title' => 'สาเหตุของการรังแกกันทางไซเบอร์ Cyberbullying | รากเหง้าของปัญหาที่ต้องรู้',
+                    'youtube_id' => 'VQFr4bg7FIc',
+                    'thumbnail' => $this->getYouTubeThumbnail('VQFr4bg7FIc'),
+                    'duration' => '02:37',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 6,
+                    'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
+                    'youtube_id' => '67z5uTSghZ4',
+                    'thumbnail' => $this->getYouTubeThumbnail('67z5uTSghZ4'),
+                    'duration' => '03:30',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 7,
+                    'title' => 'การใช้คอมพิวเตอร์อย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T | 7 ขั้นตอนสู่โลกดิจิทัลที่ปลอดภัย',
+                    'youtube_id' => 'HH10Up0ZqNg',
+                    'thumbnail' => $this->getYouTubeThumbnail('HH10Up0ZqNg'),
+                    'duration' => '06:25',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
 
             ],
             2 => [ // อาข่า
-                [
-                    'id' => 4,
-                    'title' => 'การป้องกันไซเบอร์บูลลี่ภาษาอาข่า ตอนที่ 1',
-                    'youtube_id' => 'M7lc1UVf-VE',
-                    'thumbnail' => $this->getYouTubeThumbnail('M7lc1UVf-VE'),
-                    'duration' => '06:45',
-                    'category' => 'การป้องกัน'
-                ]
+                
             ],
             3 => [ // ลาหู่
-                [
-                    'id' => 5,
-                    'title' => 'การป้องกันไซเบอร์บูลลี่ภาษาลาหู่ ตอนที่ 1',
-                    'youtube_id' => 'dQw4w9WgXcQ',
-                    'thumbnail' => $this->getYouTubeThumbnail('dQw4w9WgXcQ'),
-                    'duration' => '07:30',
-                    'category' => 'การป้องกัน'
-                ]
-            ]
+               
+            ],
+
+            4 => [ // ม้ง
+               
+            ],
+
+            5 => [ // เย้า
+               
+            ],
+
+            6 => [ // กระเหรี่ยง
+        
+               
+            ],
+
+            7 => [ // ลีซู
+               
+            ],
         ];
 
         return $allVideos[$language] ?? [
