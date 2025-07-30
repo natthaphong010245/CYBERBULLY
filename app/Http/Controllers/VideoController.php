@@ -108,7 +108,38 @@ class VideoController extends Controller
             ],
 
             4 => [ // ม้ง
-               
+                [
+                    'id' => 1,
+                    'title' => 'รู้จัก Bullying การรังแก 4 ประเภท หลัก 3 จ. ที่เด็กต้องรู้',
+                    'youtube_id' => 'vevLkt6vce8',
+                    'thumbnail' => $this->getYouTubeThumbnail('vevLkt6vce8'),
+                    'duration' => '02:50',
+                    'category' => 'การรังแก'
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'รู้จัก Cyber Bullying การรังแกทางไซเบอร์ 9 รูปแบบที่เด็กควรรู้ และหลัก 2A✨',
+                    'youtube_id' => 'qzhSfP9PYVA',
+                    'thumbnail' => $this->getYouTubeThumbnail('qzhSfP9PYVA'),
+                    'duration' => '03:21',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'ผลกระทบของการรังแกทางออนไลน์ที่คุณต้องรู้ | คุณนายตำรวจเตือนภัย',
+                    'youtube_id' => '9tIHJ5nWFJE',
+                    'thumbnail' => $this->getYouTubeThumbnail('9tIHJ5nWFJE'),
+                    'duration' => '01:24',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
+                    'youtube_id' => 'To3tuouQDEI',
+                    'thumbnail' => $this->getYouTubeThumbnail('To3tuouQDEI'),
+                    'duration' => '00:55',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
             ],
 
             5 => [ // เย้า
@@ -120,8 +151,15 @@ class VideoController extends Controller
                
             ],
 
-            7 => [ // ลีซู
-               
+            7 => [ // ลีซอ
+               [
+                    'id' => 4,
+                    'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
+                    'youtube_id' => 'QSREpMRFABk',
+                    'thumbnail' => $this->getYouTubeThumbnail('QSREpMRFABk'),
+                    'duration' => '01:12',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
             ],
         ];
 
