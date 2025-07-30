@@ -152,6 +152,23 @@ class VideoController extends Controller
             ],
 
             7 => [ // ลีซอ
+                                [
+                    'id' => 1,
+                    'title' => 'รู้จัก Bullying การรังแก 4 ประเภท หลัก 3 จ. ที่เด็กต้องรู้',
+                    'youtube_id' => 'xD2GnOeGsCw',
+                    'thumbnail' => $this->getYouTubeThumbnail('xD2GnOeGsCw'),
+                    'duration' => '03:07',
+                    'category' => 'การรังแก'
+                ],
+
+                [
+                    'id' => 3,
+                    'title' => 'ผลกระทบของการรังแกทางออนไลน์ที่คุณต้องรู้ | คุณนายตำรวจเตือนภัย',
+                    'youtube_id' => '6K-DGwx7Xt4',
+                    'thumbnail' => $this->getYouTubeThumbnail('6K-DGwx7Xt4'),
+                    'duration' => '01:42',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
                [
                     'id' => 4,
                     'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
