@@ -101,7 +101,38 @@ class VideoController extends Controller
 
             ],
             2 => [ // อาข่า
-                
+                [
+                    'id' => 1,
+                    'title' => 'รู้จัก Bullying การรังแก 4 ประเภท หลัก 3 จ. ที่เด็กต้องรู้',
+                    'youtube_id' => '2w4hTlRtAkc',
+                    'thumbnail' => $this->getYouTubeThumbnail('2w4hTlRtAkc'),
+                    'duration' => '03:07',
+                    'category' => 'การรังแก'
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'รู้จัก Cyber Bullying การรังแกทางไซเบอร์ 9 รูปแบบที่เด็กควรรู้ และหลัก 2A✨',
+                    'youtube_id' => '0KPtJG4MHpE',
+                    'thumbnail' => $this->getYouTubeThumbnail('0KPtJG4MHpE'),
+                    'duration' => '03:27',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'ผลกระทบของการรังแกทางออนไลน์ที่คุณต้องรู้ | คุณนายตำรวจเตือนภัย',
+                    'youtube_id' => '4ZDCkQCGacA',
+                    'thumbnail' => $this->getYouTubeThumbnail('4ZDCkQCGacA'),
+                    'duration' => '01:43',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
+                    'youtube_id' => '5mek05e2cPw',
+                    'thumbnail' => $this->getYouTubeThumbnail('5mek05e2cPw'),
+                    'duration' => '01:25',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
             ],
             3 => [ // ลาหู่
                
