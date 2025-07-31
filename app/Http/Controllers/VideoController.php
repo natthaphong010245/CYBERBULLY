@@ -171,6 +171,30 @@ class VideoController extends Controller
                     'duration' => '00:55',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
+                [
+                    'id' => 5,
+                    'title' => 'สาเหตุของการรังแกกันทางไซเบอร์ Cyberbullying | รากเหง้าของปัญหาที่ต้องรู้',
+                    'youtube_id' => 'MIps8dFe3v4',
+                    'thumbnail' => $this->getYouTubeThumbnail('MIps8dFe3v4'),
+                    'duration' => '03:22',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 6,
+                    'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
+                    'youtube_id' => 'e9dq8e5QwdY',
+                    'thumbnail' => $this->getYouTubeThumbnail('e9dq8e5QwdY'),
+                    'duration' => '03:38',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 7,
+                    'title' => 'การใช้คอมพิวเตอร์อย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T | 7 ขั้นตอนสู่โลกดิจิทัลที่ปลอดภัย',
+                    'youtube_id' => 'BD4Hjq4UC0Q',
+                    'thumbnail' => $this->getYouTubeThumbnail('BD4Hjq4UC0Q'),
+                    'duration' => '09:30',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
             ],
 
             5 => [ // เย้า
