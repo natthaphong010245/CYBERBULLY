@@ -66,13 +66,6 @@
                                     <p class="text-red-600 font-medium mb-2 text-center text-xl">มีพฤติกรรมการกลั่นแกล้ง</p>
                                     <p class="text-gray-600 text-lg">คำแนะนำ: มีพฤติกรรมการกลั่นแกล้ง</p>
                                 @endif
-
-                                <div class="flex justify-center mt-4">
-                                    <a href="/assessment/cyberbullying/person_action/form"
-                                        class="text-base px-8 py-2 rounded-xl text-white font-medium shadow-md bg-[#929AFF] transition-all duration-300 hover:bg-[#7B84FC]">
-                                        ดูรายละเอียดเพิ่มเติม
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,13 +111,6 @@
                                     <p class="text-red-600 font-medium mb-2 text-center text-xl">เคยถูกกลั่นแกล้ง</p>
                                     <p class="text-gray-600 text-lg">คำแนะนำ: เคยถูกกลั่นแกล้ง</p>
                                 @endif
-
-                                <div class="flex justify-center mt-4">
-                                    <a href="/assessment/cyberbullying/victim/form"
-                                        class="text-base px-8 py-2 rounded-xl text-white font-medium shadow-md bg-[#929AFF] transition-all duration-300 hover:bg-[#7B84FC]">
-                                        ดูรายละเอียดเพิ่มเติม
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>

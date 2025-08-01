@@ -46,13 +46,6 @@
                         <p class="text-gray-600 text-lg">คำแนะนำ: เคยถูกกลั่นแกล้ง</p>
                     @endif
                 </div>
-
-                <div class="flex justify-center mt-4">
-                    <a href="/assessment/cyberbullying/victim/form"
-                        class="text-base px-6 py-2 rounded-xl text-white font-medium shadow-md bg-[#929AFF] transition-all duration-300 hover:bg-[#7B84FC]">
-                        ดูรายละเอียดเพิ่มเติม
-                    </a>
-                </div>
             </div>
         </div>
         <div class="border-b border-gray-300"></div>
