@@ -6,23 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
-        Schema::create('safe_area_message', function (Blueprint $table) {
+        Schema::create('safe_area', function (Blueprint $table) {
             $table->id();
-            $table->text('message');
+            $table->json('voice_message');
             $table->timestamps();
+            
+            $table->index(['created_at']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('safe_area_message');
+        Schema::dropIfExists('safe_area');
     }
 };
