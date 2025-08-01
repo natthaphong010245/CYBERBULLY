@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('cyberbullying_assessment', function (Blueprint $table) {
             $table->id();
-            $table->json('assessment_data'); // Store assessment data as JSON object
+            $table->json('assessment_data');
             $table->timestamps();
+            
+            // Add indexes for better performance
+            $table->index('created_at');
         });
     }
 

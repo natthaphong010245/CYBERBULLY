@@ -14,7 +14,7 @@
 
             <div class="flex flex-col items-center">
                 <div class="flex justify-center mb-4">
-                    @if ($score == 0)
+                    @if (!$hasPersonActionExperience)
                         <img src="{{ asset('images/mental_health/normal.png') }}" alt="Normal"
                             class="w-32 h-32 object-contain">
                     @else
@@ -38,7 +38,7 @@
 
                 <div class="border-t border-gray-300 w-full pt-4">
                     <h2 class="text-sm font-bold text-[#3E36AE] mb-2">ผลการประเมิน</h2>
-                    @if ($score == 0)
+                    @if (!$hasPersonActionExperience)
                         <p class="text-green-600 font-medium mb-2 text-center text-xl">ไม่มีพฤติกรรมการกลั่นแกล้ง</p>
                         <p class="text-gray-600 text-lg">คำแนะนำ: ไม่มีพฤติกรรมการกลั่นแกล้ง</p>
                     @else
