@@ -133,9 +133,40 @@ class VideoController extends Controller
                     'duration' => '01:25',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
+                 [
+                    'id' => 5,
+                    'title' => 'สาเหตุของการรังแกกันทางไซเบอร์ Cyberbullying | รากเหง้าของปัญหาที่ต้องรู้',
+                    'youtube_id' => '3eIFUwbdVZE',
+                    'thumbnail' => $this->getYouTubeThumbnail('3eIFUwbdVZE'),
+                    'duration' => '04:01',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 6,
+                    'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
+                    'youtube_id' => 'MTbSiSwn0zo',
+                    'thumbnail' => $this->getYouTubeThumbnail('MTbSiSwn0zo'),
+                    'duration' => '04:06',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 7,
+                    'title' => 'การใช้คอมพิวเตอร์อย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T | 7 ขั้นตอนสู่โลกดิจิทัลที่ปลอดภัย',
+                    'youtube_id' => 'HzCYjVs7Xoc',
+                    'thumbnail' => $this->getYouTubeThumbnail('HzCYjVs7Xoc'),
+                    'duration' => '07:27',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
             ],
             3 => [ // ลาหู่
-               
+               [
+                    'id' => 6,
+                    'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
+                    'youtube_id' => 'K9gj4mPRt5o',
+                    'thumbnail' => $this->getYouTubeThumbnail('K9gj4mPRt5o'),
+                    'duration' => '03:52',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
             ],
 
             4 => [ // ม้ง
@@ -168,7 +199,7 @@ class VideoController extends Controller
                     'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
                     'youtube_id' => 'To3tuouQDEI',
                     'thumbnail' => $this->getYouTubeThumbnail('To3tuouQDEI'),
-                    'duration' => '00:55',
+                    'duration' => '01:13',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
                 [
@@ -202,7 +233,55 @@ class VideoController extends Controller
             ],
 
             6 => [ // กระเหรี่ยง
-        
+                        [
+                    'id' => 1,
+                    'title' => 'รู้จัก Bullying การรังแก 4 ประเภท หลัก 3 จ. ที่เด็กต้องรู้',
+                    'youtube_id' => 'Amf-c82V4R4',
+                    'thumbnail' => $this->getYouTubeThumbnail('Amf-c82V4R4'),
+                    'duration' => '02:51',
+                    'category' => 'การรังแก'
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'รู้จัก Cyber Bullying การรังแกทางไซเบอร์ 9 รูปแบบที่เด็กควรรู้ และหลัก 2A✨',
+                    'youtube_id' => 'osF2ngDN3ZQ',
+                    'thumbnail' => $this->getYouTubeThumbnail('osF2ngDN3ZQ'),
+                    'duration' => '03:27',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'ผลกระทบของการรังแกทางออนไลน์ที่คุณต้องรู้ | คุณนายตำรวจเตือนภัย',
+                    'youtube_id' => 'oMsTvK03Ifg',
+                    'thumbnail' => $this->getYouTubeThumbnail('oMsTvK03Ifg'),
+                    'duration' => '01:27',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                
+                [
+                    'id' => 5,
+                    'title' => 'สาเหตุของการรังแกกันทางไซเบอร์ Cyberbullying | รากเหง้าของปัญหาที่ต้องรู้',
+                    'youtube_id' => 'GHgzBAdt6oI',
+                    'thumbnail' => $this->getYouTubeThumbnail('GHgzBAdt6oI'),
+                    'duration' => '02:25',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 6,
+                    'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
+                    'youtube_id' => 'SHC4WaPrqUM',
+                    'thumbnail' => $this->getYouTubeThumbnail('SHC4WaPrqUM'),
+                    'duration' => '03:59',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 7,
+                    'title' => 'การใช้คอมพิวเตอร์อย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T | 7 ขั้นตอนสู่โลกดิจิทัลที่ปลอดภัย',
+                    'youtube_id' => 'Q9bAi4mgJv8',
+                    'thumbnail' => $this->getYouTubeThumbnail('Q9bAi4mgJv8'),
+                    'duration' => '06:14',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
                
             ],
 
@@ -230,6 +309,22 @@ class VideoController extends Controller
                     'youtube_id' => 'QSREpMRFABk',
                     'thumbnail' => $this->getYouTubeThumbnail('QSREpMRFABk'),
                     'duration' => '01:12',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 5,
+                    'title' => 'สาเหตุของการรังแกกันทางไซเบอร์ Cyberbullying | รากเหง้าของปัญหาที่ต้องรู้',
+                    'youtube_id' => 'Ru61gyz6Ytw',
+                    'thumbnail' => $this->getYouTubeThumbnail('Ru61gyz6Ytw'),
+                    'duration' => '02:34',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 6,
+                    'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
+                    'youtube_id' => 'sh50WMzg6gY',
+                    'thumbnail' => $this->getYouTubeThumbnail('sh50WMzg6gY'),
+                    'duration' => '03:26',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
             ],
