@@ -1,5 +1,5 @@
 <?php
-
+// app/Http/Controllers/Auth/RegisterController.php
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -42,23 +42,46 @@ class RegisterController extends Controller
             'password_confirmation' => ['required', 'same:password'],
         ];
 
+        // เพิ่มกฎสำหรับโรงเรียนเฉพาะเมื่อเป็นครู
         if ($request->role === 'teacher') {
-            $rules['school'] = 'required';
+            $rules['school'] = 'required|string';
         }
 
         $request->validate($rules, $messages);
 
-        $school = ($request->role === 'researcher') ? null : $request->school;
+        try {
+            // กำหนดค่า school
+            $school = null;
+            if ($request->role === 'teacher' && $request->filled('school')) {
+                $school = $request->school;
+            }
 
-        $user = User::create([
-            'role' => $request->role,
-            'school' => $school,
-            'name' => $request->name,
-            'lastname' => $request->lastname,
-            'username' => $request->username,
-            'password' => $request->password,
-        ]);
-        
-        return redirect()->route('login')->with('success', 'เจ้าหน้าที่กำลังตรวจสอบข้อมูลของคุณ กรุณารอการอนุมัติจากผู้ดูแลระบบ');
+            // สร้างผู้ใช้ใหม่
+            $user = User::create([
+                'role' => $request->role,
+                'role_user' => 0, // เริ่มต้นยังไม่อนุมัติ
+                'school' => $school,
+                'name' => $request->name,
+                'lastname' => $request->lastname,
+                'username' => $request->username,
+                'password' => $request->password, // จะถูก hash อัตโนมัติใน model
+            ]);
+            
+            $message = 'เจ้าหน้าที่กำลังตรวจสอบข้อมูลของคุณ กรุณารอการอนุมัติจากผู้ดูแลระบบ';
+            
+            if ($request->role === 'researcher') {
+                $message = 'ลงทะเบียนนักวิจัยสำเร็จ! เจ้าหน้าที่กำลังตรวจสอบข้อมูลของคุณ';
+            }
+            
+            return redirect()->route('login')->with('success', $message);
+            
+        } catch (\Exception $e) {
+            // Log error for debugging
+            \Log::error('Registration error: ' . $e->getMessage());
+            
+            return back()->withInput()->withErrors([
+                'general' => 'เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองใหม่อีกครั้ง'
+            ]);
+        }
     }
 }
