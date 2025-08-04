@@ -158,7 +158,31 @@ class VideoController extends Controller
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
             ],
-            3 => [ // ลาหู่
+            3 => [ // ลาหู่ 
+                [
+                    'id' => 2,
+                    'title' => 'รู้จัก Cyber Bullying การรังแกทางไซเบอร์ 9 รูปแบบที่เด็กควรรู้ และหลัก 2A✨',
+                    'youtube_id' => 'nbqmGco_vVM',
+                    'thumbnail' => $this->getYouTubeThumbnail('nbqmGco_vVM'),
+                    'duration' => '03:30',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'ผลกระทบของการรังแกทางออนไลน์ที่คุณต้องรู้ | คุณนายตำรวจเตือนภัย',
+                    'youtube_id' => 'ZZAa0zzRH-Q',
+                    'thumbnail' => $this->getYouTubeThumbnail('ZZAa0zzRH-Q'),
+                    'duration' => '01:37',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ], 
+                 [
+                    'id' => 4,
+                    'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
+                    'youtube_id' => 'QxtzwTuL45I',
+                    'thumbnail' => $this->getYouTubeThumbnail('QxtzwTuL45I'),
+                    'duration' => '01:30',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
                [
                     'id' => 6,
                     'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
@@ -255,6 +279,14 @@ class VideoController extends Controller
                     'youtube_id' => 'oMsTvK03Ifg',
                     'thumbnail' => $this->getYouTubeThumbnail('oMsTvK03Ifg'),
                     'duration' => '01:27',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                 [
+                    'id' => 4,
+                    'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
+                    'youtube_id' => 'NDnn3xTtqsQ',
+                    'thumbnail' => $this->getYouTubeThumbnail('NDnn3xTtqsQ'),
+                    'duration' => '01:13',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
                 
