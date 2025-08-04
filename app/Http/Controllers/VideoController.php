@@ -158,7 +158,15 @@ class VideoController extends Controller
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
             ],
-            3 => [ // ลาหู่ 
+            3 => [ // ลาหู่
+                [
+                    'id' => 1,
+                    'title' => 'รู้จัก Bullying การรังแก 4 ประเภท หลัก 3 จ. ที่เด็กต้องรู้',
+                    'youtube_id' => 'j9ZGnOxmijM',
+                    'thumbnail' => $this->getYouTubeThumbnail('j9ZGnOxmijM'),
+                    'duration' => '02:51',
+                    'category' => 'การรังแก'
+                ],
                 [
                     'id' => 2,
                     'title' => 'รู้จัก Cyber Bullying การรังแกทางไซเบอร์ 9 รูปแบบที่เด็กควรรู้ และหลัก 2A✨',
