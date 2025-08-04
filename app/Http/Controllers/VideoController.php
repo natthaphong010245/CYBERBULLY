@@ -260,8 +260,15 @@ class VideoController extends Controller
                 ],
             ],
 
-            5 => [ // เย้า
-               
+            5 => [ // เย้า _JV5CW7RL2M
+               [
+                    'id' => 4,
+                    'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
+                    'youtube_id' => '_JV5CW7RL2M',
+                    'thumbnail' => $this->getYouTubeThumbnail('_JV5CW7RL2M'),
+                    'duration' => '01:00',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
             ],
 
             6 => [ // กระเหรี่ยง
