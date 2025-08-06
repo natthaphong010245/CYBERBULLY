@@ -1,5 +1,5 @@
 <?php
-
+// database/migrations/2025_03_24_000001_create_behavioral_report_table_with_status.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText('image')->nullable();       // Store as JSON array
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
+            $table->boolean('status')->default(false);   // เพิ่มคอลัม status พร้อมค่าเริ่มต้น
             $table->timestamps();
         });
     }
