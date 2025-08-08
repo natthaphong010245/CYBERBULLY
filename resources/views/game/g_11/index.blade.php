@@ -97,7 +97,7 @@
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
         <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 text-center">
             <div class="flex justify-center mb-6">
-                <img src="{{ asset('images/material/school_girl.png') }}" alt="Character"
+                <img src="{{ asset('images/material/school_man.png') }}" alt="Character"
                     class="w-40 h-auto object-contain">
             </div>
 
