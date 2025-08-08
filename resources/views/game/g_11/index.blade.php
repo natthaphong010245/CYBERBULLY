@@ -67,7 +67,7 @@
         class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50">
         <div class="modal-content bg-white rounded-3xl shadow-2xl p-8 max-w-sm mx-4 text-center">
             <h2 class="text-xl font-bold text-indigo-800 mb-4">
-                สัญญาณเตือนภัยกับงบนอกถังผู้ถูกกลั่นแกล้งทางไซเบอร์
+                สัญญาณเตือนภัยที่บ่งบอกถึงผู้ถูกกลั่นแกล้งทางไซเบอร์
             </h2>
 
             <div class="flex justify-center mb-4">
