@@ -191,12 +191,28 @@ class VideoController extends Controller
                     'duration' => '01:30',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
+                [
+                    'id' => 5,
+                    'title' => 'สาเหตุของการรังแกกันทางไซเบอร์ Cyberbullying | รากเหง้าของปัญหาที่ต้องรู้',
+                    'youtube_id' => 'fxy-iluyB8g',
+                    'thumbnail' => $this->getYouTubeThumbnail('fxy-iluyB8g'),
+                    'duration' => '03:41',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
                [
                     'id' => 6,
                     'title' => 'วิธีการรับมือ Cyberbullying | 5 ขั้นตอน STOP BLOCK TELL REMOVE BE STRONG',
                     'youtube_id' => 'K9gj4mPRt5o',
                     'thumbnail' => $this->getYouTubeThumbnail('K9gj4mPRt5o'),
                     'duration' => '03:52',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 7,
+                    'title' => 'การใช้คอมพิวเตอร์อย่างปลอดภัย ด้วยหลัก C.O.N.N.E.C.T | 7 ขั้นตอนสู่โลกดิจิทัลที่ปลอดภัย',
+                    'youtube_id' => 'SPVq4pwxlPw',
+                    'thumbnail' => $this->getYouTubeThumbnail('SPVq4pwxlPw'),
+                    'duration' => '06:52',
                     'category' => 'การรังแกทางไซเบอร์'
                 ],
             ],
@@ -260,7 +276,31 @@ class VideoController extends Controller
                 ],
             ],
 
-            5 => [ // เย้า _JV5CW7RL2M
+            5 => [ // เย้า 
+                [
+                    'id' => 1,
+                    'title' => 'รู้จัก Bullying การรังแก 4 ประเภท หลัก 3 จ. ที่เด็กต้องรู้',
+                    'youtube_id' => '_ZRi81yDwdE',
+                    'thumbnail' => $this->getYouTubeThumbnail('_ZRi81yDwdE'),
+                    'duration' => '02:51',
+                    'category' => 'การรังแก'
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'รู้จัก Cyber Bullying การรังแกทางไซเบอร์ 9 รูปแบบที่เด็กควรรู้ และหลัก 2A✨',
+                    'youtube_id' => 'H9XDHCIU0m0',
+                    'thumbnail' => $this->getYouTubeThumbnail('H9XDHCIU0m0'),
+                    'duration' => '03:16',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'ผลกระทบของการรังแกทางออนไลน์ที่คุณต้องรู้ | คุณนายตำรวจเตือนภัย',
+                    'youtube_id' => 'Vfqhwvb69t8',
+                    'thumbnail' => $this->getYouTubeThumbnail('Vfqhwvb69t8'),
+                    'duration' => '01:37',
+                    'category' => 'การรังแกทางไซเบอร์'
+                ],
                [
                     'id' => 4,
                     'title' => 'สัญญาณเตือนภัย Warning Signal การรังแก ที่ผู้ปกครองและครูต้องรู้',
