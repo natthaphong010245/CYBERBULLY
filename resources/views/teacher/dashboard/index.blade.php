@@ -19,8 +19,8 @@
                             <div class="stat-icon stat-icon-pink">
                                 <i class="fas fa-school"></i>
                             </div>
-                            <div class="stat-number">{{ $data['overview']['โรงเรียนวาวีวิทยาคม'] }}</div>
-                            <div class="stat-label">วารีวิทยาคม</div>
+                            <div class="stat-number">{{ collect($data['overview'])->first() }}</div>
+                            <div class="stat-label">{{ collect($data['overview'])->keys()->first() }}</div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                             @empty
                             <tr>
                                 <td colspan="2" class="text-center py-4 text-muted">
-                                    ไม่พบข้อมูลรายงาน
+                                    ไม่พบข้อมูลการรายงาน
                                 </td>
                             </tr>
                             @endforelse
@@ -107,10 +107,31 @@
 <div class="row">
     <div class="col-12">
         <div class="chart-container">
-            <h6><strong>{{ $data['school_name'] }}</strong></h6>
-            <p class="text-muted small">Report</p>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h6><strong>{{ $data['school_name'] }}</strong></h6>
+                    <p class="text-muted small">Report</p>
+                </div>
+                <div class="year-selector">
+                    <select id="yearSelector" class="form-select" style="width: 120px;">
+                        @foreach(range(2025, 2035) as $year)
+                            <option value="{{ $year }}" {{ $year == $data['current_year'] ? 'selected' : '' }}>
+                                {{ $year }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div style="height: 450px; position: relative;">
                 <canvas id="schoolReportChart"></canvas>
+                <div id="chart-loading" class="chart-loading-overlay" style="display: none;">
+                    <div class="loading-spinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">กำลังโหลดข้อมูล...</p>
+                    </div>
+                </div>
             </div>
             <div class="mt-3 d-flex justify-content-center">
                 <div><i class="fas fa-circle" style="color: #4C6FFF;"></i> <small>{{ $data['school_name'] }}</small></div>
@@ -160,9 +181,54 @@
     background: #a8a8a8;
 }
 
+/* Year selector styling */
+.year-selector select {
+    border: 2px solid #e3e6f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #5a5c69;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.year-selector select:focus {
+    border-color: #4C6FFF;
+    box-shadow: 0 0 0 0.2rem rgba(76, 111, 255, 0.25);
+    outline: none;
+}
+
+.year-selector select:hover {
+    border-color: #4C6FFF;
+}
+
+.chart-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    border-radius: 8px;
+}
+
+.loading-spinner {
+    text-align: center;
+}
+
+.loading-spinner p {
+    color: #6c757d;
+    margin: 0;
+    font-size: 14px;
+}
+
 /* Dashboard Pagination Styling */
-
-
 .dashboard-pagination {
     margin: 0;
     display: flex;
@@ -281,12 +347,18 @@
 let schoolReportChart;
 let studentReportsData = {!! json_encode($data['student_reports']) !!};
 let currentStudentPage = {{ $data['current_page'] ?? 1 }};
+let currentYear = {{ $data['current_year'] }};
 
 const monthLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-const schoolReportData = {!! json_encode($data['school_report_data']) !!};
+const initialSchoolReportData = {!! json_encode($data['school_report_data']) !!};
+const schoolName = "{{ $data['school_name'] }}";
 
-function initializeChart() {
+function initializeChart(schoolReportData = initialSchoolReportData) {
     const schoolReportCtx = document.getElementById('schoolReportChart').getContext('2d');
+    
+    if (schoolReportChart) {
+        schoolReportChart.destroy();
+    }
     
     const maxValue = Math.max(...schoolReportData);
     const dynamicMax = Math.max(5, Math.ceil(maxValue * 1.2));
@@ -297,7 +369,7 @@ function initializeChart() {
             labels: monthLabels,
             datasets: [
                 {
-                    label: '{{ $data["school_name"] }}',
+                    label: schoolName,
                     data: schoolReportData,
                     borderColor: '#4C6FFF',
                     backgroundColor: 'rgba(76, 111, 255, 0.1)',
@@ -393,11 +465,11 @@ function initializeChart() {
                     },
                     callbacks: {
                         title: function(context) {
-                            return `${context[0].label} 2025`;
+                            return `${context[0].label} ${currentYear}`;
                         },
                         label: function(context) {
                             const value = context.parsed.y;
-                            return `{{ $data["school_name"] }}: ${value}`;
+                            return `${schoolName}: ${value}`;
                         }
                     },
                     position: 'average',
@@ -417,6 +489,57 @@ function initializeChart() {
     });
 }
 
+// Year selector functionality
+document.getElementById('yearSelector').addEventListener('change', function() {
+    const selectedYear = parseInt(this.value);
+    if (selectedYear && selectedYear !== currentYear) {
+        loadDataForYear(selectedYear);
+    }
+});
+
+async function loadDataForYear(year) {
+    try {
+        showLoading(true);
+        
+        const response = await fetch(`/api/teacher/school-data-by-year/${year}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // Update chart
+        initializeChart(data.monthly_data);
+        currentYear = year;
+        
+        console.log(`Successfully loaded data for year ${year}`);
+        
+    } catch (error) {
+        console.error('Error loading data for year:', year, error);
+        
+        const errorMsg = error.message || 'เกิดข้อผิดพลาดในการโหลดข้อมูล';
+        alert(`ไม่สามารถโหลดข้อมูลปี ${year} ได้: ${errorMsg}`);
+        
+        // Reset to current year
+        document.getElementById('yearSelector').value = currentYear;
+        
+    } finally {
+        showLoading(false);
+    }
+}
+
+function showLoading(show) {
+    const loadingOverlay = document.getElementById('chart-loading');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = show ? 'flex' : 'none';
+    }
+}
+
 // Function to load student reports with pagination (updated to 6 items per page)
 function loadStudentReports(page) {
     currentStudentPage = page;
@@ -434,7 +557,7 @@ function loadStudentReports(page) {
 
 function updateStudentReportsTable(page) {
     const tbody = document.getElementById('studentReportsTableBody');
-    const perPage = 6; // Updated from 4 to 6
+    const perPage = 6;
     const startIndex = (page - 1) * perPage;
     const endIndex = startIndex + perPage;
     const paginatedData = studentReportsData.slice(startIndex, endIndex);
@@ -465,7 +588,7 @@ function updateStudentReportsTable(page) {
 
 function updateStudentReportsPagination(currentPage) {
     const totalReports = studentReportsData.length;
-    const perPage = 6; // Updated from 4 to 6
+    const perPage = 6;
     const totalPages = Math.ceil(totalReports / perPage);
     
     if (totalPages <= 1) {
@@ -513,12 +636,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize student reports pagination if needed
     const totalReports = studentReportsData.length;
-    const totalPages = Math.ceil(totalReports / 6); // Updated from 4 to 6
+    const totalPages = Math.ceil(totalReports / 6);
     if (totalPages > 1) {
         updateStudentReportsPagination(currentStudentPage);
     }
     
-    console.log('Teacher dashboard initialized');
+    console.log('Teacher dashboard initialized with real data');
+    console.log('School:', schoolName);
+    console.log('Current year:', currentYear);
 });
 
 window.addEventListener('resize', function() {

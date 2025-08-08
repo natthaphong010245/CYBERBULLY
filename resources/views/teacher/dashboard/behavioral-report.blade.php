@@ -10,7 +10,7 @@
         <div class="chart-container">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                    <h6><strong>โรงเรียนวาวีวิทยาคม</strong></h6>
+                    <h6><strong>{{ $data['school_name'] }}</strong></h6>
                     <p class="text-muted small">Behavioral</p>
                 </div>
                 <div class="d-flex align-items-center" style="position: relative;">
@@ -51,9 +51,9 @@
                             <td class="text-center">{{ Str::limit($report['message'], 100, '.....') }}</td>
                             <td class="text-center">
                                 @if($report['status'] == 'reviewed')
-                                    <span style="color: #006E0B; text-decoration: underline; font-weight: 500;">ตรวจสอบแล้ว</span>
+                                    <span style="color: #006E0B; font-weight: 500;">ตรวจสอบแล้ว</span>
                                 @else
-                                    <span style="color: #D36300; text-decoration: underline; font-weight: 500;">รอตรวจสอบ</span>
+                                    <span style="color: #D36300; font-weight: 500;">รอตรวจสอบ</span>
                                 @endif
                             </td>
                         </tr>
@@ -61,7 +61,7 @@
                         <tr>
                             <td colspan="3" class="text-center py-4 text-muted">
                                 <i class="fas fa-inbox fa-2x mb-2"></i><br>
-                                ไม่พบข้อมูลที่ตรงกับเงื่อนไขการกรอง
+                                ไม่พบข้อมูลการรายงาน
                             </td>
                         </tr>
                         @endforelse
@@ -140,7 +140,7 @@
     </div>
 </div>
 
-<!-- Report Detail Modal (Same as researcher's) -->
+<!-- Report Detail Modal -->
 <div class="modal fade" id="reportDetailModal" tabindex="-1" aria-labelledby="reportDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="border-radius: 20px; border: none;">
@@ -157,12 +157,16 @@
                     <div class="col-md-6">
                         <div class="image-gallery">
                             <div class="image-container" style="position: relative; height: 400px; background: #f8f9fa; border-radius: 15px; overflow: hidden;">
-                                <img id="currentImage" src="" alt="Report Image" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img id="currentImage" src="" alt="Report Image" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                                <div id="noImageMessage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #666; font-size: 18px; font-weight: 500; display: none;">
+                                    <i class="fas fa-image fa-3x mb-3" style="color: #ddd;"></i><br>
+                                    ไม่พบรูปภาพ
+                                </div>
                                 <div class="image-nav-left" style="position: absolute; left: 0; top: 0; width: 50%; height: 100%; cursor: pointer; z-index: 10;"></div>
                                 <div class="image-nav-right" style="position: absolute; right: 0; top: 0; width: 50%; height: 100%; cursor: pointer; z-index: 10;"></div>
                                 
                                 <!-- Image indicators -->
-                                <div class="image-indicators" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 20px;">
+                                <div class="image-indicators" id="imageIndicators" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 20px;">
                                     <span class="indicator active" data-index="0"></span>
                                     <span class="indicator" data-index="1"></span>
                                     <span class="indicator" data-index="2"></span>
@@ -170,14 +174,14 @@
                             </div>
                         </div>
                         
-                        <!-- Audio and Location Controls - Centered Layout -->
-                        <div class="controls-section mt-3 d-flex justify-content-center align-items-center gap-5" style="padding: 0 20px;">
+                        <!-- Audio and Location Controls - Vertical Layout with More Spacing -->
+                        <div class="controls-section mt-3 d-flex justify-content-center align-items-center" style="padding: 0 20px; gap: 100px;">
                             <!-- Audio Control -->
                             <div class="audio-control d-flex flex-column align-items-center" style="cursor: pointer;" onclick="toggleAudio()">
                                 <div class="audio-icon mb-2">
                                     <i id="audioIcon" class="fas fa-play" style="color: #626DF7; font-size: 24px;"></i>
                                 </div>
-                                <span id="audioTime" style="color: #343A81; font-size: 14px; font-weight: 500;">0:00 / 5:00</span>
+                                <span id="audioTime" style="color: #343A81; font-size: 14px; font-weight: 500;">รายงานเสียง</span>
                             </div>
                             
                             <!-- Location Control -->
@@ -185,7 +189,7 @@
                                 <div class="location-icon mb-2">
                                     <i class="fas fa-map-marker-alt" style="color: #626DF7; font-size: 24px;"></i>
                                 </div>
-                                <span style="color: #343A81; font-size: 16px; font-weight: 600;">Location</span>
+                                <span style="color: #343A81; font-size: 14px; font-weight: 500;">ตำแหน่งที่ตั้ง</span>
                             </div>
                         </div>
                     </div>
@@ -193,9 +197,10 @@
                     <!-- Right side - Content -->
                     <div class="col-md-6" style="position: relative;">
                         <div class="content-section" style="height: 500px; display: flex; flex-direction: column; justify-content: space-between; margin-right: 30px;">
-                            <!-- Message text -->
-                            <div class="message-content" style="flex-grow: 1; overflow-y: auto; padding: 20px;">
-                                <p id="reportMessage" style="color: #343A81; font-size: 16px; margin: 0;"></p>
+                            <!-- Message text - Full area like in image 4 -->
+                            <div class="message-content" style="flex-grow: 1; overflow-y: auto; padding: 0; line-height: 1.6;">
+                                <h6 style="color: #343A81; font-size: 18px; font-weight: 600; margin-bottom: 15px;">ข้อความ</h6>
+                                <p id="reportMessage" style="color: #343A81; font-size: 16px; margin: 0; padding: 0; line-height: 1.8; word-wrap: break-word;"></p>
                             </div>
                             
                             <!-- Review Button -->
@@ -210,7 +215,7 @@
     </div>
 </div>
 
-<!-- Confirmation Modal -->
+<!-- Confirmation Modal with Dark Transparent Background -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content" style="border-radius: 20px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
@@ -231,7 +236,6 @@
 
 @section('styles')
 <style>
-/* Same styles as researcher dashboard but for teacher */
 .behavioral-table th,
 .behavioral-table td {
     text-align: center !important;
@@ -269,7 +273,7 @@
     background-color: #f0f0f0 !important;
 }
 
-/* All other styles from researcher dashboard for consistency */
+/* Pagination styles */
 .pagination-wrapper {
     display: inline-flex;
     align-items: center;
@@ -483,7 +487,84 @@
 }
 
 .message-content {
-    font-size: 24px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.message-content h6 {
+    color: #343A81;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* Custom modal backdrop for dark transparent effect - Higher Specificity */
+.modal.show .modal-backdrop,
+.modal-backdrop.show,
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+    opacity: 1 !important;
+}
+
+/* Force backdrop styling for all modals */
+body .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+    opacity: 1 !important;
+}
+
+/* Enhanced modal styling */
+#confirmationModal .modal-content {
+    background: white;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+#confirmationModal .modal-body {
+    padding: 30px;
+}
+
+/* Ensure both modals use the same backdrop style */
+#reportDetailModal .modal-backdrop,
+#confirmationModal .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+}
+
+/* Specific z-index control for layered modals */
+#confirmationModal {
+    z-index: 1060 !important;
+}
+
+#confirmationModal .modal-backdrop {
+    z-index: 1055;
+}
+
+/* Custom backdrop for confirmation modal */
+.confirmation-custom-backdrop {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+    z-index: 1055 !important;
+    opacity: 1 !important;
+}
+
+/* Ensure confirmation modal content is above backdrop */
+#confirmationModal .modal-dialog {
+    z-index: 1060 !important;
+    position: relative !important;
 }
 
 .message-content::-webkit-scrollbar {
@@ -531,11 +612,13 @@
 
 @section('scripts')
 <script>
-// Same JavaScript functionality as researcher dashboard
 let currentImageIndex = 0;
 let currentImages = [];
 let currentReportId = null;
 let currentReportStatus = null;
+let currentReportLatitude = null;
+let currentReportLongitude = null;
+let currentAudioUrl = null;
 let currentFilter = '{{ $data["current_filter"] ?? "" }}';
 let isFilterOpen = false;
 
@@ -667,28 +750,67 @@ let audioTimer = null;
 let currentAudioTime = 0;
 let totalAudioTime = 300;
 let isAudioPlaying = false;
+let audioElement = null;
 
 function toggleAudio() {
     const audioIcon = document.getElementById('audioIcon');
     const audioTimeEl = document.getElementById('audioTime');
     const audioIconContainer = audioIcon.parentElement;
+    const audioControl = audioIconContainer.parentElement;
+    
+    if (!currentAudioUrl) {
+        console.log('No audio URL available - audio control disabled');
+        audioControl.style.cursor = 'not-allowed';
+        audioControl.style.opacity = '0.5';
+        return;
+    }
     
     if (!isAudioPlaying) {
-        isAudioPlaying = true;
-        currentAudioTime = totalAudioTime;
-        audioIcon.className = 'fas fa-pause';
-        audioIconContainer.classList.add('playing');
-        
-        audioTimer = setInterval(() => {
-            currentAudioTime--;
-            updateAudioTime();
+        if (!audioElement) {
+            audioElement = new Audio(currentAudioUrl);
             
-            if (currentAudioTime <= 0) {
+            audioElement.addEventListener('loadedmetadata', function() {
+                totalAudioTime = Math.floor(audioElement.duration) || 300;
+                console.log('Audio loaded, duration:', totalAudioTime, 'seconds');
+            });
+            
+            audioElement.addEventListener('timeupdate', function() {
+                if (isAudioPlaying) {
+                    currentAudioTime = Math.floor(audioElement.currentTime);
+                }
+            });
+            
+            audioElement.addEventListener('ended', function() {
+                console.log('Audio playback ended');
                 stopAudio();
-            }
-        }, 1000);
+                currentAudioTime = 0;
+            });
+            
+            audioElement.addEventListener('error', function(e) {
+                console.error('Audio error:', e);
+                stopAudio();
+                currentAudioTime = 0;
+                totalAudioTime = 0;
+            });
+        }
+        
+        audioElement.play().then(() => {
+            isAudioPlaying = true;
+            audioIcon.className = 'fas fa-pause';
+            audioIconContainer.classList.add('playing');
+            console.log('Audio started playing');
+        }).catch(error => {
+            console.error('Audio play failed:', error);
+            stopAudio();
+        });
     } else {
-        stopAudio();
+        if (audioElement) {
+            audioElement.pause();
+        }
+        isAudioPlaying = false;
+        audioIcon.className = 'fas fa-play';
+        audioIconContainer.classList.remove('playing');
+        console.log('Audio paused');
     }
 }
 
@@ -700,31 +822,24 @@ function stopAudio() {
     audioIcon.className = 'fas fa-play';
     audioIconContainer.classList.remove('playing');
     
-    if (audioTimer) {
-        clearInterval(audioTimer);
-        audioTimer = null;
+    if (audioElement) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
     }
     
-    currentAudioTime = 0;
-    updateAudioTime();
-}
-
-function updateAudioTime() {
-    const audioTimeEl = document.getElementById('audioTime');
-    const currentMinutes = Math.floor(currentAudioTime / 60);
-    const currentSeconds = currentAudioTime % 60;
-    const totalMinutes = Math.floor(totalAudioTime / 60);
-    const totalSeconds = totalAudioTime % 60;
-    
-    const currentTimeStr = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
-    const totalTimeStr = `${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
-    
-    audioTimeEl.textContent = `${currentTimeStr} / ${totalTimeStr}`;
+    console.log('Audio stopped');
 }
 
 function openLocation() {
-    const googleMapsUrl = 'https://www.google.com/maps/search/Thailand';
-    window.open(googleMapsUrl, '_blank');
+    if (currentReportLatitude && currentReportLongitude) {
+        const googleMapsUrl = `https://www.google.com/maps?q=${currentReportLatitude},${currentReportLongitude}&z=15`;
+        window.open(googleMapsUrl, '_blank');
+        console.log('Opening Google Maps with coordinates:', currentReportLatitude, currentReportLongitude);
+    } else {
+        const googleMapsUrl = 'https://www.google.com/maps/search/Thailand';
+        window.open(googleMapsUrl, '_blank');
+        console.log('Opening Google Maps with default location');
+    }
 }
 
 function loadReports(status = '', page = 1) {
@@ -741,6 +856,8 @@ function loadReports(status = '', page = 1) {
         url.searchParams.set('status', status);
     }
     
+    console.log('Loading reports with URL:', url.toString());
+    
     fetch(url.toString(), {
         method: 'GET',
         headers: {
@@ -749,8 +866,14 @@ function loadReports(status = '', page = 1) {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Received data:', data);
         updateReportsTable(data.reports);
         updatePagination(data.pagination);
         currentFilter = data.current_filter || '';
@@ -766,22 +889,25 @@ function updateReportsTable(reports) {
     const tbody = document.getElementById('reportsTableBody');
     tbody.innerHTML = '';
     
+    console.log('Updating table with reports:', reports);
+    console.log('Number of reports:', reports.length);
+    
     if (reports.length === 0) {
         tbody.innerHTML = `
             <tr class="empty-state">
                 <td colspan="3" class="text-center py-4 text-muted">
                     <i class="fas fa-inbox fa-2x mb-2"></i><br>
-                    ไม่พบข้อมูลที่ตรงกับเงื่อนไขการกรอง
+                    ไม่พบข้อมูลการรายงาน
                 </td>
             </tr>
         `;
         return;
     }
     
-    reports.forEach((report) => {
+    reports.forEach((report, index) => {
         const statusText = report.status === 'reviewed' 
-            ? '<span style="color: #006E0B; text-decoration: underline; font-weight: 500;">ตรวจสอบแล้ว</span>'
-            : '<span style="color: #D36300; text-decoration: underline; font-weight: 500;">รอตรวจสอบ</span>';
+            ? '<span style="color: #006E0B; font-weight: 500;">ตรวจสอบแล้ว</span>'
+            : '<span style="color: #D36300; font-weight: 500;">รอตรวจสอบ</span>';
             
         const row = `
             <tr class="report-row" data-id="${report.id}" style="cursor: pointer;">
@@ -791,6 +917,8 @@ function updateReportsTable(reports) {
             </tr>
         `;
         tbody.innerHTML += row;
+        
+        console.log(`Report ${index + 1}:`, report.id, report.status, report.date);
     });
 }
 
@@ -811,6 +939,8 @@ function updatePagination(pagination) {
     
     const current = parseInt(pagination.current_page);
     const total = parseInt(pagination.total_pages);
+    
+    console.log('Updating pagination - Current:', current, 'Total:', total);
     
     // Previous arrow
     const prevDisabled = current === 1;
@@ -891,53 +1021,113 @@ function updatePagination(pagination) {
 }
 
 function showReportDetail(reportId) {
-    const reportRow = document.querySelector(`[data-id="${reportId}"]`);
-    if (reportRow) {
-        const cells = reportRow.querySelectorAll('td');
-        const date = cells[0].textContent.trim();
-        const message = cells[1].textContent.trim();
-        const statusElement = cells[2].querySelector('span');
-        const status = statusElement.textContent.includes('ตรวจสอบแล้ว') ? 'reviewed' : 'pending';
-        
-        currentReportId = reportId;
-        currentReportStatus = status;
-        currentImages = [
-            'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
-            'https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-            'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
-        ];
-        currentImageIndex = 0;
-        
-        document.getElementById('reportMessage').textContent = message;
-        showImage(0);
-        updateReviewButton();
-        initializeAudio();
-        
-        const modal = new bootstrap.Modal(document.getElementById('reportDetailModal'));
-        modal.show();
-    }
+    fetch(`/api/teacher/behavioral-report/detail/${reportId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            
+            currentReportId = reportId;
+            currentReportStatus = data.status;
+            currentReportLatitude = data.latitude;
+            currentReportLongitude = data.longitude;
+            currentAudioUrl = data.audio;
+            currentImages = data.images || [];
+            currentImageIndex = 0;
+            
+            console.log('Report detail loaded:', {
+                id: reportId,
+                imagesCount: currentImages.length,
+                hasAudio: !!currentAudioUrl,
+                images: currentImages
+            });
+            
+            document.getElementById('reportMessage').textContent = data.message;
+            showImage(0);
+            updateReviewButton();
+            initializeAudio();
+            updateAudioControls();
+            
+            const modal = new bootstrap.Modal(document.getElementById('reportDetailModal'));
+            
+            // Force backdrop styling after modal is shown
+            document.getElementById('reportDetailModal').addEventListener('shown.bs.modal', function() {
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                    backdrop.style.backdropFilter = 'blur(3px)';
+                    backdrop.style.webkitBackdropFilter = 'blur(3px)';
+                    backdrop.style.opacity = '1';
+                }
+            }, { once: true });
+            
+            modal.show();
+        })
+        .catch(error => {
+            console.error('Error loading report detail:', error);
+            alert('ไม่สามารถโหลดรายละเอียดรายงานได้');
+        });
 }
 
 function initializeAudio() {
     stopAudio();
     currentAudioTime = 0;
-    totalAudioTime = 300;
-    updateAudioTime();
+    totalAudioTime = 0;
+    audioElement = null;
+    updateAudioControls();
+    
+    console.log('Audio initialized');
+}
+
+function updateAudioControls() {
+    const audioIcon = document.getElementById('audioIcon');
+    const audioIconContainer = audioIcon.parentElement;
+    const audioControl = audioIconContainer.parentElement;
+    
+    if (!currentAudioUrl) {
+        audioControl.style.cursor = 'not-allowed';
+        audioControl.style.opacity = '0.5';
+        audioIcon.className = 'fas fa-play';
+        audioIconContainer.classList.remove('playing');
+        console.log('Audio control disabled - no audio file');
+    } else {
+        audioControl.style.cursor = 'pointer';
+        audioControl.style.opacity = '1';
+        audioIcon.className = 'fas fa-play';
+        audioIconContainer.classList.remove('playing');
+        console.log('Audio control enabled - audio file available');
+    }
 }
 
 function showImage(index) {
-    if (currentImages.length === 0) return;
+    const imageEl = document.getElementById('currentImage');
+    const noImageEl = document.getElementById('noImageMessage');
+    const indicatorsEl = document.getElementById('imageIndicators');
+    
+    if (currentImages.length === 0) {
+        imageEl.style.display = 'none';
+        noImageEl.style.display = 'block';
+        indicatorsEl.style.display = 'none';
+        return;
+    }
+    
+    imageEl.style.display = 'block';
+    noImageEl.style.display = 'none';
+    indicatorsEl.style.display = 'flex';
     
     currentImageIndex = index;
-    const imageEl = document.getElementById('currentImage');
     imageEl.src = currentImages[index];
     
     document.querySelectorAll('.indicator').forEach((indicator, i) => {
         indicator.classList.toggle('active', i === index);
+        indicator.style.display = i < currentImages.length ? 'block' : 'none';
     });
 }
 
 function navigateImage(direction) {
+    if (currentImages.length === 0) return;
+    
     const newIndex = currentImageIndex + direction;
     if (newIndex >= 0 && newIndex < currentImages.length) {
         showImage(newIndex);
@@ -971,7 +1161,42 @@ function updateReviewButton() {
 }
 
 function showConfirmationModal() {
-    const confirmModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+    // Create custom backdrop for confirmation modal
+    const existingBackdrop = document.querySelector('.confirmation-custom-backdrop');
+    if (existingBackdrop) {
+        existingBackdrop.remove();
+    }
+    
+    const backdrop = document.createElement('div');
+    backdrop.className = 'modal-backdrop fade show confirmation-custom-backdrop';
+    backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.4) !important;
+        backdrop-filter: blur(3px) !important;
+        -webkit-backdrop-filter: blur(3px) !important;
+        z-index: 1055;
+        opacity: 1 !important;
+    `;
+    
+    document.body.appendChild(backdrop);
+    
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmationModal'), {
+        backdrop: false, // We handle backdrop manually
+        keyboard: false
+    });
+    
+    // Handle modal hide to remove custom backdrop
+    document.getElementById('confirmationModal').addEventListener('hidden.bs.modal', function() {
+        const customBackdrop = document.querySelector('.confirmation-custom-backdrop');
+        if (customBackdrop) {
+            customBackdrop.remove();
+        }
+    }, { once: true });
+    
     confirmModal.show();
 }
 
@@ -987,15 +1212,27 @@ function confirmReview() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            currentReportStatus = 'reviewed';
+            
+            // Hide confirmation modal and remove custom backdrop
             bootstrap.Modal.getInstance(document.getElementById('confirmationModal')).hide();
+            const customBackdrop = document.querySelector('.confirmation-custom-backdrop');
+            if (customBackdrop) {
+                customBackdrop.remove();
+            }
+            
+            // Hide main report modal
             bootstrap.Modal.getInstance(document.getElementById('reportDetailModal')).hide();
             
             const currentPage = document.querySelector('.pagination .page-item.active .page-link')?.getAttribute('data-page') || 1;
             loadReports(currentFilter, currentPage);
+        } else {
+            alert('เกิดข้อผิดพลาดในการอัปเดตสถานะ');
         }
     })
     .catch(error => {
         console.error('Error updating report status:', error);
+        alert('เกิดข้อผิดพลาดในการอัปเดตสถานะ');
     });
 }
 
@@ -1017,6 +1254,32 @@ document.addEventListener('DOMContentLoaded', function() {
             stopAudio();
         });
     }
+    
+    // Handle cancel button in confirmation modal
+    const confirmationModal = document.getElementById('confirmationModal');
+    if (confirmationModal) {
+        confirmationModal.addEventListener('hidden.bs.modal', function() {
+            const customBackdrop = document.querySelector('.confirmation-custom-backdrop');
+            if (customBackdrop) {
+                customBackdrop.remove();
+            }
+        });
+        
+        // Handle cancel button click
+        const cancelBtn = confirmationModal.querySelector('[data-bs-dismiss="modal"]');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', function() {
+                const customBackdrop = document.querySelector('.confirmation-custom-backdrop');
+                if (customBackdrop) {
+                    customBackdrop.remove();
+                }
+            });
+        }
+    }
+    
+    console.log('Teacher behavioral report page initialized');
+    console.log('School:', '{{ $data["school_name"] }}');
+    console.log('Current filter:', currentFilter);
 });
 </script>
 @endsection

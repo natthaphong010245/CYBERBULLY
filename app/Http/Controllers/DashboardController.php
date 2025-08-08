@@ -83,7 +83,7 @@ class DashboardController extends Controller
         $transformedReports = $reports->map(function($report) {
             return [
                 'id' => $report->id,
-                'date' => $report->created_at->format('m/d/Y'),
+                'date' => $report->created_at->format('d/m/Y'),
                 'message' => $report->message,
                 'status' => $report->status ? 'reviewed' : 'pending'
             ];
